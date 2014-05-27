@@ -1,8 +1,10 @@
 #ifndef LOCATION_H
 #define LOCATION_H
 
-#include "Include/enums.h"
 #include "Include/common.h"
+#include "Include/enums.h"
+#include "Include/func.h"
+#include "Include/exceptions.h"
 
 class Creature;
 class Item;
@@ -51,14 +53,22 @@ private:
   std::map<Directions, std::shared_ptr<Location> > _neighbours;
 
 protected:
+  Location(Ref ref);
   virtual void loc_walk(WalkVector dir_vector, void (Location::*Fun)() );
   virtual void load() = 0;
   virtual void draw() = 0;
   virtual void set_not_drawn() { _drawn = false; }
   virtual void set_not_loaded() { _loaded = false; }
 
-public:
-  Location(Ref ref);
+  //data
+  void setName(std::string name) { _name = name; }
+  void setDestript(std::string dsc) { _descript = dsc; }
+
+  //establish neighbour connections
+  virtual void create_neighbours();
+
+public:  
+  static std::unique_ptr<Location> create(LocTypes loc_type, Ref ref);
   virtual std::weak_ptr<Location> connection(Directions dir) { return _neighbours[dir]; }
 
   virtual bool loaded() const { return _loaded; }
@@ -100,7 +110,7 @@ protected:
   virtual void draw();
 
 public:
-  OrdinaryLocation(Ref ref);
+  OrdinaryLocation(Ref ref): Location(ref) {}
   std::list<std::weak_ptr<Creature> > creatures();
   std::list<std::weak_ptr<Item> > objects();
 

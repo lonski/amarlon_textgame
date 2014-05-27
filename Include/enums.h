@@ -2,6 +2,16 @@
 #define ENUMS_H
 
 //===
+enum class LocTypes{
+  Null     = 0,
+  Ordinary = 1,
+  Draw     = 2,
+  End      = 3
+};
+
+//~~~
+
+//===
 enum class Directions{
   Null      = 0,
   North     = 1,

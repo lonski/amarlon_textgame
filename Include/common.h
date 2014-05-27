@@ -1,16 +1,12 @@
 #ifndef COMMON_H
 #define COMMON_H
 
-#include <QDebug>
-#include <fstream>
-#include <memory>
-#include <map>
+#include "inc.h"
 
-#include <soci.h>
-#include <soci-firebird.h>
-
+#define __sql DB::Session()
 typedef unsigned int Ref;
 
+//===DB Object
 class DBObject{
   Ref _ref;
 public:
@@ -18,6 +14,7 @@ public:
   Ref ref() const { return _ref; }
   virtual ~DBObject() {}
 };
+//===~~~
 
 //===Database connection
 class DB {

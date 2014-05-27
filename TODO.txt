@@ -1,0 +1,2 @@
+##Location
+- Testy load() ( create_neigbours )

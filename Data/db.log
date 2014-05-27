@@ -1,0 +1,1 @@
+select first 1 ref from locations

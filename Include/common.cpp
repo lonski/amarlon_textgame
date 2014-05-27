@@ -5,8 +5,8 @@ using namespace std;
 //===Database connection
 
 DB* DB::_instance = nullptr;
-const string DB::_db_file = "/home/spszenguo/Projects/Amarlon/Data/data.fdb";
-const string DB::_db_log_file = "/home/spszenguo/Projects/Amarlon/Data/db.log";
+const string DB::_db_file = "/home/spszenguo/Projects/amarlon/Data/data.fdb";
+const string DB::_db_log_file = "/home/spszenguo/Projects/amarlon/Data/db.log";
 
 DB::DB()
 {

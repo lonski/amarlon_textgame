@@ -2,8 +2,9 @@
 #define COMMON_H
 
 #include "inc.h"
+#include "enums.h"
 
-#define __sql DB::Session()
+#define _Database DB::Session()
 typedef unsigned int Ref;
 
 //===DB Object
@@ -35,5 +36,42 @@ public:
   ~DB();
 };
 //===~~~
+
+//===WalkVector (used in Location to walk within range)
+class WalkVector{
+private:
+  short _vals[4];
+  short indexof(Directions dir){
+    switch(dir){
+      case Directions::North: return 0; break;
+      case Directions::South: return 1; break;
+      case Directions::East: return 2; break;
+      case Directions::West: return 3; break;
+      default : return -1; break;
+    }
+  }
+
+public:
+  WalkVector(short north = 0, short south = 0, short east = 0, short west = 0 )
+  : _vals{north, south, east, west}
+  {
+  }
+  void inc(Directions dir, short val = 1)
+  {
+    short i = indexof(dir);
+    if (i != -1) _vals[indexof(dir)] += val;
+  }
+  void dec(Directions dir, short val = 1)
+  {
+    short i = indexof(dir);
+    if (i != -1) _vals[indexof(dir)] -= val;
+  }
+  short operator[](Directions dir)
+  {
+    short i = indexof(dir);
+    return ( i != -1 ? _vals[i] : 0);
+  }
+};
+//===~~
 
 #endif // COMMON_H

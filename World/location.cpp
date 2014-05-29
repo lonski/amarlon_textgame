@@ -15,7 +15,19 @@ Location::Location(Ref ref)
     _neighbours[i] = nullptr;
 }
 
-std::unique_ptr<Location> Location::create(Ref ref, LocTypes loc_type)
+void Location::setName(string name)
+{
+  _name = name;
+  save("NAME", _name);
+}
+
+void Location::setDestript(string dsc)
+{
+  _descript = dsc;
+  save("DESCRIPTION", _descript);
+}
+
+Location *Location::create(Ref ref, LocTypes loc_type)
 {
   Location *loc_ptr = nullptr;
 
@@ -26,12 +38,27 @@ std::unique_ptr<Location> Location::create(Ref ref, LocTypes loc_type)
     default : throw creation_error("Nieprawidłowy typ lokacji - "+toStr(static_cast<int>(loc_type))); break;
   }
 
-  return unique_ptr<Location>(loc_ptr);
+  LocationManager.add(loc_ptr);
+  return loc_ptr;
 }
 
 void Location::setConnection(Directions dir, Location *loc)
 {
-  _neighbours[dir] = loc;  
+  if ( _neighbours[dir] != loc)
+  {
+    _neighbours[dir] = loc;
+
+    if ( loc != nullptr )
+    {
+      stringstream s;
+
+      s << "UPDATE OR INSER INTO loc_neighbours(location, direction, nb_location) VALUES("
+        << ref() << ", " << static_cast<int>(dir) << ", " << loc->ref() << ")"
+        << " MATCHING(location, direction)";
+
+      save(s.str());
+    }
+  }
 }
 
 void Location::loc_walk_within_range(WalkVector dir_vector, void (Location::*Fun)())
@@ -67,7 +94,7 @@ void Location::create_neighbours()
     if (nb_loc != 0 && dir != Directions::Null && _neighbours[dir] == nullptr)
     {
       //only creation, 'cause if we hit load() here, it would have loaded whole world recursively
-      _neighbours[dir] = Location::create(nb_loc, loc_type).release();
+      _neighbours[dir] = Location::create(nb_loc, loc_type);
     }
   }
 
@@ -143,34 +170,105 @@ void Location::load()
 
         _loaded = true;
       }
-    }catch(soci_error &e)
+    }
+    catch(soci_error &e)
     {
       MsgError(e.what());
-      qDebug() << __sql.get_last_query().c_str();
+      qDebug() << _Database.get_last_query().c_str();
     }
-    }
+  }
 }
 
 void Location::draw()
 {
+  //TDOD
+}
+
+void Location::save_to_db()
+{
+  for (auto i = _save_queries.begin(); i != _save_queries.end(); ++i)
+  {
+    //send every entry to DB, commit and delete entry
+    //if error occurs, only print it in debug and then delete entry
+    try
+    {
+      if (*i != "")
+      {
+        _Database << *i;
+        _Database.commit();
+      }
+    }
+    catch(soci_error &e)
+    {
+      qDebug() << "###Error saving location " << ref() << ": ";
+      qDebug() << e.what();
+      qDebug() << (*i).c_str();
+    }
+  }
+
+  _save_queries.clear();
+}
+
+void Location::save(string query)
+{
+  if ( loaded() ) _save_queries.push_back(query);
+}
+
+template<typename T>
+void Location::save(string f_name, T f_val)
+{
+  if ( ref() && loaded() )
+  {
+    stringstream s;
+    s << "UPDATE locations SET " << f_name << "=\'"<<f_val<<"\' WHERE ref="<<ref();
+    _save_queries.push_back(s.str());
+  }
 }
 
 Location::~Location()
 {
+  try
+  {
+    save_to_db();
+  }
+  catch(std::exception &e)
+  {
+    qDebug() << "Error saving location " << ref() << " : " << e.what();
+  }
+  catch(...)
+  {
+    qDebug() << "Error saving location " << ref() << ",";
+  }
 }
 
 //===~~~
 
 //===ORDINARY LOCATION
-void OrdinaryLocation::draw()
-{
-}
 //===~~~
 
 //===DRAW LOCATION
+//===~~~
 
-void DrawLocation::draw()
+//===LOCATION MANAGER
+Location::Manager &Location::Manager::Inst()
 {
+  static Manager instance;
+  return instance;
 }
 
+void Location::Manager::add(Location *loc)
+{
+  _locations.push_back(loc);
+}
+
+void Location::Manager::purge()
+{
+  std::for_each(_locations.begin(), _locations.end(), [](Location *l){ delete l; } );
+  _locations.clear();
+}
+
+Location::Manager::~Manager()
+{
+  purge();
+}
 //===~~~

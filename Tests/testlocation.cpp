@@ -24,7 +24,7 @@ void TestLocation::LocCreation()
   {
     //create loc "Test1"
     Location *loc = nullptr;
-    loc = Location::create(1).release();
+    loc = Location::create(1);
 
     //validate data
     QVERIFY(loc != nullptr);
@@ -36,6 +36,8 @@ void TestLocation::LocCreation()
   {
     qDebug() << "Error: " << e.what();
   }
+
+  LocationManager.purge();
 }
 
 void TestLocation::LoadingData()
@@ -43,7 +45,7 @@ void TestLocation::LoadingData()
   try
   {
     //create loc "Test3"
-    unique_ptr<Location> loc( Location::create(3) );
+    Location *loc = Location::create(3);
     QVERIFY(loc->loaded() == false);
 
     //then load it
@@ -73,6 +75,7 @@ void TestLocation::LoadingData()
     qDebug() << "Error: " << e.what();
   }
 
+  LocationManager.purge();
 }
 
 void TestLocation::LocWalkWithinRange()
@@ -80,7 +83,7 @@ void TestLocation::LocWalkWithinRange()
   try
   {
     //create loc "Test5"
-    unique_ptr<Location> loc(Location::create(5));
+    Location *loc = Location::create(5);
 
     //perform load-walk within the range of 1
     loc->loc_walk_within_range(WalkVector(1,1,1,1), &Location::load);
@@ -131,4 +134,30 @@ void TestLocation::LocWalkWithinRange()
     qDebug() << "Error: " << e.what();
   }
 
+  LocationManager.purge();
+}
+
+void TestLocation::SaveData()
+{
+  //create loc "Test5"
+  Location *loc = Location::create(5);
+  loc->load();
+
+  //validate
+  QCOMPARE(loc->name().c_str(), "Test5");
+
+  //rename
+  loc->setName("changed_name");
+
+  //validate rename
+  QCOMPARE(loc->name().c_str(), "changed_name");
+  loc->save_to_db();
+  loc->load();
+  QCOMPARE(loc->name().c_str(), "changed_name");
+
+  //rollback changes
+  loc->setName("Test5");
+  loc->save_to_db();
+
+  LocationManager.purge();
 }

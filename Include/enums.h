@@ -1,6 +1,8 @@
 #ifndef ENUMS_H
 #define ENUMS_H
 
+#include "inc.h"
+
 //===
 enum class LocTypes{
   Null     = 0,
@@ -27,10 +29,12 @@ enum class Directions{
   End       = 11
 };
 
-Directions& operator++( Directions& d ) {
-  d = static_cast<Directions>( static_cast<int>(d) + 1 );
-  return d;
-}
+Directions operator~(Directions& d);
+Directions& operator++( Directions& d );
+const char* DirectionStr(Directions &d);
+
+
+
 //~~~
 
 #endif // ENUMS_H

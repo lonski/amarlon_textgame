@@ -20,6 +20,7 @@ public:
 class DB {
   const static std::string _db_file;
   const static std::string _db_log_file;
+  const static std::string _db_server;
   static DB *_instance;
 
   soci::session *_session;

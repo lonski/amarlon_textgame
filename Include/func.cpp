@@ -2,8 +2,9 @@
 
 using namespace std;
 using namespace soci;
+using namespace fun;
 
-void MapQuery(const string &query, MapTable &result){
+void fun::MapQuery(const string &query, MapTable &result){
 
   result.clear();
   row r;
@@ -35,33 +36,33 @@ void MapQuery(const string &query, MapTable &result){
         case soci::dt_double:
             ind = r.get_indicator(i);
             if (ind == i_ok || ind == i_truncated)
-              str = toString(r.get<double>(i));
+              str = toStr(r.get<double>(i));
             else
               str = "NULL";
             break;
         case soci::dt_integer:
             ind = r.get_indicator(i);
             if (ind == i_ok || ind == i_truncated)
-              str = toString(r.get<int>(i));
+              str = toStr(r.get<int>(i));
             else
               str = "NULL";
             break;
         case soci::dt_unsigned_long_long:
             ind = r.get_indicator(i);
             if (ind == i_ok || ind == i_truncated)
-              str = toString(r.get<unsigned long>(i));
+              str = toStr(r.get<unsigned long>(i));
             else
               str = "NULL";
             break;
         case soci::dt_long_long:
             ind = r.get_indicator(i);
             if (ind == i_ok || ind == i_truncated)
-              str = toString(r.get<long long>(i));
+              str = toStr(r.get<long long>(i));
             else
               str = "NULL";
             break;
         case soci::dt_date:
-            //str = Func::toString(r.get<std::tm>(i));
+            //str = Func::toStr(r.get<std::tm>(i));
             //cout << asctime(&when);
             //date = asctime(&when);
             break;
@@ -76,7 +77,7 @@ void MapQuery(const string &query, MapTable &result){
 
 }
 
-MapRow MapQuery(const string &query){
+MapRow fun::MapQuery(const string &query){
 
   MapRow result;
   row r;
@@ -107,33 +108,33 @@ MapRow MapQuery(const string &query){
         case soci::dt_double:
             ind = r.get_indicator(i);
             if (ind == i_ok || ind == i_truncated)
-              str = toString(r.get<double>(i));
+              str = toStr(r.get<double>(i));
             else
               str = "NULL";
             break;
         case soci::dt_integer:
             ind = r.get_indicator(i);
             if (ind == i_ok || ind == i_truncated)
-              str = toString(r.get<int>(i));
+              str = toStr(r.get<int>(i));
             else
               str = "NULL";
             break;
         case soci::dt_unsigned_long_long:
             ind = r.get_indicator(i);
             if (ind == i_ok || ind == i_truncated)
-              str = toString(r.get<unsigned long>(i));
+              str = toStr(r.get<unsigned long>(i));
             else
               str = "NULL";
             break;
         case soci::dt_long_long:
             ind = r.get_indicator(i);
             if (ind == i_ok || ind == i_truncated)
-              str = toString(r.get<long long>(i));
+              str = toStr(r.get<long long>(i));
             else
               str = "NULL";
             break;
         case soci::dt_date:
-            //str = Func::toString(r.get<std::tm>(i));
+            //str = Func::toStr(r.get<std::tm>(i));
             //cout << asctime(&when);
             //date = asctime(&when);
             break;
@@ -147,3 +148,4 @@ MapRow MapQuery(const string &query){
   return result;
 
 }
+

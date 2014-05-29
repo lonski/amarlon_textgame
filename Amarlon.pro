@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     World/location.cpp \
     Include/common.cpp \
     Tests/testdb.cpp \
-    Include/func.cpp
+    Include/func.cpp \
+    Include/enums.cpp
 
 HEADERS  += game.h \
     Tests/testlocation.h \

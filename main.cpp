@@ -1,8 +1,9 @@
+#include <QtTest/QTest>
+#include <QApplication>
+
 #include "game.h"
 #include "Tests/testlocation.h"
 #include "Tests/testdb.h"
-#include <QtTest/QTest>
-#include <QApplication>
 
 int main(int argc, char *argv[])
 {

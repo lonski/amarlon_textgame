@@ -1,5 +1,7 @@
 #ifndef TESTLOCATION_H
 #define TESTLOCATION_H
+
+#include "World/location.h"
 #include <QtTest/QtTest>
 
 class TestLocation : public QObject
@@ -9,6 +11,8 @@ public:
   TestLocation();
 private slots:
    void LocCreation();
+   void LoadingData();
+   void LocWalkWithinRange();
 };
 
 

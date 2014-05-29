@@ -8,6 +8,8 @@
 #include <fstream>
 #include <memory>
 #include <map>
+#include <algorithm>
+#include <set>
 
 #include <soci.h>
 #include <soci-firebird.h>

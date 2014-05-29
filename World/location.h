@@ -6,48 +6,14 @@
 #include "Include/func.h"
 #include "Include/exceptions.h"
 
+#define LocationManager Location::Manager::Inst()
+
 class Creature;
 class Item;
 
-//===WalkVector
-class WalkVector{
-private:
-  short _vals[4];
-  short indexof(Directions dir){
-    switch(dir){
-      case Directions::North: return 0; break;
-      case Directions::South: return 1; break;
-      case Directions::East: return 2; break;
-      case Directions::West: return 3; break;
-      default : return -1; break;
-    }
-  }
-
-public:
-  WalkVector(short north = 0, short south = 0, short east = 0, short west = 0 )
-  : _vals{north, south, east, west}
-  {
-  }
-  void inc(Directions dir, short val = 1)
-  {
-    short i = indexof(dir);
-    if (i != -1) _vals[indexof(dir)] += val;
-  }
-  void dec(Directions dir, short val = 1)
-  {
-    short i = indexof(dir);
-    if (i != -1) _vals[indexof(dir)] -= val;
-  }
-  short operator[](Directions dir)
-  {
-    short i = indexof(dir);
-    return ( i != -1 ? _vals[i] : 0);
-  }
-};
-//===~~
-
 //===Location - abstract base class
-class Location : public DBObject, public std::enable_shared_from_this<Location>{
+class Location : public DBObject, public std::enable_shared_from_this<Location>
+{
 private:
   //parameters
   static unsigned int _draw_range;
@@ -63,30 +29,47 @@ private:
   //connections
   std::map<Directions, Location* > _neighbours;
 
+  //save
+  std::list<std::string> _save_queries;
+
 protected:
   Location(Ref ref);
-
-  //data
-  void setName(std::string name) { _name = name; }
-  void setDestript(std::string dsc) { _descript = dsc; }
+  virtual ~Location() = 0;
 
   //establish neighbour connections
   virtual void create_neighbours();
   virtual void copy_connections_to_neighbour(Directions dir);
 
 public:  
-  static std::unique_ptr<Location> create(Ref ref, LocTypes loc_type = LocTypes::Ordinary);
-  virtual Location* connection(Directions dir) { return _neighbours[dir]; }
-  virtual void setConnection(Directions dir, Location* loc);
+
+  class Manager
+  {
+  private:
+    std::vector<Location*> _locations;
+    void add(Location *loc);
+    Manager() {}
+    friend class Location;
+  public:
+    static Manager &Inst();
+    void purge();
+    ~Manager();
+  };
+
+  //creation
+  static Location* create(Ref ref, LocTypes loc_type = LocTypes::Ordinary);
 
   //operations
-  virtual void loc_walk_within_range(WalkVector dir_vector, void (Location::*Fun)() );
+  virtual void loc_walk_within_range(WalkVector dir_vector, void (Location::*Fun)() );  
+  template<typename T> void save(std::string f_name, T f_val);
+  void save(std::string query);
+  void save_to_db();
   virtual void load();
   virtual void draw();
   virtual void set_not_drawn() { _drawn = false; }
   virtual void set_not_loaded() { _loaded = false; }
 
-  //set data
+  //access data
+  virtual Location* connection(Directions dir) { return _neighbours[dir]; }
   virtual bool loaded() const { return _loaded; }
   virtual bool drawn() const { return _drawn; }
   virtual bool enterable() const { return true; }
@@ -96,7 +79,10 @@ public:
   virtual std::string name() const { return _name; }
   virtual std::string descript() const { return _descript; }
 
-  virtual ~Location() = 0;
+  //set data
+  virtual void setConnection(Directions dir, Location* loc);
+  void setName(std::string name);
+  void setDestript(std::string dsc);
 
 };
 //===~~~
@@ -104,7 +90,6 @@ public:
 //==DrawLocation -> Location used only for drawing
 class DrawLocation : public Location {
 protected:
-  virtual void draw();
 
 public:
   DrawLocation(Ref ref) : Location(ref) {}
@@ -122,7 +107,6 @@ private:
   std::list<std::shared_ptr<Item> > _objects;
 
 protected:
-  virtual void draw();
 
 public:
   OrdinaryLocation(Ref ref): Location(ref) {}

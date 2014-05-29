@@ -13,6 +13,7 @@ private slots:
    void LocCreation();
    void LoadingData();
    void LocWalkWithinRange();
+   void SaveData();
 };
 
 

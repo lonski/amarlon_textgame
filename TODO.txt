@@ -1,2 +1,4 @@
 ##Location
-- Testy load() ( create_neigbours )
+-> Pamiatki -> do zapisywania
+-> Rysowanie lokacji
+-> Zastanowienie się nad zarządzanie lokacjami -> kiedy usuwać? kiedy zapisywac?

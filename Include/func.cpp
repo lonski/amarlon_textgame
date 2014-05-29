@@ -73,7 +73,7 @@ void fun::MapQuery(const string &query, MapTable &result){
       result.push_back(map_row);
     }while (stmt.fetch());
   }
-  __sql.commit();
+  _Database.commit();
 
 }
 
@@ -81,7 +81,7 @@ MapRow fun::MapQuery(const string &query){
 
   MapRow result;
   row r;
-  soci::statement stmt = (__sql.prepare << query, into(r));
+  soci::statement stmt = (_Database.prepare << query, into(r));
 
   stmt.execute(true);
   if (stmt.got_data()){
@@ -144,7 +144,7 @@ MapRow fun::MapQuery(const string &query){
       }
     }while (stmt.fetch());
   }
-  __sql.commit();
+  _Database.commit();
   return result;
 
 }

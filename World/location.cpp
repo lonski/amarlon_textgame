@@ -187,18 +187,6 @@ void Location::draw()
 
 Location::~Location()
 {
-  try
-  {
-    save_to_db();
-  }
-  catch(std::exception &e)
-  {
-    qDebug() << "Error saving location " << ref() << " : " << e.what();
-  }
-  catch(...)
-  {
-    qDebug() << "Error saving location " << ref() << ",";
-  }
 }
 
 //===~~~

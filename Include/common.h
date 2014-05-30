@@ -25,7 +25,7 @@ protected:
 public:
   //birth and death
   DBObject(dbRef ref, dbTable table): _ref(ref), _table(table), _loaded(false) {}
-  virtual ~DBObject() {}
+  virtual ~DBObject() = 0;
 
   //data access
   virtual dbRef ref() const { return _ref; }
@@ -46,8 +46,9 @@ void DBObject::save(std::string f_name, T f_val, dbTable tbl)
     std::stringstream s;
     s << "UPDATE "+ ( tbl == "" ? _table : tbl) + " SET " << f_name << "=\'"<<f_val<<"\' WHERE ref="<<ref();
     _save_queries.push_back(s.str());
-  }
+    }
 }
+
 //===~~~
 
 //===Database connection

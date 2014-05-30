@@ -39,7 +39,8 @@ HEADERS  += game.h \
     Include/func.h \
     Include/inc.h \
     Include/exceptions.h \
-    Equipment/item.h
+    Equipment/item.h \
+    Include/prototypemanager.h
 
 FORMS    += game.ui
 

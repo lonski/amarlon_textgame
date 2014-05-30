@@ -5,7 +5,7 @@ using namespace soci;
 
 const string DB::_db_file = "/home/pi/db/data.fdb";
 const string DB::_db_log_file = "../amarlon/Data/db.log";
-const string DB::_db_server = "192.168.1.5";
+const string DB::_db_server = "lonski.pl";
 
 //===DB Object
 void DBObject::save_to_db()
@@ -31,6 +31,12 @@ void DBObject::save_to_db()
   }
 
   _save_queries.clear();
+}
+
+void DBObject::purge()
+{
+  _Database << "delete from " << table().c_str() << " where ref = " << ref();
+  _Database.commit();
 }
 
 void DBObject::save(string query)

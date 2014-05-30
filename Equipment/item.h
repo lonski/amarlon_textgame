@@ -14,11 +14,15 @@ private:
   static PrototypeManager<Item, ItemPrototypes> *_prototypes;
 
   //data
+  ItemTypes _item_type;
   std::string _name;
   std::string _descript;
   double _weight;
   int _value;
 
+  //deleted funcs
+  Item& operator=(const Item&) = delete;
+  Item(const Item&) = delete;
 protected:
   Item(dbRef ref);
 
@@ -27,7 +31,7 @@ public:
   const static dbTable table_name;
 
   //creation
-  static std::unique_ptr<Item> create(dbRef ref);  
+  static std::unique_ptr<Item> create(dbRef ref, bool prototype = false);
   static PrototypeManager<Item, ItemPrototypes>& prototypes();
   std::unique_ptr<Item> clone();
 
@@ -36,10 +40,18 @@ public:
 
   //data access
   virtual dbTable table() const { return table_name; }
+  ItemTypes item_type() const { return _item_type; }
   std::string name() const { return _name; }
   std::string descript() const { return _descript; }
   double weight() const { return _weight; }
   int value() const { return _value; }
+
+  //data set
+  void set_item_type(ItemTypes type);
+  void set_name(std::string name);
+  void set_destript(std::string dsc);
+  void set_weight(double weight);
+  void set_value(int value);
 
   ~Item() = 0;
 };

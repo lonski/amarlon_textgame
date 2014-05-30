@@ -101,12 +101,12 @@ public:
   virtual bool drawn() const { return _drawn; }
   virtual bool enterable() const { return true; }
   virtual unsigned int draw_range() const { return _draw_range; }
+  virtual dbTable table() const { return table_name; }
 
   virtual std::string name() const { return _name; }
   virtual std::string descript() const { return _descript; }
 
-  //set data
-  virtual dbTable table() const { return table_name; }
+  //set data  
   virtual void set_draw_range(unsigned int range) { _draw_range = range; }
   virtual void set_connection(Directions dir, Location* loc);
   void set_name(std::string name);

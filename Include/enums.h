@@ -7,8 +7,10 @@
 enum class ItemPrototypes
 {
   Null = 0,
-  Dagger = 1,
-  End = 2
+  Sztylet = 1,
+  Szyszak = 2,
+  Kolczuga = 3,
+  End = 4
 };
 //~~~
 

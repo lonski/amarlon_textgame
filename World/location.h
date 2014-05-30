@@ -6,13 +6,11 @@
 #include "Include/func.h"
 #include "Include/exceptions.h"
 
-#define LocationManager Location::Manager::Inst()
-
 class Creature;
 class Item;
 
 //===Location - abstract base class
-class Location : public DBObject, public std::enable_shared_from_this<Location>
+class Location : public DBObject
 {
 private:
   //parameters
@@ -29,10 +27,11 @@ private:
   //connections
   std::map<Directions, Location* > _neighbours;
 
-  //save
+  //save data
   std::list<std::string> _save_queries;
 
 protected:
+  //birth and death
   Location(Ref ref);
   virtual ~Location() = 0;
 
@@ -40,28 +39,29 @@ protected:
   virtual void create_neighbours();
   virtual void copy_connections_to_neighbour(Directions dir);
 
+  //save changes
+  template<typename T> void save(std::string f_name, T f_val);
+  void save(std::string query);
+
 public:  
 
-  class Manager
+  //Location Manager
+  static class LocationManager
   {
   private:
     std::vector<Location*> _locations;
-    void add(Location *loc);
-    Manager() {}
-    friend class Location;
+    void add(Location *loc);        
   public:
-    static Manager &Inst();
-    void purge();
-    ~Manager();
-  };
+    friend class Location;
+    void purge();        
+    ~LocationManager();
+  } Manager;
 
   //creation
   static Location* create(Ref ref, LocTypes loc_type = LocTypes::Ordinary);
 
   //operations
-  virtual void loc_walk_within_range(WalkVector dir_vector, void (Location::*Fun)() );  
-  template<typename T> void save(std::string f_name, T f_val);
-  void save(std::string query);
+  virtual void loc_walk_within_range(WalkVector dir_vector, void (Location::*Fun)() );    
   void save_to_db();
   virtual void load();
   virtual void draw();
@@ -87,7 +87,7 @@ public:
 };
 //===~~~
 
-//==DrawLocation -> Location used only for drawing
+//==DrawLocation -> a location used only for drawing
 class DrawLocation : public Location {
 protected:
 

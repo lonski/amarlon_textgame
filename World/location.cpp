@@ -6,6 +6,7 @@ using namespace fun;
 
 //===LOCATION
 unsigned int Location::_draw_range = 5;
+Location::LocationManager Location::Manager;
 
 Location::Location(Ref ref)
 : DBObject(ref), _loaded(false), _drawn(false)
@@ -38,7 +39,7 @@ Location *Location::create(Ref ref, LocTypes loc_type)
     default : throw creation_error("Nieprawidłowy typ lokacji - "+toStr(static_cast<int>(loc_type))); break;
   }
 
-  LocationManager.add(loc_ptr);
+  Location::Manager.add(loc_ptr);
   return loc_ptr;
 }
 
@@ -250,25 +251,19 @@ Location::~Location()
 //===~~~
 
 //===LOCATION MANAGER
-Location::Manager &Location::Manager::Inst()
-{
-  static Manager instance;
-  return instance;
-}
-
-void Location::Manager::add(Location *loc)
+void Location::LocationManager::add(Location *loc)
 {
   _locations.push_back(loc);
 }
 
-void Location::Manager::purge()
+void Location::LocationManager::purge()
 {
   std::for_each(_locations.begin(), _locations.end(), [](Location *l){ delete l; } );
   _locations.clear();
 }
 
-Location::Manager::~Manager()
+Location::LocationManager::~LocationManager()
 {
-  purge();
+  purge();  
 }
 //===~~~

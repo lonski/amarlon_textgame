@@ -37,7 +37,7 @@ void TestLocation::LocCreation()
     qDebug() << "Error: " << e.what();
   }
 
-  LocationManager.purge();
+  Location::Manager.purge();
 }
 
 void TestLocation::LoadingData()
@@ -75,7 +75,7 @@ void TestLocation::LoadingData()
     qDebug() << "Error: " << e.what();
   }
 
-  LocationManager.purge();
+  Location::Manager.purge();
 }
 
 void TestLocation::LocWalkWithinRange()
@@ -134,7 +134,7 @@ void TestLocation::LocWalkWithinRange()
     qDebug() << "Error: " << e.what();
   }
 
-  LocationManager.purge();
+  Location::Manager.purge();
 }
 
 void TestLocation::SaveData()
@@ -159,5 +159,5 @@ void TestLocation::SaveData()
   loc->setName("Test5");
   loc->save_to_db();
 
-  LocationManager.purge();
+  Location::Manager.purge();
 }

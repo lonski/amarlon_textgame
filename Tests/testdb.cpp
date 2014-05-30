@@ -10,7 +10,7 @@ TestDB::TestDB()
 void TestDB::TestConnection()
 {
   indicator ind;
-  Ref ref(0);
+  dbRef ref(0);
   DB::Session() << "select first 1 ref from locations", into(ref,ind);
 
   QVERIFY(ind == i_ok);

@@ -4,7 +4,17 @@
 #include "inc.h"
 
 //===
-enum class LocTypes{
+enum class ItemPrototypes
+{
+  Null = 0,
+  Dagger = 1,
+  End = 2
+};
+//~~~
+
+//===
+enum class LocTypes
+{
   Null     = 0,
   Ordinary = 1,
   Draw     = 2,
@@ -14,7 +24,8 @@ enum class LocTypes{
 //~~~
 
 //===
-enum class Directions{
+enum class Directions
+{
   Null      = 0,
   North     = 1,
   South     = 2,

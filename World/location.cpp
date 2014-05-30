@@ -6,10 +6,11 @@ using namespace fun;
 
 //===LOCATION
 unsigned int Location::_draw_range = 5;
+const dbTable Location::table_name = "locations";
 Location::LocationManager Location::Manager;
 
 Location::Location(dbRef ref)
-: DBObject(ref, "locations"), _drawn(false)
+: DBObject(ref), _drawn(false)
 {
   //initalize neighbours
   for (auto i = Directions::Null; i != Directions::End; ++i)

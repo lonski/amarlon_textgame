@@ -1,4 +1,4 @@
-#include "common.h"
+#include "db.h"
 
 using namespace std;
 using namespace soci;
@@ -46,11 +46,11 @@ DBObject::~DBObject()
   }
   catch(std::exception &e)
   {
-    qDebug() << "Error saving DBObject ["<<_table.c_str()<<"] " << ref() << " : " << e.what();
+    qDebug() << "Error saving DBObject " << ref() << " : " << e.what();
   }
   catch(...)
   {
-    qDebug() << "Error saving DBObject ["<<_table.c_str()<<"] " << ref() << ".";
+    qDebug() << "Error saving DBObject " << ref() << ".";
   }
 }
 

@@ -1,12 +1,13 @@
 #ifndef FUNC_H
 #define FUNC_H
 
-#include "common.h"
+#include "inc.h"
+#include "db.h"
+
+typedef std::map<std::string,std::string> MapRow;
+typedef std::vector<MapRow> MapTable;
 
 namespace fun{
-
-  typedef std::map<std::string,std::string> MapRow;
-  typedef std::vector<MapRow> MapTable;
 
   //declarations
   void MapQuery(const std::string &query, MapTable &result);

@@ -10,7 +10,6 @@ template<class T, typename EnumT>
 class PrototypeManager
 {
 private:
-  const std::string _prototype_condition = "OBJ_TYPE = 'TPL'";
   std::map<EnumT, std::unique_ptr<T> > _prototypes;
   void load_all();
 public:
@@ -44,7 +43,7 @@ template<class T, typename EnumT>
 void PrototypeManager<T,EnumT>::load_all()
 {
   MapTable protos;
-  fun::MapQuery("SELECT ref, prototype FROM "+T::table_name+" WHERE "+_prototype_condition, protos);
+  fun::MapQuery("SELECT ref, prototype FROM "+T::table_name+" WHERE obj_type="+fun::toStr(static_cast<int>(ObjTypes::Prototype)), protos);
 
   //for each connection
   for (auto p = protos.begin(); p != protos.end(); ++p)

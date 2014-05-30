@@ -12,6 +12,18 @@ enum class ItemPrototypes
 };
 //~~~
 
+enum class ItemTypes
+{
+  Null = 0,
+  Ordinary = 1,
+  Weapon = 2,
+  Armor = 3,
+  Food = 4,
+  Jewelry = 5,
+  Tool = 6,
+  End = 7
+};
+
 //===
 enum class LocTypes
 {
@@ -19,6 +31,17 @@ enum class LocTypes
   Ordinary = 1,
   Draw     = 2,
   End      = 3
+};
+
+//~~~
+
+//===
+enum class ObjTypes
+{
+  Null = 0,
+  Instance = 1,
+  Prototype = 2,
+  End = 3
 };
 
 //~~~

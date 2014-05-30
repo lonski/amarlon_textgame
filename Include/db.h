@@ -9,7 +9,8 @@ typedef unsigned int dbRef;
 typedef std::string dbTable;
 
 //===DB Object
-class DBObject{
+class DBObject
+{
 private:
   dbRef _ref;
   bool _loaded;
@@ -34,6 +35,7 @@ public:
   //operations
   virtual void save_to_db();
   virtual void load() = 0;
+  virtual void purge();
 
 };
 
@@ -45,13 +47,15 @@ void DBObject::save(std::string f_name, T f_val, dbTable tbl)
     std::stringstream s;
     s << "UPDATE "+ ( tbl == "" ? table() : tbl) + " SET " << f_name << "=\'"<<f_val<<"\' WHERE ref="<<ref();
     _save_queries.push_back(s.str());
-    }
+  }
 }
 
 //===~~~
 
 //===Database connection
-class DB {
+class DB
+{
+private:
   const static std::string _db_file;
   const static std::string _db_log_file;
   const static std::string _db_server;

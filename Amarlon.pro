@@ -28,7 +28,8 @@ SOURCES += main.cpp\
     Include/func.cpp \
     Include/enums.cpp \
     Equipment/item.cpp \
-    Include/db.cpp
+    Include/db.cpp \
+    Tests/testitems.cpp
 
 HEADERS  += game.h \
     Tests/testlocation.h \
@@ -40,7 +41,8 @@ HEADERS  += game.h \
     Include/exceptions.h \
     Equipment/item.h \
     Include/prototypemanager.h \
-    Include/db.h
+    Include/db.h \
+    Tests/testitems.h
 
 FORMS    += game.ui
 

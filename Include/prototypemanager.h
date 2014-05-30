@@ -15,6 +15,8 @@ private:
 public:
   PrototypeManager();
   std::unique_ptr<T> clone(EnumT key);
+  size_t count();
+  void reload();
 };
 //~~~
 
@@ -51,9 +53,25 @@ void PrototypeManager<T,EnumT>::load_all()
     dbRef ref = fun::CheckField<dbRef>( (*p)["REF"] );
     EnumT type = fun::CheckFieldCast<EnumT>( (*p)["PROTOTYPE"] );
 
-    _prototypes[type] = T::create(ref);
+    _prototypes[type] = T::create(ref, true);
   }
+
+  _Database.commit();
 }
+
+template<class T, typename EnumT>
+size_t PrototypeManager<T,EnumT>::count()
+{
+  return _prototypes.size();
+}
+
+template<class T, typename EnumT>
+void PrototypeManager<T,EnumT>::reload()
+{
+  _prototypes.clear();
+  load_all();
+}
+
 //~~~
 
 #endif // PROTOTYPEMANAGER_H

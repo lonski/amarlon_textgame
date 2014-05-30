@@ -162,7 +162,7 @@ void Location::load()
   if ( !loaded() && ref() > 0 ){
     try
     {
-      MapRow loc_data = MapQuery( "SELECT * FROM locations WHERE ref="+toStr(ref()) );
+      MapRow loc_data = MapQuery( "SELECT * FROM "+table()+" WHERE ref="+toStr(ref()) );
       if (loc_data.size() > 0)
       {
         set_name( CheckField<string>(loc_data["NAME"]) );
@@ -183,7 +183,7 @@ void Location::load()
 
 void Location::draw()
 {
-  //TDOD
+  //TODO
 }
 
 Location::~Location()

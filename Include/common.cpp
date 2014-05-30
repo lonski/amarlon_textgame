@@ -3,6 +3,10 @@
 using namespace std;
 using namespace soci;
 
+const string DB::_db_file = "/home/pi/db/data.fdb";
+const string DB::_db_log_file = "../amarlon/Data/db.log";
+const string DB::_db_server = "192.168.1.5";
+
 //===DB Object
 void DBObject::save_to_db()
 {
@@ -33,14 +37,27 @@ void DBObject::save(string query)
 {
   if ( loaded() ) _save_queries.push_back(query);
 }
+
+DBObject::~DBObject()
+{
+  try
+  {
+    save_to_db();
+  }
+  catch(std::exception &e)
+  {
+    qDebug() << "Error saving DBObject ["<<_table.c_str()<<"] " << ref() << " : " << e.what();
+  }
+  catch(...)
+  {
+    qDebug() << "Error saving DBObject ["<<_table.c_str()<<"] " << ref() << ".";
+  }
+}
+
 //===~~~
 
 //===Database connection
 DB* DB::_instance = nullptr;
-//const string DB::_db_file = "/home/spszenguo/Projects/amarlon/Data/data.fdb";
-const string DB::_db_file = "/home/pi/db/data.fdb";
-const string DB::_db_log_file = "../amarlon/Data/db.log";
-const string DB::_db_server = "192.168.1.5";
 
 DB::DB()
 {

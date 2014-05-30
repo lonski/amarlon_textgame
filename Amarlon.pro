@@ -24,23 +24,23 @@ SOURCES += main.cpp\
         game.cpp \
     Tests/testlocation.cpp \
     World/location.cpp \
-    Include/common.cpp \
     Tests/testdb.cpp \
     Include/func.cpp \
     Include/enums.cpp \
-    Equipment/item.cpp
+    Equipment/item.cpp \
+    Include/db.cpp
 
 HEADERS  += game.h \
     Tests/testlocation.h \
     World/location.h \
-    Include/common.h \
     Include/enums.h \
     Tests/testdb.h \
     Include/func.h \
     Include/inc.h \
     Include/exceptions.h \
     Equipment/item.h \
-    Include/prototypemanager.h
+    Include/prototypemanager.h \
+    Include/db.h
 
 FORMS    += game.ui
 

@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
   //TEST EXECUTION
   QTest::qExec(&db_tests, argc, argv);
   QTest::qExec(&location_tests, argc, argv);
-  
+
   //return a.exec();
   return 0;
 }

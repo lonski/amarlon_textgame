@@ -2,11 +2,24 @@
 
 using namespace std;
 
-PrototypeManager<Item, ItemPrototypes> Item::Prototypes;
+const dbTable Item::table_name = "items";
+PrototypeManager<Item, ItemPrototypes>* Item::_prototypes = nullptr;
 
 Item::Item(dbRef ref)
-: DBObject(ref, "items")
+: DBObject(ref)
 {
+}
+
+std::unique_ptr<Item> Item::create(dbRef ref)
+{
+  //TODO
+  return unique_ptr<Item>(nullptr);
+}
+
+PrototypeManager<Item, ItemPrototypes> &Item::prototypes()
+{
+  if (_prototypes == nullptr) _prototypes = new PrototypeManager<Item, ItemPrototypes>();
+  return *_prototypes;
 }
 
 void Item::load()

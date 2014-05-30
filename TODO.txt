@@ -1,2 +1,2 @@
-##Location
--> Rysowanie lokacji
+1. Testy PrototypeManager
+    -> ładownaie prototypów

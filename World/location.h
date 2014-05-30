@@ -1,13 +1,50 @@
 #ifndef LOCATION_H
 #define LOCATION_H
 
-#include "Include/common.h"
+#include "Include/db.h"
 #include "Include/enums.h"
 #include "Include/func.h"
 #include "Include/exceptions.h"
 
 class Creature;
 class Item;
+
+//===WalkVector (used in Location to walk within range)
+class WalkVector{
+private:
+  short _vals[4];
+  short indexof(Directions dir){
+    switch(dir){
+      case Directions::North: return 0; break;
+      case Directions::South: return 1; break;
+      case Directions::East: return 2; break;
+      case Directions::West: return 3; break;
+      default : return -1; break;
+    }
+  }
+
+public:
+  WalkVector(short north = 0, short south = 0, short east = 0, short west = 0 )
+  : _vals{north, south, east, west}
+  {
+  }
+  void inc(Directions dir, short val = 1)
+  {
+    short i = indexof(dir);
+    if (i != -1) _vals[indexof(dir)] += val;
+  }
+  void dec(Directions dir, short val = 1)
+  {
+    short i = indexof(dir);
+    if (i != -1) _vals[indexof(dir)] -= val;
+  }
+  short operator[](Directions dir)
+  {
+    short i = indexof(dir);
+    return ( i != -1 ? _vals[i] : 0);
+  }
+};
+//===~~
 
 //===Location - abstract base class
 class Location : public DBObject
@@ -36,6 +73,7 @@ protected:
   virtual void copy_connections_to_neighbour(Directions dir);
 
 public:  
+  const static dbTable table_name;
 
   //Location Manager
   static class LocationManager
@@ -68,6 +106,7 @@ public:
   virtual std::string descript() const { return _descript; }
 
   //set data
+  virtual dbTable table() const { return table_name; }
   virtual void set_draw_range(unsigned int range) { _draw_range = range; }
   virtual void set_connection(Directions dir, Location* loc);
   void set_name(std::string name);

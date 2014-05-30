@@ -16,8 +16,7 @@ private:
   //parameters
   static unsigned int _draw_range;
 
-  //flags
-  bool _loaded;
+  //flags  
   bool _drawn;
 
   //data
@@ -27,21 +26,14 @@ private:
   //connections
   std::map<Directions, Location* > _neighbours;
 
-  //save data
-  std::list<std::string> _save_queries;
-
 protected:
   //birth and death
-  Location(Ref ref);
+  Location(dbRef ref);
   virtual ~Location() = 0;
 
   //establish neighbour connections
   virtual void create_neighbours();
   virtual void copy_connections_to_neighbour(Directions dir);
-
-  //save changes
-  template<typename T> void save(std::string f_name, T f_val);
-  void save(std::string query);
 
 public:  
 
@@ -58,31 +50,28 @@ public:
   } Manager;
 
   //creation
-  static Location* create(Ref ref, LocTypes loc_type = LocTypes::Ordinary);
+  static Location* create(dbRef ref, LocTypes loc_type = LocTypes::Ordinary);
 
   //operations
-  virtual void loc_walk_within_range(WalkVector dir_vector, void (Location::*Fun)() );    
-  void save_to_db();
+  virtual void loc_walk_within_range(WalkVector dir_vector, void (Location::*Fun)() );      
   virtual void load();
   virtual void draw();
   virtual void set_not_drawn() { _drawn = false; }
-  virtual void set_not_loaded() { _loaded = false; }
 
   //access data
-  virtual Location* connection(Directions dir) { return _neighbours[dir]; }
-  virtual bool loaded() const { return _loaded; }
+  virtual Location* connection(Directions dir) { return _neighbours[dir]; }  
   virtual bool drawn() const { return _drawn; }
   virtual bool enterable() const { return true; }
   virtual unsigned int draw_range() const { return _draw_range; }
-  virtual void setDrawRange(unsigned int range) { _draw_range = range; }
 
   virtual std::string name() const { return _name; }
   virtual std::string descript() const { return _descript; }
 
   //set data
-  virtual void setConnection(Directions dir, Location* loc);
-  void setName(std::string name);
-  void setDestript(std::string dsc);
+  virtual void set_draw_range(unsigned int range) { _draw_range = range; }
+  virtual void set_connection(Directions dir, Location* loc);
+  void set_name(std::string name);
+  void set_destript(std::string dsc);
 
 };
 //===~~~
@@ -92,7 +81,7 @@ class DrawLocation : public Location {
 protected:
 
 public:
-  DrawLocation(Ref ref) : Location(ref) {}
+  DrawLocation(dbRef ref) : Location(ref) {}
   virtual bool enterable() const { return false; }
   virtual ~DrawLocation() {}
 
@@ -109,7 +98,7 @@ private:
 protected:
 
 public:
-  OrdinaryLocation(Ref ref): Location(ref) {}
+  OrdinaryLocation(dbRef ref): Location(ref) {}
   std::list<std::weak_ptr<Creature> > creatures();
   std::list<std::weak_ptr<Item> > objects();
 

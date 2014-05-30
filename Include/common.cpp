@@ -1,9 +1,41 @@
 #include "common.h"
 
 using namespace std;
+using namespace soci;
+
+//===DB Object
+void DBObject::save_to_db()
+{
+  for (auto i = _save_queries.begin(); i != _save_queries.end(); ++i)
+  {
+    //send every entry to DB, commit and delete entry
+    //if error occurs, only print it in debug and then delete entry
+    try
+    {
+      if (*i != "")
+      {
+        _Database << *i;
+        _Database.commit();
+      }
+    }
+    catch(soci_error &e)
+    {
+      qDebug() << "###Error saving location " << ref() << ": ";
+      qDebug() << e.what();
+      qDebug() << (*i).c_str();
+    }
+  }
+
+  _save_queries.clear();
+}
+
+void DBObject::save(string query)
+{
+  if ( loaded() ) _save_queries.push_back(query);
+}
+//===~~~
 
 //===Database connection
-
 DB* DB::_instance = nullptr;
 //const string DB::_db_file = "/home/spszenguo/Projects/amarlon/Data/data.fdb";
 const string DB::_db_file = "/home/pi/db/data.fdb";

@@ -485,14 +485,14 @@ należy kontener.<y:LabelModel>
             <y:ProxyAutoBoundsNode>
               <y:Realizers active="0">
                 <y:GroupNode>
-                  <y:Geometry height="362.8301498331799" width="1121.9873064451733" x="-1958.8865694168712" y="445.92166863207524"/>
+                  <y:Geometry height="622.1996894558214" width="1121.9873064451733" x="-1958.8865694168712" y="445.9216686320753"/>
                   <y:Fill color="#F5F5F5" transparent="false"/>
                   <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
                   <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="1121.9873064451733" x="0.0" y="0.0">ITEMS</y:NodeLabel>
                   <y:Shape type="roundrectangle"/>
                   <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
                   <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
-                  <y:BorderInsets bottom="21" bottomF="21.207272522926814" left="0" leftF="0.0" right="40" rightF="39.96417452830224" top="20" topF="20.467924528301978"/>
+                  <y:BorderInsets bottom="35" bottomF="34.96171780594568" left="0" leftF="0.0" right="40" rightF="39.96417452830224" top="20" topF="20.467924528301978"/>
                 </y:GroupNode>
                 <y:GroupNode>
                   <y:Geometry height="50.0" width="50.0" x="0.0" y="60.0"/>
@@ -512,7 +512,7 @@ należy kontener.<y:LabelModel>
               <data key="d4"/>
               <data key="d6">
                 <y:UMLClassNode>
-                  <y:Geometry height="107.89999999999998" width="388.59999999999985" x="-1280.4634375" y="502.8505306603772"/>
+                  <y:Geometry height="345.3279245283019" width="388.59999999999985" x="-1280.4634375" y="502.8505306603773"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="37.4140625" x="175.59296874999993" y="25.96875">Item<y:LabelModel>
@@ -523,7 +523,14 @@ należy kontener.<y:LabelModel>
                     </y:ModelParameter>
                   </y:NodeLabel>
                   <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="abstract" use3DEffect="false">
-                    <y:AttributeLabel>+static PrototypeManager&lt;Item, ItemPrototypes&gt; Prototypes;</y:AttributeLabel>
+                    <y:AttributeLabel>ItemTypes _item_type;
+ItemSizeClass _size_class;
+string _name;
+string _descript;
+double _weight;
+int _value;
+
++static PrototypeManager&lt;Item, ItemPrototypes&gt; Prototypes;</y:AttributeLabel>
                     <y:MethodLabel>+static Item* create(dbRef);
 +Item* clone();</y:MethodLabel>
                   </y:UML>
@@ -534,7 +541,7 @@ należy kontener.<y:LabelModel>
               <data key="d4"/>
               <data key="d6">
                 <y:UMLClassNode>
-                  <y:Geometry height="27.418935445853663" width="137.76919601951204" x="-1943.8865694168712" y="745.1256104964747"/>
+                  <y:Geometry height="27.418935445853663" width="137.76919601951204" x="-1943.8865694168712" y="990.7407048360974"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="101.55078125" x="18.10920738475602" y="3.0">OrdinaryItem<y:LabelModel>
@@ -555,7 +562,7 @@ należy kontener.<y:LabelModel>
               <data key="d4"/>
               <data key="d6">
                 <y:UMLClassNode>
-                  <y:Geometry height="27.418935445853663" width="137.76919601951204" x="-1776.1173733973592" y="745.1256104964747"/>
+                  <y:Geometry height="27.418935445853663" width="137.76919601951204" x="-1776.1173733973592" y="990.7407048360974"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="63.42041015625" x="37.17439293163102" y="3.0">Weapon<y:LabelModel>
@@ -576,7 +583,7 @@ należy kontener.<y:LabelModel>
               <data key="d4"/>
               <data key="d6">
                 <y:UMLClassNode>
-                  <y:Geometry height="27.418935445853663" width="137.76919601951204" x="-1608.3481773778472" y="745.1256104964747"/>
+                  <y:Geometry height="27.418935445853663" width="137.76919601951204" x="-1608.3481773778472" y="990.7407048360974"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="49.3603515625" x="44.20442222850602" y="3.0">Armor<y:LabelModel>
@@ -597,7 +604,7 @@ należy kontener.<y:LabelModel>
               <data key="d4"/>
               <data key="d6">
                 <y:UMLClassNode>
-                  <y:Geometry height="27.418935445853663" width="137.76919601951204" x="-1440.578981358335" y="745.1256104964747"/>
+                  <y:Geometry height="27.418935445853663" width="137.76919601951204" x="-1440.578981358335" y="990.7407048360974"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="57.82177734375" x="39.97370933788102" y="3.0">Jewelry<y:LabelModel>
@@ -618,7 +625,7 @@ należy kontener.<y:LabelModel>
               <data key="d4"/>
               <data key="d6">
                 <y:UMLClassNode>
-                  <y:Geometry height="27.418935445853663" width="137.76919601951204" x="-1105.040589319311" y="745.1256104964747"/>
+                  <y:Geometry height="27.418935445853663" width="137.76919601951204" x="-1105.040589319311" y="990.7407048360974"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="40.04833984375" x="48.86042808788102" y="3.0">Food<y:LabelModel>
@@ -639,7 +646,7 @@ należy kontener.<y:LabelModel>
               <data key="d4"/>
               <data key="d6">
                 <y:UMLClassNode>
-                  <y:Geometry height="27.418935445853663" width="137.76919601951204" x="-1272.809785338823" y="745.1256104964747"/>
+                  <y:Geometry height="27.418935445853663" width="137.76919601951204" x="-1272.809785338823" y="990.7407048360974"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="35.18603515625" x="51.29158043163102" y="3.0">Tool<y:LabelModel>
@@ -739,7 +746,7 @@ należy kontener.<y:LabelModel>
           <data key="d5"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="241.28035840000007" width="505.26621560754734" x="711.1788906261871" y="82.35154754240148"/>
+              <y:Geometry height="259.095639909434" width="505.26621560754734" x="711.1788906261871" y="76.5154621005654"/>
               <y:Fill color="#FFFF99" transparent="false"/>
               <y:BorderStyle color="#000000" type="dotted" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="109.06640625" x="198.09990467877367" y="3.0">ItemContainer<y:LabelModel>
@@ -750,7 +757,8 @@ należy kontener.<y:LabelModel>
                 </y:ModelParameter>
               </y:NodeLabel>
               <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="false">
-                <y:AttributeLabel>-int _max_item_size;
+                <y:AttributeLabel>-string _name;
+-ItemSizeClasses _max_item_size;
 -int _max_volume;
 -int _cur_volume;
 
@@ -851,7 +859,7 @@ należy kontener.<y:LabelModel>
     <edge id="n1::e2" source="n1::n0::n0" target="n1::n2::n0">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="138.89204420020098" ty="-7.352149818357759">
+          <y:Path sx="0.0" sy="0.0" tx="138.89204420020098" ty="-23.53014492673416">
             <y:Point x="-947.2713932997991" y="1195.2362728478772"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
@@ -889,7 +897,7 @@ należy kontener.<y:LabelModel>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="-36.979394303758795" ty="49.66530740487275">
-            <y:Point x="-662.0661683308813" y="556.8005306603773"/>
+            <y:Point x="-662.0661683308813" y="675.5144929245282"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="white_diamond" target="none"/>
@@ -912,7 +920,7 @@ należy kontener.<y:LabelModel>
     <edge id="n1::n2::e0" source="n1::n2::n5" target="n1::n2::n0">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="50.00744619044508" ty="-0.29324741524243336"/>
+          <y:Path sx="0.0" sy="0.0" tx="50.00744619044508" ty="-0.9385219766353905"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="white_delta"/>
           <y:BendStyle smoothed="false"/>
@@ -922,9 +930,9 @@ należy kontener.<y:LabelModel>
     <edge id="n1::n2::e1" source="n1::n2::n6" target="n1::n2::n0">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="22.27005883122206" ty="0.8416442920748182">
-            <y:Point x="-1203.925187329067" y="725.6061476353789"/>
-            <y:Point x="-1063.893378668778" y="725.6061476353789"/>
+          <y:Path sx="0.0" sy="0.0" tx="22.27005883122206" ty="2.6936355567496646">
+            <y:Point x="-1203.925187329067" y="971.2212419750016"/>
+            <y:Point x="-1063.893378668778" y="971.2212419750016"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="white_delta"/>
@@ -935,9 +943,9 @@ należy kontener.<y:LabelModel>
     <edge id="n1::n2::e2" source="n1::n2::n4" target="n1::n2::n0">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="-9.506908973655982" ty="0.8416442920748182">
-            <y:Point x="-1371.694383348579" y="708.3557936841593"/>
-            <y:Point x="-1095.670346473656" y="708.3557936841593"/>
+          <y:Path sx="0.0" sy="0.0" tx="-9.506908973655982" ty="2.6936355567496646">
+            <y:Point x="-1371.694383348579" y="951.2212419750016"/>
+            <y:Point x="-1095.670346473656" y="951.2212419750016"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="white_delta"/>
@@ -948,9 +956,9 @@ należy kontener.<y:LabelModel>
     <edge id="n1::n2::e3" source="n1::n2::n3" target="n1::n2::n0">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="-39.29781629073" ty="-0.6479010737788826">
-            <y:Point x="-1539.4635793680911" y="689.6158943670861"/>
-            <y:Point x="-1125.46125379073" y="689.6158943670861"/>
+          <y:Path sx="0.0" sy="0.0" tx="-39.29781629073" ty="-2.0735712058176063">
+            <y:Point x="-1539.4635793680911" y="932.4813426579284"/>
+            <y:Point x="-1125.46125379073" y="932.4813426579284"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="white_delta"/>
@@ -961,9 +969,9 @@ należy kontener.<y:LabelModel>
     <edge id="n1::n2::e4" source="n1::n2::n2" target="n1::n2::n0">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="-63.81147716877899" ty="-7.9112080006081555">
-            <y:Point x="-1707.2327753876032" y="671.4576270500129"/>
-            <y:Point x="-1149.974914668779" y="671.4576270500129"/>
+          <y:Path sx="0.0" sy="0.0" tx="-63.81147716877899" ty="-25.319379419478327">
+            <y:Point x="-1707.2327753876032" y="914.3230753408552"/>
+            <y:Point x="-1149.974914668779" y="914.3230753408552"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="white_delta"/>
@@ -974,9 +982,9 @@ należy kontener.<y:LabelModel>
     <edge id="n1::n2::e5" source="n1::n2::n1" target="n1::n2::n0">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="-92.18376985170903" ty="-8.365164683534886">
-            <y:Point x="-1875.0019714071152" y="650.5756196353789"/>
-            <y:Point x="-1178.3472073517091" y="650.5756196353789"/>
+          <y:Path sx="0.0" sy="0.0" tx="-92.18376985170903" ty="-26.772242432831796">
+            <y:Point x="-1875.0019714071152" y="893.4410679262212"/>
+            <y:Point x="-1178.3472073517091" y="893.4410679262212"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="white_delta"/>
@@ -1002,7 +1010,7 @@ należy kontener.<y:LabelModel>
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="79.99920076710202" sy="-63.265625116556066" tx="2.09552991335795" ty="68.25939216461131">
+          <y:Path sx="79.99920076710202" sy="-63.265625116556066" tx="2.09552991335795" ty="73.29942234004477">
             <y:Point x="645.304187816901" y="816.764609995472"/>
             <y:Point x="965.9075283433187" y="816.764609995472"/>
           </y:Path>
@@ -1016,7 +1024,7 @@ należy kontener.<y:LabelModel>
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="156.84809554095818" sy="-5.35139236301859" tx="13.59761105819509" ty="49.62571344174978">
+          <y:Path sx="156.84809554095818" sy="-5.35139236301859" tx="-233.38868358219463" ty="46.55415812886889">
             <y:Point x="-55.9780763340417" y="252.6174401841513"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
@@ -1029,7 +1037,7 @@ należy kontener.<y:LabelModel>
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="155.69328569426057" sy="6.929362353962574" tx="-3.70173827517119" ty="21.093426649296987">
+          <y:Path sx="155.69328569426057" sy="22.177037256704775" tx="23.36096170082419" ty="18.021871336416098">
             <y:Point x="-930.4701518057395" y="224.0851533916985"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
@@ -1042,7 +1050,7 @@ należy kontener.<y:LabelModel>
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="21.53111084908355" sy="-13.835086558250405" tx="108.94966305275113" ty="-28.695060287546994">
+          <y:Path sx="27.55279264422029" sy="-16.906641871131285" tx="108.94966305275113" ty="-91.83693802885172">
             <y:Point x="-977.213774447249" y="189.15664018415112"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
@@ -1102,7 +1110,7 @@ należy kontener.<y:LabelModel>
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="-83.50206937619237" sy="-41.59945305073549" tx="42.39521701699539" ty="2.349196914307015">
+          <y:Path sx="-83.50206937619237" sy="-44.671008363616416" tx="42.39521701699539" ty="2.349196914307015">
             <y:Point x="-582.6915570101271" y="161.39227369166602"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>

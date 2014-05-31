@@ -13,12 +13,12 @@ class Item;
 class WalkVector{
 private:
   short _vals[4];
-  short indexof(Directions dir){
+  short indexof(Direction dir){
     switch(dir){
-      case Directions::North: return 0; break;
-      case Directions::South: return 1; break;
-      case Directions::East: return 2; break;
-      case Directions::West: return 3; break;
+      case Direction::North: return 0; break;
+      case Direction::South: return 1; break;
+      case Direction::East: return 2; break;
+      case Direction::West: return 3; break;
       default : return -1; break;
     }
   }
@@ -28,17 +28,17 @@ public:
   : _vals{north, south, east, west}
   {
   }
-  void inc(Directions dir, short val = 1)
+  void inc(Direction dir, short val = 1)
   {
     short i = indexof(dir);
     if (i != -1) _vals[indexof(dir)] += val;
   }
-  void dec(Directions dir, short val = 1)
+  void dec(Direction dir, short val = 1)
   {
     short i = indexof(dir);
     if (i != -1) _vals[indexof(dir)] -= val;
   }
-  short operator[](Directions dir)
+  short operator[](Direction dir)
   {
     short i = indexof(dir);
     return ( i != -1 ? _vals[i] : 0);
@@ -61,7 +61,7 @@ private:
   std::string _descript;
 
   //connections
-  std::map<Directions, Location* > _neighbours;
+  std::map<Direction, Location* > _neighbours;
 
 protected:
   //birth and death
@@ -70,7 +70,7 @@ protected:
 
   //establish neighbour connections
   virtual void create_neighbours();
-  virtual void copy_connections_to_neighbour(Directions dir);
+  virtual void copy_connections_to_neighbour(Direction dir);
 
 public:  
   const static dbTable table_name;
@@ -88,7 +88,7 @@ public:
   } Manager;
 
   //creation
-  static Location* create(dbRef ref, LocTypes loc_type = LocTypes::Ordinary);
+  static Location* create(dbRef ref, LocType loc_type = LocType::Ordinary);
 
   //operations
   virtual void loc_walk_within_range(WalkVector dir_vector, void (Location::*Fun)() );      
@@ -97,7 +97,7 @@ public:
   virtual void set_not_drawn() { _drawn = false; }
 
   //access data
-  virtual Location* connection(Directions dir) { return _neighbours[dir]; }  
+  virtual Location* connection(Direction dir) { return _neighbours[dir]; }
   virtual bool drawn() const { return _drawn; }
   virtual bool enterable() const { return true; }
   virtual unsigned int draw_range() const { return _draw_range; }
@@ -108,7 +108,7 @@ public:
 
   //set data  
   virtual void set_draw_range(unsigned int range) { _draw_range = range; }
-  virtual void set_connection(Directions dir, Location* loc);
+  virtual void set_connection(Direction dir, Location* loc);
   void set_name(std::string name);
   void set_destript(std::string dsc);
 

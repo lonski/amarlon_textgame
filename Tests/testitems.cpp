@@ -32,13 +32,13 @@ void TestItems::LoadData()
   QCOMPARE(itm->weight(), 1.93);
   QCOMPARE(itm->descript().c_str(), "lolo");
   QCOMPARE(itm->name().c_str(),"TestIns2");
-  QVERIFY(itm->item_type() == ItemTypes::Armor);
+  QVERIFY(itm->item_type() == ItemType::Armor);
 
 }
 
 void TestItems::PrototypeTest()
 {
-  unique_ptr<Item> new_item = Item::prototypes().clone(ItemPrototypes::Sztylet);
+  unique_ptr<Item> new_item = Item::prototypes().clone(ItemPrototype::Sztylet);
   QVERIFY(new_item->ref() != 4);
   QCOMPARE(new_item->name().c_str(), "TestTpl2");
   new_item->purge();

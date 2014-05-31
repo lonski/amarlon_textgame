@@ -485,14 +485,14 @@ należy kontener.<y:LabelModel>
             <y:ProxyAutoBoundsNode>
               <y:Realizers active="0">
                 <y:GroupNode>
-                  <y:Geometry height="622.1996894558214" width="1121.9873064451733" x="-1958.8865694168712" y="445.9216686320753"/>
+                  <y:Geometry height="639.216675347989" width="1121.9873064451733" x="-1958.8865694168712" y="445.9216686320753"/>
                   <y:Fill color="#F5F5F5" transparent="false"/>
                   <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
                   <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="1121.9873064451733" x="0.0" y="0.0">ITEMS</y:NodeLabel>
                   <y:Shape type="roundrectangle"/>
                   <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
                   <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
-                  <y:BorderInsets bottom="35" bottomF="34.96171780594568" left="0" leftF="0.0" right="40" rightF="39.96417452830224" top="20" topF="20.467924528301978"/>
+                  <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="40" rightF="39.96417452830224" top="20" topF="20.467924528301978"/>
                 </y:GroupNode>
                 <y:GroupNode>
                   <y:Geometry height="50.0" width="50.0" x="0.0" y="60.0"/>
@@ -525,6 +525,7 @@ należy kontener.<y:LabelModel>
                   <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="abstract" use3DEffect="false">
                     <y:AttributeLabel>ItemTypes _item_type;
 ItemSizeClass _size_class;
+BodyPart _body_part;
 string _name;
 string _descript;
 double _weight;
@@ -562,10 +563,10 @@ int _value;
               <data key="d4"/>
               <data key="d6">
                 <y:UMLClassNode>
-                  <y:Geometry height="27.418935445853663" width="137.76919601951204" x="-1776.1173733973592" y="990.7407048360974"/>
+                  <y:Geometry height="79.39763914396679" width="161.24344930253096" x="-1787.8545000388688" y="990.7407048360974"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="63.42041015625" x="37.17439293163102" y="3.0">Weapon<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="63.42041015625" x="48.91151957314048" y="3.0">Weapon<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -573,7 +574,8 @@ int _value;
                     </y:ModelParameter>
                   </y:NodeLabel>
                   <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="false">
-                    <y:AttributeLabel/>
+                    <y:AttributeLabel>WeaponType _wpn_type;
+int _dmg;</y:AttributeLabel>
                     <y:MethodLabel/>
                   </y:UML>
                 </y:UMLClassNode>
@@ -583,10 +585,10 @@ int _value;
               <data key="d4"/>
               <data key="d6">
                 <y:UMLClassNode>
-                  <y:Geometry height="27.418935445853663" width="137.76919601951204" x="-1608.3481773778472" y="990.7407048360974"/>
+                  <y:Geometry height="79.39763914396679" width="154.5365197930971" x="-1610.8632759438851" y="990.7407048360974"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="49.3603515625" x="44.20442222850602" y="3.0">Armor<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="49.3603515625" x="52.58808411529856" y="3.0">Armor<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -594,7 +596,7 @@ int _value;
                     </y:ModelParameter>
                   </y:NodeLabel>
                   <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="false">
-                    <y:AttributeLabel/>
+                    <y:AttributeLabel>int _damage_reduction;</y:AttributeLabel>
                     <y:MethodLabel/>
                   </y:UML>
                 </y:UMLClassNode>
@@ -957,7 +959,7 @@ int _value;
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="-39.29781629073" ty="-2.0735712058176063">
-            <y:Point x="-1539.4635793680911" y="932.4813426579284"/>
+            <y:Point x="-1533.5950160473367" y="932.4813426579284"/>
             <y:Point x="-1125.46125379073" y="932.4813426579284"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>

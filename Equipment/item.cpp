@@ -66,7 +66,7 @@ void Item::load()
       MsgError(e.what());
       qDebug() << _Database.get_last_query().c_str();
     }
-    }
+  }
 }
 
 std::unique_ptr<Item> Item::clone()

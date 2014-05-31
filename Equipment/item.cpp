@@ -89,6 +89,18 @@ void Item::set_item_type(ItemType type)
   save("ITEM_TYPE",static_cast<int>(_item_type));
 }
 
+void Item::set_size_class(ItemSizeClass size_class)
+{
+  _size_class = size_class;
+  save("SIZE_CLASS",static_cast<int>(_size_class));
+}
+
+void Item::set_body_part(BodyPart body_part)
+{
+  _body_part = body_part;
+  save("BODY_PART",static_cast<int>(_body_part));
+}
+
 void Item::set_name(string name)
 {
   _name = name;

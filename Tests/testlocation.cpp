@@ -30,7 +30,7 @@ void TestLocation::LocCreation()
     QVERIFY(loc != nullptr);
     QCOMPARE(loc->ref(), static_cast<unsigned int>(1));
     QVERIFY(loc->name() == "");
-    QVERIFY(loc->connection(Directions::South) == nullptr);
+    QVERIFY(loc->connection(Direction::South) == nullptr);
   }
   catch(creation_error &e)
   {
@@ -59,14 +59,14 @@ void TestLocation::LoadingData()
     QCOMPARE(loc->descript().c_str(), "Testowa lokacja3");
 
     //vlidate one of neighbour's ptrs - location created but not yet loaded
-    Location* nb = loc->connection(Directions::Northeast);
+    Location* nb = loc->connection(Direction::Northeast);
     QVERIFY(nb != nullptr);
     QVERIFY(nb->ref() == 5);
     QVERIFY(nb->name() == "");
     QVERIFY(nb->loaded() == false);
 
     //validate another neighbour ptr - still nullptr (no neighbour there)
-    nb = loc->connection(Directions::East);
+    nb = loc->connection(Direction::East);
     QVERIFY(nb == nullptr);
 
   }
@@ -91,41 +91,41 @@ void TestLocation::LocWalkWithinRange()
     //validate data (look for loc map at begining of this file):
     //#1. locations of refs 6,4,3 should be loaded
     //Loc 6
-    Location *loc6 =loc->connection(Directions::Northwest);
+    Location *loc6 =loc->connection(Direction::Northwest);
     QCOMPARE(loc6->ref(), static_cast<dbRef>(6));
     QVERIFY(loc6->loaded());
     //Loc 4
-    Location *loc4 = loc->connection(Directions::West);
+    Location *loc4 = loc->connection(Direction::West);
     QCOMPARE(loc4->ref(), static_cast<dbRef>(4));
     QVERIFY(loc4->loaded());
     //Loc 3
-    Location *loc3 = loc->connection(Directions::Southwest);
+    Location *loc3 = loc->connection(Direction::Southwest);
     QCOMPARE(loc3->ref(), static_cast<dbRef>(3));
     QVERIFY(loc3->loaded());
 
     //#2. locations of refs 7,1,2 should be created
     //Loc 7
-    Location *loc7 = loc6->connection(Directions::North);
+    Location *loc7 = loc6->connection(Direction::North);
     QVERIFY(loc7 != nullptr);
     QCOMPARE(loc7->ref(), static_cast<dbRef>(7));
     QVERIFY(loc7->loaded() == false);
     //Loc 1
-    Location *loc1 = loc4->connection(Directions::West);
+    Location *loc1 = loc4->connection(Direction::West);
     QVERIFY(loc1 != nullptr);
     QCOMPARE(loc1->ref(), static_cast<dbRef>(1));
     QVERIFY(loc1->loaded() == false);
     //Loc 2
-    Location *loc2 = loc4->connection(Directions::Southwest);
+    Location *loc2 = loc4->connection(Direction::Southwest);
     QVERIFY(loc2 != nullptr);
     QCOMPARE(loc2->ref(), static_cast<dbRef>(2));
     QVERIFY(loc2->loaded() == false);
 
     //#3. locations of refs 9,8 should not be created
     //Loc 9
-    Location *loc9 = loc1->connection(Directions::West);
+    Location *loc9 = loc1->connection(Direction::West);
     QVERIFY(loc9 == nullptr);
     //Loc 8
-    Location *loc8 = loc2->connection(Directions::West);
+    Location *loc8 = loc2->connection(Direction::West);
     QVERIFY(loc8 == nullptr);
 
   }

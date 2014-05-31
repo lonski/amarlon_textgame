@@ -4,7 +4,7 @@
 #include "inc.h"
 
 //===
-enum class ItemPrototypes
+enum class ItemPrototype
 {
   Null = 0,
   Sztylet = 1,
@@ -14,7 +14,7 @@ enum class ItemPrototypes
 };
 //~~~
 
-enum class ItemTypes
+enum class ItemType
 {
   Null = 0,
   Ordinary = 1,
@@ -27,7 +27,7 @@ enum class ItemTypes
 };
 
 //===
-enum class LocTypes
+enum class LocType
 {
   Null     = 0,
   Ordinary = 1,
@@ -38,7 +38,7 @@ enum class LocTypes
 //~~~
 
 //===
-enum class ObjTypes
+enum class ObjType
 {
   Null = 0,
   Instance = 1,
@@ -49,7 +49,7 @@ enum class ObjTypes
 //~~~
 
 //===
-enum class Directions
+enum class Direction
 {
   Null      = 0,
   North     = 1,
@@ -65,9 +65,9 @@ enum class Directions
   End       = 11
 };
 
-Directions operator~(Directions& d);
-Directions& operator++( Directions& d );
-const char* DirectionStr(Directions &d);
+Direction operator~(Direction& d);
+Direction& operator++( Direction& d );
+const char* DirectionStr(Direction &d);
 
 
 

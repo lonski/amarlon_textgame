@@ -11,10 +11,10 @@
 class Item : public DBObject
 {
 private:
-  static PrototypeManager<Item, ItemPrototypes> *_prototypes;
+  static PrototypeManager<Item, ItemPrototype> *_prototypes;
 
   //data
-  ItemTypes _item_type;
+  ItemType _item_type;
   std::string _name;
   std::string _descript;
   double _weight;
@@ -32,7 +32,7 @@ public:
 
   //creation
   static std::unique_ptr<Item> create(dbRef ref, bool prototype = false);
-  static PrototypeManager<Item, ItemPrototypes>& prototypes();
+  static PrototypeManager<Item, ItemPrototype>& prototypes();
   std::unique_ptr<Item> clone();
 
   //operations
@@ -40,14 +40,14 @@ public:
 
   //data access
   virtual dbTable table() const { return table_name; }
-  ItemTypes item_type() const { return _item_type; }
+  ItemType item_type() const { return _item_type; }
   std::string name() const { return _name; }
   std::string descript() const { return _descript; }
   double weight() const { return _weight; }
   int value() const { return _value; }
 
   //data set
-  void set_item_type(ItemTypes type);
+  void set_item_type(ItemType type);
   void set_name(std::string name);
   void set_destript(std::string dsc);
   void set_weight(double weight);

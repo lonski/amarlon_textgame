@@ -45,7 +45,7 @@ template<class T, typename EnumT>
 void PrototypeManager<T,EnumT>::load_all()
 {
   MapTable protos;
-  fun::MapQuery("SELECT ref, prototype FROM "+T::table_name+" WHERE obj_type="+fun::toStr(static_cast<int>(ObjTypes::Prototype)), protos);
+  fun::MapQuery("SELECT ref, prototype FROM "+T::table_name+" WHERE obj_type="+fun::toStr(static_cast<int>(ObjType::Prototype)), protos);
 
   //for each connection
   for (auto p = protos.begin(); p != protos.end(); ++p)

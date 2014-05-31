@@ -8,9 +8,9 @@
 
 int main(int argc, char *argv[])
 {
-  //QApplication a(argc, argv);
-  //Game w;
-  //w.show();
+  QApplication a(argc, argv);
+  Game w;
+  w.show();
 
   //TESTS
   TestDB db_tests;
@@ -22,6 +22,5 @@ int main(int argc, char *argv[])
   QTest::qExec(&location_tests, argc, argv);
   QTest::qExec(&item_tests, argc, argv);
 
-  //return a.exec();
-  return 0;
+  return a.exec();
 }

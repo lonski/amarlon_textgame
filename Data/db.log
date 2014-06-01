@@ -1636,3 +1636,34 @@ EXECUTE PROCEDURE CLONE_ITEM(4)
 SELECT obj_type, item_type FROM items WHERE ref=11
 SELECT * FROM items WHERE ref=11
 delete from items where ref = 11
+select first 1 ref from locations
+SELECT * FROM locations WHERE ref=3
+SELECT * FROM v_loc_neighbours WHERE location=3
+SELECT * FROM locations WHERE ref=5
+SELECT * FROM v_loc_neighbours WHERE location=5
+SELECT * FROM locations WHERE ref=4
+SELECT * FROM v_loc_neighbours WHERE location=4
+SELECT * FROM locations WHERE ref=6
+SELECT * FROM v_loc_neighbours WHERE location=6
+SELECT * FROM locations WHERE ref=3
+SELECT * FROM v_loc_neighbours WHERE location=3
+SELECT * FROM locations WHERE ref=5
+SELECT * FROM v_loc_neighbours WHERE location=5
+UPDATE locations SET NAME='changed_name' WHERE ref=5
+UPDATE locations SET NAME='Test5' WHERE ref=5
+SELECT obj_type, item_type FROM items WHERE ref=2
+SELECT * FROM items WHERE ref=2
+SELECT obj_type, item_type FROM items WHERE ref=4
+SELECT obj_type, item_type FROM items WHERE ref=2
+SELECT * FROM items WHERE ref=2
+SELECT ref, prototype FROM items WHERE obj_type=2
+SELECT obj_type, item_type FROM items WHERE ref=3
+SELECT * FROM items WHERE ref=3
+SELECT obj_type, item_type FROM items WHERE ref=4
+SELECT * FROM items WHERE ref=4
+SELECT obj_type, item_type FROM items WHERE ref=5
+SELECT * FROM items WHERE ref=5
+EXECUTE PROCEDURE CLONE_ITEM(4)
+SELECT obj_type, item_type FROM items WHERE ref=12
+SELECT * FROM items WHERE ref=12
+delete from items where ref = 12

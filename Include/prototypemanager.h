@@ -5,7 +5,7 @@
 #include "Include/db.h"
 #include "Include/func.h"
 
-//==PrototypeManager declaration
+//==PrototypeManager
 template<class T, typename EnumT>
 class PrototypeManager
 {
@@ -18,9 +18,7 @@ public:
   size_t count();
   void reload();
 };
-//~~~
 
-//==PrototypeManager definition
 template<class T, typename EnumT>
 PrototypeManager<T,EnumT>::PrototypeManager()
 {
@@ -71,7 +69,28 @@ void PrototypeManager<T,EnumT>::reload()
   _prototypes.clear();
   load_all();
 }
+//~~~
 
+//==Prototypable
+template<class T, typename EnumT>
+class Prototypable
+{
+private:
+  static PrototypeManager<T, EnumT> *_prototypes;
+public:
+  static PrototypeManager<T, EnumT>& prototypes();
+  virtual std::unique_ptr<T> clone() = 0;
+};
+
+template<class T, typename EnumT>
+PrototypeManager<T, EnumT>& Prototypable<T, EnumT>::prototypes()
+{
+  if (_prototypes == nullptr) _prototypes = new PrototypeManager<T, EnumT>();
+  return *_prototypes;
+}
+
+template<class T, typename EnumT>
+PrototypeManager<T, EnumT>* Prototypable<T, EnumT>::_prototypes = nullptr;
 //~~~
 
 #endif // PROTOTYPEMANAGER_H

@@ -5,7 +5,6 @@ using namespace soci;
 using namespace fun;
 
 const dbTable Item::table_name = "items";
-PrototypeManager<Item, ItemPrototype>* Item::_prototypes = nullptr;
 
 Item::Item(dbRef ref) : DBObject(ref)
 {
@@ -36,12 +35,6 @@ std::unique_ptr<Item> Item::create(dbRef ref, bool prototype)
   new_item->load();
 
   return unique_ptr<Item>(new_item);
-}
-
-PrototypeManager<Item, ItemPrototype> &Item::prototypes()
-{
-  if (_prototypes == nullptr) _prototypes = new PrototypeManager<Item, ItemPrototype>();
-  return *_prototypes;
 }
 
 void Item::load()

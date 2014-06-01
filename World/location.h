@@ -138,8 +138,8 @@ protected:
 
 public:
   OrdinaryLocation(dbRef ref): Location(ref) {}
-  std::list<std::weak_ptr<Creature> > creatures();
-  std::list<std::weak_ptr<Item> > objects();
+  std::vector<std::weak_ptr<Creature> > creatures();
+  std::vector<std::weak_ptr<Item> > objects();
 
   virtual ~OrdinaryLocation() {}
 };

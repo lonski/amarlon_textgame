@@ -8,11 +8,9 @@
 #include "Include/exceptions.h"
 
 //===Item
-class Item : public DBObject
+class Item : public DBObject, public Prototypable<Item, ItemPrototype>
 {
 private:
-  static PrototypeManager<Item, ItemPrototype> *_prototypes;
-
   //data
   ItemType _item_type;
   ItemSizeClass _size_class;
@@ -34,7 +32,6 @@ public:
 
   //creation
   static std::unique_ptr<Item> create(dbRef ref, bool prototype = false);
-  static PrototypeManager<Item, ItemPrototype>& prototypes();
   std::unique_ptr<Item> clone();
 
   //operations

@@ -29,7 +29,13 @@ SOURCES += main.cpp\
     Include/enums.cpp \
     Equipment/item.cpp \
     Include/db.cpp \
-    Tests/testitems.cpp
+    Tests/testitems.cpp \
+    Equipment/ordinaryitem.cpp \
+    Equipment/weapon.cpp \
+    Equipment/armor.cpp \
+    Equipment/jewelry.cpp \
+    Equipment/food.cpp \
+    Equipment/tool.cpp
 
 HEADERS  += game.h \
     Tests/testlocation.h \
@@ -42,7 +48,13 @@ HEADERS  += game.h \
     Equipment/item.h \
     Include/prototypemanager.h \
     Include/db.h \
-    Tests/testitems.h
+    Tests/testitems.h \
+    Equipment/ordinaryitem.h \
+    Equipment/weapon.h \
+    Equipment/armor.h \
+    Equipment/jewelry.h \
+    Equipment/food.h \
+    Equipment/tool.h
 
 FORMS    += game.ui
 

@@ -1,4 +1,10 @@
 #include "item.h"
+#include "ordinaryitem.h"
+#include "weapon.h"
+#include "armor.h"
+#include "jewelry.h"
+#include "food.h"
+#include "tool.h"
 
 using namespace std;
 using namespace soci;

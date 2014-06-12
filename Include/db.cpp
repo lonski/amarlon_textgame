@@ -5,7 +5,7 @@ using namespace soci;
 
 const string DB::_db_file = "/home/pi/db/data.fdb";
 const string DB::_db_log_file = "../amarlon/Data/db.log";
-const string DB::_db_server = "lonski.pl";
+const string DB::_db_server = "192.168.1.5";//"lonski.pl";
 
 //===DB Object
 void DBObject::save_to_db()

@@ -12,6 +12,7 @@ using namespace std;
 using namespace soci;
 using namespace fun;
 
+//==========ITEM============
 const dbTable Item::table_name = "items";
 
 Item::Item(dbRef ref, bool temporary) : DBObject(ref, temporary)
@@ -64,8 +65,18 @@ void Item::load()
         _body_parts.clear();
         _body_parts = Str2BodyParts( CheckField<string>(item_data["BODY_PARTS"]) );
         set_durability( CheckField<int>(item_data["DURABILITY"]) );
+        set_stackable( CheckField<bool>(item_data["STACKABLE"]) );
 
         set_loaded();
+      }
+
+      try
+      {
+        inventory = Container<>::create(Container<>::byOwner( table(),ref() ));
+      }
+      catch(creation_error)
+      {
+        inventory = unique_ptr<Container<> >(nullptr);
       }
     }
     catch(soci_error &e)
@@ -78,16 +89,21 @@ void Item::load()
 
 std::unique_ptr<Item> Item::clone()
 {
-  //save
-  save_to_db();
+  if (!isTemporary())
+  {
+    //save
+    save_to_db();
 
-  //clone db record
-  dbRef new_ref(0);
-  _Database << "EXECUTE PROCEDURE CLONE_ITEM("<< ref() << ")", into(new_ref);
-  _Database.commit();
+    //clone db record
+    dbRef new_ref(0);
+    _Database << "EXECUTE PROCEDURE CLONE_ITEM("<< ref() << ")", into(new_ref);
+    _Database.commit();
 
-  //return new item
-  return Item::create(new_ref);
+    //return new item
+    return Item::create(new_ref);
+  }
+
+  return unique_ptr<Item>(nullptr);
 }
 
 void Item::set_type(ItemType type)
@@ -108,7 +124,7 @@ void Item::set_descript(string dsc)
   save("DESCRIPTION", _descript);
 }
 
-void Item::set_weight(double weight)
+void Item::set_weight(Weight weight)
 {
   _weight = weight;
   save("WEIGHT", _weight);
@@ -148,10 +164,18 @@ void Item::remove_body_part(BodyPartType body_part)
   {
     _body_parts.erase(iter);
     save("BODY_PARTS", BodyParts2Str(_body_parts));
-  }
+    }
+}
+
+void Item::set_stackable(bool stackable)
+{
+  _stackable = stackable;
+  save("STACKABLE", _stackable);
 }
 
 Item::~Item()
 {
 }
+//===~~~
+
 

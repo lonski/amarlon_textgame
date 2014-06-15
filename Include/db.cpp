@@ -39,6 +39,7 @@ void DBObject::save_to_db()
 
 void DBObject::reload()
 {
+  save_to_db();
   set_not_loaded();
   load();
 }
@@ -47,6 +48,7 @@ void DBObject::purge()
 {
   if ( !isTemporary() )
   {
+    _save_queries.clear();
     _Database << "delete from " << table().c_str() << " where ref = " << ref();
     _Database.commit();
   }

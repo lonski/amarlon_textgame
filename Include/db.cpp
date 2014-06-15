@@ -5,58 +5,74 @@ using namespace soci;
 
 const string DB::_db_file = "/home/pi/db/data.fdb";
 const string DB::_db_log_file = "../amarlon/Data/db.log";
-const string DB::_db_server = "192.168.1.5";//"lonski.pl";
+const string DB::_db_server = "lonski.pl"; //"192.168.1.5";
 
 //===DB Object
 void DBObject::save_to_db()
 {
-  for (auto i = _save_queries.begin(); i != _save_queries.end(); ++i)
+  if (!isTemporary())
   {
-    //send every entry to DB, commit and delete entry
-    //if error occurs, only print it in debug and then delete entry
-    try
+
+    for (auto i = _save_queries.begin(); i != _save_queries.end(); ++i)
     {
-      if (*i != "")
+      //send every entry to DB, commit and delete entry
+      //if error occurs, only print it in debug and then delete entry
+      try
       {
-        _Database << *i;
-        _Database.commit();
+        if (*i != "")
+        {
+          _Database << *i;
+          _Database.commit();
+        }
+      }
+      catch(soci_error &e)
+      {
+        qDebug() << "###Error saving location " << ref() << ": ";
+        qDebug() << e.what();
+        qDebug() << (*i).c_str();
       }
     }
-    catch(soci_error &e)
-    {
-      qDebug() << "###Error saving location " << ref() << ": ";
-      qDebug() << e.what();
-      qDebug() << (*i).c_str();
-    }
-  }
 
-  _save_queries.clear();
+    _save_queries.clear();
+    }
+}
+
+void DBObject::reload()
+{
+  set_not_loaded();
+  load();
 }
 
 void DBObject::purge()
 {
-  _Database << "delete from " << table().c_str() << " where ref = " << ref();
-  _Database.commit();
+  if ( !isTemporary() )
+  {
+    _Database << "delete from " << table().c_str() << " where ref = " << ref();
+    _Database.commit();
+  }
 }
 
 void DBObject::save(string query)
 {
-  if ( loaded() ) _save_queries.push_back(query);
+  if ( loaded() && !isTemporary() ) _save_queries.push_back(query);
 }
 
 DBObject::~DBObject()
 {
-  try
+  if ( !isTemporary() )
   {
-    save_to_db();
-  }
-  catch(std::exception &e)
-  {
-    qDebug() << "Error saving DBObject " << ref() << " : " << e.what();
-  }
-  catch(...)
-  {
-    qDebug() << "Error saving DBObject " << ref() << ".";
+    try
+    {
+      save_to_db();
+    }
+    catch(std::exception &e)
+    {
+      qDebug() << "Error saving DBObject " << ref() << " : " << e.what();
+    }
+    catch(...)
+    {
+      qDebug() << "Error saving DBObject " << ref() << ".";
+    }
   }
 }
 

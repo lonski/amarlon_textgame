@@ -8,9 +8,7 @@
 
 int main(int argc, char *argv[])
 {
-  QApplication a(argc, argv);
-  Game w;
-  w.show();
+  QApplication amarlon(argc, argv);
 
   //TESTS
   TestDB db_tests;
@@ -22,5 +20,10 @@ int main(int argc, char *argv[])
   QTest::qExec(&location_tests, argc, argv);
   QTest::qExec(&item_tests, argc, argv);
 
-  return a.exec();
+  //START GAME
+  Game main_window;
+  main_window.show();
+  amarlon.exec();
+
+  return 0;
 }

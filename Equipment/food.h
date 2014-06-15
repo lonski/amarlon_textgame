@@ -7,9 +7,21 @@
 class Food : public Item
 {
 private:
+  //data
+  int _hunger;
+
   friend class Item;
-  Food(dbRef ref);
+  Food(dbRef ref,bool temporary = false);
 public:
+  //operations
+  void load();
+
+  //data access
+  int hunger() const { return _hunger; }
+
+  //data set
+  void set_hunger(int hunger);
+
   virtual ~Food() {}
 };
 //===

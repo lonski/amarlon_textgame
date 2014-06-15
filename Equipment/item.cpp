@@ -5,6 +5,8 @@
 #include "jewelry.h"
 #include "food.h"
 #include "tool.h"
+#include "shield.h"
+#include "../World/locationobject.h"
 
 using namespace std;
 using namespace soci;
@@ -12,11 +14,11 @@ using namespace fun;
 
 const dbTable Item::table_name = "items";
 
-Item::Item(dbRef ref) : DBObject(ref)
+Item::Item(dbRef ref, bool temporary) : DBObject(ref, temporary)
 {
 }
 
-std::unique_ptr<Item> Item::create(dbRef ref, bool prototype)
+std::unique_ptr<Item> Item::create(dbRef ref, bool prototype, bool temporary)
 {
   Item* new_item = nullptr;
 
@@ -28,12 +30,14 @@ std::unique_ptr<Item> Item::create(dbRef ref, bool prototype)
   {
     switch(item_type)
     {
-      case ItemType::Ordinary: new_item = new OrdinaryItem(ref); break;
-      case ItemType::Weapon: new_item = new Weapon(ref); break;
-      case ItemType::Armor: new_item = new Armor(ref); break;
-      case ItemType::Jewelry: new_item = new Jewelry(ref); break;
-      case ItemType::Food: new_item = new Food(ref); break;
-      case ItemType::Tool: new_item = new Tool(ref); break;
+      case ItemType::Ordinary: new_item = new OrdinaryItem(ref, temporary); break;
+      case ItemType::Weapon: new_item = new Weapon(ref, temporary); break;
+      case ItemType::Armor: new_item = new Armor(ref, temporary); break;
+      case ItemType::Jewelry: new_item = new Jewelry(ref, temporary); break;
+      case ItemType::Food: new_item = new Food(ref, temporary); break;
+      case ItemType::Tool: new_item = new Tool(ref, temporary); break;
+      case ItemType::Shield: new_item = new Shield(ref, temporary); break;
+      case ItemType::LocationObject: new_item = new LocationObject(ref, temporary); break;
       default : throw creation_error("Nieprawidłowy typ itemu."); break;
     }
   }else throw creation_error("Brak prawidłowego rekordu w bazie.");
@@ -51,11 +55,15 @@ void Item::load()
       MapRow item_data = MapQuery( "SELECT * FROM "+table()+" WHERE ref="+toStr(ref()) );
       if (item_data.size() > 0)
       {
-        set_item_type( CheckFieldCast<ItemType>(item_data["ITEM_TYPE"]));
+        set_type( CheckFieldCast<ItemType>(item_data["ITEM_TYPE"]));
         set_name( CheckField<string>(item_data["NAME"]) );
-        set_destript( CheckField<string>(item_data["DESCRIPTION"]) );
+        set_descript( CheckField<string>(item_data["DESCRIPTION"]) );
         set_weight( CheckField<double>(item_data["WEIGHT"]) );
         set_value( CheckField<int>(item_data["SHOP_VALUE"]) );
+        set_condition( CheckFieldCast<ItemCondition>(item_data["CONDITION"]));
+        _body_parts.clear();
+        _body_parts = Str2BodyParts( CheckField<string>(item_data["BODY_PARTS"]) );
+        set_durability( CheckField<int>(item_data["DURABILITY"]) );
 
         set_loaded();
       }
@@ -82,22 +90,10 @@ std::unique_ptr<Item> Item::clone()
   return Item::create(new_ref);
 }
 
-void Item::set_item_type(ItemType type)
+void Item::set_type(ItemType type)
 {
   _item_type = type;
   save("ITEM_TYPE",static_cast<int>(_item_type));
-}
-
-void Item::set_size_class(ItemSizeClass size_class)
-{
-  _size_class = size_class;
-  save("SIZE_CLASS",static_cast<int>(_size_class));
-}
-
-void Item::set_body_part(BodyPart body_part)
-{
-  _body_part = body_part;
-  save("BODY_PART",static_cast<int>(_body_part));
 }
 
 void Item::set_name(string name)
@@ -106,7 +102,7 @@ void Item::set_name(string name)
   save("NAME", _name);
 }
 
-void Item::set_destript(string dsc)
+void Item::set_descript(string dsc)
 {
   _descript = dsc;
   save("DESCRIPTION", _descript);
@@ -122,6 +118,37 @@ void Item::set_value(int value)
 {
   _value = value;
   save("SHOP_VALUE", _value);
+}
+
+void Item::set_condition(ItemCondition condition)
+{
+  _condition = condition;
+  save("CONDITION",static_cast<int>(_condition));
+}
+
+void Item::set_durability(int dura)
+{
+  _durability = dura;
+  save("DURABILITY", _durability);
+}
+
+void Item::add_body_part(BodyPartType body_part)
+{
+  if (check_body_part(body_part) == false )
+  {
+    _body_parts.push_back(body_part);
+    save("BODY_PARTS", BodyParts2Str(_body_parts));
+  }
+}
+
+void Item::remove_body_part(BodyPartType body_part)
+{
+  auto iter = std::find(_body_parts.begin(), _body_parts.end(), body_part);
+  if (iter != _body_parts.end())
+  {
+    _body_parts.erase(iter);
+    save("BODY_PARTS", BodyParts2Str(_body_parts));
+  }
 }
 
 Item::~Item()

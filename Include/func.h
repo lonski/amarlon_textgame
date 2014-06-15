@@ -10,6 +10,8 @@ typedef std::vector<MapRow> MapTable;
 namespace fun{
 
   //declarations
+  std::string BodyParts2Str(std::vector<BodyPartType>& parts);
+  std::vector<BodyPartType> Str2BodyParts(const std::string str);
   void MapQuery(const std::string &query, MapTable &result);
   MapRow MapQuery(const std::string &query);  
   template<typename T> T CheckField(const std::string &field_val, T* = 0);

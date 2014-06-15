@@ -12,8 +12,14 @@ typedef std::string dbTable;
 class DBObject
 {
 private:
+  //data
   dbRef _ref;
+
+  //flags
   bool _loaded;
+  bool _temporary;
+
+  //save queue
   std::list<std::string> _save_queries;
 protected:
   //save changes
@@ -24,8 +30,11 @@ protected:
 
 public:
   //birth and death
-  DBObject(dbRef ref): _ref(ref), _loaded(false) {}
+  DBObject(dbRef ref, bool temporary = false): _ref(ref), _loaded(false), _temporary(temporary) {}
   virtual ~DBObject() = 0;
+
+  //flags access
+  bool isTemporary() const { return _temporary; }
 
   //data access
   virtual dbRef ref() const { return _ref; }
@@ -35,6 +44,7 @@ public:
   //operations
   virtual void save_to_db();
   virtual void load() = 0;
+  virtual void reload();
   virtual void purge();
 
 };
@@ -42,7 +52,7 @@ public:
 template<typename T>
 void DBObject::save(std::string f_name, T f_val, dbTable tbl)
 {
-  if ( ref() && loaded() )
+  if ( ref() && loaded() && !isTemporary() )
   {
     std::stringstream s;
     s << "UPDATE "+ ( tbl == "" ? table() : tbl) + " SET " << f_name << "=\'"<<f_val<<"\' WHERE ref="<<ref();

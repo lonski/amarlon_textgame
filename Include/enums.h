@@ -2,6 +2,20 @@
 #define ENUMS_H
 
 #include "inc.h"
+//===
+/* Słownik dbRef
+ * przydatny przy tworzeniu obiektów
+ * przez metody fabryczne, które
+ * wymagają podania ref obiektu do stworzenia
+ */
+namespace refDict
+{
+  enum class Item
+  {
+    Miedziak = 121
+  };
+}
+//~~~
 
 //===
 enum class WeaponSkill
@@ -48,54 +62,24 @@ enum class BodyPartType
 };
 //~~~
 
-////===
-//enum class ItemSizeClass
-//{
-//  Null       =  0,
-//  BardzoMaly =  1,
-//  Maly       =  2,
-//  Nieduzy    =  3,
-//  Spory      =  4,
-//  Duzy       =  5,
-//  BardzoDuzy =  6,
-//  Ogromny    =  7,
-//  End        =  8
-//};
-///*
-//1.Bardzo mały
-//  - Orientacyjna objętość: 1^3[cm3] - 5^3[cm3]
-//  - Przykłady: mały kamyk, kostka do gry, pierścień
-//  - Uwagi: raczej brak broni czy pancerza o tym rozmiarze
-//2.Mały
-//  - Orientacyjna objętość: 5^3[cm3] - 10^3[cm3]
-//  - Przykłady: nóż, szklanka, skarpetka
-//  - Uwagi: raczej brak pancerza w tym rozmiarze
-//3.Nieduży
-//  - Orientacyjna objętość: 10^3[cm3] - 20^2[cm3]
-//  - Przykłady: kwiatek doniczkowy, książka, hełm, którki miecz
-//4.Spory
-//  - Orentacyjna objętość: 20^3[cm3] - 40^3[cm3]
-//  - Przykłady: plecak, mała tarcza, długi miecz, poduszka, kaftan, kolczuga
-//5.Duży
-//  - Orientacyjna objętość: 40^3[cm3] - 80^3[cm3]
-//  - Przykłady: zbroja płytowa, gitara, krzesło, halabarda
-//6.Bardzo duży
-//  - Orientacyjna objętość: 80^3[cm3]++
-//  - Przykłady: człowiek, szafka, beczka
-//  - Uwagi: jeżeli już możliwy do podniesienia, to zajmujący cały kontener
-//7. Ogromny
-//    Item którego nie da się podnieść, czyli np drzewo czy piec
-//    */
-////~~~
+//===
+enum class ItemContainerPrototype
+{
+  Null = 0,
+  Inventory = 1,
+  End = 2
+};
+//~~~
 
 //===
 enum class ItemPrototype
 {
   Null = 0,
-  Sztylet = 1,
-  Szyszak = 2,
-  Kolczuga = 3,
-  End = 4
+  Nozyk = 1,
+  Noz = 2,
+  Sztylet_typowy = 3,
+  //TODO (...)
+  End = 2
 };
 //~~~
 

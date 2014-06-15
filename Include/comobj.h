@@ -1,6 +1,16 @@
 #ifndef COMOBJ_H
 #define COMOBJ_H
 
+typedef double Weight;
+
+template<typename T>
+struct CMValue
+{
+  T max;
+  T cur;
+  CMValue(T m = 0, T c = 0) : max(m), cur(c) {}
+};
+
 struct Damage
 {
   int piercing;

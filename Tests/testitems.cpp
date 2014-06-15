@@ -270,8 +270,170 @@ void TestItems::TemporaryItem()
 
 void TestItems::PrototypeTest()
 {
-  unique_ptr<Item> new_item = Item::prototypes().clone(ItemPrototype::Sztylet);
+  unique_ptr<Item> new_item = Item::prototypes().clone(ItemPrototype::Nozyk);
   QVERIFY(new_item->ref() != 4);
   QCOMPARE(new_item->name().c_str(), "TestTpl2");
   new_item->purge();
+}
+
+void TestItems::ContainerCreation()
+{
+  unique_ptr<Item::Container<> > cont = Item::Container<>::create(1,true);
+  QCOMPARE(cont->name().c_str(), "Ekwipunek");
+}
+
+void TestItems::ContainerCreationFromPrototype()
+{
+  unique_ptr<Item::Container<> > cont = Item::Container<>::prototypes().clone(ItemContainerPrototype::Inventory);
+  QVERIFY(cont->ref() != 1);
+  QCOMPARE(cont->name().c_str(), "Ekwipunek");
+  cont->purge();
+}
+
+void TestItems::ContainerInsertionEraseNonStackable()
+{
+  //===================INSERT===================
+  //create some new container
+  unique_ptr<Item::Container<> > cont = Item::Container<>::prototypes().clone(ItemContainerPrototype::Inventory);
+  cont->set_name("TestCont");
+  QCOMPARE(cont->name().c_str(), "TestCont");
+
+  //check content
+  QCOMPARE(cont->get_all().size(), static_cast<size_t>(0));
+
+  //create some new items
+  shared_ptr<Item> item1( Item::prototypes().clone(ItemPrototype::Nozyk).release() );
+  shared_ptr<Item> item2( Item::prototypes().clone(ItemPrototype::Sztylet_typowy).release() );
+
+  //insert them
+  cont->insert(item1);
+  cont->insert(item2);
+
+  //check content
+  QCOMPARE(cont->get_all().size(), static_cast<size_t>(2));
+
+  //recreate and check content
+  dbRef cont_ref = cont->ref();
+  delete cont.release();
+  cont = Item::Container<>::create(cont_ref);
+  QCOMPARE(cont->get_all().size(), static_cast<size_t>(2));
+
+  //====================ERASE======================
+  cont->erase(item1->ref());
+  QCOMPARE(cont->get_all().size(), static_cast<size_t>(1));
+  cont->erase(item2->ref());
+  QCOMPARE(cont->get_all().size(), static_cast<size_t>(0));
+
+  //recreate and check content
+  delete cont.release();
+  cont = Item::Container<>::create(cont_ref);
+  QCOMPARE(cont->get_all().size(), static_cast<size_t>(0));
+
+  //clean up
+  cont->purge();
+  item1->purge();
+  item2->purge();
+
+}
+
+void TestItems::ContainerInsertionEraseStackable()
+{
+  //create some new container
+  unique_ptr<Item::Container<> > cont = Item::Container<>::prototypes().clone(ItemContainerPrototype::Inventory);
+  cont->set_name("TestCont");
+  QCOMPARE(cont->name().c_str(), "TestCont");
+
+  //check content
+  QCOMPARE(cont->get_all().size(), static_cast<size_t>(0));
+
+  //create some new items
+  shared_ptr<Item> miedziak( Item::create( (int)refDict::Item::Miedziak ) );
+  QVERIFY(miedziak->isStackable());
+
+  //insert
+  cont->insert(miedziak, 10);
+
+  //validate
+  cont->reload();
+  QCOMPARE(cont->get_all().size(), static_cast<size_t>(1));
+  QVERIFY(cont->find(miedziak->ref()).item.get() != nullptr);
+  QCOMPARE(cont->find(miedziak->ref()).amount, 10);
+
+  //insert more
+  cont->insert(miedziak, 4);
+
+  //validate
+  cont->reload();
+  QCOMPARE(cont->get_all().size(), static_cast<size_t>(1));
+  QVERIFY(cont->find(miedziak->ref()).item.get() != nullptr);
+  QCOMPARE(cont->find(miedziak->ref()).amount, 14);
+
+  //insert even more and some other item
+  shared_ptr<Item> item1( Item::prototypes().clone(ItemPrototype::Nozyk).release() );
+  cont->insert(item1);
+  cont->insert(miedziak, 2);
+
+  //validate
+  cont->reload();
+  QCOMPARE(cont->get_all().size(), static_cast<size_t>(2));
+  QVERIFY(cont->find(miedziak->ref()).item.get() != nullptr);
+  QCOMPARE(cont->find(miedziak->ref()).amount, 16);
+
+  //erase some
+  cont->erase(miedziak->ref(), 12);
+
+  //validate
+  cont->reload();
+  QCOMPARE(cont->get_all().size(), static_cast<size_t>(2));
+  QVERIFY(cont->find(miedziak->ref()).item.get() != nullptr);
+  QCOMPARE(cont->find(miedziak->ref()).amount, 4);
+
+  //erase all miedziaks
+  cont->erase(miedziak->ref(), 4);
+
+  //validate
+  cont->reload();
+  QCOMPARE(cont->get_all().size(), static_cast<size_t>(1));
+  QVERIFY(cont->find(miedziak->ref()).item.get() == nullptr);
+
+  //clean up
+  cont->purge();
+  item1->purge();
+}
+
+void TestItems::ItemAsAContainer()
+{
+  //create some item
+  Item* szkatulka = Item::prototypes().clone(ItemPrototype::Null).release();
+  szkatulka->set_name("Szkatułka");
+
+  //create a container for that item
+  Item::Container<>* cont = Item::Container<>::prototypes().clone(ItemContainerPrototype::Null).release();
+  cont->set_max_weight(5);
+  cont->set_otable(szkatulka->table());
+  cont->set_oref(szkatulka->ref());
+  cont->save_to_db();
+  delete cont; //is not needed anymore -> will be loaded on item reload
+
+  //it should apply new container to item
+  szkatulka->reload();
+
+  QVERIFY(szkatulka->inventory.get() != nullptr);
+
+  //create some item to insert to szkatułka
+  shared_ptr<Item> i1( Item::create( (int)refDict::Item::Miedziak).release() );
+  shared_ptr<Item> i2( Item::prototypes().clone(ItemPrototype::Sztylet_typowy) );
+
+  //insert to szkatułka
+  szkatulka->inventory->insert(i1, 5);
+  szkatulka->inventory->insert(i2);
+
+  QCOMPARE(szkatulka->inventory->get_all().size(), (size_t)2 );
+
+  //clean up!
+  szkatulka->inventory->purge();
+  i2->purge();
+  szkatulka->purge();
+  delete szkatulka;
+
 }

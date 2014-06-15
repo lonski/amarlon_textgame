@@ -35,7 +35,10 @@ SOURCES += main.cpp\
     Equipment/armor.cpp \
     Equipment/jewelry.cpp \
     Equipment/food.cpp \
-    Equipment/tool.cpp
+    Equipment/tool.cpp \
+    Include/comobj.cpp \
+    Equipment/shield.cpp \
+    World/locationobject.cpp
 
 HEADERS  += game.h \
     Tests/testlocation.h \
@@ -54,7 +57,10 @@ HEADERS  += game.h \
     Equipment/armor.h \
     Equipment/jewelry.h \
     Equipment/food.h \
-    Equipment/tool.h
+    Equipment/tool.h \
+    Include/comobj.h \
+    Equipment/shield.h \
+    World/locationobject.h
 
 FORMS    += game.ui
 

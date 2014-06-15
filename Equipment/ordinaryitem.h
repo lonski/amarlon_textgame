@@ -8,7 +8,7 @@ class OrdinaryItem : public Item
 {
 private:
   friend class Item;
-  OrdinaryItem(dbRef ref);
+  OrdinaryItem(dbRef ref, bool temporary = false);
 public:
   virtual ~OrdinaryItem() {}
 };

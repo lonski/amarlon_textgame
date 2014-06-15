@@ -3,6 +3,11 @@
 
 #include <QtTest/QtTest>
 #include "Equipment/item.h"
+#include "Equipment/weapon.h"
+#include "Equipment/armor.h"
+#include "Equipment/food.h"
+#include "Equipment/shield.h"
+#include "../Include/func.h"
 
 class TestItems : public QObject
 {
@@ -12,6 +17,8 @@ public:
 private slots:
    void ItemCreation();
    void LoadData();
+   void SaveData();
+   void TemporaryItem();
    void PrototypeTest();
 };
 

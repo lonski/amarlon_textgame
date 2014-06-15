@@ -4,58 +4,89 @@
 #include "inc.h"
 
 //===
-enum class BodyPart
+enum class WeaponSkill
+{
+  Null = 0,
+  Miecze = 1,
+  Topory = 2,
+  Cepy = 3,
+  Wrecz = 4,
+  Luki = 5,
+  Wlocznie = 6,
+  Noze = 7,
+  Proce = 8,
+  Kije = 9,
+  Improwizacja = 10,
+  End = 11
+};
+//~~~
+
+//===
+enum class ItemCondition
+{
+  Null = 0,
+  Damaged = 1,
+  Good = 2,
+  End = 3
+};
+//~~~
+
+//===
+enum class BodyPartType
 {
   Null = 0,
   Head = 1,
   Chest = 2,
-  Waist = 3,
-  Hands = 4,
-  Feet = 5,
-  Neck = 6,
-  Finger = 7,
+  LeftHand = 3,
+  RightHand = 4,
+  LeftLeg = 5,
+  RightLeg = 6,
+  RightFinger = 7,
+  LeftFinger = 8,
+  Neck = 9,
   End = 8
 };
-
-//===
-enum class ItemSizeClass
-{
-  Null       =  0,
-  BardzoMaly =  1,
-  Maly       =  2,
-  Nieduzy    =  3,
-  Spory      =  4,
-  Duzy       =  5,
-  BardzoDuzy =  6,
-  Ogromny    =  7,
-  End        =  8
-};
-/*
-1.Bardzo mały
-  - Orientacyjna objętość: 1^3[cm3] - 5^3[cm3]
-  - Przykłady: mały kamyk, kostka do gry, pierścień
-  - Uwagi: raczej brak broni czy pancerza o tym rozmiarze
-2.Mały
-  - Orientacyjna objętość: 5^3[cm3] - 10^3[cm3]
-  - Przykłady: nóż, szklanka, skarpetka
-  - Uwagi: raczej brak pancerza w tym rozmiarze
-3.Nieduży
-  - Orientacyjna objętość: 10^3[cm3] - 20^2[cm3]
-  - Przykłady: kwiatek doniczkowy, książka, hełm, którki miecz
-4.Spory
-  - Orentacyjna objętość: 20^3[cm3] - 40^3[cm3]
-  - Przykłady: plecak, mała tarcza, długi miecz, poduszka, kaftan, kolczuga
-5.Duży
-  - Orientacyjna objętość: 40^3[cm3] - 80^3[cm3]
-  - Przykłady: zbroja płytowa, gitara, krzesło, halabarda
-6.Bardzo duży
-  - Orientacyjna objętość: 80^3[cm3]++
-  - Przykłady: człowiek, szafka, beczka
-  - Uwagi: jeżeli już możliwy do podniesienia, to zajmujący cały kontener
-7. Ogromny
-    Item którego nie da się podnieść, czyli np drzewo czy piec
-    */
 //~~~
+
+////===
+//enum class ItemSizeClass
+//{
+//  Null       =  0,
+//  BardzoMaly =  1,
+//  Maly       =  2,
+//  Nieduzy    =  3,
+//  Spory      =  4,
+//  Duzy       =  5,
+//  BardzoDuzy =  6,
+//  Ogromny    =  7,
+//  End        =  8
+//};
+///*
+//1.Bardzo mały
+//  - Orientacyjna objętość: 1^3[cm3] - 5^3[cm3]
+//  - Przykłady: mały kamyk, kostka do gry, pierścień
+//  - Uwagi: raczej brak broni czy pancerza o tym rozmiarze
+//2.Mały
+//  - Orientacyjna objętość: 5^3[cm3] - 10^3[cm3]
+//  - Przykłady: nóż, szklanka, skarpetka
+//  - Uwagi: raczej brak pancerza w tym rozmiarze
+//3.Nieduży
+//  - Orientacyjna objętość: 10^3[cm3] - 20^2[cm3]
+//  - Przykłady: kwiatek doniczkowy, książka, hełm, którki miecz
+//4.Spory
+//  - Orentacyjna objętość: 20^3[cm3] - 40^3[cm3]
+//  - Przykłady: plecak, mała tarcza, długi miecz, poduszka, kaftan, kolczuga
+//5.Duży
+//  - Orientacyjna objętość: 40^3[cm3] - 80^3[cm3]
+//  - Przykłady: zbroja płytowa, gitara, krzesło, halabarda
+//6.Bardzo duży
+//  - Orientacyjna objętość: 80^3[cm3]++
+//  - Przykłady: człowiek, szafka, beczka
+//  - Uwagi: jeżeli już możliwy do podniesienia, to zajmujący cały kontener
+//7. Ogromny
+//    Item którego nie da się podnieść, czyli np drzewo czy piec
+//    */
+////~~~
 
 //===
 enum class ItemPrototype
@@ -77,7 +108,9 @@ enum class ItemType
   Food = 4,
   Jewelry = 5,
   Tool = 6,
-  End = 7
+  Shield = 7,
+  LocationObject = 8,
+  End = 9
 };
 
 //===

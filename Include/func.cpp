@@ -148,4 +148,28 @@ MapRow fun::MapQuery(const string &query){
   return result;
 
 }
+/*
+ * Function converts BodyPartTypes to a 0-1 string, which is saved to db
+ */
+string fun::BodyParts2Str(vector<BodyPartType> &parts)
+{
+  string str(static_cast<int>(BodyPartType::End), '0');
 
+  for_each(parts.begin(), parts.end(),
+    [&str](BodyPartType bp)
+    {
+      str[static_cast<int>(bp)] = '1';
+    }
+  );
+
+  return str;
+}
+
+std::vector<BodyPartType> fun::Str2BodyParts(const string str)
+{
+  vector<BodyPartType> p;
+  for (size_t i = 0; i < str.size(); ++i)
+    if (str[i] == '1') p.push_back(static_cast<BodyPartType>(i));
+
+  return p;
+}

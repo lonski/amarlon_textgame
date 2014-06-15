@@ -8,7 +8,7 @@ class Jewelry : public Item
 {
 private:
   friend class Item;
-  Jewelry(dbRef ref);
+  Jewelry(dbRef ref, bool temporary = false);
 public:
   virtual ~Jewelry() {}
 };

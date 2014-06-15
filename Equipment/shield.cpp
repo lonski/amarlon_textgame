@@ -1,14 +1,14 @@
-#include "food.h"
+#include "shield.h"
 
 using namespace std;
 using namespace soci;
 using namespace fun;
 
-Food::Food(dbRef ref, bool temporary): Item(ref, temporary)
+Shield::Shield(dbRef ref, bool temporary): Item(ref, temporary)
 {
 }
 
-void Food::load()
+void Shield::load()
 {
   if ( !loaded() && ref() > 0 ){
     try
@@ -16,7 +16,7 @@ void Food::load()
       MapRow item_data = MapQuery( "SELECT * FROM "+table()+" WHERE ref="+toStr(ref()) );
       if (item_data.size() > 0)
       {
-        set_hunger(CheckField<int>(item_data["FOD_HUNGER"]));
+        set_defence(CheckField<int>(item_data["SHD_DEFENCE"]));
       }
     }
     catch(soci_error &e)
@@ -29,8 +29,8 @@ void Food::load()
   Item::load();
 }
 
-void Food::set_hunger(int hunger)
+void Shield::set_defence(int defence)
 {
-  _hunger = hunger;
-  save("FOD_HUNGER", _hunger);
+  _defence = defence;
+  save("SHD_DEFENCE", _defence);
 }

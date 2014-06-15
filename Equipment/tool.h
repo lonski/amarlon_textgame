@@ -8,7 +8,7 @@ class Tool : public Item
 {
 private:
   friend class Item;
-  Tool(dbRef ref);
+  Tool(dbRef ref, bool temporary = false);
 public:
   virtual ~Tool() {}
 };

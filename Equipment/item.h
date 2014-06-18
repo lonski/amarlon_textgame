@@ -21,7 +21,7 @@ struct AmountedItem
 //===Item
 class Item : public DBObject, public Prototypable<Item, ItemPrototype>
 {
-public:
+public:  
   //===CONTAINER===
   template<typename T = Item>
   class Container : public DBObject, public Prototypable<Container<T>, ItemContainerPrototype>
@@ -133,6 +133,24 @@ public:
 };
 //===~~~
 
+/* Container typedefs */
+class OrdinaryItem;
+class Weapon;
+class Armor;
+class Shield;
+class Jewelry;
+class Food;
+class LocationObject;
+
+typedef Item::Container<> ItemContainer;
+typedef Item::Container<OrdinaryItem> OItemContainer;
+typedef Item::Container<Weapon> WeaponContainer;
+typedef Item::Container<Armor> ArmorContainer;
+typedef Item::Container<Shield> ShieldContainer;
+typedef Item::Container<Jewelry> JewelryContainer;
+typedef Item::Container<Food> FoodContainer;
+typedef Item::Container<LocationObject> LocationObjectContainer;
+
 //=============================ITEM CONTAINER DEF=========================
 template<typename T>
 const dbTable Item::Container<T>::table_name = "item_container_def";
@@ -203,7 +221,7 @@ void Item::Container<T>::load()
           dbRef item_ref = fun::CheckField<dbRef>( (*RowIter)["ITEM"] );
           int amount = fun::CheckField<int>( (*RowIter)["AMOUNT"] );
 
-          std::shared_ptr<Item> item( Item::create(item_ref).release() );
+          std::shared_ptr<T> item( dynamic_cast<T*>(Item::create(item_ref).release()) );
           insert(item, amount);
 
         }

@@ -5,6 +5,8 @@
 #include "Include/enums.h"
 #include "Include/func.h"
 #include "Include/exceptions.h"
+#include "Equipment/item.h"
+#include "locationobject.h"
 
 class Creature;
 class Item;
@@ -130,18 +132,23 @@ public:
 //===OrdinaryLocation -> an enterable location
 class OrdinaryLocation : public Location{
 private:
-  //objects in loc
-  std::list<std::shared_ptr<Creature> > _creatures;
-  std::list<std::shared_ptr<Item> > _objects;
+  //Creature::Container<MOB>* _mobs;
+  //Creature::Container<NPC>* _npcs;
+  std::unique_ptr<LocationObjectContainer> _objects;
 
 protected:
 
 public:
-  OrdinaryLocation(dbRef ref): Location(ref) {}
+  OrdinaryLocation(dbRef ref): Location(ref)
+  {
+    _objects = LocationObjectContainer::create( LocationObjectContainer::byOwner(table_name, ref) );
+  }
   std::vector<std::weak_ptr<Creature> > creatures();
   std::vector<std::weak_ptr<Item> > objects();
 
-  virtual ~OrdinaryLocation() {}
+  virtual ~OrdinaryLocation()
+  {
+  }
 };
 //===~~~
 

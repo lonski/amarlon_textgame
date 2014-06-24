@@ -41,7 +41,10 @@ SOURCES += main.cpp\
     World/locationobject.cpp \
     Creatures/creature.cpp \
     Tests/testfun.cpp \
-    Tests/testcreature.cpp
+    Tests/testcreature.cpp \
+    Creatures/creaturemodificator.cpp \
+    Creatures/creaturestats.cpp \
+    Creatures/bodypart.cpp
 
 HEADERS  += game.h \
     Tests/testlocation.h \
@@ -66,7 +69,10 @@ HEADERS  += game.h \
     World/locationobject.h \
     Creatures/creature.h \
     Tests/testfun.h \
-    Tests/testcreature.h
+    Tests/testcreature.h \
+    Creatures/creaturemodificator.h \
+    Creatures/creaturestats.h \
+    Creatures/bodypart.h
 
 FORMS    += game.ui
 

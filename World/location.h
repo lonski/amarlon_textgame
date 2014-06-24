@@ -141,7 +141,14 @@ protected:
 public:
   OrdinaryLocation(dbRef ref): Location(ref)
   {
-    _objects = LocationObjectContainer::create( LocationObjectContainer::byOwner(table_name, ref) );
+    try
+    {
+      _objects = LocationObjectContainer::create( LocationObjectContainer::byOwner(table_name, ref) );
+    }
+    catch(creation_error&)
+    {
+      _objects = std::unique_ptr<LocationObjectContainer>(nullptr);
+    }
   }
   std::vector<std::weak_ptr<Creature> > creatures();
   std::vector<std::weak_ptr<Item> > objects();

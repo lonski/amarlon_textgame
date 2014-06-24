@@ -5,6 +5,8 @@
 #include "../Include/db.h"
 #include "../Include/func.h"
 #include "../Creatures/creature.h"
+#include "../Creatures/creaturestats.h"
+#include "../Creatures/bodypart.h"
 
 class TestCreature : public QObject
 {

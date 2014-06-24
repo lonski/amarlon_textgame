@@ -4,7 +4,7 @@ using namespace std;
 
 void TestCreature::stats_atr2str()
 {
-  Creature::Stats stats;
+  CreatureStats stats;
 
   stats.set_attribute(Attribute::CHR, 2);
   stats.set_attribute(Attribute::IMP, 5);
@@ -16,7 +16,7 @@ void TestCreature::stats_atr2str()
 
 void TestCreature::stats_str2atrs()
 {
-  Creature::Stats stats;
+  CreatureStats stats;
 
   stats.Str2Attributes("0;7;3;9;0;0;2;5;0;");
 
@@ -32,7 +32,7 @@ void TestCreature::stats_str2atrs()
 
 void TestCreature::stats_skills2str()
 {
-  Creature::Stats stats;
+  CreatureStats stats;
 
   stats.set_skill(Skill::Aktorstwo, 43);
   stats.set_skill(Skill::Empatia, 12);
@@ -43,7 +43,7 @@ void TestCreature::stats_skills2str()
 
 void TestCreature::stats_str2skills()
 {
-  Creature::Stats stats;
+  CreatureStats stats;
 
   stats.Str2Skills("0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;12;0;0;0;0;0;0;0;0;43;0;0;0;0;0;0;0;0;0;0;0;67;0;0;0;0;0;1;");
 
@@ -56,7 +56,7 @@ void TestCreature::stats_str2skills()
 
 void TestCreature::bodypart_tostr()
 {
-  Creature::BodyPart bp;
+  BodyPart bp;
   bp.set_region(BodyRegion::Dol);
   bp.set_type(BodyPartType::LeftLeg);
   bp.set_damage(DamageLevel::Brak);
@@ -66,7 +66,7 @@ void TestCreature::bodypart_tostr()
 
 void TestCreature::bodypart_fromstr()
 {
-  Creature::BodyPart bp("2,5,1,0");
+  BodyPart bp("2,5,1,0");
 
   QVERIFY(bp.region() == BodyRegion::Dol);
   QVERIFY(bp.type() == BodyPartType::LeftLeg);
@@ -76,7 +76,7 @@ void TestCreature::bodypart_fromstr()
 
 void TestCreature::bodypart_equip()
 {
-  Creature::BodyPart bp("2,5,1,0");
+  BodyPart bp("2,5,1,0");
   shared_ptr<Item> item( Item::prototypes().clone(ItemPrototype::Noz).release() );
 
   bp.equip(item);
@@ -91,7 +91,7 @@ void TestCreature::bodypart_equip()
 void TestCreature::bodypart_unequip()
 {
   //equip
-  Creature::BodyPart bp("2,5,1,0");
+  BodyPart bp("2,5,1,0");
   shared_ptr<Item> item( Item::prototypes().clone(ItemPrototype::Noz).release() );
 
   bp.equip(item);
@@ -110,7 +110,7 @@ void TestCreature::bodypart_unequip()
 
 void TestCreature::bodypart_creation_fromstr()
 {
-  Creature::BodyPart bp("2,5,1,121");
+  BodyPart bp("2,5,1,121");
 
   QVERIFY(bp.region() == BodyRegion::Dol);
   QVERIFY(bp.type() == BodyPartType::LeftLeg);

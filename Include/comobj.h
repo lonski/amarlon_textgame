@@ -18,6 +18,7 @@ struct Damage
   int bashing;
 
   Damage(int p = 0, int s = 0, int b = 0) : piercing(p), slashing(s), bashing(b) {}
+  void clear() { piercing = 0; slashing = 0; bashing = 0;}
 };
 
 #endif // COMOBJ_H

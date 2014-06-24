@@ -17,6 +17,107 @@ namespace refDict
 }
 //~~~
 
+
+enum class SkillGroup
+{
+  Null = 0,
+  Wojownik = 1,
+  Oszust = 2,
+  Lowca = 3,
+  Kaplan = 4,
+  Bard = 5,
+  Wspolne = 6,
+  End = 7
+};
+
+enum class Skill
+{
+  Null = 0,
+
+  //wojownik
+  Inicjatywa = 11,
+  Kowalstwo = 12,
+  Odpornosc = 13,
+  Taktyka = 14,
+  Tarczownictwo = 15,
+  Walka_Miecze = 16,
+  Walka_Topory = 17,
+  Walka_Cepy = 18,
+  Walka_Wrecz = 19,
+
+  //oszust
+  Akrobatyka = 21,
+  Czujnosc = 22,
+  Gadanina = 23,
+  Targowanie_sie = 24,
+  Ukrywanie_sie = 25,
+  Walka_Noze = 26,
+  Walka_Proce = 27,
+  Wycena = 28,
+  Zlodziejstwo = 29,
+
+  //lowca
+  Lowiectwo = 31,
+  Plywanie = 32,
+  Przetrwanie = 33,
+  Pulapki = 34,
+  Sprawnosc = 35,
+  Tropienie = 36,
+  Walka_Luki = 37,
+  Walka_Wlocznie = 38,
+  Wspinaczka = 39,
+
+  //kaplan
+  Czytania_Pisanie = 41,
+  Empatia = 42,
+  Leczenie = 43,
+  Rytualy = 44,
+  Magia = 45,
+  Walka_Kije = 46,
+  Wiedza_tajemna = 47,
+  Zastraszanie = 48,
+  Zielarstwo = 49,
+
+  //bard
+  Aktorstwo = 51,
+  Autorytet = 52,
+  Muzyka = 53,
+  Opowiesci = 54,
+  Piesni = 55,
+  Sztuka = 56,
+  Spiew = 57,
+  Uwodzenie = 58,
+  Walka_improwizowana = 59,
+
+  //wspolne
+  Gornictwo = 61,
+  Jezdziectwo = 62,
+  Mocna_glowa = 63,
+  Opieka_nad_zwierzetami = 64,
+  Powozenie = 65,
+  Rolnictwo = 66,
+  Rybactwo = 67,
+  Rzemioslo = 68,
+  Taniec = 69,
+
+  End = 70
+};
+
+
+enum class Attribute
+{
+  Null = 0,
+  STR  = 1, //Sila
+  DEX  = 2, //Zreczność
+  END  = 3, //Wytrzymałość
+  REF  = 4, //Reflex
+  INT  = 5, //Inteligencja
+  CHR  = 6, //Charyzma
+  IMP  = 7, //Wrażenie
+  WLL  = 8, //Wola
+  End  = 9
+};
+
 //===
 enum class WeaponSkill
 {
@@ -43,6 +144,33 @@ enum class ItemCondition
   Good = 2,
   End = 3
 };
+//~~~
+
+//===
+enum class DamageLevel
+{
+  Null = 0,
+  Brak = 1,
+  BardzoLekkie = 2,
+  Lekkie = 3,
+  Srednie = 4,
+  Ciezkie = 5,
+  BardzoCiezkie = 6,
+  Zabojcze = 7,
+  End = 8
+};
+
+//~~~
+
+//===
+enum class BodyRegion
+{
+  Null = 0,
+  Gora = 1,
+  Dol = 2,
+  End = 3
+};
+
 //~~~
 
 //===

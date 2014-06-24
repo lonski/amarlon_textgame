@@ -173,3 +173,51 @@ std::vector<BodyPartType> fun::Str2BodyParts(const string str)
 
   return p;
 }
+
+
+SkillGroup fun::skill_group(Skill skill)
+{
+  const int s = static_cast<int>(skill);
+  const int group_cnt = 7;
+
+  for (int i = 1; i < group_cnt; ++i)
+  {
+    int low_bound = i*10;
+    int high_bound = low_bound + 10;
+
+    if (s > low_bound && s < high_bound ) return static_cast<SkillGroup>(i);
+  }
+
+  return SkillGroup::Null;
+}
+
+
+std::vector<string> fun::explode(string str, char ch)
+{
+  vector<string> result;
+  string line;
+
+  for (auto s = str.begin(); s != str.end(); ++s)
+  {
+    if (*s == ch)
+    {
+      if (!line.empty())
+      {
+        result.push_back(line);
+        line.clear();
+      }
+    }
+    else
+    {
+      line += *s;
+    }
+  }
+
+  if (!line.empty())
+  {
+    result.push_back(line);
+    line.clear();
+  }
+
+  return result;
+}

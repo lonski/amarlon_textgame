@@ -14,9 +14,12 @@ namespace fun{
   std::vector<BodyPartType> Str2BodyParts(const std::string str);
   void MapQuery(const std::string &query, MapTable &result);
   MapRow MapQuery(const std::string &query);  
+  SkillGroup skill_group(Skill skill);
+  std::vector<std::string> explode(std::string str, char ch);
+
   template<typename T> T CheckField(const std::string &field_val, T* = 0);
   template<> std::string CheckField<std::string>(const std::string &field_val, std::string*);
-  template<typename T> T CheckFieldCast(const std::string &field_val);
+  template<typename T> T CheckFieldCast(const std::string &field_val);  
   //===~~~
 
   //===static inlines

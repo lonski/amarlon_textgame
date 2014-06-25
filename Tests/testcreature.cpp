@@ -120,3 +120,107 @@ void TestCreature::bodypart_creation_fromstr()
   QCOMPARE(bp.toStr().c_str(), "2,5,1,121");
 }
 
+void TestCreature::modificator_creation()
+{
+  CreatureModificator mod;
+  mod.save_to_db();
+  QVERIFY(mod.ref() != 0);
+  mod.purge();
+}
+
+void TestCreature::modificator_creation_existing()
+{
+  CreatureModificator mod(13);
+  QCOMPARE(mod.ref(), (dbRef)13);
+}
+
+void TestCreature::modificator_load()
+{
+  CreatureModificator mod(13);
+
+  QCOMPARE(mod.name().c_str(), "testo");
+  QCOMPARE(mod.global_test_level_mod(), 1);
+  QCOMPARE(mod.effect_time(), 9);
+  QCOMPARE(mod.creature_stats().get_attribute(Attribute::CHR), 3);
+  QCOMPARE(mod.creature_stats().get_attribute(Attribute::STR), 0);
+  QCOMPARE(mod.creature_stats().get_skill(Skill::Czujnosc), 34);
+  QCOMPARE(mod.creature_stats().get_skill(Skill::Akrobatyka), 0);
+}
+
+void TestCreature::modificator_save()
+{
+  //create blank one
+  CreatureModificator* mod = new CreatureModificator;
+
+  //create record in db
+  mod->save_to_db();
+
+  //set some data
+  mod->creature_stats().set_attribute(Attribute::DEX, 3);
+  mod->set_name("lol");
+
+  //store ref
+  dbRef ref = mod->ref();
+
+  delete mod;
+
+  //recreate
+  mod = new CreatureModificator(ref);
+
+  //validate
+  QCOMPARE(mod->name().c_str(), "lol");
+  QVERIFY(mod->creature_stats().get_attribute(Attribute::DEX) == 3);
+
+  //clean up!
+  mod->purge();
+}
+
+void TestCreature::modificator_augument()
+{
+  CreatureModificator m1, m2;
+
+  //set some stats
+  m1.creature_stats().set_attribute(Attribute::IMP, 3);
+  m1.creature_stats().set_skill(Skill::Gornictwo, 34);
+  m1.set_global_test_level_mod(1);
+
+  QCOMPARE(m1.creature_stats().get_attribute(Attribute::IMP), 3);
+  QCOMPARE(m1.creature_stats().get_skill(Skill::Gornictwo), 34);
+  QCOMPARE(m1.global_test_level_mod(), 1);
+  QCOMPARE(m1.effect_time(), -1);
+
+  //set augument stats
+  m2.creature_stats().set_attribute(Attribute::IMP, 1);
+  m2.creature_stats().set_attribute(Attribute::STR, 3);
+  m2.creature_stats().set_skill(Skill::Odpornosc, 4);
+  m2.set_global_test_level_mod(2);
+  m2.set_effect_time(50);
+
+  QCOMPARE(m2.creature_stats().get_attribute(Attribute::IMP), 1);
+  QCOMPARE(m2.creature_stats().get_attribute(Attribute::STR), 3);
+  QCOMPARE(m2.creature_stats().get_skill(Skill::Odpornosc), 4);
+  QCOMPARE(m2.global_test_level_mod(), 2);
+  QCOMPARE(m2.effect_time(), 50);
+
+  //augument
+  m1.augument(m2);
+
+  //validate
+  QCOMPARE(m1.creature_stats().get_attribute(Attribute::IMP), 4);
+  QCOMPARE(m1.creature_stats().get_attribute(Attribute::STR), 3);
+  QCOMPARE(m1.creature_stats().get_skill(Skill::Gornictwo), 34);
+  QCOMPARE(m1.creature_stats().get_skill(Skill::Odpornosc), 4);
+  QCOMPARE(m1.global_test_level_mod(), 3);
+  QCOMPARE(m1.effect_time(), -1);
+
+  //remove augument
+  m1.remove_augument(m2);
+
+  QCOMPARE(m1.creature_stats().get_attribute(Attribute::IMP), 3);
+  QCOMPARE(m1.creature_stats().get_attribute(Attribute::STR), 0);
+  QCOMPARE(m1.creature_stats().get_skill(Skill::Gornictwo), 34);
+  QCOMPARE(m1.creature_stats().get_skill(Skill::Odpornosc), 0);
+  QCOMPARE(m1.global_test_level_mod(), 1);
+  QCOMPARE(m1.effect_time(), -1);
+}
+

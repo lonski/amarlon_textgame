@@ -54,7 +54,7 @@ void CreatureStats::Str2Skills(string skill_str)
 void CreatureStats::augument(const CreatureStats &stats)
 {
   for (int i = (int)Attribute::Null; i != (int)Attribute::End; ++i)
-  {
+  {    
     Attribute atr = static_cast<Attribute>(i);
     _attributes[atr] += stats.get_attribute(atr);
   }

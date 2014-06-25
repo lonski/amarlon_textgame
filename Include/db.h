@@ -28,6 +28,13 @@ protected:
   virtual void set_loaded() { _loaded = true; }
   virtual void set_not_loaded() { _loaded = false; }
 
+  //set data
+  void set_ref(dbRef ref)
+  {
+    _ref = ref;
+    set_not_loaded();
+  }
+
 public:
   //birth and death
   DBObject(dbRef ref, bool temporary = false): _ref(ref), _loaded(false), _temporary(temporary) {}

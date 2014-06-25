@@ -15,4 +15,6 @@
 #include <soci.h>
 #include <soci-firebird.h>
 
+#define D(X) qDebug() << #X << "=" << X;
+
 #endif // INC_H

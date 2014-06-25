@@ -12,7 +12,6 @@ void DBObject::save_to_db()
 {
   if (!isTemporary())
   {
-
     for (auto i = _save_queries.begin(); i != _save_queries.end(); ++i)
     {
       //send every entry to DB, commit and delete entry
@@ -27,7 +26,7 @@ void DBObject::save_to_db()
       }
       catch(soci_error &e)
       {
-        qDebug() << "###Error saving location " << ref() << ": ";
+        qDebug() << "###Error saving " << table().c_str() << " ref=" << ref() << ": ";
         qDebug() << e.what();
         qDebug() << (*i).c_str();
       }
@@ -51,6 +50,7 @@ void DBObject::purge()
     _save_queries.clear();
     _Database << "delete from " << table().c_str() << " where ref = " << ref();
     _Database.commit();
+    _temporary = true;
   }
 }
 

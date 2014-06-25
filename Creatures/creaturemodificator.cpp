@@ -1,24 +1,107 @@
 #include "creaturemodificator.h"
 
+using namespace std;
+using namespace fun;
+
+const dbTable CreatureModificator::table_name = "crt_mods";
+
 void CreatureModificator::augument(const CreatureModificator &mod)
 {
-  _mods.augument(creature_stats());
+  _mods.augument(mod.creature_stats());
   _global_test_level_mod += mod.global_test_level_mod();
 }
 
 void CreatureModificator::remove_augument(const CreatureModificator &mod)
 {
-  _mods.remove_augument(creature_stats());
+  _mods.remove_augument(mod.creature_stats());
   _global_test_level_mod -= mod.global_test_level_mod();
 }
 
-
 CreatureModificator::CreatureModificator()
+: DBObject(0), _global_test_level_mod(0), _effect_time(-1)
 {
-  //TODO: create new record in db
 }
 
-CreatureModificator::CreatureModificator(dbRef ref)
+CreatureModificator::CreatureModificator(dbRef ref, bool temporary)
+: DBObject(ref, temporary)
 {
-  //TODO: load existing record from db
+  load();
+}
+
+CreatureModificator::~CreatureModificator()
+{
+  if ( !isTemporary() && ref() != 0)
+  {
+    try
+    {
+      save_to_db();
+    }
+    catch(std::exception &e)
+    {
+      qDebug() << "Error saving " << table_name.c_str() << " " << ref() << " : " << e.what();
+    }
+    catch(...)
+    {
+      qDebug() << "Error saving " << table_name.c_str() << " "  << ref() << ".";
+    }
+  }
+}
+
+void CreatureModificator::load()
+{
+  if ( 0 != ref() )
+  {
+    MapRow mod_data = MapQuery("SELECT * FROM "+table_name+" WHERE ref="+toStr(ref()));
+    if (!mod_data.empty())
+    {
+      set_name( CheckField<string>(mod_data["NAME"]) );
+      set_effect_time( CheckField<int>(mod_data["EFFECT_TIME"]) );
+      set_global_test_level_mod( CheckField<int>(mod_data["GLB_TEST_MOD"]) );
+
+      string atrs = CheckField<string>(mod_data["ATTRIBUTES"]);
+      if (!atrs.empty()) _mods.Str2Attributes(atrs);
+
+      string skills = CheckField<string>(mod_data["SKILLS"]);
+      if (!skills.empty()) _mods.Str2Skills(skills);
+    }
+  }
+}
+
+void CreatureModificator::save_to_db()
+{
+  if ( 0 == ref() )
+  {
+    dbRef new_ref(0);
+    soci::indicator ind;
+    try
+    {
+      _Database << "SELECT ref FROM CREATE_EMPTY_CRT_MOD", soci::into(new_ref, ind);
+      _Database.commit();
+
+      if (soci::i_ok == ind)
+      {
+        set_ref(new_ref);
+        set_loaded();
+      }
+    }
+    catch(soci::soci_error &e)
+    {
+      qDebug() << "###Error saving " << table().c_str() << " ref=" << ref() << ": ";
+      qDebug() << e.what();
+      qDebug() << _Database.get_last_query().c_str();
+    }
+  }
+  //no else on purpose
+  if ( 0 != ref() )
+  {
+    save("UPDATE " + table_name + " SET "
+         " name='" + _name + "',"
+         " effect_time=" + toStr(_effect_time) + ","
+         " glb_test_mod=" + toStr(_global_test_level_mod) + ","
+         " attributes='" + _mods.Attributes2Str() + "',"
+         " skills='" + _mods.Skills2Str() + "'"
+         " WHERE ref=" + toStr(ref()) );
+  }
+
+  DBObject::save_to_db();
 }

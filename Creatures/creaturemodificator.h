@@ -14,12 +14,18 @@ private:
   std::string _name;
   int _effect_time;
 public:
+  //parameters
+  const static dbTable table_name;
+
   //creation
   CreatureModificator();
-  CreatureModificator(dbRef ref);
+  CreatureModificator(dbRef ref, bool temporary = false);
+  ~CreatureModificator();
 
   //data access
+  virtual dbTable table() const { return table_name; }
   CreatureStats& creature_stats() { return _mods; }
+  const CreatureStats& creature_stats() const { return _mods; }
   int global_test_level_mod() const { return _global_test_level_mod; }
   std::string name() const { return _name; }
   int effect_time() const { return _effect_time; }
@@ -30,6 +36,8 @@ public:
   void set_global_test_level_mod(int test_level_mod) { _global_test_level_mod = test_level_mod; }
 
   //operations
+  virtual void load();
+  virtual void save_to_db();
   void augument(const CreatureModificator& mod);
   void remove_augument(const CreatureModificator& mod);
 };

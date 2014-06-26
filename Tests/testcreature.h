@@ -31,6 +31,9 @@ private slots:
   void modificator_load();
   void modificator_save();
   void modificator_augument();
+
+  void modmanager();
+
 };
 
 #endif // TESTCREATURE_H

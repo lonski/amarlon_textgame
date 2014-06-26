@@ -105,3 +105,61 @@ void CreatureModificator::save_to_db()
 
   DBObject::save_to_db();
 }
+
+//==================================CreatureModificatorManager====================================
+CreatureModificatorManager::CreatureModificatorManager()
+: _complex_mod( shared_ptr<CreatureModificator>(new CreatureModificator) )
+{
+}
+
+void CreatureModificatorManager::add(std::shared_ptr<CreatureModificator> new_mod)
+{
+  if (0 != new_mod->ref())
+  {
+    _complex_mod->augument(*new_mod);
+    _applied_mods.push_back(TimedCreatureModificator(new_mod, new_mod->effect_time()));
+  }
+  else
+  {
+    throw no_ref("Do managera nie można dodać modyfikatora nei zapisanego w bazie!");
+  }
+}
+
+void CreatureModificatorManager::remove(dbRef mod_to_remove)
+{
+  for (auto i = _applied_mods.begin(); i != _applied_mods.end(); ++i)
+  {
+    if ( i->modificator->ref() == mod_to_remove )
+    {
+      _complex_mod->remove_augument( *(i->modificator) );
+      _applied_mods.erase(i);
+      break;
+    }
+   }
+}
+
+std::vector<std::weak_ptr<CreatureModificator> > CreatureModificatorManager::get_all()
+{
+  vector<weak_ptr<CreatureModificator> > mods;
+  for (auto i = _applied_mods.begin(); i != _applied_mods.end(); ++i)
+  {
+    mods.push_back(i->modificator);
+  }
+
+  return mods;
+}
+
+void CreatureModificatorManager::tick_time(Minute tick)
+{
+  //TODO!
+}
+
+
+
+
+
+
+
+
+
+

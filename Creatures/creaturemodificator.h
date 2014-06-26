@@ -4,6 +4,7 @@
 #include "../Include/inc.h"
 #include "creaturestats.h"
 #include "../Include/db.h"
+#include "../Include/gameclock.h"
 
 class CreatureModificator : public DBObject
 {
@@ -40,6 +41,29 @@ public:
   virtual void save_to_db();
   void augument(const CreatureModificator& mod);
   void remove_augument(const CreatureModificator& mod);
+};
+
+class CreatureModificatorManager : TimeObserver
+{
+private:
+  struct TimedCreatureModificator
+  {
+    TimedCreatureModificator(std::shared_ptr<CreatureModificator> m = std::shared_ptr<CreatureModificator>(nullptr), int t=0)
+    : modificator(m), time(t)
+    {}
+    std::shared_ptr<CreatureModificator> modificator;
+    int time;
+  };
+
+  std::vector<TimedCreatureModificator> _applied_mods;
+  std::shared_ptr<CreatureModificator> _complex_mod;
+public:
+  CreatureModificatorManager();
+  void add(std::shared_ptr<CreatureModificator> new_mod);
+  void remove(dbRef mod_to_remove);
+  const CreatureModificator& get_complex_mod() const { return *_complex_mod; }
+  std::vector<std::weak_ptr<CreatureModificator> > get_all();
+  virtual void tick_time(Minute tick);
 };
 
 #endif // CREATUREMODIFICATOR_H

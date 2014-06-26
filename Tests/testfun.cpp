@@ -57,4 +57,64 @@ void TestFun::explode()
   QCOMPARE(v[2].c_str(), "b");
 }
 
+void TestFun::gameclock()
+{
+  //initalized state
+  QVERIFY(GameClock::Clock().minute() == 0);
+  QVERIFY(GameClock::Clock().hour() == 0);
+  QVERIFY(GameClock::Clock().day() == 0);
+  QVERIFY(GameClock::Clock().month() == 0);
+  QVERIFY(GameClock::Clock().year() == 0);
+
+  //increase 4 minutes
+  GameClock::Clock().tick_time(4);
+  QCOMPARE(GameClock::Clock().minute(), (uint)4 );
+  QCOMPARE(GameClock::Clock().hour(),   (uint)0 );
+  QCOMPARE(GameClock::Clock().day(),    (uint)0 );
+  QCOMPARE(GameClock::Clock().month(),  (uint)0 );
+  QCOMPARE(GameClock::Clock().year(),   (uint)0 );
+
+  //increase 1hour 10mins
+  GameClock::Clock().tick_time(60 + 10);
+  QCOMPARE(GameClock::Clock().minute(), (uint)14 );
+  QCOMPARE(GameClock::Clock().hour(),   (uint)1 );
+  QCOMPARE(GameClock::Clock().day(),    (uint)0 );
+  QCOMPARE(GameClock::Clock().month(),  (uint)0 );
+  QCOMPARE(GameClock::Clock().year(),   (uint)0 );
+
+  //increase 3h 2min
+  GameClock::Clock().tick_time(3*60 + 2);
+  QCOMPARE(GameClock::Clock().minute(), (uint)16 );
+  QCOMPARE(GameClock::Clock().hour(),   (uint)4 );
+  QCOMPARE(GameClock::Clock().day(),    (uint)0 );
+  QCOMPARE(GameClock::Clock().month(),  (uint)0 );
+  QCOMPARE(GameClock::Clock().year(),   (uint)0 );
+
+  //increase 2 days
+  GameClock::Clock().tick_time(2*24*60);
+  QCOMPARE(GameClock::Clock().minute(), (uint)16 );
+  QCOMPARE(GameClock::Clock().hour(),   (uint)4 );
+  QCOMPARE(GameClock::Clock().day(),    (uint)2 );
+  QCOMPARE(GameClock::Clock().month(),  (uint)0 );
+  QCOMPARE(GameClock::Clock().year(),   (uint)0 );
+
+  //increase 1month 4dayes 4min
+  GameClock::Clock().tick_time(30*24*60 + 4*24*60 + 4);
+  QCOMPARE(GameClock::Clock().minute(), (uint)20 );
+  QCOMPARE(GameClock::Clock().hour(),   (uint)4 );
+  QCOMPARE(GameClock::Clock().day(),    (uint)6 );
+  QCOMPARE(GameClock::Clock().month(),  (uint)1 );
+  QCOMPARE(GameClock::Clock().year(),   (uint)0 );
+
+  //increase 1year
+  GameClock::Clock().tick_time(1*12*30*24*60);
+  QCOMPARE(GameClock::Clock().minute(), (uint)20 );
+  QCOMPARE(GameClock::Clock().hour(),   (uint)4 );
+  QCOMPARE(GameClock::Clock().day(),    (uint)6 );
+  QCOMPARE(GameClock::Clock().month(),  (uint)1 );
+  QCOMPARE(GameClock::Clock().year(),   (uint)1 );
+
+
+}
+
 

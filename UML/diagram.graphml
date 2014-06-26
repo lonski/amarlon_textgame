@@ -488,7 +488,7 @@ TIME<y:LabelModel>
                   <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="public nested class" use3DEffect="false">
                     <y:AttributeLabel>-string _name;
 
--unordered_set&lt;T*, dbRef&gt; _crts;</y:AttributeLabel>
+-set&lt;T*, dbRef&gt; _crts;</y:AttributeLabel>
                     <y:MethodLabel>+static Container* create(dbRef);
 
 +insert(T*, int);
@@ -622,7 +622,7 @@ TIME<y:LabelModel>
                       <y:Geometry height="217.29260868349922" width="424.27214341321485" x="435.0715794352928" y="533.7575230695413"/>
                       <y:Fill color="#FFFF99" transparent="false"/>
                       <y:BorderStyle color="#000000" type="dotted" width="1.0"/>
-                      <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="226.68212890625" x="98.79500725348242" y="3.0">Creature::ModificatorManager<y:LabelModel>
+                      <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="216.28466796875" x="103.99373772223242" y="3.0">CreatureModificatorManager<y:LabelModel>
                           <y:SmartNodeLabelModel distance="4.0"/>
                         </y:LabelModel>
                         <y:ModelParameter>
@@ -645,9 +645,9 @@ TIME<y:LabelModel>
                   <data key="d6">
                     <y:UMLClassNode>
                       <y:Geometry height="217.29260868349922" width="295.669487798108" x="989.3281821945355" y="533.7575230695413"/>
-                      <y:Fill color="#FFFF99" transparent="false"/>
-                      <y:BorderStyle color="#000000" type="dotted" width="1.0"/>
-                      <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="162.412109375" x="66.62868921155399" y="3.0">Creature::Modificator<y:LabelModel>
+                      <y:Fill color="#FFCC00" transparent="false"/>
+                      <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                      <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="152.0146484375" x="71.82741968030399" y="3.0">CreatureModificator<y:LabelModel>
                           <y:SmartNodeLabelModel distance="4.0"/>
                         </y:LabelModel>
                         <y:ModelParameter>
@@ -691,24 +691,6 @@ modyfikatory czasowe.<y:LabelModel>
               <data key="d4"/>
               <data key="d6">
                 <y:UMLNoteNode>
-                  <y:Geometry height="19.061158953888707" width="120.93096338055597" x="-736.0288304440148" y="705.6735459115549"/>
-                  <y:Fill color="#FFCC00" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="4" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="13.3125" modelName="custom" textColor="#000000" visible="true" width="101.689453125" x="4.0" y="2.8743294769443537">typedef map&lt;CreatureAttribute, int&gt; Attributes;
-typedef map&lt;CreatureSkill, int&gt; Skills;<y:LabelModel>
-                      <y:SmartNodeLabelModel distance="4.0"/>
-                    </y:LabelModel>
-                    <y:ModelParameter>
-                      <y:SmartNodeLabelModelParameter labelRatioX="-0.5" labelRatioY="0.0" nodeRatioX="-0.5" nodeRatioY="0.0" offsetX="4.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                    </y:ModelParameter>
-                  </y:NodeLabel>
-                </y:UMLNoteNode>
-              </data>
-            </node>
-            <node id="n1::n0::n7">
-              <data key="d4"/>
-              <data key="d6">
-                <y:UMLNoteNode>
                   <y:Geometry height="33.772803315910096" width="93.5415881250724" x="-722.3341428162731" y="759.3159614925822"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
@@ -726,7 +708,7 @@ do wykonywnych testów<y:LabelModel>
                 </y:UMLNoteNode>
               </data>
             </node>
-            <node id="n1::n0::n8">
+            <node id="n1::n0::n7">
               <data key="d4"/>
               <data key="d6">
                 <y:UMLNoteNode>
@@ -743,7 +725,7 @@ do wykonywnych testów<y:LabelModel>
                 </y:UMLNoteNode>
               </data>
             </node>
-            <node id="n1::n0::n9">
+            <node id="n1::n0::n8">
               <data key="d4"/>
               <data key="d6">
                 <y:UMLNoteNode>
@@ -760,7 +742,7 @@ do wykonywnych testów<y:LabelModel>
                 </y:UMLNoteNode>
               </data>
             </node>
-            <node id="n1::n0::n10">
+            <node id="n1::n0::n9">
               <data key="d4"/>
               <data key="d6">
                 <y:UMLClassNode>
@@ -789,7 +771,7 @@ Item* unequip();</y:MethodLabel>
                 </y:UMLClassNode>
               </data>
             </node>
-            <node id="n1::n0::n11">
+            <node id="n1::n0::n10">
               <data key="d4"/>
               <data key="d6">
                 <y:UMLNoteNode>
@@ -810,7 +792,7 @@ wygenerowane na podstawie stat z bazy<y:LabelModel>
                 </y:UMLNoteNode>
               </data>
             </node>
-            <node id="n1::n0::n12">
+            <node id="n1::n0::n11">
               <data key="d4"/>
               <data key="d6">
                 <y:UMLClassNode>
@@ -1329,7 +1311,7 @@ enterable = false<y:LabelModel>
 -int _max_volume;
 -int _cur_volume;
 
--unordered_set&lt; pair&lt;T*, int&gt;, dbRef &gt; _items;</y:AttributeLabel>
+-set&lt; pair&lt;T*, int&gt;, dbRef &gt; _items;</y:AttributeLabel>
                     <y:MethodLabel>+static Container* create(dbRef);
 
 +insert(T*, int);
@@ -1598,8 +1580,8 @@ template&lt;typename T&gt;<y:LabelModel>
           <data key="d6">
             <y:UMLClassNode>
               <y:Geometry height="208.4454790974189" width="197.7148140457084" x="1120.8200563677344" y="-171.9129309297279"/>
-              <y:Fill color="#FFFF99" transparent="false"/>
-              <y:BorderStyle color="#000000" type="dotted" width="1.0"/>
+              <y:Fill color="#FFCC00" transparent="false"/>
+              <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="85.0849609375" x="56.314926554104204" y="25.96875">GameClock<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
                 </y:LabelModel>
@@ -1655,8 +1637,8 @@ template&lt;typename T&gt;<y:LabelModel>
               <data key="d6">
                 <y:UMLClassNode>
                   <y:Geometry height="113.36424275368586" width="193.84012501291727" x="1442.386964897223" y="-663.214268693916"/>
-                  <y:Fill color="#FFFF99" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="dotted" width="1.0"/>
+                  <y:Fill color="#FFCC00" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="71.02490234375" x="61.407611334583635" y="3.0">Observer<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
@@ -1677,8 +1659,8 @@ template&lt;typename T&gt;<y:LabelModel>
               <data key="d6">
                 <y:UMLClassNode>
                   <y:Geometry height="113.36424275368586" width="223.35435787988308" x="1108.000284450647" y="-663.214268693916"/>
-                  <y:Fill color="#FFFF99" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="dotted" width="1.0"/>
+                  <y:Fill color="#FFCC00" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="59.11669921875" x="82.11882933056654" y="3.0">Subject<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
@@ -1700,8 +1682,8 @@ template&lt;typename T&gt;<y:LabelModel>
               <data key="d6">
                 <y:UMLClassNode>
                   <y:Geometry height="113.36424275368586" width="189.72326791557634" x="1446.5038219945639" y="-471.6056068307667"/>
-                  <y:Fill color="#FFFF99" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="dotted" width="1.0"/>
+                  <y:Fill color="#FFCC00" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="106.71142578125" x="41.50592106716317" y="3.0">TimeObserver<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
@@ -4091,16 +4073,6 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n1::n0::e5" source="n1::n0::n0" target="n1::n0::n6">
-      <data key="d10">
-        <y:PolyLineEdge>
-          <y:Path sx="-75.21899937157632" sy="-97.91895393416107" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
-          <y:Arrows source="none" target="none"/>
-          <y:BendStyle smoothed="false"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
     <edge id="n2::n0::e0" source="n2::n0::n0" target="n2::n0::n28">
       <data key="d10">
         <y:PolyLineEdge>
@@ -4904,7 +4876,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n1::n0::e6" source="n1::n0::n7" target="n1::n0::n0">
+    <edge id="n1::n0::e5" source="n1::n0::n6" target="n1::n0::n0">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="-76.09594533440253" ty="-36.92071617212309"/>
@@ -4924,7 +4896,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n1::n0::e7" source="n1::n0::n0" target="n1::n0::n8">
+    <edge id="n1::n0::e6" source="n1::n0::n0" target="n1::n0::n7">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="-133.25222471663272" sy="-181.84205690689146" tx="0.0" ty="0.0"/>
@@ -4934,7 +4906,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n1::n0::e8" source="n1::n0::n4" target="n1::n0::n9">
+    <edge id="n1::n0::e7" source="n1::n0::n4" target="n1::n0::n8">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="-70.81254756579895" sy="-63.31146504789831" tx="0.0" ty="0.0"/>
@@ -5482,7 +5454,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n1::n0::e9" source="n1::n0::n10" target="n1::n0::n0">
+    <edge id="n1::n0::e8" source="n1::n0::n9" target="n1::n0::n0">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="28.28993371699346" sy="-23.984355170492464" tx="-24.341569595581575" ty="63.26227746817943"/>
@@ -5500,7 +5472,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n1::n0::e10" source="n1::n0::n0" target="n1::n0::n11">
+    <edge id="n1::n0::e9" source="n1::n0::n0" target="n1::n0::n10">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="96.20990227004997" sy="44.94714690598325" tx="0.0" ty="0.0"/>
@@ -5520,7 +5492,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n1::n0::e11" source="n1::n0::n0" target="n1::n0::n12">
+    <edge id="n1::n0::e10" source="n1::n0::n0" target="n1::n0::n11">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="135.0592211649145" sy="169.0815809043553" tx="-22.336411675812087" ty="-19.180611035416632"/>
@@ -5538,7 +5510,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n1::n0::e12" source="n1::n0::n5::n1" target="n1::n0::n12">
+    <edge id="n1::n0::e11" source="n1::n0::n5::n1" target="n1::n0::n11">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="-54.1408027270345" sy="60.71218389486478" tx="107.70505732844197" ty="-74.20283727215724">

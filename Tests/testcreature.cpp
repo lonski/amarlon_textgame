@@ -268,6 +268,57 @@ void TestCreature::modmanager()
   QCOMPARE(manager.get_complex_mod().creature_stats().get_attribute(Attribute::DEX), 0);
   QCOMPARE(manager.get_complex_mod().creature_stats().get_attribute(Attribute::IMP), 1);
 
+  mod1->purge();
+  mod2->purge();
+  mod3->purge();
+}
 
+void TestCreature::modmanager_ticktime()
+{
+  //create manager
+  CreatureModificatorManager manager;
+  //create some mods
+  shared_ptr<CreatureModificator> mod1(new CreatureModificator), mod2(new CreatureModificator),
+                                  mod3(new CreatureModificator), mod4(new CreatureModificator);
+  //set mods time
+  mod1->set_effect_time(10);
+  mod1->save_to_db();
+  mod2->set_effect_time(10);
+  mod2->save_to_db();
+  mod3->set_effect_time(20);
+  mod3->save_to_db();
+  mod4->save_to_db();
+
+  //ADD mods to manager
+  manager.add(mod1);
+  manager.add(mod2);
+  manager.add(mod3);
+  manager.add(mod4);
+
+  //validate size
+  QCOMPARE(manager.get_all().size(), (size_t)4);
+
+  //TICK 4
+  GameClock::Clock().tick_time(4);
+
+  //validate size
+  QCOMPARE(manager.get_all().size(), (size_t)4);
+
+  //TICK 10
+  GameClock::Clock().tick_time(10);
+
+  //validate size
+  QCOMPARE(manager.get_all().size(), (size_t)2);
+
+  //TICK 6
+  GameClock::Clock().tick_time(6);
+
+  //validate size
+  QCOMPARE(manager.get_all().size(), (size_t)1);
+
+  mod1->purge();
+  mod2->purge();
+  mod3->purge();
+  mod4->purge();
 }
 

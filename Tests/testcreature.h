@@ -8,6 +8,7 @@
 #include "../Creatures/creaturestats.h"
 #include "../Creatures/bodypart.h"
 #include "../Creatures/creaturemodificator.h"
+#include "../Include/gameclock.h"
 
 class TestCreature : public QObject
 {
@@ -33,6 +34,7 @@ private slots:
   void modificator_augument();
 
   void modmanager();
+  void modmanager_ticktime();
 
 };
 

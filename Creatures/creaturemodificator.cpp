@@ -125,7 +125,7 @@ void CreatureModificatorManager::add(std::shared_ptr<CreatureModificator> new_mo
   }
 }
 
-void CreatureModificatorManager::remove(dbRef mod_to_remove)
+bool CreatureModificatorManager::remove(dbRef mod_to_remove)
 {
   for (auto i = _applied_mods.begin(); i != _applied_mods.end(); ++i)
   {
@@ -133,9 +133,11 @@ void CreatureModificatorManager::remove(dbRef mod_to_remove)
     {
       _complex_mod->remove_augument( *(i->modificator) );
       _applied_mods.erase(i);
-      break;
+      return true;
     }
-   }
+  }
+
+  return false;
 }
 
 std::vector<std::weak_ptr<CreatureModificator> > CreatureModificatorManager::get_all()
@@ -151,7 +153,24 @@ std::vector<std::weak_ptr<CreatureModificator> > CreatureModificatorManager::get
 
 void CreatureModificatorManager::tick_time(Minute tick)
 {
-  //TODO!
+  for (auto i = _applied_mods.begin(); i != _applied_mods.end();)
+  {
+    TimedCreatureModificator& mod = (*i);
+    bool erased = false;
+
+    //odejmij czas
+    if ( mod.time > static_cast<int>(tick)  )
+    {
+      mod.time -= tick;
+    }
+    //usun efekt jezeli do usuniecia
+    else if ( mod.time != -1 )
+    {
+      erased = remove(mod.modificator->ref());
+    }
+
+    if (!erased) ++i;
+  }
 }
 
 

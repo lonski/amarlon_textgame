@@ -38,7 +38,10 @@ public:
 class TimeObserver : Observer
 {
 public:
-  TimeObserver() : Observer(&GameClock::Clock()) {}
+  TimeObserver() : Observer(&GameClock::Clock())
+  {
+    GameClock::Clock().oAdd(this);
+  }
   virtual void update(Subject *subject)
   {
     if (subject == _subject)

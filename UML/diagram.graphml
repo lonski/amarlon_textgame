@@ -620,8 +620,8 @@ TIME<y:LabelModel>
                   <data key="d6">
                     <y:UMLClassNode>
                       <y:Geometry height="217.29260868349922" width="424.27214341321485" x="435.0715794352928" y="533.7575230695413"/>
-                      <y:Fill color="#FFFF99" transparent="false"/>
-                      <y:BorderStyle color="#000000" type="dotted" width="1.0"/>
+                      <y:Fill color="#FFCC00" transparent="false"/>
+                      <y:BorderStyle color="#000000" type="line" width="1.0"/>
                       <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="216.28466796875" x="103.99373772223242" y="3.0">CreatureModificatorManager<y:LabelModel>
                           <y:SmartNodeLabelModel distance="4.0"/>
                         </y:LabelModel>

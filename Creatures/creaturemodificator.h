@@ -60,7 +60,7 @@ private:
 public:
   CreatureModificatorManager();
   void add(std::shared_ptr<CreatureModificator> new_mod);
-  void remove(dbRef mod_to_remove);
+  bool remove(dbRef mod_to_remove);
   const CreatureModificator& get_complex_mod() const { return *_complex_mod; }
   std::vector<std::weak_ptr<CreatureModificator> > get_all();
   virtual void tick_time(Minute tick);

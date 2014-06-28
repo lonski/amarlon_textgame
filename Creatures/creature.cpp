@@ -17,13 +17,21 @@ Creature::Creature(dbRef ref, bool temp)
 
 Creature::~Creature()
 {
-  string body_save;
-  for (auto b = _body.begin(); b!=_body.end(); ++b)
+  if ( !isTemporary() && ref() != 0)
   {
-    BodyPart *bp = *b;
-    body_save += bp->toStr() + ";";
+    try
+    {
+      save_to_db();
+    }
+    catch(std::exception &e)
+    {
+      qDebug() << "Error saving " << table_name.c_str() << " " << ref() << " : " << e.what();
+    }
+    catch(...)
+    {
+      qDebug() << "Error saving " << table_name.c_str() << " "  << ref() << ".";
+    }
   }
-  save(body_save);
 }
 
 std::unique_ptr<Creature> Creature::create(dbRef ref, bool prototype, bool temp)
@@ -94,16 +102,6 @@ void Creature::load()
           _body.push_back( shared_ptr<BodyPart>(new BodyPart(*b)) );
       }
 
-      //INVENTORY
-      try
-      {
-        _inventory = Item::Container<>::create(Item::Container<>::byOwner( table(),ref() ));
-      }
-      catch(creation_error)
-      {
-        _inventory = unique_ptr<Item::Container<> >(nullptr);
-      }
-
       //MODS
         //zaladuj z crt_mods
       vector<int> mod_refs(100);
@@ -125,6 +123,19 @@ void Creature::load()
           _mods.add( shared_ptr<CreatureModificator>(&eq->mods().get_complex_mod()) );
       }
 
+      //INVENTORY
+      try
+      {
+        _inventory = Item::Container<>::create(Item::Container<>::byOwner( table(),ref() ));
+      }
+      catch(creation_error)
+      {
+        _inventory = Item::Container<>::prototypes().clone(ItemContainerPrototype::Inventory);
+        _inventory->set_otable(table());
+        _inventory->set_oref(ref());
+        _inventory->save_to_db();
+      }
+
       calc_total_damage();
       set_loaded();
     }
@@ -134,6 +145,25 @@ void Creature::load()
       qDebug() << _Database.get_last_query().c_str();
     }
   }
+}
+
+void Creature::save_to_db()
+{
+  string body_save;
+  for (auto b = _body.begin(); b!=_body.end(); ++b)
+  {
+    BodyPart *bp = (*b).get();
+    body_save += bp->toStr() + ";";
+  }
+  save("UPDATE "+table()+" SET body='"+body_save+"' WHERE ref="+fun::toStr(ref()));
+
+  DBObject::save_to_db();
+}
+
+void Creature::purge()
+{
+  _inventory->purge();
+  DBObject::purge();
 }
 
 void Creature::set_name(string name)
@@ -176,6 +206,25 @@ void Creature::mod_skill(Skill skill, int mod)
 {
   _stats.mod_skill(skill, mod);
   save("SKILLS", _stats.Skills2Str());
+}
+
+std::vector<std::weak_ptr<BodyPart> > Creature::body_parts()
+{
+  vector<weak_ptr<BodyPart> > parts;
+  for (auto b = _body.begin(); b != _body.end(); ++b)
+    parts.push_back(weak_ptr<BodyPart>(*b));
+
+  return parts;
+}
+
+void Creature::take(std::shared_ptr<Item> item, int amount)
+{
+  _inventory->insert(item, amount);
+}
+
+void Creature::drop(dbRef item_ref, int amount)
+{
+  _inventory->erase(item_ref, amount);
 }
 
 void Creature::calc_total_damage()

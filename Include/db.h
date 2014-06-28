@@ -21,6 +21,7 @@ private:
 
   //save queue
   std::list<std::string> _save_queries;
+
 protected:
   //save changes
   template<typename T> void save(std::string f_name, T f_val, dbTable tbl = "");

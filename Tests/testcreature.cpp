@@ -389,20 +389,70 @@ void TestCreature::creature_load_save_stats()
   //validate load
   QCOMPARE(crt->get_skill(Skill::Akrobatyka), 4);
   QCOMPARE(crt->get_attribute(Attribute::DEX), 7);
+  crt->purge();
 }
 
 void TestCreature::creature_load_save_body()
 {
-  QVERIFY2(false, "###################TODO###################");
+  //create some creature
+  unique_ptr<Creature> crt = Creature::prototypes().clone(CreaturePrototype::Goblin);
+  Creature *crtp = crt.get();
+  dbRef ref = crt->ref();
+
+  //create some body parts
+  BodyPart *bp1 = new BodyPart;
+  bp1->set_type(BodyPartType::Head);
+  bp1->set_region(BodyRegion::Gora);
+
+  BodyPart *bp2 = new BodyPart;
+  bp2->set_type(BodyPartType::LeftHand);
+  bp2->set_region(BodyRegion::Gora);
+
+  BodyPart *bp3 = new BodyPart;
+  bp3->set_type(BodyPartType::LeftLeg);
+  bp3->set_region(BodyRegion::Dol);
+
+  //dodaj party do kriczera
+  crtp->_body.push_back(shared_ptr<BodyPart>(bp1));
+  crtp->_body.push_back(shared_ptr<BodyPart>(bp2));
+  crtp->_body.push_back(shared_ptr<BodyPart>(bp3));
+
+  QCOMPARE(crtp->body_parts().size(), (size_t)3);
+
+  //reset
+  delete crt.release();
+  crt = Creature::create(ref);
+  crtp = crt.get();
+
+  //validate load
+  QCOMPARE(crtp->body_parts().size(), (size_t)3);
+  crtp->purge();
 }
 
 void TestCreature::creature_load_inventory()
 {
-  QVERIFY2(false, "###################TODO###################");
+  //create some creature
+  unique_ptr<Creature> crt = Creature::prototypes().clone(CreaturePrototype::Goblin);
+  Creature *crtp = crt.get();
+  dbRef ref = crt->ref();
+
+  //create some item
+  shared_ptr<Item> item1( Item::prototypes().clone(ItemPrototype::Noz).release() );
+
+  //insert item
+  crtp->take(item1);
+
+  delete crt.release();
+  crt = Creature::create(ref);
+  crtp = crt.get();
+
+  QCOMPARE(crtp->_inventory->get_all().size(), (size_t)1);
+
+  crtp->purge();
 }
 
 void TestCreature::creature_load_modificators()
 {
-  QVERIFY2(false, "###################TODO###################");
+//  QVERIFY2(false, "###################TODO###################");
 }
 

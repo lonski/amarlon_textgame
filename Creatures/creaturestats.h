@@ -4,7 +4,6 @@
 #include "../Include/inc.h"
 #include "../Include/func.h"
 #include "../Include/enums.h"
-#include "../Equipment/armor.h"
 
 class CreatureStats
 {

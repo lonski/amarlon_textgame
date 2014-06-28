@@ -7,6 +7,7 @@
 #include "Include/prototypemanager.h"
 #include "Include/exceptions.h"
 #include "Include/comobj.h"
+#include "Creatures/creaturemodificator.h"
 
 class Item;
 
@@ -71,6 +72,8 @@ public:
 
   };
   //===~~~
+public:
+  typedef std::unique_ptr<Item::Container<> > Inventory;
 
 private:
   //data
@@ -84,29 +87,35 @@ private:
   std::vector<BodyPartType> _body_parts;
   bool _stackable;
 
+  Inventory _inventory;
+  CreatureModificatorManager _mods;
+
   //deleted funcs
   Item& operator=(const Item&) = delete;
   Item(const Item&) = delete;
 protected:
   Item(dbRef ref, bool temporary = false);
 
-public:
+public:   
   //parameters
   const static dbTable table_name;
+  virtual dbTable table() const { return table_name; }
 
   //creation  
   static std::unique_ptr<Item> create(dbRef ref, bool prototype = false, bool temporary = false);
   std::unique_ptr<Item> clone();
-  ~Item() = 0;
+  virtual ~Item() = 0;
 
   //operations
   virtual void load();
 
   //inventory
-  std::unique_ptr<Container<> > inventory;
+  Inventory& inventory() { return _inventory; }
 
-  //data access
-  virtual dbTable table() const { return table_name; }
+  //creature modificators
+  CreatureModificatorManager& mods() { return _mods; }
+
+  //data access  
   ItemType type() const { return _item_type; }
   std::string name() const { return _name; }
   std::string descript() const { return _descript; }

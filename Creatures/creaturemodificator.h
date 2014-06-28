@@ -2,6 +2,7 @@
 #define CREATUREMODIFICATOR_H
 
 #include "../Include/inc.h"
+#include "../Include/exceptions.h"
 #include "creaturestats.h"
 #include "../Include/db.h"
 #include "../Include/gameclock.h"
@@ -14,17 +15,25 @@ private:
 
   std::string _name;
   int _effect_time;
+
+  //parameters
+  dbTable _otable;
+  dbRef _oref;
 public:
   //parameters
   const static dbTable table_name;
+  virtual dbTable table() const { return table_name; }
+  dbTable otable() const {return _otable; }
+  dbRef oref() const { return _oref; }
+  void set_otable(dbTable otable) { _otable = otable; }
+  void set_oref(dbRef oref) { _oref = oref; }
 
   //creation
-  CreatureModificator();
+  CreatureModificator(dbTable otable = "", dbRef oref = 0);
   CreatureModificator(dbRef ref, bool temporary = false);
   ~CreatureModificator();
 
-  //data access
-  virtual dbTable table() const { return table_name; }
+  //data access  
   CreatureStats& creature_stats() { return _mods; }
   const CreatureStats& creature_stats() const { return _mods; }
   int global_test_level_mod() const { return _global_test_level_mod; }
@@ -61,7 +70,7 @@ public:
   CreatureModificatorManager();
   void add(std::shared_ptr<CreatureModificator> new_mod);
   bool remove(dbRef mod_to_remove);
-  const CreatureModificator& get_complex_mod() const { return *_complex_mod; }
+  CreatureModificator& get_complex_mod() const { return *_complex_mod; }
   std::vector<std::weak_ptr<CreatureModificator> > get_all();
   virtual void tick_time(Minute tick);
 };

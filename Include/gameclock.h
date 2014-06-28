@@ -42,6 +42,10 @@ public:
   {
     GameClock::Clock().oAdd(this);
   }
+  ~TimeObserver()
+  {
+    GameClock::Clock().oRemove(this);
+  }
   virtual void update(Subject *subject)
   {
     if (subject == _subject)

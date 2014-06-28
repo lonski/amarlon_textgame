@@ -418,22 +418,79 @@ void TestItems::ItemAsAContainer()
   //it should apply new container to item
   szkatulka->reload();
 
-  QVERIFY(szkatulka->inventory.get() != nullptr);
+  QVERIFY(szkatulka->inventory().get() != nullptr);
 
   //create some item to insert to szkatułka
   shared_ptr<Item> i1( Item::create( (int)refDict::Item::Miedziak).release() );
   shared_ptr<Item> i2( Item::prototypes().clone(ItemPrototype::Sztylet_typowy) );
 
   //insert to szkatułka
-  szkatulka->inventory->insert(i1, 5);
-  szkatulka->inventory->insert(i2);
+  szkatulka->inventory()->insert(i1, 5);
+  szkatulka->inventory()->insert(i2);
 
-  QCOMPARE(szkatulka->inventory->get_all().size(), (size_t)2 );
+  QCOMPARE(szkatulka->inventory()->get_all().size(), (size_t)2 );
 
   //clean up!
-  szkatulka->inventory->purge();
+  szkatulka->inventory()->purge();
   i2->purge();
   szkatulka->purge();
   delete szkatulka;
 
+}
+
+void TestItems::ItemModManager()
+{
+  //create some item
+  unique_ptr<Item> item = Item::prototypes().clone(ItemPrototype::Nozyk);
+  dbRef iref = item->ref();
+
+  //=================
+  //create some mods
+  shared_ptr<CreatureModificator> mod1(new CreatureModificator(item->table(), item->ref()))
+                                , mod2(new CreatureModificator(item->table(), item->ref()))
+                                , mod3(new CreatureModificator(item->table(), item->ref()));
+
+  //set the mods and save to DB
+  mod1->creature_stats().set_attribute(Attribute::CHR, 1);
+  mod1->creature_stats().set_attribute(Attribute::STR, 1);
+  mod1->save_to_db();
+
+  mod2->creature_stats().set_attribute(Attribute::CHR, 2);
+  mod2->creature_stats().set_attribute(Attribute::DEX, 1);
+  mod2->save_to_db();
+
+  mod3->creature_stats().set_attribute(Attribute::CHR, 3);
+  mod3->creature_stats().set_attribute(Attribute::IMP, 1);
+  mod3->save_to_db();
+
+  //reset item
+  delete item.release();
+  item = Item::create(iref);
+  Item *itm = item.get(); //bo nie podpowiada jak wyłuskuję unika. denerwujące.
+
+  //VALIDATE MOD MANAGER
+
+  //validate size
+  QCOMPARE(itm->mods().get_all().size(), (size_t)3);
+  //validate complex mod
+  QCOMPARE(itm->mods().get_complex_mod().creature_stats().get_attribute(Attribute::CHR), 6);
+  QCOMPARE(itm->mods().get_complex_mod().creature_stats().get_attribute(Attribute::STR), 1);
+  QCOMPARE(itm->mods().get_complex_mod().creature_stats().get_attribute(Attribute::DEX), 1);
+  QCOMPARE(itm->mods().get_complex_mod().creature_stats().get_attribute(Attribute::IMP), 1);
+
+  //REMOVE mod2
+  itm->mods().remove(mod2->ref());
+
+  //validate size
+  QCOMPARE(itm->mods().get_all().size(), (size_t)2);
+  //validate complex mod
+  QCOMPARE(itm->mods().get_complex_mod().creature_stats().get_attribute(Attribute::CHR), 4);
+  QCOMPARE(itm->mods().get_complex_mod().creature_stats().get_attribute(Attribute::STR), 1);
+  QCOMPARE(itm->mods().get_complex_mod().creature_stats().get_attribute(Attribute::DEX), 0);
+  QCOMPARE(itm->mods().get_complex_mod().creature_stats().get_attribute(Attribute::IMP), 1);
+
+  mod1->purge();
+  mod2->purge();
+  mod3->purge();
+  itm->purge();
 }

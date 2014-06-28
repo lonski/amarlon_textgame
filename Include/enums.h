@@ -18,6 +18,38 @@ namespace refDict
 //~~~
 
 //===
+enum class CreatureType
+{
+  Null = 0,
+  MOB = 1,
+  NPC = 2,
+  Player = 3,
+  End = 4
+};
+//~~~
+
+//===
+enum class CreaturePrototype
+{
+  Null = 0,
+  Szczur = 1,
+  Goblin = 2,
+  End = 3
+};
+//~~~
+
+//===
+enum class Sex
+{
+  Null = 0,
+  Male = 1,
+  Female = 2,
+  NotSpecified = 3,
+  End = 4
+};
+//~~~
+
+//===
 enum class Season
 {
   Null = 0,

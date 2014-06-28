@@ -70,13 +70,25 @@ void Item::load()
         set_loaded();
       }
 
+      //MODS
+      //zaladuj z crt_mods
+      vector<int> mod_refs(100);
+      vector<indicator> inds;
+
+      string query = "SELECT ref FROM crt_mods WHERE otable='" + table() + "' and oref=" + fun::toStr(ref());
+      _Database << query, into(mod_refs, inds);
+
+      for (auto m = mod_refs.begin(); m != mod_refs.end(); ++m)
+        _mods.add( shared_ptr<CreatureModificator>(new CreatureModificator(*m)) );
+
+      //INVENTORY
       try
       {
-        inventory = Container<>::create(Container<>::byOwner( table(),ref() ));
+        _inventory = Container<>::create(Container<>::byOwner( table(),ref() ));
       }
       catch(creation_error)
       {
-        inventory = unique_ptr<Container<> >(nullptr);
+        _inventory = unique_ptr<Container<> >(nullptr);
       }
     }
     catch(soci_error &e)

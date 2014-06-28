@@ -36,6 +36,14 @@ private slots:
   void modmanager();
   void modmanager_ticktime();
 
+  void creature_creation();
+  void creature_load_base();
+  void creature_save_base();
+  void creature_load_save_stats();
+  void creature_load_save_body();
+  void creature_load_inventory();
+  void creature_load_modificators();
+
 };
 
 #endif // TESTCREATURE_H

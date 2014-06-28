@@ -17,8 +17,8 @@ void CreatureModificator::remove_augument(const CreatureModificator &mod)
   _global_test_level_mod -= mod.global_test_level_mod();
 }
 
-CreatureModificator::CreatureModificator()
-: DBObject(0), _global_test_level_mod(0), _effect_time(-1)
+CreatureModificator::CreatureModificator(dbTable otable, dbRef oref)
+: DBObject(0), _global_test_level_mod(0), _effect_time(-1), _otable(otable), _oref(oref)
 {
 }
 
@@ -95,6 +95,8 @@ void CreatureModificator::save_to_db()
   if ( 0 != ref() )
   {
     save("UPDATE " + table_name + " SET "
+         " otable='" + _otable + "',"
+         " oref=" + toStr(_oref) + ","
          " name='" + _name + "',"
          " effect_time=" + toStr(_effect_time) + ","
          " glb_test_mod=" + toStr(_global_test_level_mod) + ","

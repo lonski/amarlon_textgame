@@ -25,6 +25,7 @@ private slots:
    void ContainerInsertionEraseNonStackable();
    void ContainerInsertionEraseStackable();
    void ItemAsAContainer();
+   void ItemModManager();
 };
 
 #endif // TESTITEMS_H

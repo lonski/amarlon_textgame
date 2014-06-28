@@ -322,3 +322,87 @@ void TestCreature::modmanager_ticktime()
   mod4->purge();
 }
 
+void TestCreature::creature_creation()
+{
+  unique_ptr<Creature> crt = Creature::prototypes().clone(CreaturePrototype::Goblin);
+  dbRef ref = crt->ref();
+  QVERIFY(crt->ref() != 0);
+
+  delete crt.release();
+  crt = Creature::create(ref);
+  QVERIFY(crt->ref() == ref);
+
+  crt->purge();
+}
+
+void TestCreature::creature_load_base()
+{
+  unique_ptr<Creature> crt = Creature::prototypes().clone(CreaturePrototype::Goblin);
+
+  QVERIFY(crt->ref() != 0);
+  QCOMPARE(crt->name().c_str(), "Goblin");
+  QCOMPARE(crt->descript().c_str(), "Goblin zielony taki");
+  QVERIFY(crt->sex() == Sex::Male);
+
+  crt->purge();
+}
+
+void TestCreature::creature_save_base()
+{
+  unique_ptr<Creature> crt = Creature::prototypes().clone(CreaturePrototype::Goblin);
+  dbRef ref = crt->ref();
+
+  crt->set_name("lol");
+  crt->set_descript("lal");
+  crt->set_sex(Sex::Female);
+
+  QCOMPARE(crt->name().c_str(), "lol");
+  QCOMPARE(crt->descript().c_str(), "lal");
+  QVERIFY(crt->sex() == Sex::Female);
+
+  //reset
+  delete crt.release();
+  crt = Creature::create(ref);
+
+  //validate
+  QCOMPARE(crt->name().c_str(), "lol");
+  QCOMPARE(crt->descript().c_str(), "lal");
+  QVERIFY(crt->sex() == Sex::Female);
+
+  crt->purge();
+}
+
+void TestCreature::creature_load_save_stats()
+{
+  //create some creature
+  unique_ptr<Creature> crt = Creature::prototypes().clone(CreaturePrototype::Goblin);
+  dbRef ref = crt->ref();
+
+  //set stats
+  crt->set_skill(Skill::Akrobatyka, 4);
+  crt->set_attribute(Attribute::DEX, 7);
+
+  //reset item
+  delete crt.release();
+  crt = Creature::create(ref);
+
+  //validate load
+  QCOMPARE(crt->get_skill(Skill::Akrobatyka), 4);
+  QCOMPARE(crt->get_attribute(Attribute::DEX), 7);
+}
+
+void TestCreature::creature_load_save_body()
+{
+  QVERIFY2(false, "###################TODO###################");
+}
+
+void TestCreature::creature_load_inventory()
+{
+  QVERIFY2(false, "###################TODO###################");
+}
+
+void TestCreature::creature_load_modificators()
+{
+  QVERIFY2(false, "###################TODO###################");
+}
+

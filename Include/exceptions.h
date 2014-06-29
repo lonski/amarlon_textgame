@@ -3,6 +3,9 @@
 
 #include "inc.h"
 
+namespace error
+{
+
 class creation_error : public std::logic_error {
 public:
   explicit creation_error (const std::string& what_arg): std::logic_error(what_arg) {}
@@ -17,5 +20,12 @@ class no_ref : public std::logic_error {
 public:
   explicit no_ref (const std::string& what_arg): std::logic_error(what_arg) {}
 };
+
+class equip_no_bodyparts : public std::logic_error {
+public:
+  explicit equip_no_bodyparts (const std::string& what_arg): std::logic_error(what_arg) {}
+};
+
+}
 
 #endif // EXCEPTIONS_H

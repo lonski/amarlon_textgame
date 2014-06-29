@@ -74,6 +74,7 @@ public:
   //===~~~
 public:
   typedef std::unique_ptr<Item::Container<> > Inventory;
+  typedef std::vector<std::shared_ptr<Item> > STLContainer;
 
 private:
   //data
@@ -196,7 +197,7 @@ std::unique_ptr<Item::Container<T> > Item::Container<T>::create(dbRef ref, bool 
   if ( obj_type == ObjType::Instance || prototype )
   {
       new_container = new Container<T>(ref, temporary);
-  }else throw creation_error("Brak prawidłowego rekordu w bazie.");
+  }else throw error::creation_error("Brak prawidłowego rekordu w bazie.");
 
   new_container->load();
 
@@ -311,7 +312,7 @@ void Item::Container<T>::insert(std::shared_ptr<T> &item, int amount)
   if ( _weight_cap.cur + items_weight > _weight_cap.max )
   {
     qDebug() << "Cur cap [" << _weight_cap.cur << "] + items_weight [" << items_weight << "] < max_cap [" << _weight_cap.max << "]";
-    throw container_insertion_error("Zbyt duży ciężar, aby pomieścić go w pojemniku.");
+    throw error::container_insertion_error("Zbyt duży ciężar, aby pomieścić go w pojemniku.");
   }
   else
   {

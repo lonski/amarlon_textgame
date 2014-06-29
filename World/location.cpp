@@ -37,7 +37,7 @@ Location *Location::create(dbRef ref, LocType loc_type)
   {
     case LocType::Ordinary : loc_ptr = new OrdinaryLocation(ref); break;
     case LocType::Draw     : loc_ptr = new DrawLocation(ref); break;
-    default : throw creation_error("Nieprawidłowy typ lokacji - "+toStr(static_cast<int>(loc_type))); break;
+    default : throw error::creation_error("Nieprawidłowy typ lokacji - "+toStr(static_cast<int>(loc_type))); break;
   }
 
   Location::Manager.add(loc_ptr);

@@ -8,13 +8,12 @@ BodyPart::BodyPart()
   , _type(BodyPartType::Null)
   , _damage(DamageLevel::Null)
   , _armor(Damage())
-  , _equipped(std::shared_ptr<Item>(nullptr))
 {
 }
 
-BodyPart::BodyPart(string str)
+BodyPart::BodyPart(string str, vector<shared_ptr<Item> >& eq_items)
 {
-  fromStr(str);
+  fromStr(str, eq_items);
 }
 
 string BodyPart::toStr()
@@ -26,35 +25,62 @@ string BodyPart::toStr()
   result += fun::toStr( (int)_type ) + ",";
   result += fun::toStr( (int)_damage ) + ",";
 
-  if (_equipped != nullptr)  result += fun::toStr(_equipped->ref());
-  else result += "0";
+  for (int i = (int)ItemType::Null + 1; i != (int)ItemType::End; ++i)
+  {
+    if (_equipped.count( (ItemType)i ) > 0)
+    {
+      result += fun::toStr(_equipped[ (ItemType)i ]->ref()) + ",";
+    }
+    else
+    {
+      result += "0,";
+    }
+  }
 
   return result;
 }
 
-bool BodyPart::fromStr(string str)
+bool BodyPart::fromStr(string str, vector<shared_ptr<Item> >& eq_items)
 {
-  static const size_t data_fields_cnt = 5;
+  static const size_t data_fields_cnt = 4 + (int)ItemType::End - 1;
   bool result = true;
 
-  vector<string> data = fun::explode(str,',');
+  vector<string> data = fun::explode(str,',');  
 
   if (data_fields_cnt == data.size())
   {
-    _region = static_cast<BodyRegion>( fun::fromStr<int>(data[0]) );
-    _side = static_cast<BodySide>( fun::fromStr<int>(data[1]) );
-    _type = static_cast<BodyPartType>( fun::fromStr<int>(data[2]) );
-    _damage = static_cast<DamageLevel>( fun::fromStr<int>(data[3]) );
+    int index = 0;
+    _region = static_cast<BodyRegion>( fun::fromStr<int>(data[index++]) );
+    _side = static_cast<BodySide>( fun::fromStr<int>(data[index++]) );
+    _type = static_cast<BodyPartType>( fun::fromStr<int>(data[index++]) );
+    _damage = static_cast<DamageLevel>( fun::fromStr<int>(data[index++]) );
 
-    dbRef i_ref = fun::fromStr<dbRef>( data[4] );
-    if (0 != i_ref)
+    //load equipped items
+    for (int i = (int)ItemType::Null + 1; i != (int)ItemType::End; ++i)
     {
-      shared_ptr<Item> item( move(Item::create(i_ref)) );
-      equip(item);
-    }
-    else
-    {
-      _equipped = shared_ptr<Item>(nullptr);
+      dbRef i_ref = fun::fromStr<dbRef>( data[index++] );
+      if (i_ref != 0)
+      {
+        //poszukaj itema w zalozonych
+        bool found = false;
+        for (auto eq = eq_items.begin(); eq != eq_items.end(); ++eq)
+        {
+          //zmnaleziono itema -> equip wskaźnika
+          if ( (*eq)->ref() == i_ref && (*eq)->type() == static_cast<ItemType>(i) )
+          {
+            equip( *eq );
+            found = true;
+            break;
+          }
+        }
+        //nie znaleziono itema -> stwórz nowy
+        if (!found)
+        {
+          shared_ptr<Item> item( move(Item::create(i_ref)) );
+          eq_items.push_back(item);
+          equip( item );
+        }
+      }
     }
   }
   else
@@ -67,27 +93,88 @@ bool BodyPart::fromStr(string str)
 
 void BodyPart::calc_armor()
 {
-  Armor *arm = dynamic_cast<Armor*>(_equipped.get());
-  if (arm != nullptr)
+  if (_equipped.count(ItemType::Armor) > 0)
   {
-    _armor = arm->damage_reduction();
-  }
-  else
-  {
-    _armor.clear();
+    Armor *arm = dynamic_cast<Armor*>(_equipped[ItemType::Armor].get());
+    if (arm != nullptr)
+    {
+      _armor = arm->damage_reduction();
+    }
+    else
+    {
+      _armor.clear();
+    }
   }
 }
 
 void BodyPart::equip(std::shared_ptr<Item> item)
 {
-  _equipped = item;
-  calc_armor();
+  ItemType itype = item->type();
+  _equipped[itype] = item;
+
+  if (itype == ItemType::Armor) calc_armor();
 }
 
-std::shared_ptr<Item> BodyPart::unequip()
+std::shared_ptr<Item> BodyPart::unequip(ItemType itype)
 {
-  std::shared_ptr<Item> r = _equipped;
-  _equipped = std::shared_ptr<Item>(nullptr);
-  calc_armor();
+  std::shared_ptr<Item> r(nullptr);
+
+  if (_equipped.count(itype) > 0)
+  {
+    r = _equipped[itype];
+    _equipped.erase(itype);
+    if (itype == ItemType::Armor) calc_armor();
+  }
+
   return r;
+}
+
+std::vector<std::shared_ptr<Item> > BodyPart::unequip()
+{
+  vector<shared_ptr<Item> > result;
+  for (int i = (int)ItemType::Null + 1; i != (int)ItemType::End; ++i)
+  {
+    shared_ptr<Item> item = unequip(static_cast<ItemType>(i));
+    if (item != nullptr) result.push_back(item);
+  }
+
+  return result;
+}
+
+std::weak_ptr<Item> BodyPart::equipped(ItemType itype)
+{
+  weak_ptr<Item> result;
+
+  if (itype != ItemType::Null)
+  {
+    auto iter = _equipped.find(itype);
+    if (iter != _equipped.end())
+    {
+      result = iter->second;
+    }
+  }
+  else
+  {
+    for (auto i = _equipped.begin(); i!=_equipped.end(); ++i)
+    {
+      if (i->second != nullptr)
+      {
+        result = i->second;
+        break;
+      }
+    }
+  }
+
+  return result;
+}
+
+std::vector<std::weak_ptr<Item> > BodyPart::equipped()
+{
+  vector<weak_ptr<Item> > result;
+  for (auto i = _equipped.begin(); i != _equipped.end(); ++i)
+  {
+    result.push_back( i->second );
+  }
+
+  return result;
 }

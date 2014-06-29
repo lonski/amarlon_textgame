@@ -133,7 +133,7 @@ void CreatureModificatorManager::add(std::shared_ptr<CreatureModificator> new_mo
   }
   else
   {
-    throw no_ref("Do managera nie można dodać modyfikatora nei zapisanego w bazie!");
+    throw error::no_ref("Do managera nie można dodać modyfikatora nei zapisanego w bazie!");
   }
 }
 

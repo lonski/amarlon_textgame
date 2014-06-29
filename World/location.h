@@ -145,7 +145,7 @@ public:
     {
       _objects = LocationObjectContainer::create( LocationObjectContainer::byOwner(table_name, ref) );
     }
-    catch(creation_error&)
+    catch(error::creation_error&)
     {
       _objects = std::unique_ptr<LocationObjectContainer>(nullptr);
     }

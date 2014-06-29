@@ -1,0 +1,1 @@
+template set_owner<T>(T* owner) dla CreatureModificator

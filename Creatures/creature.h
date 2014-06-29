@@ -70,7 +70,8 @@ public:
   void set_skill(Skill skill, int val);
   void mod_skill(Skill skill, int mod);
 
-  //body & inventory
+  //body & inventory & mods
+  CreatureModificatorManager& mods() { return _mods; }
   std::vector<std::weak_ptr<BodyPart> > body_parts();
   void take(std::shared_ptr<Item> item, int amount = 1);
   void drop(dbRef item_ref, int amount = 1);

@@ -15,7 +15,9 @@ using namespace fun;
 //==========ITEM============
 const dbTable Item::table_name = "items";
 
-Item::Item(dbRef ref, bool temporary) : DBObject(ref, temporary)
+Item::Item(dbRef ref, bool temporary)
+: DBObject(ref, temporary)
+, _mods(this)
 {
 }
 

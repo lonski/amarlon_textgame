@@ -18,7 +18,11 @@ void CreatureModificator::remove_augument(const CreatureModificator &mod)
 }
 
 CreatureModificator::CreatureModificator(dbTable otable, dbRef oref)
-: DBObject(0), _global_test_level_mod(0), _effect_time(-1), _otable(otable), _oref(oref)
+  : DBObject(0)
+  , _global_test_level_mod(0)
+  , _effect_time(-1)
+  , _otable(otable)
+  , _oref(oref)
 {
 }
 
@@ -109,8 +113,9 @@ void CreatureModificator::save_to_db()
 }
 
 //==================================CreatureModificatorManager====================================
-CreatureModificatorManager::CreatureModificatorManager()
+CreatureModificatorManager::CreatureModificatorManager(DBObject *owner)
 : _complex_mod( shared_ptr<CreatureModificator>(new CreatureModificator) )
+, _owner(owner)
 {
 }
 
@@ -118,6 +123,11 @@ void CreatureModificatorManager::add(std::shared_ptr<CreatureModificator> new_mo
 {
   if (0 != new_mod->ref())
   {
+    if (_owner != nullptr)
+    {
+      new_mod->set_oref(_owner->ref());
+      new_mod->set_otable(_owner->table());
+    }
     _complex_mod->augument(*new_mod);
     _applied_mods.push_back(TimedCreatureModificator(new_mod, new_mod->effect_time()));
   }
@@ -133,6 +143,8 @@ bool CreatureModificatorManager::remove(dbRef mod_to_remove)
   {
     if ( i->modificator->ref() == mod_to_remove )
     {
+      i->modificator->set_oref(0);
+      i->modificator->set_otable("");
       _complex_mod->remove_augument( *(i->modificator) );
       _applied_mods.erase(i);
       return true;

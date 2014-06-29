@@ -37,8 +37,8 @@ void TestItems::LoadData()
   QCOMPARE(itm->durability(), 7);
 
   QCOMPARE(itm->body_parts().size(), static_cast<size_t>(2));
-  QVERIFY(itm->check_body_part(BodyPartType::LeftLeg));
-  QVERIFY(itm->check_body_part(BodyPartType::Chest));
+  QVERIFY(itm->check_body_part(BodyPartType::Glowa));
+  QVERIFY(itm->check_body_part(BodyPartType::Tors));
 
   //test weapon
   unique_ptr<Weapon> wpn( dynamic_cast<Weapon*>(Item::create(1).release()) ) ;
@@ -112,8 +112,8 @@ void TestItems::SaveData()
   itm->set_name("xx");
   itm->set_type(ItemType::Food);
   itm->set_condition(ItemCondition::Damaged);
-  itm->add_body_part(BodyPartType::Head);
-  itm->remove_body_part(BodyPartType::Chest);
+  itm->add_body_part(BodyPartType::Reka);
+  itm->remove_body_part(BodyPartType::Tors);
   itm->set_durability(5);
 
   //
@@ -128,8 +128,8 @@ void TestItems::SaveData()
   QVERIFY(itm->type() == ItemType::Food);
   QVERIFY(itm->condition() == ItemCondition::Damaged);
   QCOMPARE(itm->body_parts().size(), static_cast<size_t>(2));
-  QVERIFY(itm->check_body_part(BodyPartType::Head));
-  QVERIFY(itm->check_body_part(BodyPartType::LeftLeg));
+  QVERIFY(itm->check_body_part(BodyPartType::Glowa));
+  QVERIFY(itm->check_body_part(BodyPartType::Reka));
   QCOMPARE(itm->durability(), 5);
 
   //rollback
@@ -138,8 +138,8 @@ void TestItems::SaveData()
   itm->set_name("TestIns2");
   itm->set_type(ItemType::Armor);
   itm->set_condition(ItemCondition::Good);
-  itm->add_body_part(BodyPartType::Chest);
-  itm->remove_body_part(BodyPartType::Head);
+  itm->add_body_part(BodyPartType::Tors);
+  itm->remove_body_part(BodyPartType::Reka);
   itm->set_durability(7);
 
   delete itm.release();

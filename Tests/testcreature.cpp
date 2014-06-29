@@ -58,31 +58,33 @@ void TestCreature::bodypart_tostr()
 {
   BodyPart bp;
   bp.set_region(BodyRegion::Dol);
-  bp.set_type(BodyPartType::LeftLeg);
+  bp.set_side(BodySide::Left);
+  bp.set_type(BodyPartType::Noga);
   bp.set_damage(DamageLevel::Brak);
 
-  QCOMPARE( bp.toStr().c_str(), "2,5,1,0");
+  QCOMPARE( bp.toStr().c_str(), "2,1,4,1,0");
 }
 
 void TestCreature::bodypart_fromstr()
 {
-  BodyPart bp("2,5,1,0");
+  BodyPart bp("2,1,4,1,0");
 
   QVERIFY(bp.region() == BodyRegion::Dol);
-  QVERIFY(bp.type() == BodyPartType::LeftLeg);
+  QVERIFY(bp.side() == BodySide::Left);
+  QVERIFY(bp.type() == BodyPartType::Noga);
   QVERIFY(bp.damage() == DamageLevel::Brak);
   QVERIFY(bp.equipped().lock() == nullptr);
 }
 
 void TestCreature::bodypart_equip()
 {
-  BodyPart bp("2,5,1,0");
+  BodyPart bp("2,1,4,1,0");
   shared_ptr<Item> item( Item::prototypes().clone(ItemPrototype::Noz).release() );
 
   bp.equip(item);
   QVERIFY(bp.equipped().lock() != nullptr);
 
-  string str = "2,5,1,"+fun::toStr(item->ref());
+  string str = "2,1,4,1,"+fun::toStr(item->ref());
   QCOMPARE(bp.toStr().c_str(), str.c_str());
 
   item->purge();
@@ -91,13 +93,13 @@ void TestCreature::bodypart_equip()
 void TestCreature::bodypart_unequip()
 {
   //equip
-  BodyPart bp("2,5,1,0");
+  BodyPart bp("2,1,4,1,0");
   shared_ptr<Item> item( Item::prototypes().clone(ItemPrototype::Noz).release() );
 
   bp.equip(item);
   QVERIFY(bp.equipped().lock() != nullptr);
 
-  string str = "2,5,1,"+fun::toStr(item->ref());
+  string str = "2,1,4,1,"+fun::toStr(item->ref());
   QCOMPARE(bp.toStr().c_str(), str.c_str());
   //~~~
 
@@ -110,14 +112,15 @@ void TestCreature::bodypart_unequip()
 
 void TestCreature::bodypart_creation_fromstr()
 {
-  BodyPart bp("2,5,1,121");
+  BodyPart bp("2,1,4,1,121");
 
   QVERIFY(bp.region() == BodyRegion::Dol);
-  QVERIFY(bp.type() == BodyPartType::LeftLeg);
+  QVERIFY(bp.side() == BodySide::Left);
+  QVERIFY(bp.type() == BodyPartType::Noga);
   QVERIFY(bp.damage() == DamageLevel::Brak);
   QVERIFY(bp.equipped().lock() != nullptr);
   QCOMPARE(bp.equipped().lock()->ref(), (dbRef)121);
-  QCOMPARE(bp.toStr().c_str(), "2,5,1,121");
+  QCOMPARE(bp.toStr().c_str(), "2,1,4,1,121");
 }
 
 void TestCreature::modificator_creation()
@@ -401,15 +404,15 @@ void TestCreature::creature_load_save_body()
 
   //create some body parts
   BodyPart *bp1 = new BodyPart;
-  bp1->set_type(BodyPartType::Head);
+  bp1->set_type(BodyPartType::Glowa);
   bp1->set_region(BodyRegion::Gora);
 
   BodyPart *bp2 = new BodyPart;
-  bp2->set_type(BodyPartType::LeftHand);
+  bp2->set_type(BodyPartType::Reka);
   bp2->set_region(BodyRegion::Gora);
 
   BodyPart *bp3 = new BodyPart;
-  bp3->set_type(BodyPartType::LeftLeg);
+  bp3->set_type(BodyPartType::Noga);
   bp3->set_region(BodyRegion::Dol);
 
   //dodaj party do kriczera
@@ -453,6 +456,32 @@ void TestCreature::creature_load_inventory()
 
 void TestCreature::creature_load_modificators()
 {
-//  QVERIFY2(false, "###################TODO###################");
+//  //create some creature
+//  //a jebne szarda bo ten się nei jebie jak junik z podpowiedziami, a robienie plain pojntera to tez myli lol
+//  shared_ptr<Creature> crt (Creature::prototypes().clone(CreaturePrototype::Goblin).release());
+//  dbRef ref = crt->ref();
+
+//  //dobra to teraz wciepac trzeba kilka modsów
+//  //1. mod z założonego itema!
+//  shared_ptr<CreatureModificator> i_mod1(new CreatureModificator);
+//  i_mod1->creature_stats().set_attribute(Attribute::STR, 1);
+//  shared_ptr<CreatureModificator> i_mod2(new CreatureModificator);
+//  i_mod2->creature_stats().set_attribute(Attribute::STR, 2);
+
+//  shared_ptr<Item> item1( Item::prototypes().clone(ItemPrototype::Noz).release() );
+//  item1->mods().add(i_mod1);
+//  item1->mods().add(i_mod2); //nożyk STR+3 oł je
+
+//  crt->equip(item1);
+
+//  //2. Wciapanie modów niezależnych
+//  shared_ptr<CreatureModificator> n_mod1(new CreatureModificator);
+//  shared_ptr<CreatureModificator> n_mod2(new CreatureModificator);
+//  n_mod1->creature_stats().set_skill(Skill::Walka_Miecze, 10);
+//  n_mod2->creature_stats().set_skill(Skill::Walka_Topory, 6);
+
+//  crt->mods().add(n_mod1);
+//  crt->mods().add(n_mod2);
+
 }
 

@@ -66,8 +66,9 @@ private:
 
   std::vector<TimedCreatureModificator> _applied_mods;
   std::shared_ptr<CreatureModificator> _complex_mod;
+  DBObject *_owner;
 public:
-  CreatureModificatorManager();
+  CreatureModificatorManager(DBObject *owner = nullptr);
   void add(std::shared_ptr<CreatureModificator> new_mod);
   bool remove(dbRef mod_to_remove);
   CreatureModificator& get_complex_mod() const { return *_complex_mod; }

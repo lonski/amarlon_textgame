@@ -32,7 +32,7 @@ void TestLocation::LocCreation()
     QVERIFY(loc->name() == "");
     QVERIFY(loc->connection(Direction::South) == nullptr);
   }
-  catch(creation_error &e)
+  catch(error::creation_error &e)
   {
     qDebug() << "Error: " << e.what();
   }

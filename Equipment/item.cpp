@@ -41,9 +41,9 @@ std::unique_ptr<Item> Item::create(dbRef ref, bool prototype, bool temporary)
       case ItemType::Tool: new_item = new Tool(ref, temporary); break;
       case ItemType::Shield: new_item = new Shield(ref, temporary); break;
       case ItemType::LocationObject: new_item = new LocationObject(ref, temporary); break;
-      default : throw creation_error("Nieprawidłowy typ itemu."); break;
+      default : throw error::creation_error("Nieprawidłowy typ itemu."); break;
     }
-  }else throw creation_error("Brak prawidłowego rekordu w bazie.");
+  }else throw error::creation_error("Brak prawidłowego rekordu w bazie.");
 
   new_item->load();
 
@@ -88,7 +88,7 @@ void Item::load()
       {
         _inventory = Container<>::create(Container<>::byOwner( table(),ref() ));
       }
-      catch(creation_error)
+      catch(error::creation_error)
       {
         _inventory = unique_ptr<Container<> >(nullptr);
       }

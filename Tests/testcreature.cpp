@@ -62,30 +62,33 @@ void TestCreature::bodypart_tostr()
   bp.set_type(BodyPartType::Noga);
   bp.set_damage(DamageLevel::Brak);
 
-  QCOMPARE( bp.toStr().c_str(), "2,1,4,1,0");
+  QCOMPARE( bp.toStr().c_str(), "2,1,4,1,0,0,0,0,0,0,0,0,");
 }
 
 void TestCreature::bodypart_fromstr()
 {
-  BodyPart bp("2,1,4,1,0");
+  Item::STLContainer eq;
+  BodyPart bp("2,1,4,1,0,0,0,0,0,0,0,0,", eq);
 
   QVERIFY(bp.region() == BodyRegion::Dol);
   QVERIFY(bp.side() == BodySide::Left);
   QVERIFY(bp.type() == BodyPartType::Noga);
   QVERIFY(bp.damage() == DamageLevel::Brak);
-  QVERIFY(bp.equipped().lock() == nullptr);
+  QVERIFY(eq.empty());
 }
 
 void TestCreature::bodypart_equip()
 {
-  BodyPart bp("2,1,4,1,0");
+  Item::STLContainer eq;
+  BodyPart bp("2,1,4,1,0,0,0,0,0,0,0,0,", eq);
   shared_ptr<Item> item( Item::prototypes().clone(ItemPrototype::Noz).release() );
 
   bp.equip(item);
-  QVERIFY(bp.equipped().lock() != nullptr);
+  QVERIFY(bp.equipped().size() == 1);
 
-  string str = "2,1,4,1,"+fun::toStr(item->ref());
+  string str = "2,1,4,1,0,0,"+fun::toStr(item->ref())+",0,0,0,0,0,";
   QCOMPARE(bp.toStr().c_str(), str.c_str());
+  //qDebug() << bp.toStr().c_str();
 
   item->purge();
 }
@@ -93,18 +96,16 @@ void TestCreature::bodypart_equip()
 void TestCreature::bodypart_unequip()
 {
   //equip
-  BodyPart bp("2,1,4,1,0");
+  Item::STLContainer eq;
+  BodyPart bp("2,1,4,1,0,0,0,0,0,0,0,0,", eq);
   shared_ptr<Item> item( Item::prototypes().clone(ItemPrototype::Noz).release() );
 
   bp.equip(item);
-  QVERIFY(bp.equipped().lock() != nullptr);
-
-  string str = "2,1,4,1,"+fun::toStr(item->ref());
-  QCOMPARE(bp.toStr().c_str(), str.c_str());
+  QVERIFY(!bp.equipped().empty());
   //~~~
 
-  shared_ptr<Item> i2 = bp.unequip();
-  QVERIFY(bp.equipped().lock() == nullptr);
+  shared_ptr<Item> i2 = bp.unequip().at(0);
+  QVERIFY(bp.equipped().empty());
   QCOMPARE(i2.get(), item.get());
 
   item->purge();
@@ -112,15 +113,16 @@ void TestCreature::bodypart_unequip()
 
 void TestCreature::bodypart_creation_fromstr()
 {
-  BodyPart bp("2,1,4,1,121");
+  Item::STLContainer eq;
+  BodyPart bp("2,1,4,1,121,0,0,0,0,0,0,0,", eq);
 
   QVERIFY(bp.region() == BodyRegion::Dol);
   QVERIFY(bp.side() == BodySide::Left);
   QVERIFY(bp.type() == BodyPartType::Noga);
   QVERIFY(bp.damage() == DamageLevel::Brak);
-  QVERIFY(bp.equipped().lock() != nullptr);
-  QCOMPARE(bp.equipped().lock()->ref(), (dbRef)121);
-  QCOMPARE(bp.toStr().c_str(), "2,1,4,1,121");
+  QVERIFY(!bp.equipped().empty());
+  QCOMPARE(bp.equipped().at(0).lock()->ref(), (dbRef)121);
+  QCOMPARE(bp.toStr().c_str(), "2,1,4,1,121,0,0,0,0,0,0,0,");
 }
 
 void TestCreature::modificator_creation()
@@ -416,11 +418,9 @@ void TestCreature::creature_load_save_body()
   bp3->set_region(BodyRegion::Dol);
 
   //dodaj party do kriczera
-  crtp->_body.push_back(shared_ptr<BodyPart>(bp1));
-  crtp->_body.push_back(shared_ptr<BodyPart>(bp2));
-  crtp->_body.push_back(shared_ptr<BodyPart>(bp3));
+  crtp->body().load(bp1->toStr()+";"+bp2->toStr()+";"+bp3->toStr()+";");
 
-  QCOMPARE(crtp->body_parts().size(), (size_t)3);
+  QCOMPARE(crtp->body().parts().size(), (size_t)3);
 
   //reset
   delete crt.release();
@@ -428,7 +428,7 @@ void TestCreature::creature_load_save_body()
   crtp = crt.get();
 
   //validate load
-  QCOMPARE(crtp->body_parts().size(), (size_t)3);
+  QCOMPARE(crtp->body().parts().size(), (size_t)3);
   crtp->purge();
 }
 
@@ -451,37 +451,63 @@ void TestCreature::creature_load_inventory()
 
   QCOMPARE(crtp->_inventory->get_all().size(), (size_t)1);
 
+  auto items = crtp->_inventory->get_all();
+  for (auto i = items.begin(); i != items.end(); ++i)
+    i->item->purge();
+
   crtp->purge();
 }
 
 void TestCreature::creature_load_modificators()
 {
-//  //create some creature
-//  //a jebne szarda bo ten się nei jebie jak junik z podpowiedziami, a robienie plain pojntera to tez myli lol
-//  shared_ptr<Creature> crt (Creature::prototypes().clone(CreaturePrototype::Goblin).release());
-//  dbRef ref = crt->ref();
+  //create some creature
+  //a jebne szarda bo ten się nei jebie jak junik z podpowiedziami, a robienie plain pojntera to tez myli lol
+  shared_ptr<Creature> crt (Creature::prototypes().clone(CreaturePrototype::Goblin).release());
+  dbRef ref = crt->ref();
 
-//  //dobra to teraz wciepac trzeba kilka modsów
-//  //1. mod z założonego itema!
-//  shared_ptr<CreatureModificator> i_mod1(new CreatureModificator);
-//  i_mod1->creature_stats().set_attribute(Attribute::STR, 1);
-//  shared_ptr<CreatureModificator> i_mod2(new CreatureModificator);
-//  i_mod2->creature_stats().set_attribute(Attribute::STR, 2);
+  //bazowe staty bez mod
+  int str = crt->get_attribute(Attribute::STR);
+  int walka_miecze = crt->get_skill(Skill::Walka_Miecze);
+  int walka_topory = crt->get_skill(Skill::Walka_Topory);
+  qDebug() << str << " " << walka_miecze << " " << walka_topory;
 
-//  shared_ptr<Item> item1( Item::prototypes().clone(ItemPrototype::Noz).release() );
-//  item1->mods().add(i_mod1);
-//  item1->mods().add(i_mod2); //nożyk STR+3 oł je
+  //dobra to teraz wciepac trzeba kilka modsów
+  //1. mod z założonego itema!
+  shared_ptr<CreatureModificator> i_mod1(new CreatureModificator);
+  i_mod1->creature_stats().set_attribute(Attribute::STR, 1);
+  i_mod1->save_to_db();
+  shared_ptr<CreatureModificator> i_mod2(new CreatureModificator);
+  i_mod2->creature_stats().set_attribute(Attribute::STR, 2);
+  i_mod2->save_to_db();
 
-//  crt->equip(item1);
+  shared_ptr<Item> item1( Item::prototypes().clone(ItemPrototype::Noz).release() );
+  item1->mods().add(i_mod1);
+  item1->mods().add(i_mod2); //nożyk STR+3 oł je
 
-//  //2. Wciapanie modów niezależnych
-//  shared_ptr<CreatureModificator> n_mod1(new CreatureModificator);
-//  shared_ptr<CreatureModificator> n_mod2(new CreatureModificator);
-//  n_mod1->creature_stats().set_skill(Skill::Walka_Miecze, 10);
-//  n_mod2->creature_stats().set_skill(Skill::Walka_Topory, 6);
+  QCOMPARE(item1->mods().get_complex_mod().creature_stats().get_attribute(Attribute::STR), 3);
 
-//  crt->mods().add(n_mod1);
-//  crt->mods().add(n_mod2);
+  crt->equip(item1);
 
+  //2. Wciapanie modów niezależnych
+  shared_ptr<CreatureModificator> n_mod1(new CreatureModificator);
+  shared_ptr<CreatureModificator> n_mod2(new CreatureModificator);
+  n_mod1->creature_stats().set_skill(Skill::Walka_Miecze, 10);
+  n_mod1->save_to_db();
+  n_mod2->creature_stats().set_skill(Skill::Walka_Topory, 6);
+  n_mod2->save_to_db();
+
+  crt->mods().add(n_mod1);
+  crt->mods().add(n_mod2);
+
+  QCOMPARE( crt->get_skill(Skill::Walka_Miecze), walka_miecze+10 );
+  QCOMPARE( crt->get_skill(Skill::Walka_Topory), walka_topory+6 );
+  QCOMPARE( crt->get_attribute(Attribute::STR), str+3 );
+
+  i_mod1->purge();
+  i_mod2->purge();
+  n_mod1->purge();
+  n_mod2->purge();
+  item1->purge();
+  crt->purge();
 }
 

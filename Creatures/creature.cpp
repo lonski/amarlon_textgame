@@ -50,9 +50,9 @@ std::unique_ptr<Creature> Creature::create(dbRef ref, bool prototype, bool temp)
       case CreatureType::MOB: new_crt = new MOB(ref, temp); break;
       case CreatureType::NPC: new_crt = new NPC(ref, temp); break;
       case CreatureType::Player: /*TODO*/ break;
-      default : throw creation_error("Nieprawidłowy typ itemu."); break;
+      default : throw error::creation_error("Nieprawidłowy typ itemu."); break;
     }
-  }else throw creation_error("Brak prawidłowego rekordu w bazie.");
+  }else throw error::creation_error("Brak prawidłowego rekordu w bazie.");
 
   new_crt->load();
 
@@ -98,9 +98,7 @@ void Creature::load()
         _stats.Str2Skills( CheckField<string>(crt_data["SKILLS"]) );
 
         //body
-        vector<string> body = fun::explode( CheckField<string>(crt_data["BODY"]), ';' );
-        for (auto b = body.begin(); b != body.end(); ++b)
-          _body.push_back( shared_ptr<BodyPart>(new BodyPart(*b)) );
+        _body.load(CheckField<string>(crt_data["BODY"]));
       }
 
       //MODS
@@ -115,13 +113,10 @@ void Creature::load()
         _mods.add( shared_ptr<CreatureModificator>(new CreatureModificator(*m)) );
 
         //dodaj z itemów założonych na body_parts
-      for (auto im = _body.begin(); im != _body.end(); ++im)
+      for (auto im = _body.equipped_items().begin(); im != _body.equipped_items().end(); ++im)
       {
-        BodyPart *bp = im->get();
-        Item *eq = bp->equipped().lock().get();
-
-        if (nullptr != eq && !eq->mods().get_all().empty())
-          _mods.add( shared_ptr<CreatureModificator>(&eq->mods().get_complex_mod()) );
+        if (nullptr != *im && !(*im)->mods().get_all().empty())
+          _mods.add( shared_ptr<CreatureModificator>( &(*im)->mods().get_complex_mod()) );
       }
 
       //INVENTORY
@@ -129,7 +124,7 @@ void Creature::load()
       {
         _inventory = Item::Container<>::create(Item::Container<>::byOwner( table(),ref() ));
       }
-      catch(creation_error)
+      catch(error::creation_error)
       {
         _inventory = Item::Container<>::prototypes().clone(ItemContainerPrototype::Inventory);
         _inventory->set_otable(table());
@@ -150,12 +145,7 @@ void Creature::load()
 
 void Creature::save_to_db()
 {
-  string body_save;
-  for (auto b = _body.begin(); b!=_body.end(); ++b)
-  {
-    BodyPart *bp = (*b).get();
-    body_save += bp->toStr() + ";";
-  }
+  string body_save = _body.toStr();
   save("UPDATE "+table()+" SET body='"+body_save+"' WHERE ref="+fun::toStr(ref()));
 
   DBObject::save_to_db();
@@ -209,15 +199,6 @@ void Creature::mod_skill(Skill skill, int mod)
   save("SKILLS", _stats.Skills2Str());
 }
 
-std::vector<std::weak_ptr<BodyPart> > Creature::body_parts()
-{
-  vector<weak_ptr<BodyPart> > parts;
-  for (auto b = _body.begin(); b != _body.end(); ++b)
-    parts.push_back(weak_ptr<BodyPart>(*b));
-
-  return parts;
-}
-
 void Creature::take(std::shared_ptr<Item> item, int amount)
 {
   _inventory->insert(item, amount);
@@ -228,9 +209,67 @@ void Creature::drop(dbRef item_ref, int amount)
   _inventory->erase(item_ref, amount);
 }
 
-void Creature::equip(std::shared_ptr<Item> item, int amount)
+void Creature::equip(std::shared_ptr<Item> item)
 {
-  //BodyPartType bp = item->
+  vector<BodyPartType> req_parts = item->body_parts();
+  vector<shared_ptr<BodyPart> > temp_eq_parts;
+  //sprawdz czy mamy dostepna ilosc partsów
+  for (auto r_part = req_parts.begin(); r_part != req_parts.end(); ++r_part)
+  {
+    for (auto part = _body.parts().begin(); part != _body.parts().end(); ++part)
+    {
+      shared_ptr<BodyPart> p = *part;
+      //jezeli jest aktualnie szukany part i jest wolny
+      if ( p->type() == *r_part && p->equipped(item->type()).lock() == nullptr )
+      {
+        p->equip(item);
+        temp_eq_parts.push_back(p);
+        req_parts.erase(r_part);
+        --r_part;
+      }
+    }
+  }
+  //zabrakło jakeigos bodyparta -> rollback i exception
+  if (!req_parts.empty())
+  {
+    for (auto r = temp_eq_parts.begin(); r != temp_eq_parts.end(); ++r)
+      (*r)->unequip(item->type());
+
+    throw error::equip_no_bodyparts("Brak dostępnych części ciała aby założyć przedmiot.");
+  }
+
+//  if (!item->mods().get_all().empty())
+//    _mods.add( shared_ptr<CreatureModificator>(&item->mods().get_complex_mod()) );
+}
+
+shared_ptr<Item> Creature::unequip(dbRef item_ref)
+{
+  ItemType itype = ItemType::Null;
+  shared_ptr<Item> result;
+
+  //znajdz typ itema
+  for (auto eq = _body.equipped_items().begin(); eq != _body.equipped_items().end(); ++eq)
+  {
+    if ( (*eq)->ref() == item_ref )
+    {
+      itype = (*eq)->type();
+      break;
+    }
+  }
+
+  //sciagnij ze wszystkich partów
+  for (auto part = _body.parts().begin(); part != _body.parts().end(); ++part)
+  {
+    shared_ptr<BodyPart> p = *part;
+    if ( p->equipped(itype).lock()->ref() == item_ref )
+    {
+      result = p->unequip(itype);
+    }
+  }
+
+  //if ( result != nullptr ) _mods.remove(result->mods().get_complex_mod().ref());
+
+  return result;
 }
 
 void Creature::calc_total_damage()
@@ -238,4 +277,26 @@ void Creature::calc_total_damage()
   //TODO
   //algorytm z systemu rpg
   //na podstawie damage_level z body_parts
+}
+
+//==============BODY
+void Creature::Body::load(string body_str)
+{
+  _equipped_items.clear();
+  _parts.clear();
+
+  vector<string> body = fun::explode( body_str, ';' );
+  for (auto b = body.begin(); b != body.end(); ++b)
+    _parts.push_back( shared_ptr<BodyPart>(new BodyPart(*b, _equipped_items) ) );
+}
+
+string Creature::Body::toStr()
+{
+  string str;
+  for (auto b = _parts.begin(); b!=_parts.end(); ++b)
+  {
+    BodyPart *bp = (*b).get();
+    str += bp->toStr() + ";";
+  }
+  return str;
 }

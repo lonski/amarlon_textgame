@@ -13,8 +13,23 @@
 class Creature : public DBObject, public Prototypable<Creature, CreaturePrototype>
 {
 public:
-  typedef std::vector<std::shared_ptr<BodyPart> > Body;
+
 private:
+
+  class Body
+  {
+  public:
+    typedef std::vector<std::shared_ptr<BodyPart> > BodyParts;
+  private:
+    BodyParts _parts;
+    Item::STLContainer _equipped_items;
+  public:
+    BodyParts& parts() { return _parts; }
+    Item::STLContainer& equipped_items() { return _equipped_items; }
+    void load(std::string body_str);
+    std::string toStr();
+  };
+
   friend class TestCreature;
   //data
   std::string _name;
@@ -24,6 +39,7 @@ private:
   CreatureStats _stats;
   Body _body;
   Item::Inventory _inventory;
+
   CreatureModificatorManager _mods;
 
   DamageLevel _total_damage;
@@ -72,11 +88,11 @@ public:
 
   //body & inventory & mods
   CreatureModificatorManager& mods() { return _mods; }
-  std::vector<std::weak_ptr<BodyPart> > body_parts();
+  Body& body() { return _body; }
   void take(std::shared_ptr<Item> item, int amount = 1);
   void drop(dbRef item_ref, int amount = 1);
-  void equip(std::shared_ptr<Item> item, int amount = 1);
-  void unequip(dbRef item_ref, int amount = 1);
+  void equip(std::shared_ptr<Item> item);
+  std::shared_ptr<Item> unequip(dbRef item_ref);
 
 };
 

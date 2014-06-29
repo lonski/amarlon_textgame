@@ -11,6 +11,7 @@ const dbTable Creature::table_name = "creatures";
 Creature::Creature(dbRef ref, bool temp)
   : DBObject(ref, temp)
   , _sex(Sex::Null)
+  , _mods(this)
   , _total_damage(DamageLevel::Brak)
 {  
 }
@@ -225,6 +226,11 @@ void Creature::take(std::shared_ptr<Item> item, int amount)
 void Creature::drop(dbRef item_ref, int amount)
 {
   _inventory->erase(item_ref, amount);
+}
+
+void Creature::equip(std::shared_ptr<Item> item, int amount)
+{
+  //BodyPartType bp = item->
 }
 
 void Creature::calc_total_damage()

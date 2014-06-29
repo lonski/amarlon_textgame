@@ -209,6 +209,17 @@ enum class DamageLevel
 //~~~
 
 //===
+enum class BodySide
+{
+  Null = 0,
+  Left = 1,
+  Center = 2,
+  Right = 3,
+  End = 4
+};
+//~~~
+
+//===
 enum class BodyRegion
 {
   Null = 0,
@@ -223,16 +234,11 @@ enum class BodyRegion
 enum class BodyPartType
 {
   Null = 0,
-  Head = 1,
-  Chest = 2,
-  LeftHand = 3,
-  RightHand = 4,
-  LeftLeg = 5,
-  RightLeg = 6,
-  RightFinger = 7,
-  LeftFinger = 8,
-  Neck = 9,
-  End = 8
+  Glowa = 1,
+  Tors = 2,
+  Reka = 3,
+  Noga = 4,
+  End = 5
 };
 //~~~
 

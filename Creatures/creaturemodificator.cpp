@@ -24,6 +24,7 @@ CreatureModificator::CreatureModificator(dbTable otable, dbRef oref)
   , _otable(otable)
   , _oref(oref)
 {
+
 }
 
 CreatureModificator::CreatureModificator(dbRef ref, bool temporary)
@@ -95,7 +96,7 @@ void CreatureModificator::save_to_db()
       qDebug() << _Database.get_last_query().c_str();
     }
   }
-  //no else on purpose
+
   if ( 0 != ref() )
   {
     save("UPDATE " + table_name + " SET "
@@ -117,13 +118,28 @@ CreatureModificatorManager::CreatureModificatorManager(DBObject *owner)
 : _complex_mod( shared_ptr<CreatureModificator>(new CreatureModificator) )
 , _owner(owner)
 {
+  if (owner != nullptr)
+  {
+    _complex_mod->set_oref(owner->ref());
+    _complex_mod->set_otable(owner->table());    
+  }
+}
+
+CreatureModificatorManager::~CreatureModificatorManager()
+{
+  _complex_mod->purge();
 }
 
 void CreatureModificatorManager::add(std::shared_ptr<CreatureModificator> new_mod)
 {
+  if (0 == new_mod->ref())
+  {
+    new_mod->save_to_db();
+  }
+
   if (0 != new_mod->ref())
   {
-    if (_owner != nullptr)
+    if (_owner != nullptr && new_mod->oref() == 0 )
     {
       new_mod->set_oref(_owner->ref());
       new_mod->set_otable(_owner->table());

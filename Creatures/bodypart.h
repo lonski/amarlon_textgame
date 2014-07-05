@@ -22,6 +22,7 @@ private:
 public:
   //creation
   BodyPart();
+  BodyPart(BodyPartType type, BodyRegion region, BodySide side);
   BodyPart(std::string str, std::vector<std::shared_ptr<Item> > &eq_items);
   ~BodyPart() {}
 
@@ -31,6 +32,7 @@ public:
   void equip(std::shared_ptr<Item> item);
   std::shared_ptr<Item> unequip(ItemType itype);
   std::vector<std::shared_ptr<Item> > unequip();
+  bool accept(ItemType itype);
 
   //access data
   BodyRegion region() const { return _region; }

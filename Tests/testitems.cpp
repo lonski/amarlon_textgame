@@ -242,6 +242,27 @@ void TestItems::SaveData()
 
 void TestItems::TemporaryItem()
 {
+  //rollback error in save item
+  unique_ptr<Item> itmx = Item::create(2);
+
+  itmx->set_weight(1.93);
+  itmx->set_descript("lolo");
+  itmx->set_name("TestIns2");
+  itmx->set_type(ItemType::Armor);
+  itmx->set_condition(ItemCondition::Good);
+
+  vector<BodyPartType> bps = itmx->body_parts();
+  for_each(bps.begin(), bps.end(), [&](BodyPartType b)
+  {
+    itmx->remove_body_part(b);
+  });
+
+  itmx->add_body_part(BodyPartType::Tors);
+  itmx->add_body_part(BodyPartType::Glowa);
+  itmx->set_durability(7);
+  delete itmx.release();
+  //~~~
+
   //create instance item
   unique_ptr<Item> itm = Item::create(2, false, true);
 
@@ -473,10 +494,10 @@ void TestItems::ItemModManager()
   //validate size
   QCOMPARE(itm->mods().get_all().size(), (size_t)3);
   //validate complex mod
-  QCOMPARE(itm->mods().get_complex_mod().creature_stats().get_attribute(Attribute::CHR), 6);
-  QCOMPARE(itm->mods().get_complex_mod().creature_stats().get_attribute(Attribute::STR), 1);
-  QCOMPARE(itm->mods().get_complex_mod().creature_stats().get_attribute(Attribute::DEX), 1);
-  QCOMPARE(itm->mods().get_complex_mod().creature_stats().get_attribute(Attribute::IMP), 1);
+  QCOMPARE(itm->mods().get_complex_mod()->creature_stats().get_attribute(Attribute::CHR), 6);
+  QCOMPARE(itm->mods().get_complex_mod()->creature_stats().get_attribute(Attribute::STR), 1);
+  QCOMPARE(itm->mods().get_complex_mod()->creature_stats().get_attribute(Attribute::DEX), 1);
+  QCOMPARE(itm->mods().get_complex_mod()->creature_stats().get_attribute(Attribute::IMP), 1);
 
   //REMOVE mod2
   itm->mods().remove(mod2->ref());
@@ -484,13 +505,10 @@ void TestItems::ItemModManager()
   //validate size
   QCOMPARE(itm->mods().get_all().size(), (size_t)2);
   //validate complex mod
-  QCOMPARE(itm->mods().get_complex_mod().creature_stats().get_attribute(Attribute::CHR), 4);
-  QCOMPARE(itm->mods().get_complex_mod().creature_stats().get_attribute(Attribute::STR), 1);
-  QCOMPARE(itm->mods().get_complex_mod().creature_stats().get_attribute(Attribute::DEX), 0);
-  QCOMPARE(itm->mods().get_complex_mod().creature_stats().get_attribute(Attribute::IMP), 1);
+  QCOMPARE(itm->mods().get_complex_mod()->creature_stats().get_attribute(Attribute::CHR), 4);
+  QCOMPARE(itm->mods().get_complex_mod()->creature_stats().get_attribute(Attribute::STR), 1);
+  QCOMPARE(itm->mods().get_complex_mod()->creature_stats().get_attribute(Attribute::DEX), 0);
+  QCOMPARE(itm->mods().get_complex_mod()->creature_stats().get_attribute(Attribute::IMP), 1);
 
-  mod1->purge();
-  mod2->purge();
-  mod3->purge();
   itm->purge();
 }

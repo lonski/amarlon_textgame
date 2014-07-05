@@ -53,7 +53,7 @@ public:
     //general & items operations
     virtual void load();
     void insert(std::shared_ptr<T>& item, int amount = 1);
-    void erase(dbRef item_ref, int amount = 1);
+    AmountedItem<T> erase(dbRef item_ref, int amount = 1);
     AmountedItem<T> find(dbRef item_ref);
     std::vector<AmountedItem<T> > get_all();
 
@@ -337,12 +337,15 @@ void Item::Container<T>::insert(std::shared_ptr<T> &item, int amount)
 }
 
 template<typename T>
-void Item::Container<T>::erase(dbRef item_ref, int amount)
+AmountedItem<T> Item::Container<T>::erase(dbRef item_ref, int amount)
 {
 
   auto iter = _items.find(item_ref);
+  AmountedItem<T> ret;
   if (iter != _items.end())
   {
+    ret = iter->second;
+
     bool stackable = iter->second.item->isStackable();
     int& cont_amount = iter->second.amount;
     int amount_to_save = 0;
@@ -358,6 +361,7 @@ void Item::Container<T>::erase(dbRef item_ref, int amount)
     {
       cont_amount -= amount;
       amount_to_save = cont_amount;
+      ret.amount = amount;
     }
 
     save("EXECUTE PROCEDURE UPDINS_ITEM_CONTAINER_POS("+
@@ -366,6 +370,8 @@ void Item::Container<T>::erase(dbRef item_ref, int amount)
           fun::toStr(amount_to_save) +")"   //amount
         );
   }
+
+  return ret;
 }
 
 template<typename T>

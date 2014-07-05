@@ -1,1 +1,2 @@
-template set_owner<T>(T* owner) dla CreatureModificator
+BUG:
+zapisywanie bodyparts z itemów do bazy -> brak możliwości wymogu kilku rodzai tego samego bodyparta

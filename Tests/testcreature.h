@@ -5,10 +5,14 @@
 #include "../Include/db.h"
 #include "../Include/func.h"
 #include "../Creatures/creature.h"
+#include "../Creatures/mob.h"
 #include "../Creatures/creaturestats.h"
 #include "../Creatures/bodypart.h"
 #include "../Creatures/creaturemodificator.h"
 #include "../Include/gameclock.h"
+#include "../Equipment/shield.h"
+#include "../Equipment/weapon.h"
+#include "../Creatures/creaturemonitor.h"
 
 class TestCreature : public QObject
 {
@@ -43,6 +47,7 @@ private slots:
   void creature_load_save_body();
   void creature_load_inventory();
   void creature_load_modificators();
+  void creature_eq();
 
 };
 

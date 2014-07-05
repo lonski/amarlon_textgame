@@ -11,6 +11,15 @@ BodyPart::BodyPart()
 {
 }
 
+BodyPart::BodyPart(BodyPartType type, BodyRegion region, BodySide side)
+  : _region(region)
+  , _side(side)
+  , _type(type)
+  , _damage(DamageLevel::Null)
+  , _armor(Damage())
+{
+}
+
 BodyPart::BodyPart(string str, vector<shared_ptr<Item> >& eq_items)
 {
   fromStr(str, eq_items);
@@ -29,7 +38,14 @@ string BodyPart::toStr()
   {
     if (_equipped.count( (ItemType)i ) > 0)
     {
-      result += fun::toStr(_equipped[ (ItemType)i ]->ref()) + ",";
+      if (_equipped[ (ItemType)i ] != nullptr)
+      {
+        result += fun::toStr(_equipped[ (ItemType)i ]->ref()) + ",";
+      }
+      else
+      {
+        result += "0,";
+      }
     }
     else
     {
@@ -109,7 +125,7 @@ void BodyPart::calc_armor()
 
 void BodyPart::equip(std::shared_ptr<Item> item)
 {
-  ItemType itype = item->type();
+  ItemType itype = item->type();  
   _equipped[itype] = item;
 
   if (itype == ItemType::Armor) calc_armor();
@@ -136,6 +152,41 @@ std::vector<std::shared_ptr<Item> > BodyPart::unequip()
   {
     shared_ptr<Item> item = unequip(static_cast<ItemType>(i));
     if (item != nullptr) result.push_back(item);
+  }
+
+  return result;
+}
+
+bool BodyPart::accept(ItemType itype)
+{
+  /* na boyparcie mogą byc założone różne itemy, ta funkcja określa
+     co może byc założone naraz na jednej cześci ciała.
+
+     Na bodyparcie jednocześnie może być założony tylko jeden z itemów: Weapon, Shield, Tool
+     oraz dodatkowo może byc założony Armor i Jewelry
+  */
+
+  bool result = false;
+
+  if ( _equipped[itype] == nullptr )
+  {
+    if ( itype == ItemType::Weapon   ||
+         itype == ItemType::Shield   ||
+         itype == ItemType::Tool     ||
+         itype == ItemType::Ordinary ||
+         itype == ItemType::Food
+       )
+    {
+      result = _equipped[ItemType::Weapon] == nullptr &&
+               _equipped[ItemType::Shield] == nullptr &&
+               _equipped[ItemType::Tool] == nullptr &&
+               _equipped[ItemType::Ordinary] == nullptr &&
+               _equipped[ItemType::Food] == nullptr;
+    }
+    else if (itype == ItemType::Armor || itype == ItemType::Jewelry)
+    {
+      result = true;
+    }
   }
 
   return result;

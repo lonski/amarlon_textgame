@@ -12,7 +12,7 @@ namespace refDict
 {
   enum class Item
   {
-    Miedziak = 121
+    Miedziak = 121    
   };
 }
 //~~~
@@ -32,8 +32,8 @@ enum class CreatureType
 enum class CreaturePrototype
 {
   Null = 0,
-  Szczur = 1,
-  Goblin = 2,
+  BlankMOB = 1,
+  Ogr = 2,
   End = 3
 };
 //~~~
@@ -254,12 +254,24 @@ enum class ItemContainerPrototype
 //===
 enum class ItemPrototype
 {
-  Null = 0,
+  Null = 0,  
   Nozyk = 1,
   Noz = 2,
   Sztylet_typowy = 3,
+  BlankOrdinary = 4,
+  BlankWeapon = 5,
+  BlankArmor = 6,
+  BlankFood = 7,
+  BlankJewelry = 8,
+  BlankTool = 9,
+  BlankShield = 10,
+  BlankLocationObject = 11,
+  LekkaZbrojaSkorzana = 12,
+  MalaDrewnianaTarcza = 13,
+  HelmSkorzany = 14,
+  MieczSzeroki = 15,
   //TODO (...)
-  End = 2
+  End = 16
 };
 //~~~
 

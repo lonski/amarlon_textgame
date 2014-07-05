@@ -116,7 +116,7 @@ void Creature::load()
       for (auto im = _body.equipped_items().begin(); im != _body.equipped_items().end(); ++im)
       {
         if (nullptr != *im && !(*im)->mods().get_all().empty())
-          _mods.add( shared_ptr<CreatureModificator>( &(*im)->mods().get_complex_mod()) );
+          _mods.add( (*im)->mods().get_complex_mod() );
       }
 
       //INVENTORY
@@ -204,72 +204,37 @@ void Creature::take(std::shared_ptr<Item> item, int amount)
   _inventory->insert(item, amount);
 }
 
-void Creature::drop(dbRef item_ref, int amount)
+AmountedItem<Item> Creature::drop(dbRef item_ref, int amount)
 {
-  _inventory->erase(item_ref, amount);
+  return _inventory->erase(item_ref, amount);
+}
+
+std::vector<AmountedItem<Item> > Creature::inventory()
+{
+  return _inventory->get_all();
 }
 
 void Creature::equip(std::shared_ptr<Item> item)
 {
-  vector<BodyPartType> req_parts = item->body_parts();
-  vector<shared_ptr<BodyPart> > temp_eq_parts;
-  //sprawdz czy mamy dostepna ilosc partsów
-  for (auto r_part = req_parts.begin(); r_part != req_parts.end(); ++r_part)
-  {
-    for (auto part = _body.parts().begin(); part != _body.parts().end(); ++part)
-    {
-      shared_ptr<BodyPart> p = *part;
-      //jezeli jest aktualnie szukany part i jest wolny
-      if ( p->type() == *r_part && p->equipped(item->type()).lock() == nullptr )
-      {
-        p->equip(item);
-        temp_eq_parts.push_back(p);
-        req_parts.erase(r_part);
-        --r_part;
-      }
-    }
-  }
-  //zabrakło jakeigos bodyparta -> rollback i exception
-  if (!req_parts.empty())
-  {
-    for (auto r = temp_eq_parts.begin(); r != temp_eq_parts.end(); ++r)
-      (*r)->unequip(item->type());
+  _body.equip(item);
 
-    throw error::equip_no_bodyparts("Brak dostępnych części ciała aby założyć przedmiot.");
+  if (!item->mods().get_all().empty())
+  {
+    _mods.add( item->mods().get_complex_mod() );
   }
-
-//  if (!item->mods().get_all().empty())
-//    _mods.add( shared_ptr<CreatureModificator>(&item->mods().get_complex_mod()) );
 }
 
 shared_ptr<Item> Creature::unequip(dbRef item_ref)
 {
-  ItemType itype = ItemType::Null;
-  shared_ptr<Item> result;
+  shared_ptr<Item> r = _body.unequip(item_ref);
 
-  //znajdz typ itema
-  for (auto eq = _body.equipped_items().begin(); eq != _body.equipped_items().end(); ++eq)
+  //usun modyfikatory
+  if (r != nullptr)
   {
-    if ( (*eq)->ref() == item_ref )
-    {
-      itype = (*eq)->type();
-      break;
-    }
+    _mods.remove(r->mods().get_complex_mod()->ref());
   }
 
-  //sciagnij ze wszystkich partów
-  for (auto part = _body.parts().begin(); part != _body.parts().end(); ++part)
-  {
-    shared_ptr<BodyPart> p = *part;
-    if ( p->equipped(itype).lock()->ref() == item_ref )
-    {
-      result = p->unequip(itype);
-    }
-  }
-
-  //if ( result != nullptr ) _mods.remove(result->mods().get_complex_mod().ref());
-
-  return result;
+  return r;
 }
 
 void Creature::calc_total_damage()
@@ -299,4 +264,120 @@ string Creature::Body::toStr()
     str += bp->toStr() + ";";
   }
   return str;
+}
+
+
+void Creature::Body::equip(std::shared_ptr<Item> item)
+{
+  vector<BodyPartType> req_parts = item->body_parts();
+  vector<shared_ptr<BodyPart> > temp_eq_parts;
+
+  //sprawdz czy mamy dostepna ilosc partsów
+  for (auto r_part = req_parts.begin(); r_part != req_parts.end(); ++r_part)
+  {
+    shared_ptr<BodyPart> prefer_temp(nullptr);
+    auto prefer_iter = req_parts.end();
+
+    for (auto part = _parts.begin(); part != _parts.end(); ++part)
+    {
+      shared_ptr<BodyPart> p = *part;      
+      //jezeli jest aktualnie szukany part i jest wolny
+      if (p->type() == *r_part && p->accept(item->type()) )
+      {
+        //jeżeli weapon to preferuj RIGHT, jeżeli shield to preferuj LEFT
+        if ( (item->type() == ItemType::Weapon && p->side() != BodySide::Right) ||
+             (item->type() == ItemType::Shield && p->side() != BodySide::Left) )
+        {
+          prefer_temp = p;
+        }
+        else
+        //zaloz item i usun typ bodyparta z wymaganych
+        {
+          prefer_temp.reset();
+          p->equip(item);
+          temp_eq_parts.push_back(p);
+          req_parts.erase(r_part);
+          --r_part;
+          break;
+        }
+      }      
+    }
+    //jeżeli nei znaleziono preferowanej strony ciała dla itema, to załóż na inną dostępną
+    if (prefer_temp != nullptr && prefer_iter != req_parts.end())
+    {
+      prefer_temp->equip(item);
+      temp_eq_parts.push_back(prefer_temp);
+      req_parts.erase(prefer_iter);
+    }
+  }
+  //zabrakło jakeigos bodyparta -> rollback i exception
+  if (!req_parts.empty())
+  {
+    for (auto r = temp_eq_parts.begin(); r != temp_eq_parts.end(); ++r)
+      (*r)->unequip(item->type());
+
+    throw error::equip_no_bodyparts("Brak dostępnych części ciała aby założyć przedmiot "+item->name() + ", ref = " + fun::toStr(item->ref()));
+  }
+
+  _equipped_items.push_back(item);
+}
+
+std::shared_ptr<Item> Creature::Body::unequip(dbRef item_ref)
+{
+  ItemType itype = ItemType::Null;
+  shared_ptr<Item> result;
+
+  //znajdz typ itema
+  for (auto eq = _equipped_items.begin(); eq != _equipped_items.end(); ++eq)
+  {
+    if ( (*eq)->ref() == item_ref )
+    {
+      itype = (*eq)->type();
+      break;
+    }
+  }
+
+  //sciagnij ze wszystkich partów
+  for (auto part = _parts.begin(); part != _parts.end(); ++part)
+  {
+    shared_ptr<BodyPart> p = *part;
+    if (p->equipped(itype).lock() != nullptr && p->equipped(itype).lock()->ref() == item_ref )
+    {
+      result = p->unequip(itype);
+    }
+  }
+
+  if ( result != nullptr )
+  {
+    //usun z listy equipped
+    for (auto eq = _equipped_items.begin(); eq != _equipped_items.end(); ++eq)
+    {
+      if ( (*eq)->ref() == result->ref() )
+      {
+        _equipped_items.erase(eq);
+        break;
+      }
+    }
+  }
+
+  return result;
+}
+
+shared_ptr<BodyPart> Creature::Body::part(BodyPartType type, BodyRegion region, BodySide side)
+{
+  shared_ptr<BodyPart> bp;
+
+  for (auto b = _parts.begin(); b != _parts.end(); ++b)
+  {
+    bp = *b;
+    if (  (bp->type() == type) &&
+          (bp->region() == region || region == BodyRegion::Null) &&
+          (bp->side() == side || side == BodySide::Null)
+       )
+    {
+      return bp;
+    }
+  }
+
+  return bp;
 }

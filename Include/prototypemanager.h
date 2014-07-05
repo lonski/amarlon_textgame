@@ -4,6 +4,7 @@
 #include "Include/inc.h"
 #include "Include/db.h"
 #include "Include/func.h"
+#include "Include/exceptions.h"
 
 //==PrototypeManager
 template<class T, typename EnumT>
@@ -35,6 +36,10 @@ std::unique_ptr<T> PrototypeManager<T,EnumT>::clone(EnumT key)
   {
     new_t = found->second->clone();
   }
+  else
+  {
+    throw error::creation_error("Brak prototypu "+fun::toStr(static_cast<int>(key))+" dla tabeli "+T::table_name);
+  }
 
   return new_t;
 }
@@ -45,9 +50,8 @@ void PrototypeManager<T,EnumT>::load_all()
   MapTable protos;
   fun::MapQuery("SELECT ref, prototype FROM "+T::table_name+" WHERE obj_type="+fun::toStr(static_cast<int>(ObjType::Prototype)), protos);
 
-  //for each connection
   for (auto p = protos.begin(); p != protos.end(); ++p)
-  {
+  {    
     dbRef ref = fun::CheckField<dbRef>( (*p)["REF"] );
     EnumT type = fun::CheckFieldCast<EnumT>( (*p)["PROTOTYPE"] );
 

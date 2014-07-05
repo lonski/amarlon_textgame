@@ -3,6 +3,7 @@
 
 #include "inc.h"
 #include "db.h"
+#include "enums.h"
 
 typedef std::map<std::string,std::string> MapRow;
 typedef std::vector<MapRow> MapTable;
@@ -16,6 +17,12 @@ namespace fun{
   MapRow MapQuery(const std::string &query);  
   SkillGroup skill_group(Skill skill);
   std::vector<std::string> explode(std::string str, char ch);
+  std::string Enum2Str(BodyPartType bp);
+  std::string Enum2Str(BodyRegion bp);
+  std::string Enum2Str(BodySide bp);
+  std::string Enum2Str(ItemType bp);
+  std::string Enum2Str(Attribute e);
+  std::string Enum2Str(Skill e);
 
   template<typename T> T CheckField(const std::string &field_val, T* = 0);
   template<> std::string CheckField<std::string>(const std::string &field_val, std::string*);

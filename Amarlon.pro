@@ -47,7 +47,8 @@ SOURCES += main.cpp\
     Creatures/bodypart.cpp \
     Include/gameclock.cpp \
     Creatures/mob.cpp \
-    Creatures/npc.cpp
+    Creatures/npc.cpp \
+    Creatures/creaturemonitor.cpp
 
 HEADERS  += game.h \
     Tests/testlocation.h \
@@ -78,7 +79,8 @@ HEADERS  += game.h \
     Creatures/bodypart.h \
     Include/gameclock.h \
     Creatures/mob.h \
-    Creatures/npc.h
+    Creatures/npc.h \
+    Creatures/creaturemonitor.h
 
 FORMS    += game.ui
 

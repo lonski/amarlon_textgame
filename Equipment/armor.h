@@ -13,6 +13,7 @@ private:
 
   friend class Item;
   Armor(dbRef ref, bool temporary = false);
+  friend class TestCreature;
 public:
   //operations
   void load();

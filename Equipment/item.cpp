@@ -18,7 +18,7 @@ const dbTable Item::table_name = "items";
 Item::Item(dbRef ref, bool temporary)
 : DBObject(ref, temporary)
 , _mods(this)
-{
+{  
 }
 
 std::unique_ptr<Item> Item::create(dbRef ref, bool prototype, bool temporary)
@@ -65,9 +65,11 @@ void Item::load()
         set_value( CheckField<int>(item_data["SHOP_VALUE"]) );
         set_condition( CheckFieldCast<ItemCondition>(item_data["CONDITION"]));
         _body_parts.clear();
-        _body_parts = Str2BodyParts( CheckField<string>(item_data["BODY_PARTS"]) );
+        _body_parts = Str2BodyParts( CheckField<string>(item_data["BODY_PARTS"]) );        
         set_durability( CheckField<int>(item_data["DURABILITY"]) );
         set_stackable( CheckField<bool>(item_data["STACKABLE"]) );
+
+        _mods.get_complex_mod()->set_name( name() );
 
         set_loaded();
       }
@@ -98,7 +100,7 @@ void Item::load()
       MsgError(e.what());
       qDebug() << _Database.get_last_query().c_str();
     }
-  }
+    }
 }
 
 std::unique_ptr<Item> Item::clone()
@@ -115,7 +117,7 @@ std::unique_ptr<Item> Item::clone()
 
     //return new item
     return Item::create(new_ref);
-  }
+  }else throw error::creation_error("Nie można sklonować obiektu tymczasowego!");
 
   return unique_ptr<Item>(nullptr);
 }
@@ -178,7 +180,7 @@ void Item::remove_body_part(BodyPartType body_part)
   {
     _body_parts.erase(iter);
     save("BODY_PARTS", BodyParts2Str(_body_parts));
-    }
+  }
 }
 
 void Item::set_stackable(bool stackable)

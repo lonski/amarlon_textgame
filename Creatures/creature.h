@@ -10,6 +10,8 @@
 #include "creaturemodificator.h"
 #include "bodypart.h"
 
+class CreatureMonitor;
+
 class Creature : public DBObject, public Prototypable<Creature, CreaturePrototype>
 {
 public:
@@ -23,14 +25,19 @@ private:
   private:
     BodyParts _parts;
     Item::STLContainer _equipped_items;
+    friend class CreatureMonitor;
   public:
+    void equip(std::shared_ptr<Item> item);
+    std::shared_ptr<Item> unequip(dbRef item_ref);
     BodyParts& parts() { return _parts; }
+    std::shared_ptr<BodyPart> part(BodyPartType type, BodyRegion region = BodyRegion::Null, BodySide side = BodySide::Null );
     Item::STLContainer& equipped_items() { return _equipped_items; }
     void load(std::string body_str);
     std::string toStr();
   };
 
   friend class TestCreature;
+  friend class CreatureMonitor;
   //data
   std::string _name;
   std::string _descript;
@@ -77,8 +84,8 @@ public:
   void set_sex(Sex sex);
 
   //stats access
-  int get_attribute(Attribute atr) const { return _stats.get_attribute(atr) + _mods.get_complex_mod().creature_stats().get_attribute(atr); }
-  int get_skill(Skill skill) const { return _stats.get_skill(skill) + _mods.get_complex_mod().creature_stats().get_skill(skill); }
+  int get_attribute(Attribute atr) const { return _stats.get_attribute(atr) + _mods.get_complex_mod()->creature_stats().get_attribute(atr); }
+  int get_skill(Skill skill) const { return _stats.get_skill(skill) + _mods.get_complex_mod()->creature_stats().get_skill(skill); }
 
   //stats set
   void set_attribute(Attribute atr, int val);
@@ -90,7 +97,8 @@ public:
   CreatureModificatorManager& mods() { return _mods; }
   Body& body() { return _body; }
   void take(std::shared_ptr<Item> item, int amount = 1);
-  void drop(dbRef item_ref, int amount = 1);
+  AmountedItem<Item> drop(dbRef item_ref, int amount = 1);
+  std::vector< AmountedItem<Item> > inventory();
   void equip(std::shared_ptr<Item> item);
   std::shared_ptr<Item> unequip(dbRef item_ref);
 

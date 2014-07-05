@@ -69,9 +69,10 @@ private:
   DBObject *_owner;
 public:
   CreatureModificatorManager(DBObject *owner = nullptr);
+  ~CreatureModificatorManager();
   void add(std::shared_ptr<CreatureModificator> new_mod);
   bool remove(dbRef mod_to_remove);
-  CreatureModificator& get_complex_mod() const { return *_complex_mod; }
+  std::shared_ptr<CreatureModificator> get_complex_mod() const { return _complex_mod; }
   std::vector<std::weak_ptr<CreatureModificator> > get_all();
   virtual void tick_time(Minute tick);
 };

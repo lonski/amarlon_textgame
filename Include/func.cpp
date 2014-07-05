@@ -153,14 +153,20 @@ MapRow fun::MapQuery(const string &query){
  */
 string fun::BodyParts2Str(vector<BodyPartType> &parts)
 {
-  string str(static_cast<int>(BodyPartType::End), '0');
+  string str("");//(static_cast<int>(BodyPartType::End), '0');
 
-  for_each(parts.begin(), parts.end(),
-    [&str](BodyPartType bp)
-    {
-      str[static_cast<int>(bp)] = '1';
-    }
-  );
+  for (auto i = parts.begin(); i != parts.end(); ++i)
+  {
+    BodyPartType bp = *i;
+    str += fun::toStr(static_cast<int>(bp)) + ",";
+  }
+
+//  for_each(parts.begin(), parts.end(),
+//    [&str](BodyPartType bp)
+//    {
+//      str[static_cast<int>(bp)] = '1';
+//    }
+//  );
 
   return str;
 }
@@ -168,8 +174,13 @@ string fun::BodyParts2Str(vector<BodyPartType> &parts)
 std::vector<BodyPartType> fun::Str2BodyParts(const string str)
 {
   vector<BodyPartType> p;
-  for (size_t i = 0; i < str.size(); ++i)
-    if (str[i] == '1') p.push_back(static_cast<BodyPartType>(i));
+
+//  for (size_t i = 0; i < str.size(); ++i)
+//    if (str[i] == '1') p.push_back(static_cast<BodyPartType>(i));
+
+  vector<string> sv = fun::explode(str, ',');
+  for (auto s = sv.begin(); s != sv.end(); ++s)
+    p.push_back(static_cast<BodyPartType>( fun::fromStr<int>(*s) ));
 
   return p;
 }
@@ -220,4 +231,149 @@ std::vector<string> fun::explode(string str, char ch)
   }
 
   return result;
+}
+
+string fun::Enum2Str(ItemType bp)
+{
+  string s;
+  switch(bp)
+  {
+    case ItemType::Null: s = "Brak (Null)";
+         break;
+    case ItemType::End: s = "Brak (End)";
+         break;
+    case ItemType::Armor: s = "Armor";
+         break;
+    case ItemType::Food: s = "Food";
+         break;
+    case ItemType::Jewelry: s = "Jewelry";
+         break;
+    case ItemType::LocationObject: s = "LocationObject";
+         break;
+    case ItemType::Ordinary: s = "Ordinary";
+         break;
+    case ItemType::Shield: s = "Shield";
+         break;
+    case ItemType::Tool: s = "Tool";
+         break;
+    case ItemType::Weapon: s = "Weapon";
+         break;
+    default: s = "Uzupełnij Enum2Str";
+         break;
+  }
+  return s;
+}
+
+string fun::Enum2Str(BodyRegion bp)
+{
+  string s;
+  switch(bp)
+  {
+    case BodyRegion::Null: s = "Brak (Null)";
+         break;
+    case BodyRegion::End: s = "Brak (End)";
+         break;
+    case BodyRegion::Dol: s = "Dol";
+         break;
+    case BodyRegion::Gora: s = "Gora";
+         break;
+    default: s = "Uzupełnij Enum2Str";
+         break;
+  }
+  return s;
+}
+
+string fun::Enum2Str(Skill e)
+{
+  string s;
+  switch(e)
+  {
+    case Skill::Null: s = "Brak (Null)";
+         break;
+    case Skill::End: s = "Brak (End)";
+         break;
+
+
+    default: s = fun::toStr( static_cast<int>(e) );
+         break;
+  }
+  return s;
+}
+
+string fun::Enum2Str(Attribute e)
+{
+  string s;
+  switch(e)
+  {
+    case Attribute::Null: s = "Brak (Null)";
+         break;
+    case Attribute::End: s = "Brak (End)";
+         break;
+    case Attribute::CHR: s = "CHR";
+         break;
+    case Attribute::DEX: s = "DEX";
+         break;
+    case Attribute::END: s = "END";
+         break;
+    case Attribute::IMP: s = "IMP";
+         break;
+    case Attribute::INT: s = "INT";
+         break;
+    case Attribute::REF: s = "REF";
+         break;
+    case Attribute::STR: s = "STR";
+         break;
+    case Attribute::WLL: s = "WLL";
+         break;
+
+
+
+    default: s = "Uzupełnij Enum2Str";
+         break;
+  }
+  return s;
+}
+
+string fun::Enum2Str(BodySide bp)
+{
+  string s;
+  switch(bp)
+  {
+    case BodySide::Null: s = "Brak (Null)";
+         break;
+    case BodySide::End: s = "Brak (End)";
+         break;
+    case BodySide::Center: s = "Srodek";
+         break;
+    case BodySide::Left: s = "Lewa";
+         break;
+    case BodySide::Right: s = "Prawa";
+         break;
+    default: s = "Uzupełnij Enum2Str";
+         break;
+  }
+  return s;
+}
+
+string fun::Enum2Str(BodyPartType bp)
+{
+  string s;
+  switch(bp)
+  {
+    case BodyPartType::Null: s = "Brak (Null)";
+         break;
+    case BodyPartType::End: s = "Brak (End)";
+         break;
+    case BodyPartType::Glowa: s = "Glowa";
+         break;
+    case BodyPartType::Noga: s = "Noga";
+         break;
+    case BodyPartType::Reka: s = "Reka";
+         break;
+    case BodyPartType::Tors: s = "Tors";
+         break;
+    default: s = "Uzupełnij Enum2Str";
+         break;
+  }
+  return s;
 }

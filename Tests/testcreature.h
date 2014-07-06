@@ -49,6 +49,10 @@ private slots:
   void creature_load_modificators();
   void creature_eq();
 
+  void creature_container_creation();
+  void creature_container_load_save();
+  void creature_container_insert_erase();
+
 };
 
 #endif // TESTCREATURE_H

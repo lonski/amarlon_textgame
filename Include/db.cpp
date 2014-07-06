@@ -5,35 +5,36 @@ using namespace soci;
 
 const string DB::_db_file = "/home/pi/db/data.fdb";
 const string DB::_db_log_file = "../amarlon/Data/db.log";
-const string DB::_db_server = "192.168.1.5"; //"lonski.pl";
+const string DB::_db_server = "lonski.pl";//"192.168.1.5";
 
 //===DB Object
 void DBObject::save_to_db()
 {
   if (!isTemporary())
   {
-    for (auto i = _save_queries.begin(); i != _save_queries.end(); ++i)
+    try
     {
-      //send every entry to DB, commit and delete entry
-      //if error occurs, only print it in debug and then delete entry
-      try
+      _Database.begin();
+
+      for (auto i = _save_queries.begin(); i != _save_queries.end(); ++i)
       {
         if (*i != "")
         {
           _Database << *i;
-          _Database.commit();
         }
       }
-      catch(soci_error &e)
-      {
-        qDebug() << "###Error saving " << table().c_str() << " ref=" << ref() << ": ";
-        qDebug() << e.what();
-        qDebug() << (*i).c_str();
-      }
+
+      _Database.commit();
+    }
+    catch(soci_error &e)
+    {
+      qDebug() << "###Error saving " << table().c_str() << " ref=" << ref() << ": ";
+      qDebug() << e.what();
+      qDebug() << _Database.get_last_query().c_str();
     }
 
     _save_queries.clear();
-    }
+  }
 }
 
 void DBObject::reload()

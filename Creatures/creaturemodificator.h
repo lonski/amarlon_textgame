@@ -35,6 +35,8 @@ public:
 
   //data access  
   CreatureStats& creature_stats() { return _mods; }
+  int attribute(Attribute atr) const { return _mods.attribute(atr); }
+  int skill(Skill skill) const { return _mods.skill(skill); }
   const CreatureStats& creature_stats() const { return _mods; }
   int global_test_level_mod() const { return _global_test_level_mod; }
   std::string name() const { return _name; }

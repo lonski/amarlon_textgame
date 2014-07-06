@@ -28,6 +28,7 @@ string CreatureMonitor::print()
   str += "\nName: " + _crt->name() + ", Ref: " + fun::toStr(_crt->ref());
   str += "\n======  =====  =====  =====  =====  =====  =====  ======";
   str += "\n"+print_bodyparts();
+  str += "\n"+print_eq();
   str += "\n"+print_inventory();
   str += "\n"+print_mods();
   str += "\n======  =====  =====  =====  =====  =====  =====  ======";
@@ -111,7 +112,7 @@ string CreatureMonitor::print_mods()
       for (int i = (int)Attribute::Null+1; i != (int)Attribute::End; ++i)
       {
         Attribute atr = static_cast<Attribute>(i);
-        int val = mod->creature_stats().get_attribute(atr);
+        int val = mod->creature_stats().attribute(atr);
         if (val != 0)
         {
           ss << "[ " << fun::Enum2Str(atr) << (val > 0 ? " +" : " " ) << val << " ]";
@@ -124,7 +125,7 @@ string CreatureMonitor::print_mods()
       for (int i = (int)Skill::Null+1; i != (int)Skill::End; ++i)
       {
         Skill skl = static_cast<Skill>(i);
-        int val = mod->creature_stats().get_skill(skl);
+        int val = mod->creature_stats().skill(skl);
         if (val != 0)
         {
           ss << "[ " << fun::Enum2Str(skl) << (val > 0 ? "+" : "" ) << val << " ]";
@@ -138,5 +139,29 @@ string CreatureMonitor::print_mods()
       ss << "\n\toTable = " << mod->otable();
     }
   }
+  return ss.str();
+}
+
+string CreatureMonitor::print_eq()
+{
+  stringstream ss;
+
+  if (_crt->weapon() != nullptr || _crt->offhand() != nullptr || _crt->shield() != nullptr)
+  {
+    ss << "\n===== EQUIPPED WEAPONS =====";
+    if (_crt->weapon() != nullptr)
+    {
+      ss << "\n### Weapon: " << _crt->weapon()->name() + ", ref = " + fun::toStr(_crt->weapon()->ref());
+    }
+    if (_crt->offhand() != nullptr)
+    {
+      ss << "\n### Offhand: " << _crt->offhand()->name() + ", ref = " + fun::toStr(_crt->offhand()->ref());
+    }
+    if (_crt->shield() != nullptr)
+    {
+      ss << "\n### Shield: " << _crt->shield()->name() + ", ref = " + fun::toStr(_crt->shield()->ref());
+    }
+  }
+
   return ss.str();
 }

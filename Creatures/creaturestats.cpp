@@ -9,7 +9,7 @@ string CreatureStats::Attributes2Str()
   for(int a = (int)Attribute::Null; a != (int)Attribute::End; ++a )
   {
     Attribute atr = static_cast<Attribute>(a);
-    result += toStr( get_attribute(atr) ) + ";";
+    result += toStr( attribute(atr) ) + ";";
   }
 
   return result;
@@ -21,7 +21,7 @@ string CreatureStats::Skills2Str()
   for(int a = (int)Skill::Null; a != (int)Skill::End; ++a )
   {
     Skill skl = static_cast<Skill>(a);
-    result += toStr( get_skill(skl) ) + ";";
+    result += toStr( skill(skl) ) + ";";
   }
 
   return result;
@@ -56,12 +56,12 @@ void CreatureStats::augument(const CreatureStats &stats)
   for (int i = (int)Attribute::Null; i != (int)Attribute::End; ++i)
   {    
     Attribute atr = static_cast<Attribute>(i);
-    _attributes[atr] += stats.get_attribute(atr);
+    _attributes[atr] += stats.attribute(atr);
   }
   for (int i = (int)Skill::Null; i != (int)Skill::End; ++i)
   {
     Skill skill = static_cast<Skill>(i);
-    _skills[skill] += stats.get_skill(skill);
+    _skills[skill] += stats.skill(skill);
     }
 }
 
@@ -70,11 +70,11 @@ void CreatureStats::remove_augument(const CreatureStats &stats)
   for (int i = (int)Attribute::Null; i != (int)Attribute::End; ++i)
   {
     Attribute atr = static_cast<Attribute>(i);
-    _attributes[atr] -= stats.get_attribute(atr);
+    _attributes[atr] -= stats.attribute(atr);
   }
   for (int i = (int)Skill::Null; i != (int)Skill::End; ++i)
   {
     Skill skill = static_cast<Skill>(i);
-    _skills[skill] -= stats.get_skill(skill);
+    _skills[skill] -= stats.skill(skill);
   }
 }

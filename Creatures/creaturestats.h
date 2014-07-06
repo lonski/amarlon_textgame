@@ -12,8 +12,8 @@ private:
   std::map<Skill, int> _skills;
 public:
   //access data
-  int get_attribute(Attribute atr) const { return ( _attributes.count(atr) ? _attributes.at(atr) : 0 ); }
-  int get_skill(Skill skill) const { return ( _skills.count(skill) ? _skills.at(skill) : 0 ); }
+  int attribute(Attribute atr) const { return ( _attributes.count(atr) ? _attributes.at(atr) : 0 ); }
+  int skill(Skill skill) const { return ( _skills.count(skill) ? _skills.at(skill) : 0 ); }
 
   //set data
   void set_attribute(Attribute atr, int val) { _attributes[atr] = val; }

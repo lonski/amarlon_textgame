@@ -6,6 +6,8 @@
 #include "../Include/func.h"
 #include "../Include/enums.h"
 #include "../Equipment/item.h"
+#include "../Equipment/weapon.h"
+#include "../Equipment/shield.h"
 #include "creaturestats.h"
 #include "creaturemodificator.h"
 #include "bodypart.h"
@@ -15,6 +17,45 @@ class CreatureMonitor;
 class Creature : public DBObject, public Prototypable<Creature, CreaturePrototype>
 {
 public:
+  class Container : public DBObject
+  {
+  private:
+    //data
+    dbTable _otable;
+    dbRef _oref;
+
+    //creatures
+    std::map<dbRef, std::shared_ptr<Creature> > _creatures;
+    void Str2Creatures(std::string crts);
+    std::string Creatures2Str();
+
+  public:
+    //creation
+    static dbRef byOwner(dbTable otable, dbRef oref);
+    Container(dbRef ref);
+    Container();
+    ~Container();
+
+    //parameters
+    const static dbTable table_name;
+    virtual dbTable table() const { return table_name; }
+
+    //operations
+    virtual void load();
+    virtual void save_to_db();
+
+    void insert(std::shared_ptr<Creature>& crt);
+    std::shared_ptr<Creature> erase(dbRef crt_ref);
+    std::shared_ptr<Creature> find(dbRef crt_ref);
+    std::vector<std::shared_ptr<Creature> > get_all();
+
+    //owner data
+    dbTable otable() const { return _otable; }
+    dbRef oref() const { return _oref; }
+
+    void set_otable(dbTable otable);
+    void set_oref(dbRef oref);
+  };
 
 private:
 
@@ -27,7 +68,7 @@ private:
     Item::STLContainer _equipped_items;
     friend class CreatureMonitor;
   public:
-    void equip(std::shared_ptr<Item> item);
+    std::vector<std::shared_ptr<BodyPart> > equip(std::shared_ptr<Item> item);
     std::shared_ptr<Item> unequip(dbRef item_ref);
     BodyParts& parts() { return _parts; }
     std::shared_ptr<BodyPart> part(BodyPartType type, BodyRegion region = BodyRegion::Null, BodySide side = BodySide::Null );
@@ -50,19 +91,27 @@ private:
   CreatureModificatorManager _mods;
 
   DamageLevel _total_damage;
-  void calc_total_damage();
+
+  Weapon* _weapon;
+  Weapon* _offhand;
+  Shield* _shield;
 protected:
   //creation
   Creature(dbRef ref, bool temp = false);
 
+  //calculations
+  virtual void calc_weapons();
+  virtual void calc_total_damage();
+
 public:
+
   //parameters
   const static dbTable table_name;
   virtual dbTable table() const { return table_name; }
 
   //creation
   static std::unique_ptr<Creature> create(dbRef ref, bool prototype = false, bool temp = false);
-  std::unique_ptr<Creature> clone();
+  virtual std::unique_ptr<Creature> clone();
   virtual ~Creature() = 0;
 
   //operations
@@ -84,8 +133,8 @@ public:
   void set_sex(Sex sex);
 
   //stats access
-  int get_attribute(Attribute atr) const { return _stats.get_attribute(atr) + _mods.get_complex_mod()->creature_stats().get_attribute(atr); }
-  int get_skill(Skill skill) const { return _stats.get_skill(skill) + _mods.get_complex_mod()->creature_stats().get_skill(skill); }
+  int attribute(Attribute atr) const { return _stats.attribute(atr) + _mods.get_complex_mod()->creature_stats().attribute(atr); }
+  int skill(Skill skill) const { return _stats.skill(skill) + _mods.get_complex_mod()->creature_stats().skill(skill); }
 
   //stats set
   void set_attribute(Attribute atr, int val);
@@ -96,11 +145,17 @@ public:
   //body & inventory & mods
   CreatureModificatorManager& mods() { return _mods; }
   Body& body() { return _body; }
+  std::vector< AmountedItem<Item> > inventory();
+
   void take(std::shared_ptr<Item> item, int amount = 1);
   AmountedItem<Item> drop(dbRef item_ref, int amount = 1);
-  std::vector< AmountedItem<Item> > inventory();
+
   void equip(std::shared_ptr<Item> item);
   std::shared_ptr<Item> unequip(dbRef item_ref);
+
+  virtual Weapon* weapon() { return _weapon; }
+  virtual Weapon* offhand() { return _offhand; }
+  virtual Shield* shield() { return _shield; }
 
 };
 

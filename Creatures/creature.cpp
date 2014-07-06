@@ -7,13 +7,47 @@ using namespace soci;
 using namespace fun;
 
 const dbTable Creature::table_name = "creatures";
+const dbTable Creature::Container::table_name = "crt_containers";
 
 Creature::Creature(dbRef ref, bool temp)
   : DBObject(ref, temp)
   , _sex(Sex::Null)
   , _mods(this)
   , _total_damage(DamageLevel::Brak)
+  , _weapon(nullptr)
+  , _offhand(nullptr)
+  , _shield(nullptr)
 {  
+}
+
+void Creature::calc_weapons()
+{
+  _weapon = nullptr;
+  _offhand = nullptr;
+  _shield = nullptr;
+
+  for ( auto p = _body.parts().begin(); p != _body.parts().end(); ++p )
+  {
+    BodyPart *bp = p->get();
+    Weapon *eq_wpn = dynamic_cast<Weapon*>( bp->equipped(ItemType::Weapon).lock().get() );
+    Shield *eq_shd = dynamic_cast<Shield*>( bp->equipped(ItemType::Shield).lock().get() );
+
+    if (eq_wpn != nullptr)
+    {
+      if (bp->side() == BodySide::Left)
+      {
+        _offhand = eq_wpn;
+      }
+      else if (bp->side() == BodySide::Right)
+      {
+        _weapon = eq_wpn;
+      }
+    }
+    else if (eq_shd != nullptr)
+    {
+      _shield = eq_shd;
+    }
+  }
 }
 
 Creature::~Creature()
@@ -133,6 +167,7 @@ void Creature::load()
       }
 
       calc_total_damage();
+      calc_weapons();
       set_loaded();
     }
     catch(soci_error &e)
@@ -222,6 +257,8 @@ void Creature::equip(std::shared_ptr<Item> item)
   {
     _mods.add( item->mods().get_complex_mod() );
   }
+
+  calc_weapons();
 }
 
 shared_ptr<Item> Creature::unequip(dbRef item_ref)
@@ -233,6 +270,8 @@ shared_ptr<Item> Creature::unequip(dbRef item_ref)
   {
     _mods.remove(r->mods().get_complex_mod()->ref());
   }
+
+  calc_weapons();
 
   return r;
 }
@@ -267,7 +306,7 @@ string Creature::Body::toStr()
 }
 
 
-void Creature::Body::equip(std::shared_ptr<Item> item)
+vector<shared_ptr<BodyPart> > Creature::Body::equip(std::shared_ptr<Item> item)
 {
   vector<BodyPartType> req_parts = item->body_parts();
   vector<shared_ptr<BodyPart> > temp_eq_parts;
@@ -320,6 +359,7 @@ void Creature::Body::equip(std::shared_ptr<Item> item)
   }
 
   _equipped_items.push_back(item);
+  return temp_eq_parts;
 }
 
 std::shared_ptr<Item> Creature::Body::unequip(dbRef item_ref)
@@ -380,4 +420,173 @@ shared_ptr<BodyPart> Creature::Body::part(BodyPartType type, BodyRegion region, 
   }
 
   return bp;
+}
+
+//===============CREATURE CONTAINER
+dbRef Creature::Container::byOwner(dbTable otable, dbRef oref)
+{
+  dbRef ref = 0;
+  soci::indicator ind;
+  _Database << "SELECT ref FROM crt_containers WHERE otable='"<<otable<<"' and oref="<<fun::toStr(oref), into(ref, ind);  
+  if (ind != soci::i_ok) ref = 0;
+
+  return ref;
+}
+
+Creature::Container::Container(dbRef ref)
+  : DBObject(ref)
+{
+  load();
+}
+
+Creature::Container::Container()
+  : DBObject(0)
+{
+  dbRef ref = 0;
+  soci::indicator ind;
+  _Database << "SELECT new_ref FROM create_crt_container", into(ref, ind);
+  _Database.commit();
+  if (ind != soci::i_ok) ref = 0;
+
+  DBObject::set_ref(ref);
+  DBObject::set_loaded();
+}
+
+Creature::Container::~Container()
+{
+  if ( !isTemporary() )
+  {
+    try
+    {
+      save_to_db();
+    }
+    catch(std::exception &e)
+    {
+      qDebug() << "Error saving DBObject " << ref() << " : " << e.what();
+    }
+    catch(...)
+    {
+      qDebug() << "Error saving DBObject " << ref() << ".";
+    }
+  }
+}
+
+void Creature::Container::load()
+{
+  if ( !loaded() && ref() > 0 ){
+    try
+    {
+      //==header data
+      MapRow cont_data = fun::MapQuery("SELECT otable, oref, creatures FROM "+table_name+" WHERE ref="+fun::toStr(ref()));
+      if (cont_data.size() > 0)
+      {
+        set_oref( fun::CheckField<dbRef>(cont_data["OREF"]) );
+        set_otable( fun::CheckField<std::string>(cont_data["OTABLE"]) );
+        Str2Creatures( fun::CheckField<std::string>(cont_data["OTABLE"]) );
+      }
+
+      set_loaded();
+    }
+    catch(soci::soci_error &e)
+    {
+      fun::MsgError(e.what());
+      qDebug() << _Database.get_last_query().c_str();
+    }
+    catch(std::exception &e)
+    {
+      fun::MsgError(e.what());
+    }
+    }
+}
+
+void Creature::Container::save_to_db()
+{
+  save( Creatures2Str() );
+  DBObject::save_to_db();
+}
+
+void Creature::Container::insert(std::shared_ptr<Creature> &crt)
+{
+  if (_creatures.find(crt->ref()) == _creatures.end())
+  {
+    _creatures[crt->ref()] = crt;
+  }
+  else
+  {
+    throw error::container_insertion_error("Istota już znajduje się w kontenerze.");
+    }
+}
+
+std::shared_ptr<Creature> Creature::Container::erase(dbRef crt_ref)
+{
+  shared_ptr<Creature> r(nullptr);
+  auto crt_iter = _creatures.find(crt_ref);
+
+  if (crt_iter != _creatures.end())
+  {
+    r = crt_iter->second;
+    _creatures.erase(crt_iter);
+  }
+
+  return r;
+}
+
+std::shared_ptr<Creature> Creature::Container::find(dbRef crt_ref)
+{
+  shared_ptr<Creature> r(nullptr);
+  auto crt_iter = _creatures.find(crt_ref);
+
+  if (crt_iter != _creatures.end())
+  {
+    r = crt_iter->second;
+  }
+
+  return r;
+}
+
+std::vector<std::shared_ptr<Creature> > Creature::Container::get_all()
+{
+  vector<shared_ptr<Creature> > r;
+
+  for (auto c = _creatures.begin(); c != _creatures.end(); ++c)
+  {
+    r.push_back(c->second);
+  }
+
+  return r;
+}
+
+void Creature::Container::set_otable(dbTable otable)
+{
+  _otable = otable;
+  save("OTABLE", _otable);
+}
+
+void Creature::Container::set_oref(dbRef oref)
+{
+  _oref = oref;
+  save("OREF", _oref);
+}
+
+
+void Creature::Container::Str2Creatures(string crts)
+{
+  _creatures.clear();
+  vector<string> crts_refs = fun::explode(crts,',');
+  for (auto c = crts_refs.begin(); c != crts_refs.end(); ++c)
+  {
+    dbRef ref = fun::fromStr<dbRef>(*c);
+    _creatures[ref] = Creature::create(ref);
+  }
+}
+
+string Creature::Container::Creatures2Str()
+{
+  string r;
+  for (auto c = _creatures.begin(); c != _creatures.end(); ++c)
+  {
+    dbRef ref = c->second->ref();
+    r += ref + ",";
+  }
+  return r;
 }

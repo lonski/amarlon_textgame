@@ -20,14 +20,14 @@ void TestCreature::stats_str2atrs()
 
   stats.Str2Attributes("0;7;3;9;0;0;2;5;0;");
 
-  QCOMPARE(stats.get_attribute(Attribute::CHR), 2);
-  QCOMPARE(stats.get_attribute(Attribute::IMP), 5);
-  QCOMPARE(stats.get_attribute(Attribute::STR), 7);
-  QCOMPARE(stats.get_attribute(Attribute::DEX), 3);
-  QCOMPARE(stats.get_attribute(Attribute::END), 9);
-  QCOMPARE(stats.get_attribute(Attribute::REF), 0);
-  QCOMPARE(stats.get_attribute(Attribute::INT), 0);
-  QCOMPARE(stats.get_attribute(Attribute::WLL), 0);
+  QCOMPARE(stats.attribute(Attribute::CHR), 2);
+  QCOMPARE(stats.attribute(Attribute::IMP), 5);
+  QCOMPARE(stats.attribute(Attribute::STR), 7);
+  QCOMPARE(stats.attribute(Attribute::DEX), 3);
+  QCOMPARE(stats.attribute(Attribute::END), 9);
+  QCOMPARE(stats.attribute(Attribute::REF), 0);
+  QCOMPARE(stats.attribute(Attribute::INT), 0);
+  QCOMPARE(stats.attribute(Attribute::WLL), 0);
 }
 
 void TestCreature::stats_skills2str()
@@ -47,11 +47,11 @@ void TestCreature::stats_str2skills()
 
   stats.Str2Skills("0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;12;0;0;0;0;0;0;0;0;43;0;0;0;0;0;0;0;0;0;0;0;67;0;0;0;0;0;1;");
 
-  QCOMPARE(stats.get_skill(Skill::Aktorstwo), 43);
-  QCOMPARE(stats.get_skill(Skill::Empatia), 12);
-  QCOMPARE(stats.get_skill(Skill::Mocna_glowa), 67);
-  QCOMPARE(stats.get_skill(Skill::Taniec), 1);
-  QCOMPARE(stats.get_skill(Skill::Taktyka), 0);
+  QCOMPARE(stats.skill(Skill::Aktorstwo), 43);
+  QCOMPARE(stats.skill(Skill::Empatia), 12);
+  QCOMPARE(stats.skill(Skill::Mocna_glowa), 67);
+  QCOMPARE(stats.skill(Skill::Taniec), 1);
+  QCOMPARE(stats.skill(Skill::Taktyka), 0);
 }
 
 void TestCreature::bodypart_tostr()
@@ -146,10 +146,10 @@ void TestCreature::modificator_load()
   QCOMPARE(mod.name().c_str(), "testo");
   QCOMPARE(mod.global_test_level_mod(), 1);
   QCOMPARE(mod.effect_time(), 9);
-  QCOMPARE(mod.creature_stats().get_attribute(Attribute::CHR), 3);
-  QCOMPARE(mod.creature_stats().get_attribute(Attribute::STR), 0);
-  QCOMPARE(mod.creature_stats().get_skill(Skill::Czujnosc), 34);
-  QCOMPARE(mod.creature_stats().get_skill(Skill::Akrobatyka), 0);
+  QCOMPARE(mod.creature_stats().attribute(Attribute::CHR), 3);
+  QCOMPARE(mod.creature_stats().attribute(Attribute::STR), 0);
+  QCOMPARE(mod.creature_stats().skill(Skill::Czujnosc), 34);
+  QCOMPARE(mod.creature_stats().skill(Skill::Akrobatyka), 0);
 }
 
 void TestCreature::modificator_save()
@@ -174,7 +174,7 @@ void TestCreature::modificator_save()
 
   //validate
   QCOMPARE(mod->name().c_str(), "lol");
-  QVERIFY(mod->creature_stats().get_attribute(Attribute::DEX) == 3);
+  QVERIFY(mod->creature_stats().attribute(Attribute::DEX) == 3);
 
   //clean up!
   mod->purge();
@@ -189,8 +189,8 @@ void TestCreature::modificator_augument()
   m1.creature_stats().set_skill(Skill::Gornictwo, 34);
   m1.set_global_test_level_mod(1);
 
-  QCOMPARE(m1.creature_stats().get_attribute(Attribute::IMP), 3);
-  QCOMPARE(m1.creature_stats().get_skill(Skill::Gornictwo), 34);
+  QCOMPARE(m1.creature_stats().attribute(Attribute::IMP), 3);
+  QCOMPARE(m1.creature_stats().skill(Skill::Gornictwo), 34);
   QCOMPARE(m1.global_test_level_mod(), 1);
   QCOMPARE(m1.effect_time(), -1);
 
@@ -201,9 +201,9 @@ void TestCreature::modificator_augument()
   m2.set_global_test_level_mod(2);
   m2.set_effect_time(50);
 
-  QCOMPARE(m2.creature_stats().get_attribute(Attribute::IMP), 1);
-  QCOMPARE(m2.creature_stats().get_attribute(Attribute::STR), 3);
-  QCOMPARE(m2.creature_stats().get_skill(Skill::Odpornosc), 4);
+  QCOMPARE(m2.creature_stats().attribute(Attribute::IMP), 1);
+  QCOMPARE(m2.creature_stats().attribute(Attribute::STR), 3);
+  QCOMPARE(m2.creature_stats().skill(Skill::Odpornosc), 4);
   QCOMPARE(m2.global_test_level_mod(), 2);
   QCOMPARE(m2.effect_time(), 50);
 
@@ -211,20 +211,20 @@ void TestCreature::modificator_augument()
   m1.augument(m2);
 
   //validate
-  QCOMPARE(m1.creature_stats().get_attribute(Attribute::IMP), 4);
-  QCOMPARE(m1.creature_stats().get_attribute(Attribute::STR), 3);
-  QCOMPARE(m1.creature_stats().get_skill(Skill::Gornictwo), 34);
-  QCOMPARE(m1.creature_stats().get_skill(Skill::Odpornosc), 4);
+  QCOMPARE(m1.creature_stats().attribute(Attribute::IMP), 4);
+  QCOMPARE(m1.creature_stats().attribute(Attribute::STR), 3);
+  QCOMPARE(m1.creature_stats().skill(Skill::Gornictwo), 34);
+  QCOMPARE(m1.creature_stats().skill(Skill::Odpornosc), 4);
   QCOMPARE(m1.global_test_level_mod(), 3);
   QCOMPARE(m1.effect_time(), -1);
 
   //remove augument
   m1.remove_augument(m2);
 
-  QCOMPARE(m1.creature_stats().get_attribute(Attribute::IMP), 3);
-  QCOMPARE(m1.creature_stats().get_attribute(Attribute::STR), 0);
-  QCOMPARE(m1.creature_stats().get_skill(Skill::Gornictwo), 34);
-  QCOMPARE(m1.creature_stats().get_skill(Skill::Odpornosc), 0);
+  QCOMPARE(m1.creature_stats().attribute(Attribute::IMP), 3);
+  QCOMPARE(m1.creature_stats().attribute(Attribute::STR), 0);
+  QCOMPARE(m1.creature_stats().skill(Skill::Gornictwo), 34);
+  QCOMPARE(m1.creature_stats().skill(Skill::Odpornosc), 0);
   QCOMPARE(m1.global_test_level_mod(), 1);
   QCOMPARE(m1.effect_time(), -1);
 }
@@ -257,10 +257,10 @@ void TestCreature::modmanager()
   //validate size
   QCOMPARE(manager.get_all().size(), (size_t)3);
   //validate complex mod
-  QCOMPARE(manager.get_complex_mod()->creature_stats().get_attribute(Attribute::CHR), 6);
-  QCOMPARE(manager.get_complex_mod()->creature_stats().get_attribute(Attribute::STR), 1);
-  QCOMPARE(manager.get_complex_mod()->creature_stats().get_attribute(Attribute::DEX), 1);
-  QCOMPARE(manager.get_complex_mod()->creature_stats().get_attribute(Attribute::IMP), 1);
+  QCOMPARE(manager.get_complex_mod()->creature_stats().attribute(Attribute::CHR), 6);
+  QCOMPARE(manager.get_complex_mod()->creature_stats().attribute(Attribute::STR), 1);
+  QCOMPARE(manager.get_complex_mod()->creature_stats().attribute(Attribute::DEX), 1);
+  QCOMPARE(manager.get_complex_mod()->creature_stats().attribute(Attribute::IMP), 1);
 
   //REMOVE mod2
   manager.remove(mod2->ref());
@@ -268,10 +268,10 @@ void TestCreature::modmanager()
   //validate size
   QCOMPARE(manager.get_all().size(), (size_t)2);
   //validate complex mod
-  QCOMPARE(manager.get_complex_mod()->creature_stats().get_attribute(Attribute::CHR), 4);
-  QCOMPARE(manager.get_complex_mod()->creature_stats().get_attribute(Attribute::STR), 1);
-  QCOMPARE(manager.get_complex_mod()->creature_stats().get_attribute(Attribute::DEX), 0);
-  QCOMPARE(manager.get_complex_mod()->creature_stats().get_attribute(Attribute::IMP), 1);
+  QCOMPARE(manager.get_complex_mod()->creature_stats().attribute(Attribute::CHR), 4);
+  QCOMPARE(manager.get_complex_mod()->creature_stats().attribute(Attribute::STR), 1);
+  QCOMPARE(manager.get_complex_mod()->creature_stats().attribute(Attribute::DEX), 0);
+  QCOMPARE(manager.get_complex_mod()->creature_stats().attribute(Attribute::IMP), 1);
 
   mod1->purge();
   mod2->purge();
@@ -392,8 +392,8 @@ void TestCreature::creature_load_save_stats()
   crt = Creature::create(ref);
 
   //validate load
-  QCOMPARE(crt->get_skill(Skill::Akrobatyka), 4);
-  QCOMPARE(crt->get_attribute(Attribute::DEX), 7);
+  QCOMPARE(crt->skill(Skill::Akrobatyka), 4);
+  QCOMPARE(crt->attribute(Attribute::DEX), 7);
   crt->purge();
 }
 
@@ -466,9 +466,9 @@ void TestCreature::creature_load_modificators()
   dbRef ref = crt->ref();
 
   //bazowe staty bez mod
-  int str = crt->get_attribute(Attribute::STR);
-  int walka_miecze = crt->get_skill(Skill::Walka_Miecze);
-  int walka_topory = crt->get_skill(Skill::Walka_Topory);
+  int str = crt->attribute(Attribute::STR);
+  int walka_miecze = crt->skill(Skill::Walka_Miecze);
+  int walka_topory = crt->skill(Skill::Walka_Topory);
   //qDebug() << str << " " << walka_miecze << " " << walka_topory;
 
   //dobra to teraz wciepac trzeba kilka modsów
@@ -485,7 +485,7 @@ void TestCreature::creature_load_modificators()
   item1->mods().add(i_mod2); //nożyk STR+3 oł je
   //item1->mods().get_complex_mod()->save_to_db();
 
-  QCOMPARE(item1->mods().get_complex_mod()->creature_stats().get_attribute(Attribute::STR), 3);
+  QCOMPARE(item1->mods().get_complex_mod()->creature_stats().attribute(Attribute::STR), 3);
 
   crt->equip(item1);
 
@@ -500,9 +500,9 @@ void TestCreature::creature_load_modificators()
   crt->mods().add(n_mod1);
   crt->mods().add(n_mod2);
 
-  QCOMPARE( crt->get_skill(Skill::Walka_Miecze), walka_miecze+10 );
-  QCOMPARE( crt->get_skill(Skill::Walka_Topory), walka_topory+6 );
-  QCOMPARE( crt->get_attribute(Attribute::STR), str+3 );
+  QCOMPARE( crt->skill(Skill::Walka_Miecze), walka_miecze+10 );
+  QCOMPARE( crt->skill(Skill::Walka_Topory), walka_topory+6 );
+  QCOMPARE( crt->attribute(Attribute::STR), str+3 );
 
   i_mod1->purge();
   i_mod2->purge();
@@ -545,7 +545,7 @@ void TestCreature::creature_eq()
 
   }
 
-  QCOMPARE(crt->mods().get_complex_mod()->creature_stats().get_attribute(Attribute::DEX), -2 );
+  QCOMPARE(crt->mods().get_complex_mod()->creature_stats().attribute(Attribute::DEX), -2 );
   QCOMPARE(crt->body().equipped_items().size(), (size_t)4 );
 
   shared_ptr<BodyPart> bp = crt->body().part(BodyPartType::Glowa, BodyRegion::Gora, BodySide::Center);
@@ -575,22 +575,22 @@ void TestCreature::creature_eq()
 
   //sprawdz ilosc zalozonych itemów i zgodnosc modyfikatorów
   QCOMPARE(crt->body().equipped_items().size(), (size_t)4 );
-  QCOMPARE(crt->mods().get_complex_mod()->creature_stats().get_attribute(Attribute::DEX), -2 );
+  QCOMPARE(crt->mods().get_complex_mod()->creature_stats().attribute(Attribute::DEX), -2 );
 
   //sciagnij zbroje, validate, i zaloz z powrotem
   zbroja = std::dynamic_pointer_cast<Armor>( crt->unequip( zbroja_ref ) );
-  QCOMPARE(crt->mods().get_complex_mod()->creature_stats().get_attribute(Attribute::DEX), -1 );
+  QCOMPARE(crt->mods().get_complex_mod()->creature_stats().attribute(Attribute::DEX), -1 );
   QCOMPARE(crt->body().equipped_items().size(), (size_t)3 );
 
   crt->equip(zbroja);
   QCOMPARE(crt->body().equipped_items().size(), (size_t)4 );
-  QCOMPARE(crt->mods().get_complex_mod()->creature_stats().get_attribute(Attribute::DEX), -2 );
+  QCOMPARE(crt->mods().get_complex_mod()->creature_stats().attribute(Attribute::DEX), -2 );
 
   //sciagnij helm i wrzuc do ekw
   helm = std::dynamic_pointer_cast<Armor>( crt->unequip(helm_ref) );
   crt->take(helm);
 
-  QCOMPARE(crt->mods().get_complex_mod()->creature_stats().get_attribute(Attribute::DEX), -2 );
+  QCOMPARE(crt->mods().get_complex_mod()->creature_stats().attribute(Attribute::DEX), -2 );
   QCOMPARE(crt->body().equipped_items().size(), (size_t)3 );
 
   QCOMPARE(crt->inventory().size(), (size_t)1);
@@ -606,7 +606,7 @@ void TestCreature::creature_eq()
     ok = true;
   }
   QVERIFY(ok);
-  QCOMPARE(crt->mods().get_complex_mod()->creature_stats().get_attribute(Attribute::DEX), -2 );
+  QCOMPARE(crt->mods().get_complex_mod()->creature_stats().attribute(Attribute::DEX), -2 );
   QCOMPARE(crt->body().equipped_items().size(), (size_t)3 );
 
   //clean all dis szit ap!
@@ -712,5 +712,94 @@ void TestCreature::creature_eq()
   wpn->set_type(ItemType::Weapon);
   wpn->set_weight(1.8);
   */
+}
+
+void TestCreature::creature_container_creation()
+{
+  Creature::Container *cont = new Creature::Container;
+  dbRef ref = cont->ref();
+  QVERIFY(ref != 0);
+
+  //delete and use other constructor
+  delete cont;
+  cont = new Creature::Container(ref);
+
+  QCOMPARE(cont->ref(), ref);
+
+  cont->purge();
+  delete cont;
+}
+
+void TestCreature::creature_container_load_save()
+{
+  Creature::Container *cont = new Creature::Container;
+  dbRef ref = cont->ref();
+  cont->set_oref(2);
+  cont->set_otable("lol");
+
+  QCOMPARE(cont->oref(), (dbRef)2);
+  QCOMPARE(cont->otable().c_str(), "lol");
+
+  //recreate and check
+  delete cont;
+  cont = new Creature::Container(ref);
+
+  QCOMPARE(cont->oref(), (dbRef)2);
+  QCOMPARE(cont->otable().c_str(), "lol");
+
+  cont->purge();
+  delete cont;
+}
+
+void TestCreature::creature_container_insert_erase()
+{
+  Creature::Container *cont = new Creature::Container;
+  dbRef cont_ref = cont->ref();
+
+  //create some kriczers
+  shared_ptr<Creature> ogr1 ( Creature::prototypes().clone(CreaturePrototype::Ogr).release() );
+  dbRef ogr1_ref = ogr1->ref();
+  ogr1->set_name("Karol");
+
+  shared_ptr<Creature> ogr2 ( Creature::prototypes().clone(CreaturePrototype::Ogr).release() );
+  dbRef ogr2_ref = ogr2->ref();
+  ogr2->set_name("Maciek");
+
+  //=========insert
+  cont->insert(ogr1);
+  cont->insert(ogr2);
+
+  //validate
+  QCOMPARE(cont->get_all().size(), (size_t)2);
+  QVERIFY(cont->find(ogr1_ref) != nullptr);
+  QVERIFY(cont->find(ogr2_ref) != nullptr);
+
+  //RELOAD AND VALIDATE
+  delete cont;
+  ogr1.reset();
+  ogr2.reset();
+
+  cont = new Creature::Container(cont_ref);
+
+  QCOMPARE(cont->get_all().size(), (size_t)2);
+  QVERIFY(cont->find(ogr1_ref) != nullptr);
+  QVERIFY(cont->find(ogr2_ref) != nullptr);
+
+  //==========erase
+  cont->erase(ogr2_ref);
+
+  QCOMPARE(cont->get_all().size(), (size_t)1);
+  QVERIFY(cont->find(ogr1_ref) != nullptr);
+  QVERIFY(cont->find(ogr2_ref) == nullptr);
+
+  //RELOAD AND VALIDATE
+  delete cont;
+  cont = new Creature::Container(cont_ref);
+
+  QCOMPARE(cont->get_all().size(), (size_t)1);
+  QVERIFY(cont->find(ogr1_ref) != nullptr);
+  QVERIFY(cont->find(ogr2_ref) == nullptr);
+
+
 }
 

@@ -17,6 +17,7 @@ public:
   std::string print_bodyparts();
   std::string print_inventory();
   std::string print_mods();
+  std::string print_eq();
 };
 
 #endif // CREATUREMONITOR_H

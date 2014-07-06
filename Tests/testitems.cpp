@@ -494,10 +494,10 @@ void TestItems::ItemModManager()
   //validate size
   QCOMPARE(itm->mods().get_all().size(), (size_t)3);
   //validate complex mod
-  QCOMPARE(itm->mods().get_complex_mod()->creature_stats().get_attribute(Attribute::CHR), 6);
-  QCOMPARE(itm->mods().get_complex_mod()->creature_stats().get_attribute(Attribute::STR), 1);
-  QCOMPARE(itm->mods().get_complex_mod()->creature_stats().get_attribute(Attribute::DEX), 1);
-  QCOMPARE(itm->mods().get_complex_mod()->creature_stats().get_attribute(Attribute::IMP), 1);
+  QCOMPARE(itm->mods().get_complex_mod()->creature_stats().attribute(Attribute::CHR), 6);
+  QCOMPARE(itm->mods().get_complex_mod()->creature_stats().attribute(Attribute::STR), 1);
+  QCOMPARE(itm->mods().get_complex_mod()->creature_stats().attribute(Attribute::DEX), 1);
+  QCOMPARE(itm->mods().get_complex_mod()->creature_stats().attribute(Attribute::IMP), 1);
 
   //REMOVE mod2
   itm->mods().remove(mod2->ref());
@@ -505,10 +505,10 @@ void TestItems::ItemModManager()
   //validate size
   QCOMPARE(itm->mods().get_all().size(), (size_t)2);
   //validate complex mod
-  QCOMPARE(itm->mods().get_complex_mod()->creature_stats().get_attribute(Attribute::CHR), 4);
-  QCOMPARE(itm->mods().get_complex_mod()->creature_stats().get_attribute(Attribute::STR), 1);
-  QCOMPARE(itm->mods().get_complex_mod()->creature_stats().get_attribute(Attribute::DEX), 0);
-  QCOMPARE(itm->mods().get_complex_mod()->creature_stats().get_attribute(Attribute::IMP), 1);
+  QCOMPARE(itm->mods().get_complex_mod()->creature_stats().attribute(Attribute::CHR), 4);
+  QCOMPARE(itm->mods().get_complex_mod()->creature_stats().attribute(Attribute::STR), 1);
+  QCOMPARE(itm->mods().get_complex_mod()->creature_stats().attribute(Attribute::DEX), 0);
+  QCOMPARE(itm->mods().get_complex_mod()->creature_stats().attribute(Attribute::IMP), 1);
 
   itm->purge();
 }

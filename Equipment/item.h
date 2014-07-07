@@ -109,6 +109,7 @@ public:
 
   //operations
   virtual void load();
+  virtual void save_to_db();
 
   //inventory
   Inventory& inventory() { return _inventory; }

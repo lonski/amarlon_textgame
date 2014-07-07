@@ -32,7 +32,8 @@ namespace fun{
   //===static inlines
   static inline void MsgError(std::string e)
   {
-    QMessageBox::critical(NULL, "Error",e.c_str());
+    //QMessageBox::critical(NULL, "Error",e.c_str());
+    qDebug() << "ERROR: " << e.c_str();
   }
   //===~~~
 

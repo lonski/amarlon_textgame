@@ -566,6 +566,7 @@ void TestCreature::creature_eq()
   //stworz od nowa
   crt.reset(Creature::create(ref).release());
 
+  c_monit.reset(crt.get());
   qDebug() << c_monit.print().c_str();
 
   //sprawdz czy helm zalolzony
@@ -800,6 +801,7 @@ void TestCreature::creature_container_insert_erase()
   QVERIFY(cont->find(ogr1_ref) != nullptr);
   QVERIFY(cont->find(ogr2_ref) == nullptr);
 
+  cont->purge();
 
 }
 

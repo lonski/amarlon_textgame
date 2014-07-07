@@ -12,6 +12,8 @@ public:
   CreatureMonitor(Creature *crt);
   CreatureMonitor();
   void set_creature(Creature *crt);  
+  void reset(Creature *crt = nullptr);
+
   std::string print();
   std::string print_bodyparts();
   std::string print_inventory();

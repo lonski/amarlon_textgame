@@ -24,8 +24,8 @@ public:
   //operations
   void Str2Attributes(std::string atr_str);
   void Str2Skills(std::string skill_str);
-  std::string Attributes2Str();
-  std::string Skills2Str();
+  std::string Attributes2Str() const;
+  std::string Skills2Str() const;
   void augument(const CreatureStats& stats);
   void remove_augument(const CreatureStats& stats);
 };

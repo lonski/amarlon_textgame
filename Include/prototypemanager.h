@@ -16,7 +16,7 @@ private:
 public:
   PrototypeManager();
   std::unique_ptr<T> clone(EnumT key);
-  size_t count();
+  size_t count() const;
   void reload();
 };
 
@@ -62,7 +62,7 @@ void PrototypeManager<T,EnumT>::load_all()
 }
 
 template<class T, typename EnumT>
-size_t PrototypeManager<T,EnumT>::count()
+size_t PrototypeManager<T,EnumT>::count() const
 {
   return _prototypes.size();
 }

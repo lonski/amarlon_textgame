@@ -14,7 +14,7 @@ void Weapon::load()
     try
     {
       MapRow item_data = MapQuery( "SELECT * FROM "+table()+" WHERE ref="+toStr(ref()) );
-      if (item_data.size() > 0)
+      if (!item_data.empty())
       {
         set_skill(CheckFieldCast<WeaponSkill>(item_data["WPN_SKILL"]));
         set_defence(CheckField<int>(item_data["WPN_DEFENCE"]));

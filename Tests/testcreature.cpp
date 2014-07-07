@@ -463,7 +463,7 @@ void TestCreature::creature_load_modificators()
   //create some creature
   //a jebne szarda bo ten się nei jebie jak junik z podpowiedziami, a robienie plain pojntera to tez myli lol
   shared_ptr<Creature> crt (Creature::prototypes().clone(CreaturePrototype::Ogr).release());
-  dbRef ref = crt->ref();
+  //dbRef ref = crt->ref();
 
   //bazowe staty bez mod
   int str = crt->attribute(Attribute::STR);

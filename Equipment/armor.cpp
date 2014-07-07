@@ -14,7 +14,7 @@ void Armor::load()
     try
     {
       MapRow item_data = MapQuery( "SELECT * FROM "+table()+" WHERE ref="+toStr(ref()) );
-      if (item_data.size() > 0)
+      if (!item_data.empty())
       {
         Damage dmg
         (

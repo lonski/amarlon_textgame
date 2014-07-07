@@ -120,7 +120,7 @@ void Creature::load()
     {
       //DATA
       MapRow crt_data = MapQuery( "SELECT * FROM "+table()+" WHERE ref="+toStr(ref()) );
-      if (crt_data.size() > 0)
+      if (!crt_data.empty())
       {
         //base data
         set_name( CheckField<string>(crt_data["NAME"]) );
@@ -441,6 +441,8 @@ Creature::Container::Container(dbRef ref)
 
 Creature::Container::Container()
   : DBObject(0)
+  , _otable("")
+  , _oref(0)
 {
   dbRef ref = 0;
   soci::indicator ind;
@@ -478,7 +480,7 @@ void Creature::Container::load()
     {
       //==header data
       MapRow cont_data = fun::MapQuery("SELECT otable, oref, creatures FROM "+table_name+" WHERE ref="+fun::toStr(ref()));
-      if (cont_data.size() > 0)
+      if (!cont_data.empty())
       {
         set_oref( fun::CheckField<dbRef>(cont_data["OREF"]) );
         set_otable( fun::CheckField<std::string>(cont_data["OTABLE"]) );

@@ -16,8 +16,16 @@ using namespace fun;
 const dbTable Item::table_name = "items";
 
 Item::Item(dbRef ref, bool temporary)
-: DBObject(ref, temporary)
-, _mods(this)
+  : DBObject(ref, temporary)
+  , _item_type(ItemType::Null)
+  , _name("")
+  , _descript("")
+  , _weight(0)
+  , _value(0)
+  , _condition(ItemCondition::Null)
+  , _durability(0)
+  , _stackable(false)
+  , _mods(this)
 {  
 }
 
@@ -56,7 +64,7 @@ void Item::load()
     try
     {
       MapRow item_data = MapQuery( "SELECT * FROM "+table()+" WHERE ref="+toStr(ref()) );
-      if (item_data.size() > 0)
+      if (!item_data.empty())
       {
         set_type( CheckFieldCast<ItemType>(item_data["ITEM_TYPE"]));
         set_name( CheckField<string>(item_data["NAME"]) );

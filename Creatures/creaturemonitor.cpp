@@ -8,6 +8,7 @@ CreatureMonitor::CreatureMonitor(Creature *crt)
 }
 
 CreatureMonitor::CreatureMonitor()
+  : _crt(nullptr)
 {
 }
 

@@ -14,7 +14,7 @@ void Food::load()
     try
     {
       MapRow item_data = MapQuery( "SELECT * FROM "+table()+" WHERE ref="+toStr(ref()) );
-      if (item_data.size() > 0)
+      if (!item_data.empty())
       {
         set_hunger(CheckField<int>(item_data["FOD_HUNGER"]));
       }

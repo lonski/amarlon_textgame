@@ -85,6 +85,8 @@ private:
   soci::session& session();
 
   DB();
+  DB(const DB&);
+  DB& operator=(const DB&);
 public:
   static DB* Instance();
   static soci::session& Session();

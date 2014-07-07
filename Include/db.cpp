@@ -28,7 +28,7 @@ void DBObject::save_to_db()
     }
     catch(soci_error &e)
     {
-      qDebug() << "###Error saving " << table().c_str() << " ref=" << ref() << ": ";
+      qDebug() << "###Error saving ref=" << ref() << ": ";
       qDebug() << e.what();
       qDebug() << _Database.get_last_query().c_str();
     }

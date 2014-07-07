@@ -163,7 +163,7 @@ void Location::load()
     try
     {
       MapRow loc_data = MapQuery( "SELECT * FROM "+table()+" WHERE ref="+toStr(ref()) );
-      if (loc_data.size() > 0)
+      if (!loc_data.empty())
       {
         set_name( CheckField<string>(loc_data["NAME"]) );
         set_destript( CheckField<string>(loc_data["DESCRIPTION"]) );
@@ -178,7 +178,7 @@ void Location::load()
       MsgError(e.what());
       qDebug() << _Database.get_last_query().c_str();
     }
-  }
+    }
 }
 
 void Location::draw()

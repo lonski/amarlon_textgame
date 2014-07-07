@@ -12,7 +12,7 @@ namespace fun{
 
   //declarations
   std::string BodyParts2Str(std::vector<BodyPartType>& parts);
-  std::vector<BodyPartType> Str2BodyParts(const std::string str);
+  std::vector<BodyPartType> Str2BodyParts(const std::string &str);
   void MapQuery(const std::string &query, MapTable &result);
   MapRow MapQuery(const std::string &query);  
   SkillGroup skill_group(Skill skill);

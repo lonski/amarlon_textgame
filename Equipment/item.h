@@ -212,7 +212,7 @@ void Item::Container<T>::load()
     {
       //==header data
       MapRow cont_data = fun::MapQuery("SELECT name, otable, oref, max_weight FROM "+table_name+" WHERE ref="+fun::toStr(ref()));
-      if (cont_data.size() > 0)
+      if (!cont_data.empty())
       {
         set_name( fun::CheckField<std::string>(cont_data["NAME"]) );
         set_max_weight( fun::CheckField<Weight>(cont_data["MAX_WEIGHT"]) );
@@ -307,7 +307,6 @@ void Item::Container<T>::insert(std::shared_ptr<T> &item, int amount)
 {
   if ( !item->isStackable() ) amount = 1;
   Weight items_weight = amount * item->weight();
-  int amount_to_save = 0;
 
   if ( _weight_cap.cur + items_weight > _weight_cap.max )
   {
@@ -316,6 +315,8 @@ void Item::Container<T>::insert(std::shared_ptr<T> &item, int amount)
   }
   else
   {
+    int amount_to_save = 0;
+
     if (item->isStackable() && _items.find(item->ref()) != _items.end() )
     {//update amount
       AmountedItem<T>& aitem = _items[item->ref()];

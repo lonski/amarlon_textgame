@@ -15,7 +15,7 @@ class Item;
 class WalkVector{
 private:
   short _vals[4];
-  short indexof(Direction dir){
+  static short indexof(Direction dir){
     switch(dir){
       case Direction::North: return 0; break;
       case Direction::South: return 1; break;
@@ -40,7 +40,7 @@ public:
     short i = indexof(dir);
     if (i != -1) _vals[indexof(dir)] -= val;
   }
-  short operator[](Direction dir)
+  short operator[](Direction dir) const
   {
     short i = indexof(dir);
     return ( i != -1 ? _vals[i] : 0);

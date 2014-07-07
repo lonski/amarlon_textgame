@@ -3,7 +3,7 @@
 using namespace std;
 using namespace fun;
 
-string CreatureStats::Attributes2Str()
+string CreatureStats::Attributes2Str() const
 {
   string result;
   for(int a = (int)Attribute::Null; a != (int)Attribute::End; ++a )
@@ -15,7 +15,7 @@ string CreatureStats::Attributes2Str()
   return result;
 }
 
-string CreatureStats::Skills2Str()
+string CreatureStats::Skills2Str() const
 {
   string result;
   for(int a = (int)Skill::Null; a != (int)Skill::End; ++a )

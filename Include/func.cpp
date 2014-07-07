@@ -12,8 +12,7 @@ void fun::MapQuery(const string &query, MapTable &result){
 
   stmt.execute(true);
   if (stmt.got_data()){
-    string str;
-    stringstream ss;
+    string str;    
     indicator ind;
     size_t cr(-1);
 
@@ -85,8 +84,7 @@ MapRow fun::MapQuery(const string &query){
 
   stmt.execute(true);
   if (stmt.got_data()){
-    string str;
-    stringstream ss;
+    string str;    
     indicator ind;
     size_t cr(-1);
 
@@ -171,7 +169,7 @@ string fun::BodyParts2Str(vector<BodyPartType> &parts)
   return str;
 }
 
-std::vector<BodyPartType> fun::Str2BodyParts(const string str)
+std::vector<BodyPartType> fun::Str2BodyParts(const string &str)
 {
   vector<BodyPartType> p;
 

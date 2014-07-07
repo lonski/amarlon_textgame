@@ -75,11 +75,12 @@ void CreatureModificator::load()
 void CreatureModificator::save_to_db()
 {
   if ( 0 == ref() )
-  {
-    dbRef new_ref(0);
-    soci::indicator ind;
+  {    
     try
     {
+      dbRef new_ref(0);
+      soci::indicator ind;
+
       _Database << "SELECT ref FROM CREATE_EMPTY_CRT_MOD", soci::into(new_ref, ind);
       _Database.commit();
 

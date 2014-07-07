@@ -11,8 +11,7 @@ class CreatureMonitor
 public:
   CreatureMonitor(Creature *crt);
   CreatureMonitor();
-  void set_creature(Creature *crt);
-  void calc();
+  void set_creature(Creature *crt);  
   std::string print();
   std::string print_bodyparts();
   std::string print_inventory();

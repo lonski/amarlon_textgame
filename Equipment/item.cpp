@@ -111,6 +111,38 @@ void Item::load()
     }
 }
 
+void Item::save_to_db()
+{
+//  save("ITEM_TYPE",static_cast<int>(_item_type));
+//  save("NAME", _name);
+//  save("DESCRIPTION", _descript);
+//  save("WEIGHT", _weight);
+//  save("SHOP_VALUE", _value);
+//  save("CONDITION",static_cast<int>(_condition));
+//  save("DURABILITY", _durability);
+//  save("BODY_PARTS", BodyParts2Str(_body_parts));
+//  save("BODY_PARTS", BodyParts2Str(_body_parts));
+//  save("STACKABLE", _stackable);
+
+  stringstream save_query;
+
+  save_query <<
+    "UPDATE " << table() << " SET " <<
+    "  ITEM_TYPE = " << static_cast<int>(_item_type) <<
+    ", NAME = '" << _name << "'"
+    ", DESCRIPTION = '" << _descript << "'"
+    ", WEIGHT = " << _weight <<
+    ", SHOP_VALUE = " << _value <<
+    ", CONDITION = " << static_cast<int>(_condition) <<
+    ", DURABILITY = " << _durability <<
+    ", BODY_PARTS = '" << BodyParts2Str(_body_parts) << "'"
+    ", STACKABLE = " << static_cast<int>(_stackable) <<
+    " WHERE ref = " << ref();
+
+  save(save_query.str());
+  DBObject::save_to_db();
+}
+
 std::unique_ptr<Item> Item::clone()
 {
   if (!isTemporary())
@@ -133,43 +165,36 @@ std::unique_ptr<Item> Item::clone()
 void Item::set_type(ItemType type)
 {
   _item_type = type;
-  save("ITEM_TYPE",static_cast<int>(_item_type));
 }
 
 void Item::set_name(string name)
 {
   _name = name;
-  save("NAME", _name);
 }
 
 void Item::set_descript(string dsc)
 {
   _descript = dsc;
-  save("DESCRIPTION", _descript);
 }
 
 void Item::set_weight(Weight weight)
 {
   _weight = weight;
-  save("WEIGHT", _weight);
 }
 
 void Item::set_value(int value)
 {
   _value = value;
-  save("SHOP_VALUE", _value);
 }
 
 void Item::set_condition(ItemCondition condition)
 {
   _condition = condition;
-  save("CONDITION",static_cast<int>(_condition));
 }
 
 void Item::set_durability(int dura)
 {
   _durability = dura;
-  save("DURABILITY", _durability);
 }
 
 void Item::add_body_part(BodyPartType body_part)
@@ -177,7 +202,6 @@ void Item::add_body_part(BodyPartType body_part)
   if (check_body_part(body_part) == false )
   {
     _body_parts.push_back(body_part);
-    save("BODY_PARTS", BodyParts2Str(_body_parts));
   }
 }
 
@@ -187,18 +211,31 @@ void Item::remove_body_part(BodyPartType body_part)
   if (iter != _body_parts.end())
   {
     _body_parts.erase(iter);
-    save("BODY_PARTS", BodyParts2Str(_body_parts));
   }
 }
 
 void Item::set_stackable(bool stackable)
 {
   _stackable = stackable;
-  save("STACKABLE", _stackable);
 }
 
 Item::~Item()
 {
+  if ( !isTemporary() && ref() != 0)
+  {
+    try
+    {
+      save_to_db();
+    }
+    catch(std::exception &e)
+    {
+      qDebug() << "Error saving " << table_name.c_str() << " " << ref() << " : " << e.what();
+    }
+    catch(...)
+    {
+      qDebug() << "Error saving " << table_name.c_str() << " "  << ref() << ".";
+    }
+  }
 }
 //===~~~
 

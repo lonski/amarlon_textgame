@@ -29,6 +29,7 @@ public:
     void Str2Creatures(std::string crts);
     std::string Creatures2Str();
 
+    friend class TestCreature;
   public:
     //creation
     static dbRef byOwner(dbTable otable, dbRef oref);

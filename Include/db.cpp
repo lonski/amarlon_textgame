@@ -5,7 +5,7 @@ using namespace soci;
 
 const string DB::_db_file = "/home/pi/db/data.fdb";
 const string DB::_db_log_file = "../amarlon/Data/db.log";
-const string DB::_db_server = "lonski.pl";//"192.168.1.5";
+const string DB::_db_server = "192.168.1.5";//"lonski.pl";
 
 //===DB Object
 void DBObject::save_to_db()
@@ -29,8 +29,9 @@ void DBObject::save_to_db()
     catch(soci_error &e)
     {
       qDebug() << "###Error saving ref=" << ref() << ": ";
-      qDebug() << e.what();
-      qDebug() << _Database.get_last_query().c_str();
+      qDebug() << "#MSG = " << e.what();
+      qDebug() << "#QUERY = " << _Database.get_last_query().c_str();
+      QMessageBox::critical(NULL, "Error",_Database.get_last_query().c_str());
     }
 
     _save_queries.clear();

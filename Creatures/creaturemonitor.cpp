@@ -15,11 +15,11 @@ CreatureMonitor::CreatureMonitor()
 void CreatureMonitor::set_creature(Creature *crt)
 {
   _crt = crt;
-  calc();
 }
 
-void CreatureMonitor::calc()
+void CreatureMonitor::reset(Creature *crt)
 {
+  _crt = crt;
 }
 
 string CreatureMonitor::print()

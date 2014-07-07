@@ -86,7 +86,12 @@ std::unique_ptr<Creature> Creature::create(dbRef ref, bool prototype, bool temp)
       case CreatureType::Player: /*TODO*/ break;
       default : throw error::creation_error("Nieprawidłowy typ itemu."); break;
     }
-  }else throw error::creation_error("Brak prawidłowego rekordu w bazie.");
+  }else throw error::creation_error("Brak prawidłowego rekordu w bazie. Creature ref = "
+                                    + fun::toStr(ref) + " crt_type="
+                                    + fun::toStr(static_cast<int>(crt_type))
+                                    + " obj_type="
+                                    + fun::toStr(static_cast<int>(obj_type))
+                                    );
 
   new_crt->load();
 
@@ -475,7 +480,8 @@ Creature::Container::~Container()
 
 void Creature::Container::load()
 {
-  if ( !loaded() && ref() > 0 ){
+  if ( !loaded() && ref() > 0 )
+  {
     try
     {
       //==header data
@@ -483,8 +489,8 @@ void Creature::Container::load()
       if (!cont_data.empty())
       {
         set_oref( fun::CheckField<dbRef>(cont_data["OREF"]) );
-        set_otable( fun::CheckField<std::string>(cont_data["OTABLE"]) );
-        Str2Creatures( fun::CheckField<std::string>(cont_data["OTABLE"]) );
+        set_otable( fun::CheckField<std::string>(cont_data["OTABLE"]) );        
+        Str2Creatures( fun::CheckField<std::string>(cont_data["CREATURES"]) );
       }
 
       set_loaded();
@@ -498,12 +504,12 @@ void Creature::Container::load()
     {
       fun::MsgError(e.what());
     }
-    }
+  }
 }
 
 void Creature::Container::save_to_db()
 {
-  save( Creatures2Str() );
+  save( "CREATURES", Creatures2Str() );
   DBObject::save_to_db();
 }
 
@@ -578,17 +584,23 @@ void Creature::Container::Str2Creatures(string crts)
   for (auto c = crts_refs.begin(); c != crts_refs.end(); ++c)
   {
     dbRef ref = fun::fromStr<dbRef>(*c);
-    _creatures[ref] = Creature::create(ref);
+    if (ref != 0)
+    {
+      _creatures[ref] = Creature::create(ref);
+    }
   }
 }
 
 string Creature::Container::Creatures2Str()
 {
-  string r;
+  string r("");
   for (auto c = _creatures.begin(); c != _creatures.end(); ++c)
   {
     dbRef ref = c->second->ref();
-    r += ref + ",";
+    if (ref > 0)
+    {
+      r += fun::toStr(ref) + ",";
+    }
   }
   return r;
 }

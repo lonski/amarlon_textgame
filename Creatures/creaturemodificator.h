@@ -25,8 +25,8 @@ public:
   virtual dbTable table() const { return table_name; }
   dbTable otable() const {return _otable; }
   dbRef oref() const { return _oref; }
-  void set_otable(dbTable otable) { _otable = otable; }
-  void set_oref(dbRef oref) { _oref = oref; }
+  void set_otable(dbTable otable) { _otable = otable; set_modified();}
+  void set_oref(dbRef oref) { _oref = oref; set_modified();}
 
   //creation
   CreatureModificator(dbTable otable = "", dbRef oref = 0);
@@ -43,12 +43,12 @@ public:
   int effect_time() const { return _effect_time; }
 
   //data mod
-  void set_name(std::string name) { _name = name; }
-  void set_effect_time(int effect_time) { _effect_time = effect_time; }
-  void set_global_test_level_mod(int test_level_mod) { _global_test_level_mod = test_level_mod; }
+  void set_name(std::string name) { _name = name; set_modified(); }
+  void set_effect_time(int effect_time) { _effect_time = effect_time; set_modified(); }
+  void set_global_test_level_mod(int test_level_mod) { _global_test_level_mod = test_level_mod; set_modified(); }
 
   //operations
-  virtual void load();
+  virtual void load(MapRow *data_source = nullptr);
   virtual void save_to_db();
   void augument(const CreatureModificator& mod);
   void remove_augument(const CreatureModificator& mod);

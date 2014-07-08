@@ -93,8 +93,10 @@ public:
   static Location* create(dbRef ref, LocType loc_type = LocType::Ordinary);
 
   //operations
-  virtual void loc_walk_within_range(WalkVector dir_vector, void (Location::*Fun)() );      
-  virtual void load();
+  virtual void loc_walk_within_range(WalkVector dir_vector, void (Location::*Fun)() );
+  virtual void load(MapRow *data_source = nullptr);  
+  virtual void save_to_db();
+  void load_no_param();
   virtual void draw();
   virtual void set_not_drawn() { _drawn = false; }
 

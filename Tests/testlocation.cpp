@@ -86,7 +86,7 @@ void TestLocation::LocWalkWithinRange()
     Location *loc = Location::create(5);
 
     //perform load-walk within the range of 1
-    loc->loc_walk_within_range(WalkVector(1,1,1,1), &Location::load);
+    loc->loc_walk_within_range(WalkVector(1,1,1,1), &Location::load_no_param);
 
     //validate data (look for loc map at begining of this file):
     //#1. locations of refs 6,4,3 should be loaded

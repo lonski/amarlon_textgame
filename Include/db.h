@@ -17,6 +17,7 @@ private:
 
   //flags
   bool _loaded;
+  bool _modified;
   bool _temporary;
 
   //save queue
@@ -28,6 +29,8 @@ protected:
   virtual void save(std::string query);
   virtual void set_loaded() { _loaded = true; }
   virtual void set_not_loaded() { _loaded = false; }
+  virtual void set_modified() { _modified = true; }
+  virtual void set_not_modified() { _modified = false; }
 
   //set data
   void set_ref(dbRef ref)
@@ -38,7 +41,7 @@ protected:
 
 public:
   //birth and death
-  DBObject(dbRef ref, bool temporary = false): _ref(ref), _loaded(false), _temporary(temporary) {}
+  DBObject(dbRef ref, bool temporary = false): _ref(ref), _loaded(false), _modified(false), _temporary(temporary) {}
   virtual ~DBObject() = 0;
 
   //flags access
@@ -48,10 +51,11 @@ public:
   virtual dbRef ref() const { return _ref; }
   virtual dbTable table() const = 0;
   virtual bool loaded() const { return _loaded; }
+  virtual bool modified() const { return _modified; }
 
   //operations
   virtual void save_to_db();
-  virtual void load() = 0;
+  virtual void load(MapRow *data_source = nullptr) = 0;
   virtual void reload();
   virtual void purge();
 

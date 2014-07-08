@@ -14,7 +14,8 @@ private:
   Shield(dbRef ref,bool temporary = false);
 public:
   //operations
-  void load();
+  virtual void load(MapRow *data_source = nullptr);
+  virtual void save_to_db();
 
   //data access
   int defence() const { return _defence; }
@@ -22,7 +23,7 @@ public:
   //data set
   void set_defence(int defence);
 
-  virtual ~Shield() {}
+  virtual ~Shield();
 };
 //===
 

@@ -19,28 +19,32 @@ Location::Location(dbRef ref)
 
 void Location::set_name(string name)
 {
-  _name = name;
-  save("NAME", _name);
+  _name = name;  
+  set_modified();
 }
 
 void Location::set_destript(string dsc)
 {
   _descript = dsc;
-  save("DESCRIPTION", _descript);
+  set_modified();
 }
 
 Location *Location::create(dbRef ref, LocType loc_type)
 {
   Location *loc_ptr = nullptr;
 
-  switch(loc_type)
+  if (ref > 0)
   {
-    case LocType::Ordinary : loc_ptr = new OrdinaryLocation(ref); break;
-    case LocType::Draw     : loc_ptr = new DrawLocation(ref); break;
-    default : throw error::creation_error("Nieprawidłowy typ lokacji - "+toStr(static_cast<int>(loc_type))); break;
+    switch(loc_type)
+    {
+      case LocType::Ordinary : loc_ptr = new OrdinaryLocation(ref); break;
+      case LocType::Draw     : loc_ptr = new DrawLocation(ref); break;
+      default : throw error::creation_error("Nieprawidłowy typ lokacji - "+toStr(static_cast<int>(loc_type))); break;
+    }
+
+    Location::Manager.add(loc_ptr);
   }
 
-  Location::Manager.add(loc_ptr);
   return loc_ptr;
 }
 
@@ -54,11 +58,12 @@ void Location::set_connection(Direction dir, Location *loc)
     {
       stringstream s;
 
-      s << "UPDATE OR INSER INTO loc_neighbours(location, direction, nb_location) VALUES("
+      s << "UPDATE OR INSERT INTO loc_neighbours(location, direction, nb_location) VALUES("
         << ref() << ", " << static_cast<int>(dir) << ", " << loc->ref() << ")"
         << " MATCHING(location, direction)";
 
       save(s.str());
+      set_modified();
     }
   }
 }
@@ -66,6 +71,7 @@ void Location::set_connection(Direction dir, Location *loc)
 void Location::loc_walk_within_range(WalkVector dir_vector, void (Location::*Fun)())
 {
   (this->*Fun)();
+
   for (auto dir = Direction::Null; dir != Direction::End; ++dir)
   {
     if (dir_vector[dir])
@@ -77,6 +83,7 @@ void Location::loc_walk_within_range(WalkVector dir_vector, void (Location::*Fun
       }
     }
   }
+
 }
 
 void Location::create_neighbours()
@@ -106,6 +113,8 @@ void Location::create_neighbours()
     if ( i->second != nullptr )
       copy_connections_to_neighbour(i->first);
   }
+
+  set_modified();
 }
 
 void Location::copy_connections_to_neighbour(Direction dir)
@@ -155,14 +164,26 @@ void Location::copy_connections_to_neighbour(Direction dir)
     break;
     default :;
   }
+
+  set_modified();
 }
 
-void Location::load()
+void Location::load(MapRow *data_source)
 {
-  if ( !loaded() && ref() > 0 ){
+  if ( !loaded() && ref() > 0 )
+  {
     try
     {
-      MapRow loc_data = MapQuery( "SELECT * FROM "+table()+" WHERE ref="+toStr(ref()) );
+      MapRow loc_data;
+      if (data_source != nullptr)
+      {
+        loc_data = *data_source;
+      }
+      else
+      {
+        loc_data = MapQuery( "SELECT * FROM "+table()+" WHERE ref="+toStr(ref()) );
+      }
+
       if (!loc_data.empty())
       {
         set_name( CheckField<string>(loc_data["NAME"]) );
@@ -171,6 +192,7 @@ void Location::load()
         create_neighbours();
 
         set_loaded();
+        set_not_modified();
       }
     }
     catch(soci_error &e)
@@ -178,7 +200,25 @@ void Location::load()
       MsgError(e.what());
       qDebug() << _Database.get_last_query().c_str();
     }
-    }
+  }
+}
+
+void Location::save_to_db()
+{
+  stringstream save_query;
+
+  save_query << "UPDATE " << table() << " SET"
+             << "  NAME='" << _name << "'"
+             << " ,DESCRIPTION='" << _descript << "'"
+             << " WHERE ref=" << ref();
+
+  save(save_query.str());
+  DBObject::save_to_db();
+}
+
+void Location::load_no_param()
+{
+  load();
 }
 
 void Location::draw()

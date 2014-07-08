@@ -20,7 +20,8 @@ private:
   Weapon(dbRef ref, bool temporary = false);
 public:
   //operations
-  void load();
+  virtual void load(MapRow *data_source = nullptr);
+  virtual void save_to_db();
 
   //data access
   WeaponSkill skill() const { return _wpn_skill; }
@@ -40,7 +41,7 @@ public:
   void set_str_req(int val);
   void set_range(int range);
 
-  virtual ~Weapon() {}
+  virtual ~Weapon();
 };
 
 #endif // WEAPON_H

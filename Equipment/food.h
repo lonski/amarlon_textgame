@@ -14,7 +14,9 @@ private:
   Food(dbRef ref,bool temporary = false);
 public:
   //operations
-  void load();
+  virtual void load(MapRow *data_source = nullptr);
+  virtual void save_to_db();
+
 
   //data access
   int hunger() const { return _hunger; }
@@ -22,7 +24,7 @@ public:
   //data set
   void set_hunger(int hunger);
 
-  virtual ~Food() {}
+  virtual ~Food();
 };
 //===
 

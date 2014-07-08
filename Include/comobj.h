@@ -3,15 +3,6 @@
 
 #include "inc.h"
 
-typedef double Weight;
-
-//time
-typedef unsigned int Minute;
-typedef unsigned int Hour;
-typedef unsigned int Day;
-typedef unsigned int Month;
-typedef unsigned int Year;
-
 template<typename T>
 struct CMValue
 {

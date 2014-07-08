@@ -9,12 +9,14 @@ void CreatureModificator::augument(const CreatureModificator &mod)
 {
   _mods.augument(mod.creature_stats());
   _global_test_level_mod += mod.global_test_level_mod();
+  set_modified();
 }
 
 void CreatureModificator::remove_augument(const CreatureModificator &mod)
 {
   _mods.remove_augument(mod.creature_stats());
   _global_test_level_mod -= mod.global_test_level_mod();
+  set_modified();
 }
 
 CreatureModificator::CreatureModificator(dbTable otable, dbRef oref)
@@ -35,28 +37,23 @@ CreatureModificator::CreatureModificator(dbRef ref, bool temporary)
 
 CreatureModificator::~CreatureModificator()
 {
-  if ( !isTemporary() && ref() != 0)
-  {
-    try
-    {
-      save_to_db();
-    }
-    catch(std::exception &e)
-    {
-      qDebug() << "Error saving " << table_name.c_str() << " " << ref() << " : " << e.what();
-    }
-    catch(...)
-    {
-      qDebug() << "Error saving " << table_name.c_str() << " "  << ref() << ".";
-    }
-  }
+  _SAVE_TO_DB_
 }
 
-void CreatureModificator::load()
+void CreatureModificator::load(MapRow *data_source)
 {
   if ( 0 != ref() )
   {
-    MapRow mod_data = MapQuery("SELECT * FROM "+table_name+" WHERE ref="+toStr(ref()));
+    MapRow mod_data;
+    if (data_source != nullptr)
+    {
+      mod_data = *data_source;
+    }
+    else
+    {
+      mod_data = MapQuery("SELECT * FROM "+table_name+" WHERE ref="+toStr(ref()));
+    }
+
     if (!mod_data.empty())
     {
       set_name( CheckField<string>(mod_data["NAME"]) );
@@ -69,6 +66,9 @@ void CreatureModificator::load()
       string skills = CheckField<string>(mod_data["SKILLS"]);
       if (!skills.empty()) _mods.Str2Skills(skills);
     }
+
+    set_loaded();
+    set_not_modified();
   }
 }
 
@@ -88,6 +88,7 @@ void CreatureModificator::save_to_db()
       {
         set_ref(new_ref);
         set_loaded();
+        set_not_modified();
       }
     }
     catch(soci::soci_error &e)

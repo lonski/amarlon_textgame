@@ -16,7 +16,8 @@ private:
   friend class TestCreature;
 public:
   //operations
-  void load();
+  virtual void load(MapRow *data_source = nullptr);
+  virtual void save_to_db();
 
   //data access
   Damage damage_reduction() const { return _damage_red; }
@@ -24,7 +25,7 @@ public:
   //data set
   void set_damage_reduction(Damage dmg_red);
 
-  virtual ~Armor() {}
+  virtual ~Armor();
 };
 //===
 

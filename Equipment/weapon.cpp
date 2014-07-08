@@ -8,12 +8,21 @@ Weapon::Weapon(dbRef ref, bool temporary): Item(ref, temporary)
 {
 }
 
-void Weapon::load()
+void Weapon::load(MapRow *data_source)
 {
   if ( !loaded() && ref() > 0 ){
     try
     {
-      MapRow item_data = MapQuery( "SELECT * FROM "+table()+" WHERE ref="+toStr(ref()) );
+      MapRow item_data;
+      if (data_source != nullptr)
+      {
+        item_data = *data_source;
+      }
+      else
+      {
+        item_data = MapQuery( "SELECT * FROM "+table()+" WHERE ref="+toStr(ref()) );
+      }
+
       if (!item_data.empty())
       {
         set_skill(CheckFieldCast<WeaponSkill>(item_data["WPN_SKILL"]));
@@ -33,6 +42,9 @@ void Weapon::load()
         set_damage(dmg);
 
       }
+
+      Item::load(&item_data);
+      set_not_modified();
     }
     catch(soci_error &e)
     {
@@ -40,50 +52,71 @@ void Weapon::load()
       qDebug() << _Database.get_last_query().c_str();
     }
   }
+}
 
-  Item::load();
+void Weapon::save_to_db()
+{
+  stringstream save_query;
+
+  save_query << "UPDATE " << table() << " SET"
+             << "  WPN_SKILL=" << static_cast<int>(_wpn_skill)
+             << " ,WPN_D_PIERCING=" << _damage.piercing
+             << " ,WPN_D_SLASHING=" << _damage.slashing
+             << " ,WPN_D_BASHING=" << _damage.bashing
+             << " ,WPN_DEFENCE=" << _defence
+             << " ,WPN_ATTACK=" << _attack
+             << " ,WPN_REFLEX=" << _reflex
+             << " ,WPN_STR_REQ=" << _str_req
+             << " ,WPN_RANGE=" << _range
+             << " WHERE ref=" << ref();
+
+  save(save_query.str());
+  Item::save_to_db();
 }
 
 void Weapon::set_skill(WeaponSkill skill)
 {
   _wpn_skill = skill;
-  save("WPN_SKILL",static_cast<int>(_wpn_skill));
+  set_modified();
 }
 
 void Weapon::set_damage(Damage damage)
 {
   _damage = damage;
-  save("WPN_D_PIERCING", _damage.piercing);
-  save("WPN_D_SLASHING", _damage.slashing);
-  save("WPN_D_BASHING", _damage.bashing);
+  set_modified();
 }
 
 void Weapon::set_defence(int defence)
 {
   _defence = defence;
-  save("WPN_DEFENCE", _defence);
+  set_modified();
 }
 
 void Weapon::set_attack(int attack)
 {
   _attack = attack;
-  save("WPN_ATTACK", _attack);
+  set_modified();
 }
 
 void Weapon::set_reflex(int reflex)
 {
   _reflex = reflex;
-  save("WPN_REFLEX", _reflex);
+  set_modified();
 }
 
 void Weapon::set_str_req(int val)
 {
   _str_req = val;
-  save("WPN_STR_REQ", _str_req);
+  set_modified();
 }
 
 void Weapon::set_range(int range)
 {
   _range = range;
-  save("WPN_RANGE", _range);
+  set_modified();
+}
+
+Weapon::~Weapon()
+{
+  _SAVE_TO_DB_
 }

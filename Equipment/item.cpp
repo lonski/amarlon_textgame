@@ -33,37 +33,49 @@ std::unique_ptr<Item> Item::create(dbRef ref, bool prototype, bool temporary)
 {
   Item* new_item = nullptr;
 
-  MapRow item_data = MapQuery("SELECT obj_type, item_type FROM "+table_name+" WHERE ref="+toStr(ref));
-  ItemType item_type = CheckFieldCast<ItemType>( item_data["ITEM_TYPE"] );
-  ObjType obj_type = CheckFieldCast<ObjType>( item_data["OBJ_TYPE"] );
-
-  if (item_type != ItemType::Null && (obj_type == ObjType::Instance || prototype) )
+  if (ref > 0)
   {
-    switch(item_type)
-    {
-      case ItemType::Ordinary: new_item = new OrdinaryItem(ref, temporary); break;
-      case ItemType::Weapon: new_item = new Weapon(ref, temporary); break;
-      case ItemType::Armor: new_item = new Armor(ref, temporary); break;
-      case ItemType::Jewelry: new_item = new Jewelry(ref, temporary); break;
-      case ItemType::Food: new_item = new Food(ref, temporary); break;
-      case ItemType::Tool: new_item = new Tool(ref, temporary); break;
-      case ItemType::Shield: new_item = new Shield(ref, temporary); break;
-      case ItemType::LocationObject: new_item = new LocationObject(ref, temporary); break;
-      default : throw error::creation_error("Nieprawidłowy typ itemu."); break;
-    }
-  }else throw error::creation_error("Brak prawidłowego rekordu w bazie.");
+    MapRow item_data = MapQuery("SELECT obj_type, item_type FROM "+table_name+" WHERE ref="+toStr(ref));
+    ItemType item_type = CheckFieldCast<ItemType>( item_data["ITEM_TYPE"] );
+    ObjType obj_type = CheckFieldCast<ObjType>( item_data["OBJ_TYPE"] );
 
-  new_item->load();
+    if (item_type != ItemType::Null && (obj_type == ObjType::Instance || prototype) )
+    {
+      switch(item_type)
+      {
+        case ItemType::Ordinary: new_item = new OrdinaryItem(ref, temporary); break;
+        case ItemType::Weapon: new_item = new Weapon(ref, temporary); break;
+        case ItemType::Armor: new_item = new Armor(ref, temporary); break;
+        case ItemType::Jewelry: new_item = new Jewelry(ref, temporary); break;
+        case ItemType::Food: new_item = new Food(ref, temporary); break;
+        case ItemType::Tool: new_item = new Tool(ref, temporary); break;
+        case ItemType::Shield: new_item = new Shield(ref, temporary); break;
+        case ItemType::LocationObject: new_item = new LocationObject(ref, temporary); break;
+        default : throw error::creation_error("Nieprawidłowy typ itemu."); break;
+      }
+    }else throw error::creation_error("Brak prawidłowego rekordu w bazie.");
+
+    new_item->load();
+  }
 
   return unique_ptr<Item>(new_item);
 }
 
-void Item::load()
+void Item::load(MapRow *data_source)
 {
   if ( !loaded() && ref() > 0 ){
     try
-    {
-      MapRow item_data = MapQuery( "SELECT * FROM "+table()+" WHERE ref="+toStr(ref()) );
+    {      
+      MapRow item_data;
+      if (data_source != nullptr)
+      {
+        item_data = *data_source;
+      }
+      else
+      {
+        item_data = MapQuery( "SELECT * FROM "+table()+" WHERE ref="+toStr(ref()) );
+      }
+
       if (!item_data.empty())
       {
         set_type( CheckFieldCast<ItemType>(item_data["ITEM_TYPE"]));
@@ -80,6 +92,7 @@ void Item::load()
         _mods.get_complex_mod()->set_name( name() );
 
         set_loaded();
+        set_not_modified();
       }
 
       //MODS
@@ -108,21 +121,11 @@ void Item::load()
       MsgError(e.what());
       qDebug() << _Database.get_last_query().c_str();
     }
-    }
+  }
 }
 
 void Item::save_to_db()
 {
-//  save("ITEM_TYPE",static_cast<int>(_item_type));
-//  save("NAME", _name);
-//  save("DESCRIPTION", _descript);
-//  save("WEIGHT", _weight);
-//  save("SHOP_VALUE", _value);
-//  save("CONDITION",static_cast<int>(_condition));
-//  save("DURABILITY", _durability);
-//  save("BODY_PARTS", BodyParts2Str(_body_parts));
-//  save("BODY_PARTS", BodyParts2Str(_body_parts));
-//  save("STACKABLE", _stackable);
 
   stringstream save_query;
 
@@ -139,7 +142,7 @@ void Item::save_to_db()
     ", STACKABLE = " << static_cast<int>(_stackable) <<
     " WHERE ref = " << ref();
 
-  save(save_query.str());
+  save(save_query.str());  
   DBObject::save_to_db();
 }
 
@@ -165,36 +168,43 @@ std::unique_ptr<Item> Item::clone()
 void Item::set_type(ItemType type)
 {
   _item_type = type;
+  set_modified();
 }
 
 void Item::set_name(string name)
 {
   _name = name;
+  set_modified();
 }
 
 void Item::set_descript(string dsc)
 {
   _descript = dsc;
+  set_modified();
 }
 
 void Item::set_weight(Weight weight)
 {
   _weight = weight;
+  set_modified();
 }
 
 void Item::set_value(int value)
 {
   _value = value;
+  set_modified();
 }
 
 void Item::set_condition(ItemCondition condition)
 {
   _condition = condition;
+  set_modified();
 }
 
 void Item::set_durability(int dura)
 {
   _durability = dura;
+  set_modified();
 }
 
 void Item::add_body_part(BodyPartType body_part)
@@ -202,6 +212,7 @@ void Item::add_body_part(BodyPartType body_part)
   if (check_body_part(body_part) == false )
   {
     _body_parts.push_back(body_part);
+    set_modified();
   }
 }
 
@@ -211,31 +222,19 @@ void Item::remove_body_part(BodyPartType body_part)
   if (iter != _body_parts.end())
   {
     _body_parts.erase(iter);
+    set_modified();
   }
 }
 
 void Item::set_stackable(bool stackable)
 {
   _stackable = stackable;
+  set_modified();
 }
 
 Item::~Item()
 {
-  if ( !isTemporary() && ref() != 0)
-  {
-    try
-    {
-      save_to_db();
-    }
-    catch(std::exception &e)
-    {
-      qDebug() << "Error saving " << table_name.c_str() << " " << ref() << " : " << e.what();
-    }
-    catch(...)
-    {
-      qDebug() << "Error saving " << table_name.c_str() << " "  << ref() << ".";
-    }
-  }
+  _SAVE_TO_DB_
 }
 //===~~~
 

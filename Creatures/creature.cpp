@@ -52,48 +52,37 @@ void Creature::calc_weapons()
 
 Creature::~Creature()
 {
-  if ( !isTemporary() && ref() != 0)
-  {
-    try
-    {
-      save_to_db();
-    }
-    catch(std::exception &e)
-    {
-      qDebug() << "Error saving " << table_name.c_str() << " " << ref() << " : " << e.what();
-    }
-    catch(...)
-    {
-      qDebug() << "Error saving " << table_name.c_str() << " "  << ref() << ".";
-    }
-  }
+  _SAVE_TO_DB_
 }
 
 std::unique_ptr<Creature> Creature::create(dbRef ref, bool prototype, bool temp)
 {
   Creature* new_crt = nullptr;
 
-  MapRow crt_data = MapQuery("SELECT crt_type, obj_type FROM "+table_name+" WHERE ref="+toStr(ref));
-  CreatureType crt_type = CheckFieldCast<CreatureType>( crt_data["CRT_TYPE"] );
-  ObjType obj_type = CheckFieldCast<ObjType>( crt_data["OBJ_TYPE"] );
-
-  if (crt_type != CreatureType::Null && (obj_type == ObjType::Instance || prototype) )
+  if (ref > 0)
   {
-    switch(crt_type)
-    {
-      case CreatureType::MOB: new_crt = new MOB(ref, temp); break;
-      case CreatureType::NPC: new_crt = new NPC(ref, temp); break;
-      case CreatureType::Player: /*TODO*/ break;
-      default : throw error::creation_error("Nieprawidłowy typ itemu."); break;
-    }
-  }else throw error::creation_error("Brak prawidłowego rekordu w bazie. Creature ref = "
-                                    + fun::toStr(ref) + " crt_type="
-                                    + fun::toStr(static_cast<int>(crt_type))
-                                    + " obj_type="
-                                    + fun::toStr(static_cast<int>(obj_type))
-                                    );
+    MapRow crt_data = MapQuery("SELECT crt_type, obj_type FROM "+table_name+" WHERE ref="+toStr(ref));
+    CreatureType crt_type = CheckFieldCast<CreatureType>( crt_data["CRT_TYPE"] );
+    ObjType obj_type = CheckFieldCast<ObjType>( crt_data["OBJ_TYPE"] );
 
-  new_crt->load();
+    if (crt_type != CreatureType::Null && (obj_type == ObjType::Instance || prototype) )
+    {
+      switch(crt_type)
+      {
+        case CreatureType::MOB: new_crt = new MOB(ref, temp); break;
+        case CreatureType::NPC: new_crt = new NPC(ref, temp); break;
+        case CreatureType::Player: /*TODO*/ break;
+        default : throw error::creation_error("Nieprawidłowy typ itemu."); break;
+      }
+    }else throw error::creation_error("Brak prawidłowego rekordu w bazie. Creature ref = "
+                                      + fun::toStr(ref) + " crt_type="
+                                      + fun::toStr(static_cast<int>(crt_type))
+                                      + " obj_type="
+                                      + fun::toStr(static_cast<int>(obj_type))
+                                      );
+
+    new_crt->load();
+  }
 
   return unique_ptr<Creature>(new_crt);
 }
@@ -117,14 +106,23 @@ std::unique_ptr<Creature> Creature::clone()
   return unique_ptr<Creature>(nullptr);
 }
 
-void Creature::load()
+void Creature::load(MapRow *data_source)
 {
   if ( !loaded() && ref() > 0 )
   {
     try
     {
       //DATA
-      MapRow crt_data = MapQuery( "SELECT * FROM "+table()+" WHERE ref="+toStr(ref()) );
+      MapRow crt_data;
+      if (data_source != nullptr)
+      {
+        crt_data = *data_source;
+      }
+      else
+      {
+        crt_data = MapQuery( "SELECT * FROM "+table()+" WHERE ref="+toStr(ref()) );
+      }
+
       if (!crt_data.empty())
       {
         //base data
@@ -174,6 +172,7 @@ void Creature::load()
       calc_total_damage();
       calc_weapons();
       set_loaded();
+      set_not_modified();
     }
     catch(soci_error &e)
     {
@@ -185,9 +184,18 @@ void Creature::load()
 
 void Creature::save_to_db()
 {
-  string body_save = _body.toStr();
-  save("UPDATE "+table()+" SET body='"+body_save+"' WHERE ref="+fun::toStr(ref()));
+  stringstream save_query;
 
+  save_query << "UPDATE " << table() << " SET "
+             << "  NAME='" << _name << "'"
+             << ", DESCRIPT='" << _descript << "'"
+             << ", SEX=" << static_cast<int>(_sex)
+             << ", ATTRIBUTES='" << _stats.Attributes2Str() << "'"
+             << ", SKILLS='" << _stats.Skills2Str() << "'"
+             << ", BODY='" << _body.toStr() << "'"
+             << " WHERE ref = " << ref();
+
+  save(save_query.str());
   DBObject::save_to_db();
 }
 
@@ -200,52 +208,54 @@ void Creature::purge()
 void Creature::set_name(string name)
 {
   _name = name;
-  save("NAME", _name);
+  set_modified();
 }
 
 void Creature::set_descript(string descript)
 {
-  _descript = descript;
-  save("DESCRIPT", _descript);
+  _descript = descript;  
+  set_modified();
 }
 
 void Creature::set_sex(Sex sex)
 {
   _sex = sex;
-  save("SEX",static_cast<int>(_sex));
+  set_modified();
 }
 
 void Creature::set_attribute(Attribute atr, int val)
 {
   _stats.set_attribute(atr,val);
-  save("ATTRIBUTES", _stats.Attributes2Str());
+  set_modified();
 }
 
 void Creature::mod_attribute(Attribute atr, int mod)
 {
   _stats.mod_attribute(atr, mod);
-  save("ATTRIBUTES", _stats.Attributes2Str());
+  set_modified();
 }
 
 void Creature::set_skill(Skill skill, int val)
 {
   _stats.set_skill(skill, val);
-  save("SKILLS", _stats.Skills2Str());
+  set_modified();
 }
 
 void Creature::mod_skill(Skill skill, int mod)
 {
   _stats.mod_skill(skill, mod);
-  save("SKILLS", _stats.Skills2Str());
+  set_modified();
 }
 
 void Creature::take(std::shared_ptr<Item> item, int amount)
-{
+{  
   _inventory->insert(item, amount);
+  set_modified();
 }
 
 AmountedItem<Item> Creature::drop(dbRef item_ref, int amount)
 {
+  set_modified();
   return _inventory->erase(item_ref, amount);
 }
 
@@ -264,6 +274,7 @@ void Creature::equip(std::shared_ptr<Item> item)
   }
 
   calc_weapons();
+  set_modified();
 }
 
 shared_ptr<Item> Creature::unequip(dbRef item_ref)
@@ -277,6 +288,7 @@ shared_ptr<Item> Creature::unequip(dbRef item_ref)
   }
 
   calc_weapons();
+  set_modified();
 
   return r;
 }
@@ -288,7 +300,7 @@ void Creature::calc_total_damage()
   //na podstawie damage_level z body_parts
 }
 
-//==============BODY
+//==============BODY=============================================================
 void Creature::Body::load(string body_str)
 {
   _equipped_items.clear();
@@ -427,7 +439,7 @@ shared_ptr<BodyPart> Creature::Body::part(BodyPartType type, BodyRegion region, 
   return bp;
 }
 
-//===============CREATURE CONTAINER
+//===============CREATURE CONTAINER=========================================================
 dbRef Creature::Container::byOwner(dbTable otable, dbRef oref)
 {
   dbRef ref = 0;
@@ -457,35 +469,31 @@ Creature::Container::Container()
 
   DBObject::set_ref(ref);
   DBObject::set_loaded();
+  DBObject::set_not_modified();
 }
 
 Creature::Container::~Container()
 {
-  if ( !isTemporary() )
-  {
-    try
-    {
-      save_to_db();
-    }
-    catch(std::exception &e)
-    {
-      qDebug() << "Error saving DBObject " << ref() << " : " << e.what();
-    }
-    catch(...)
-    {
-      qDebug() << "Error saving DBObject " << ref() << ".";
-    }
-  }
+  _SAVE_TO_DB_
 }
 
-void Creature::Container::load()
+void Creature::Container::load(MapRow *data_source)
 {
   if ( !loaded() && ref() > 0 )
   {
     try
     {
+      MapRow cont_data;
+      if (data_source != nullptr)
+      {
+        cont_data = *data_source;
+      }
+      else
+      {
+        cont_data = fun::MapQuery("SELECT otable, oref, creatures FROM "+table_name+" WHERE ref="+fun::toStr(ref()));
+      }
+
       //==header data
-      MapRow cont_data = fun::MapQuery("SELECT otable, oref, creatures FROM "+table_name+" WHERE ref="+fun::toStr(ref()));
       if (!cont_data.empty())
       {
         set_oref( fun::CheckField<dbRef>(cont_data["OREF"]) );
@@ -494,6 +502,7 @@ void Creature::Container::load()
       }
 
       set_loaded();
+      set_not_modified();
     }
     catch(soci::soci_error &e)
     {
@@ -509,7 +518,15 @@ void Creature::Container::load()
 
 void Creature::Container::save_to_db()
 {
-  save( "CREATURES", Creatures2Str() );
+  stringstream save_query;
+
+  save_query << "UPDATE " << table() << " SET"
+             << "  CREATURES='" << Creatures2Str() << "'"
+             << " ,OTABLE='" << _otable << "'"
+             << " ,OREF=" << _oref
+             << " WHERE ref=" << ref();
+
+  save(save_query.str());
   DBObject::save_to_db();
 }
 
@@ -518,11 +535,12 @@ void Creature::Container::insert(std::shared_ptr<Creature> &crt)
   if (_creatures.find(crt->ref()) == _creatures.end())
   {
     _creatures[crt->ref()] = crt;
+    set_modified();
   }
   else
   {
     throw error::container_insertion_error("Istota już znajduje się w kontenerze.");
-    }
+  }
 }
 
 std::shared_ptr<Creature> Creature::Container::erase(dbRef crt_ref)
@@ -534,6 +552,7 @@ std::shared_ptr<Creature> Creature::Container::erase(dbRef crt_ref)
   {
     r = crt_iter->second;
     _creatures.erase(crt_iter);
+    set_modified();
   }
 
   return r;
@@ -567,13 +586,13 @@ std::vector<std::shared_ptr<Creature> > Creature::Container::get_all()
 void Creature::Container::set_otable(dbTable otable)
 {
   _otable = otable;
-  save("OTABLE", _otable);
+  set_modified();
 }
 
 void Creature::Container::set_oref(dbRef oref)
 {
   _oref = oref;
-  save("OREF", _oref);
+  set_modified();
 }
 
 

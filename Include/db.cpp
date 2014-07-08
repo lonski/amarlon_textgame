@@ -35,6 +35,7 @@ void DBObject::save_to_db()
     }
 
     _save_queries.clear();
+    set_not_modified();
   }
 }
 
@@ -47,7 +48,7 @@ void DBObject::reload()
 
 void DBObject::purge()
 {
-  if ( !isTemporary() )
+  if ( !isTemporary() && ref() > 0)
   {
     _save_queries.clear();
     _Database << "delete from " << table().c_str() << " where ref = " << ref();
@@ -58,12 +59,15 @@ void DBObject::purge()
 
 void DBObject::save(string query)
 {
-  if ( loaded() && !isTemporary() ) _save_queries.push_back(query);
+  if ( loaded() && !isTemporary() )
+  {
+    _save_queries.push_back(query);
+  }
 }
 
 DBObject::~DBObject()
 {
-  if ( !isTemporary() )
+  if ( !isTemporary() && modified() )
   {
     try
     {
@@ -92,7 +96,6 @@ DB::DB()
 
   _log_stream = new ofstream(_db_log_file, ios::app);
   _session->set_log_stream(_log_stream);
-
 }
 
 DB *DB::Instance()

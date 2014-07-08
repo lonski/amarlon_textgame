@@ -42,7 +42,7 @@ public:
     virtual dbTable table() const { return table_name; }
 
     //operations
-    virtual void load();
+    virtual void load(MapRow *data_source = nullptr);
     virtual void save_to_db();
 
     void insert(std::shared_ptr<Creature>& crt);
@@ -116,7 +116,7 @@ public:
   virtual ~Creature() = 0;
 
   //operations
-  virtual void load();
+  virtual void load(MapRow *data_source = nullptr);
   virtual void save_to_db();
   virtual void purge();
 
@@ -145,7 +145,7 @@ public:
 
   //body & inventory & mods
   CreatureModificatorManager& mods() { return _mods; }
-  Body& body() { return _body; }
+  Body& body() { set_modified(); return _body; }
   std::vector< AmountedItem<Item> > inventory();
 
   void take(std::shared_ptr<Item> item, int amount = 1);

@@ -51,7 +51,8 @@ public:
     ~Container();
 
     //general & items operations
-    virtual void load();
+    virtual void load(MapRow *data_source = nullptr);
+    virtual void save_to_db();
     void insert(std::shared_ptr<T>& item, int amount = 1);
     AmountedItem<T> erase(dbRef item_ref, int amount = 1);
     AmountedItem<T> find(dbRef item_ref);
@@ -108,7 +109,7 @@ public:
   virtual ~Item() = 0;
 
   //operations
-  virtual void load();
+  virtual void load(MapRow *data_source = nullptr);
   virtual void save_to_db();
 
   //inventory
@@ -174,6 +175,7 @@ Item::Container<T>::Container(dbRef ref, bool temporary) : DBObject(ref, tempora
 template<typename T>
 Item::Container<T>::~Container()
 {
+  _SAVE_TO_DB_
 }
 
 template<typename T>
@@ -192,27 +194,39 @@ std::unique_ptr<Item::Container<T> > Item::Container<T>::create(dbRef ref, bool 
 {
   Container<T>* new_container = nullptr;
 
-  MapRow cont_data = fun::MapQuery("SELECT obj_type FROM "+table_name+" WHERE ref="+fun::toStr(ref));
-  ObjType obj_type = fun::CheckFieldCast<ObjType>( cont_data["OBJ_TYPE"] );
-
-  if ( obj_type == ObjType::Instance || prototype )
+  if (ref > 0)
   {
-      new_container = new Container<T>(ref, temporary);
-  }else throw error::creation_error("Brak prawidłowego rekordu w bazie.");
+    MapRow cont_data = fun::MapQuery("SELECT obj_type FROM "+table_name+" WHERE ref="+fun::toStr(ref));
+    ObjType obj_type = fun::CheckFieldCast<ObjType>( cont_data["OBJ_TYPE"] );
 
-  new_container->load();
+    if ( obj_type == ObjType::Instance || prototype )
+    {
+        new_container = new Container<T>(ref, temporary);
+    }else throw error::creation_error("Brak prawidłowego rekordu w bazie.");
+
+    new_container->load();
+  }
 
   return std::unique_ptr<Item::Container<T> >(new_container);
 }
 
 template<typename T>
-void Item::Container<T>::load()
+void Item::Container<T>::load(MapRow *data_source)
 {
   if ( !loaded() && ref() > 0 ){
     try
     {
+      MapRow cont_data;
+      if (data_source != nullptr)
+      {
+        cont_data = *data_source;
+      }
+      else
+      {
+        cont_data = fun::MapQuery("SELECT name, otable, oref, max_weight FROM "+table_name+" WHERE ref="+fun::toStr(ref()));
+      }
+
       //==header data
-      MapRow cont_data = fun::MapQuery("SELECT name, otable, oref, max_weight FROM "+table_name+" WHERE ref="+fun::toStr(ref()));
       if (!cont_data.empty())
       {
         set_name( fun::CheckField<std::string>(cont_data["NAME"]) );
@@ -239,6 +253,7 @@ void Item::Container<T>::load()
       }
 
       set_loaded();
+      set_not_modified();
     }
     catch(soci::soci_error &e)
     {
@@ -276,28 +291,28 @@ template<typename T>
 void Item::Container<T>::set_name(std::string name)
 {
   _name = name;
-  save("NAME", _name);
+  set_modified();
 }
 
 template<typename T>
 void Item::Container<T>::set_otable(dbTable otable)
 {
   _otable = otable;
-  save("OTABLE", _otable);
+  set_modified();
 }
 
 template<typename T>
 void Item::Container<T>::set_oref(dbRef oref)
 {
   _oref = oref;
-  save("OREF", _oref);
+  set_modified();
 }
 
 template<typename T>
 void Item::Container<T>::set_max_weight(Weight max_weight)
 {
   _weight_cap.max = max_weight;
-  save("MAX_WEIGHT", _weight_cap.max);
+  set_modified();
 }
 
 /*
@@ -335,6 +350,8 @@ void Item::Container<T>::insert(std::shared_ptr<T> &item, int amount)
           fun::toStr(item->ref())    +", "+ //item
           fun::toStr(amount_to_save) +")"   //amount
         );
+
+    set_modified();
   }
 }
 
@@ -371,6 +388,8 @@ AmountedItem<T> Item::Container<T>::erase(dbRef item_ref, int amount)
           fun::toStr(item_ref)       +", "+ //item
           fun::toStr(amount_to_save) +")"   //amount
         );
+
+    set_modified();
   }
 
   return ret;
@@ -396,6 +415,22 @@ std::vector<AmountedItem<T> > Item::Container<T>::get_all()
     ret.push_back(iter->second);
 
   return ret;
+}
+
+template<typename T>
+void Item::Container<T>::save_to_db()
+{
+  std::stringstream save_query;
+
+  save_query << "UPDATE " << table() << " SET"
+             << "  MAX_WEIGHT=" << _weight_cap.max
+             << " ,NAME='" << _name << "'"
+             << " ,OREF=" << _oref
+             << " ,OTABLE='" << _otable << "'"
+             << " WHERE ref=" << ref();
+
+  save(save_query.str());
+  DBObject::save_to_db();
 }
 
 //===~~~

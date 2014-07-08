@@ -5,9 +5,6 @@
 #include "db.h"
 #include "enums.h"
 
-typedef std::map<std::string,std::string> MapRow;
-typedef std::vector<MapRow> MapTable;
-
 namespace fun{
 
   //declarations

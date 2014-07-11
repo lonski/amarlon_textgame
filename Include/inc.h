@@ -12,8 +12,8 @@
 #include <set>
 #include <unordered_set>
 
-#include <soci.h>
-#include <soci-firebird.h>
+#include "soci.h"
+#include "soci-firebird.h"
 
 #define D(X) qDebug() << #X << "=" << X;
 

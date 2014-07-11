@@ -13,12 +13,22 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = Amarlon
 TEMPLATE = app
 
-INCLUDEPATH += /usr/local/include/soci \
-               /usr/local/include/soci/firebird/ \
-               ../../include
+INCLUDEPATH += ../../include
 
-LIBS += -lsoci_core \
-        -lsoci_firebird
+win32:INCLUDEPATH += $$PWD/db-wrapper/soci/core \
+                     $$PWD/db-wrapper/soci/backend \
+                     $$PWD/db-wrapper/ibase \
+
+unix:INCLUDEPATH += /usr/local/include/soci \
+                    /usr/local/include/soci/firebird/ \
+
+win32:LIBS += -L$$quote($$PWD/db-wrapper/soci/lib) \
+              -l$$quote(soci_core_3_2) \
+              -l$$quote(soci_firebird_3_2) \
+              -l$$quote(soci_empty_3_2)
+
+unix:LIBS += -lsoci_core \
+             -lsoci_firebird
 
 SOURCES += main.cpp\
         game.cpp \

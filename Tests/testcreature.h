@@ -13,6 +13,8 @@
 #include "../Equipment/shield.h"
 #include "../Equipment/weapon.h"
 #include "../Creatures/creaturemonitor.h"
+#include "../Creatures/npc.h"
+#include "../Creatures/player.h"
 
 class TestCreature : public QObject
 {
@@ -52,6 +54,10 @@ private slots:
   void creature_container_creation();
   void creature_container_load_save();
   void creature_container_insert_erase();
+
+  void npc_load();
+
+  void player_base();
 
 };
 

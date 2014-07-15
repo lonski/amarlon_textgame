@@ -4,18 +4,18 @@ using namespace std;
 
 void TestFun::skill_group()
 {
-  QCOMPARE(fun::skill_group(Skill::Null), SkillGroup::Null);
-  QCOMPARE(fun::skill_group(Skill::End), SkillGroup::Null);
+  QCOMPARE(fun::skill_group(Skill::Null), Profession::Null);
+  QCOMPARE(fun::skill_group(Skill::End), Profession::Null);
 
-  QCOMPARE(fun::skill_group(Skill::Czytania_Pisanie), SkillGroup::Kaplan);
+  QCOMPARE(fun::skill_group(Skill::Czytania_Pisanie), Profession::Kaplan);
 
-  QCOMPARE(fun::skill_group(Skill::Inicjatywa), SkillGroup::Wojownik);
-  QCOMPARE(fun::skill_group(Skill::Walka_Wrecz), SkillGroup::Wojownik);
+  QCOMPARE(fun::skill_group(Skill::Inicjatywa), Profession::Wojownik);
+  QCOMPARE(fun::skill_group(Skill::Walka_Wrecz), Profession::Wojownik);
 
-  QCOMPARE(fun::skill_group(Skill::Aktorstwo), SkillGroup::Bard);
-  QCOMPARE(fun::skill_group(Skill::Piesni), SkillGroup::Bard);
+  QCOMPARE(fun::skill_group(Skill::Aktorstwo), Profession::Bard);
+  QCOMPARE(fun::skill_group(Skill::Piesni), Profession::Bard);
 
-  QCOMPARE(fun::skill_group(Skill::Taniec), SkillGroup::Wspolne);
+  QCOMPARE(fun::skill_group(Skill::Taniec), Profession::Brak);
 }
 
 void TestFun::explode()

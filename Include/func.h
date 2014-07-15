@@ -12,7 +12,7 @@ namespace fun{
   std::vector<BodyPartType> Str2BodyParts(const std::string &str);
   void MapQuery(const std::string &query, MapTable &result);
   MapRow MapQuery(const std::string &query);  
-  SkillGroup skill_group(Skill skill);
+  Profession skill_group(Skill skill);
   std::vector<std::string> explode(std::string str, char ch);
   std::string Enum2Str(BodyPartType bp);
   std::string Enum2Str(BodyRegion bp);

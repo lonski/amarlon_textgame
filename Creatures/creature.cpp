@@ -201,7 +201,7 @@ void Creature::save_to_db()
 
 void Creature::purge()
 {
-  _inventory->purge();
+  if (_inventory != nullptr) _inventory->purge();
   DBObject::purge();
 }
 

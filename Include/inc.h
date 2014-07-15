@@ -46,4 +46,7 @@ typedef unsigned int Day;
 typedef unsigned int Month;
 typedef unsigned int Year;
 
+typedef unsigned int Splot;
+typedef unsigned int BravePoints;
+
 #endif // INC_H

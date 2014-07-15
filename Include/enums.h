@@ -17,6 +17,81 @@ namespace refDict
 }
 //~~~
 
+enum class HungerLevel
+{
+//TODO
+};
+
+enum class FatigueLevel
+{
+//TODO
+};
+
+enum class Bless
+{
+  Null = 0,
+  Dziecie_Ognia = 1,
+  Dziecie_Wiatru = 2,
+  Dziecie_Wody = 3,
+  Dziecie_Ziemi = 4,
+  Dziecie_Jastrzebia = 5,
+  Dziecie_Weza = 6,
+  Dziecie_Kota = 7,
+  Dziecie_Kruka = 8,
+  Dziecie_Niedzwiedzia = 9,
+  Dziecie_Wilka = 10,
+  Dziecie_Ksiezyca = 11,
+  Dziecie_Slonca = 12,
+  End = 13
+};
+
+enum class Clan
+{
+  Null = 0,
+  Van_Moragh = 1,
+  Van_Tarren = 2,
+  Van_Bethar = 3,
+  Aep_Amra = 4,
+  Aep_Tien = 5,
+  Aep_Kennal = 6,
+  Di_Garren = 7,
+  Di_Eise = 8,
+  Di_Braugh = 9,
+  Mac_Merna = 10,
+  Mac_Ferne = 11,
+  Mac_Brionna = 12,
+  Bal_Dorga = 13,
+  Bal_Sethna = 14,
+  Bal_Morgh = 15,
+  Ar_Kadran = 16,
+  Ar_Vesse = 17,
+  Ar_Athul = 18,
+  O_Rolley = 19,
+  O_Branna = 20,
+  O_Loner = 21,
+  Til_Silla = 22,
+  Til_Ollen = 23,
+  Til_Meadir = 24,
+  End = 25
+};
+
+//===
+enum class Tribe
+{
+  Null = 0,
+  Tuatha_De_Birde = 1,
+  Tuatha_De_Cael = 2,
+  Tuatha_De_Edha = 3,
+  Tuatha_De_Loch = 4,
+  Tuatha_De_Morra = 5,
+  Tuatha_De_Raghar = 6,
+  Tuatha_De_Sulen = 7,
+  Tuatha_De_Talein = 8,
+  Mieszaniec = 9,
+  End = 10
+};
+//~~~
+
 //===
 enum class CreatureType
 {
@@ -34,7 +109,8 @@ enum class CreaturePrototype
   Null = 0,
   BlankMOB = 1,
   Ogr = 2,
-  End = 3
+  BlankNPC = 3,
+  End = 4
 };
 //~~~
 
@@ -64,7 +140,7 @@ enum class Season
 
 //~~~
 
-enum class SkillGroup
+enum class Profession
 {
   Null = 0,
   Wojownik = 1,
@@ -72,7 +148,7 @@ enum class SkillGroup
   Lowca = 3,
   Kaplan = 4,
   Bard = 5,
-  Wspolne = 6,
+  Brak = 6,
   End = 7
 };
 

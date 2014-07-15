@@ -1,4 +1,4 @@
-#include "testcreature.h"
+﻿#include "testcreature.h"
 
 using namespace std;
 
@@ -801,7 +801,34 @@ void TestCreature::creature_container_insert_erase()
   QVERIFY(cont->find(ogr1_ref) != nullptr);
   QVERIFY(cont->find(ogr2_ref) == nullptr);
 
+  ogr2.reset(Creature::create(ogr2_ref).release());
+  ogr1.reset(Creature::create(ogr1_ref).release());
+  ogr2->purge();
+  ogr1->purge();
   cont->purge();
+}
 
+void TestCreature::npc_load()
+{
+  shared_ptr<NPC> npc( dynamic_cast<NPC*>(Creature::prototypes().clone(CreaturePrototype::BlankNPC).release()) );
+  dbRef ref = npc->ref();
+  npc->set_name("Igor");
+  npc->set_clan(Clan::Aep_Tien);
+  npc->set_tribe(Tribe::Tuatha_De_Cael);
+
+  npc.reset();
+  npc.reset( dynamic_cast<NPC*>(Creature::create(ref).release()) );
+
+  QCOMPARE(npc->name().c_str(), "Igor");
+  QCOMPARE(npc->clan(), Clan::Aep_Tien);
+  QCOMPARE(npc->tribe(), Tribe::Tuatha_De_Cael);
+
+  npc->purge();
+}
+
+void TestCreature::player_base()
+{
+  QCOMPARE(_Player.ref(), static_cast<dbRef>(5));
+  QCOMPARE(_Player.name().c_str(), "Player");
 }
 

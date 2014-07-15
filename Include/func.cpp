@@ -184,7 +184,7 @@ std::vector<BodyPartType> fun::Str2BodyParts(const string &str)
 }
 
 
-SkillGroup fun::skill_group(Skill skill)
+Profession fun::skill_group(Skill skill)
 {
   const int s = static_cast<int>(skill);
   const int group_cnt = 7;
@@ -194,10 +194,10 @@ SkillGroup fun::skill_group(Skill skill)
     int low_bound = i*10;
     int high_bound = low_bound + 10;
 
-    if (s > low_bound && s < high_bound ) return static_cast<SkillGroup>(i);
+    if (s > low_bound && s < high_bound ) return static_cast<Profession>(i);
   }
 
-  return SkillGroup::Null;
+  return Profession::Null;
 }
 
 

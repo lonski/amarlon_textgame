@@ -59,7 +59,14 @@ SOURCES += main.cpp\
     Creatures/mob.cpp \
     Creatures/npc.cpp \
     Creatures/creaturemonitor.cpp \
-    Creatures/player.cpp
+    Creatures/player.cpp \
+    Commands/command.cpp \
+    Commands/commandlogger.cpp \
+    Tests/testcommands.cpp \
+    Commands/commandparser.cpp \
+    Commands/commandexecutor.cpp \
+    Commands/go.cpp \
+    Commands/take.cpp
 
 HEADERS  += game.h \
     Tests/testlocation.h \
@@ -92,7 +99,14 @@ HEADERS  += game.h \
     Creatures/mob.h \
     Creatures/npc.h \
     Creatures/creaturemonitor.h \
-    Creatures/player.h
+    Creatures/player.h \
+    Commands/command.h \
+    Commands/commandlogger.h \
+    Tests/testcommands.h \
+    Commands/commandparser.h \
+    Commands/commandexecutor.h \
+    Commands/go.h \
+    Commands/take.h
 
 FORMS    += game.ui
 

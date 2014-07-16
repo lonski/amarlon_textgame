@@ -10,7 +10,7 @@
 #include <map>
 #include <algorithm>
 #include <set>
-#include <unordered_set>
+#include <deque>
 
 #include "soci.h"
 #include "soci-firebird.h"

@@ -7,6 +7,7 @@
 #include "Tests/testitems.h"
 #include "Tests/testfun.h"
 #include "Tests/testcreature.h"
+#include "Tests/testcommands.h"
 
 int main(int argc, char *argv[])
 {
@@ -18,15 +19,17 @@ int main(int argc, char *argv[])
   TestItems item_tests;
   TestFun fun_tests;
   TestCreature crt_tests;
+  TestCommands cmd_tests;
 
   //TEST EXECUTION
   try
   {
-    QTest::qExec(&db_tests, argc, argv);
-    QTest::qExec(&location_tests, argc, argv);
-    QTest::qExec(&item_tests, argc, argv);
-    QTest::qExec(&fun_tests, argc, argv);
-    QTest::qExec(&crt_tests, argc, argv);
+    //QTest::qExec(&db_tests, argc, argv);
+    //QTest::qExec(&location_tests, argc, argv);
+    //QTest::qExec(&item_tests, argc, argv);
+    //QTest::qExec(&fun_tests, argc, argv);
+    //QTest::qExec(&crt_tests, argc, argv);
+    QTest::qExec(&cmd_tests, argc, argv);
   }
   catch(soci::soci_error &e)
   {

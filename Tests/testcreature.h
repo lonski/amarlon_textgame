@@ -58,6 +58,7 @@ private slots:
   void npc_load();
 
   void player_base();
+  void player_load();
 
 };
 

@@ -27,6 +27,14 @@ enum class FatigueLevel
 //TODO
 };
 
+enum class CommandID
+{
+  Null = 0,
+  Go = 1,
+  Take = 2,
+  End = 3
+};
+
 enum class Bless
 {
   Null = 0,

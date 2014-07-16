@@ -100,7 +100,8 @@ DB::DB()
 
 DB *DB::Instance()
 {
-  if (_instance == nullptr)  {
+  if (_instance == nullptr)
+  {
     _instance = new DB;
   }
 

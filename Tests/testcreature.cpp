@@ -828,7 +828,12 @@ void TestCreature::npc_load()
 
 void TestCreature::player_base()
 {
-  QCOMPARE(_Player.ref(), static_cast<dbRef>(5));
-  QCOMPARE(_Player.name().c_str(), "Player");
+  QCOMPARE(_Player->ref(), static_cast<dbRef>(5));
+  //QCOMPARE(_Player.name().c_str(), "Player");
+}
+
+void TestCreature::player_load()
+{
+  _Player->save_to_db();
 }
 

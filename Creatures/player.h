@@ -8,8 +8,8 @@
 class Player : public Creature
 {
 private:
-  const dbRef player_ref = 5;
-  static Player *_player;
+  static const dbRef player_ref;
+  static Player *_instance;
   friend class Creature;
   Player();
 
@@ -29,8 +29,19 @@ private:
   BravePoints _brave;
 
 public:
-  static Player& inst();
+  static Player *inst();
   ~Player() {}
+
+  Profession profession() const { return _prof; }
+  Bless bless() const { return _bless; }
+  Splot splot() const { return _splot; }
+  Season birth_season() const { return _birth_season; }
+  Tribe tribe() const { return _tribe; }
+  Clan clan() const { return _clan; }
+
+  void load(MapRow *data_source = nullptr);
+  void save_to_db();
+
 };
 
 #endif // PLAYER_H

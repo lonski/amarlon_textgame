@@ -1,4 +1,5 @@
 #include "take.h"
+#include "game.h"
 
 Take::Take()
 {
@@ -17,4 +18,5 @@ CommandID Take::id() const
 void Take::execute(std::vector<std::string> params)
 {
   //TODO
+  _Game->console()->append("Hohoh wywołanie tejk!", Console::font_standard);
 }

@@ -42,9 +42,9 @@ int main(int argc, char *argv[])
     qDebug() << _Database.get_last_query().c_str();
   }
 
-  //START GAME
-  Game main_window;
-  main_window.show();    
+  //START GAME  
+  _Game->console()->clear();
+  _Game->show();
   amarlon.exec();
 
   return 0;

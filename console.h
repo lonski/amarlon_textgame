@@ -23,6 +23,9 @@ struct FontConf{
 class Console : public QWidget
 {
   Q_OBJECT
+public:
+  static const FontConf font_standard;
+
 private:
   Ui::Console *ui;
   CommandExecutor cmd_exec;
@@ -32,13 +35,11 @@ public:
   ~Console();
 
   void handle_player_cmd(std::string cmd);
+  void append(std::string txt, const FontConf& font);
+  void clear();
 
-  const FontConf font_standard;
 private slots:
   void on_c_msg_returnPressed();
-
-
-  void append(std::string txt, const FontConf& font);
 };
 
 #endif // CONSOLE_H

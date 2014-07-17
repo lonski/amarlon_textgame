@@ -1,10 +1,11 @@
 #include "console.h"
 #include "ui_console.h"
 
+const FontConf Console::font_standard(Qt::black, QFont::Normal, false);
+
 Console::Console(QWidget *parent)
   : QWidget(parent)
   , ui(new Ui::Console)
-  , font_standard(Qt::black, QFont::Normal, false)
 {
   ui->setupUi(this);
 
@@ -24,7 +25,7 @@ Console::~Console()
 void Console::handle_player_cmd(std::string cmd)
 {
   cmd_exec.execute(cmd);
-  append(ui->c_msg->text().toStdString(), font_standard);
+  append(ui->c_msg->text().toStdString(), Console::font_standard);
 }
 
 void Console::append(std::string txt, const FontConf &font)
@@ -37,6 +38,11 @@ void Console::append(std::string txt, const FontConf &font)
   ui->c_log->append(txt.c_str());
   ui->c_log->verticalScrollBar()->setValue(ui->c_log->verticalScrollBar()->maximum());
   ui->c_log->setFontItalic(false);
+}
+
+void Console::clear()
+{
+  ui->c_log->clear();
 }
 
 void Console::on_c_msg_returnPressed()

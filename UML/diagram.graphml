@@ -2126,7 +2126,7 @@ tick_time(o-&gt;get_last_tick())
                   <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
                 </y:ModelParameter>
               </y:NodeLabel>
-              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="main form" use3DEffect="false">
+              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="main form, singleton" use3DEffect="false">
                 <y:AttributeLabel>Console *_console;
 MiniMap *_minimap;
 Navigator *_navigator;</y:AttributeLabel>

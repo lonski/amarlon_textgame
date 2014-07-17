@@ -354,14 +354,14 @@ TIME<y:LabelModel>
         <y:ProxyAutoBoundsNode>
           <y:Realizers active="0">
             <y:GroupNode>
-              <y:Geometry height="2664.9063660037527" width="6593.4093906005255" x="-3418.69575558272" y="-867.6781120238007"/>
+              <y:Geometry height="3264.8893971663124" width="7065.610970763658" x="-3418.69575558272" y="-1467.6611431863605"/>
               <y:Fill color="#F5F5F5" transparent="false"/>
               <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="45" fontStyle="plain" hasLineColor="false" height="56.3828125" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="6593.4093906005255" x="0.0" y="0.0">CLASS DIAGRAMS</y:NodeLabel>
+              <y:NodeLabel alignment="center" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="45" fontStyle="plain" hasLineColor="false" height="56.3828125" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="7065.610970763658" x="0.0" y="0.0">CLASS DIAGRAMS</y:NodeLabel>
               <y:Shape type="roundrectangle"/>
               <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
               <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
-              <y:BorderInsets bottom="149" bottomF="149.2103326657632" left="0" leftF="0.0" right="72" rightF="72.17170731707301" top="15" topF="15.24127720672766"/>
+              <y:BorderInsets bottom="149" bottomF="149.21033266576296" left="0" leftF="0.0" right="496" rightF="496.1987006002664" top="0" topF="0.0"/>
             </y:GroupNode>
             <y:GroupNode>
               <y:Geometry height="50.0" width="50.0" x="0.0" y="60.0"/>
@@ -456,7 +456,7 @@ TIME<y:LabelModel>
                   <y:Geometry height="229.0252159125855" width="269.8528075842603" x="-10.463142484018249" y="627.4253191838271"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="34.265625" modelName="custom" textColor="#000000" visible="true" width="220.95654296875" x="24.448132307755145" y="25.96875">template Creature::Container
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="34.265625" modelName="custom" textColor="#000000" visible="true" width="220.95654296875" x="24.448132307755145" y="88.89878530718602">template Creature::Container
 &lt;typename T = Creature&gt;<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
@@ -760,7 +760,7 @@ wygenerowane na podstawie stat z bazy<y:LabelModel>
                   <y:Geometry height="201.0779650149699" width="259.2679250694698" x="-10.463142484018249" y="900.8462887549474"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="42.3017578125" x="108.4830836284849" y="25.96875">Stats<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="42.3017578125" x="108.4830836284849" y="83.52647799595297">Stats<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -2111,6 +2111,121 @@ tick_time(o-&gt;get_last_tick())
             </node>
           </graph>
         </node>
+        <node id="n1::n12">
+          <data key="d4"/>
+          <data key="d5"/>
+          <data key="d6">
+            <y:UMLClassNode>
+              <y:Geometry height="255.73486053105376" width="250.520036574173" x="2885.196478006499" y="-1389.7623117870457"/>
+              <y:Fill color="#FFCC00" transparent="false"/>
+              <y:BorderStyle color="#000000" type="line" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="45.8056640625" x="102.3571862558365" y="25.96875">Game<y:LabelModel>
+                  <y:SmartNodeLabelModel distance="4.0"/>
+                </y:LabelModel>
+                <y:ModelParameter>
+                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                </y:ModelParameter>
+              </y:NodeLabel>
+              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="main form" use3DEffect="false">
+                <y:AttributeLabel>Console *_console;
+MiniMap *_minimap;
+Navigator *_navigator;</y:AttributeLabel>
+                <y:MethodLabel/>
+              </y:UML>
+            </y:UMLClassNode>
+          </data>
+        </node>
+        <node id="n1::n13">
+          <data key="d4"/>
+          <data key="d5"/>
+          <data key="d6">
+            <y:UMLClassNode>
+              <y:Geometry height="238.63031092035226" width="222.82695625208453" x="2472.731282480862" y="-1396.2783306863605"/>
+              <y:Fill color="#FFCC00" transparent="false"/>
+              <y:BorderStyle color="#000000" type="line" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="61.66845703125" x="80.57924961041726" y="25.96875">Console<y:LabelModel>
+                  <y:SmartNodeLabelModel distance="4.0"/>
+                </y:LabelModel>
+                <y:ModelParameter>
+                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                </y:ModelParameter>
+              </y:NodeLabel>
+              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="widget" use3DEffect="false">
+                <y:AttributeLabel>CommandExecutor cmd_exec;</y:AttributeLabel>
+                <y:MethodLabel>append(string, FontConf);
+handle_player_cmd(string);</y:MethodLabel>
+              </y:UML>
+            </y:UMLClassNode>
+          </data>
+        </node>
+        <node id="n1::n14">
+          <data key="d4"/>
+          <data key="d5"/>
+          <data key="d6">
+            <y:UMLClassNode>
+              <y:Geometry height="88.76187623611088" width="151.96525072203576" x="2243.448867461221" y="-1396.2783306863605"/>
+              <y:Fill color="#FFCC00" transparent="false"/>
+              <y:BorderStyle color="#000000" type="line" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="70.6630859375" x="40.65108239226788" y="3.0">FontConf<y:LabelModel>
+                  <y:SmartNodeLabelModel distance="4.0"/>
+                </y:LabelModel>
+                <y:ModelParameter>
+                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                </y:ModelParameter>
+              </y:NodeLabel>
+              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="false">
+                <y:AttributeLabel>+QColor kolor
++QFont:Weight weight
++bool italic</y:AttributeLabel>
+                <y:MethodLabel/>
+              </y:UML>
+            </y:UMLClassNode>
+          </data>
+        </node>
+        <node id="n1::n15">
+          <data key="d4"/>
+          <data key="d5"/>
+          <data key="d6">
+            <y:UMLClassNode>
+              <y:Geometry height="255.73486053105376" width="250.520036574173" x="2472.731282480862" y="-1076.1876056295564"/>
+              <y:Fill color="#FFFF99" transparent="false"/>
+              <y:BorderStyle color="#000000" type="line" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="66.1181640625" x="92.2009362558365" y="25.96875">MiniMap<y:LabelModel>
+                  <y:SmartNodeLabelModel distance="4.0"/>
+                </y:LabelModel>
+                <y:ModelParameter>
+                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                </y:ModelParameter>
+              </y:NodeLabel>
+              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="widget" use3DEffect="false">
+                <y:AttributeLabel/>
+                <y:MethodLabel/>
+              </y:UML>
+            </y:UMLClassNode>
+          </data>
+        </node>
+        <node id="n1::n16">
+          <data key="d4"/>
+          <data key="d5"/>
+          <data key="d6">
+            <y:UMLClassNode>
+              <y:Geometry height="255.73486053105376" width="250.520036574173" x="2472.731282480862" y="-738.9923309620508"/>
+              <y:Fill color="#FFFF99" transparent="false"/>
+              <y:BorderStyle color="#000000" type="line" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="76.21728515625" x="87.1513757089615" y="25.96875">Navigator<y:LabelModel>
+                  <y:SmartNodeLabelModel distance="4.0"/>
+                </y:LabelModel>
+                <y:ModelParameter>
+                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                </y:ModelParameter>
+              </y:NodeLabel>
+              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="widget" use3DEffect="false">
+                <y:AttributeLabel/>
+                <y:MethodLabel/>
+              </y:UML>
+            </y:UMLClassNode>
+          </data>
+        </node>
       </graph>
     </node>
     <node id="n2" yfiles.foldertype="group">
@@ -2119,7 +2234,7 @@ tick_time(o-&gt;get_last_tick())
         <y:ProxyAutoBoundsNode>
           <y:Realizers active="0">
             <y:GroupNode>
-              <y:Geometry height="2501.108321454741" width="4399.879157321671" x="3785.6686626803094" y="-815.5233412746454"/>
+              <y:Geometry height="2501.108321454741" width="4399.879157321671" x="-2188.026280223443" y="-4584.640388582966"/>
               <y:Fill color="#F5F5F5" transparent="false"/>
               <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="45" fontStyle="plain" hasLineColor="false" height="56.3828125" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="4399.879157321671" x="0.0" y="0.0">ALGORYTMY </y:NodeLabel>
@@ -2148,7 +2263,7 @@ tick_time(o-&gt;get_last_tick())
             <y:ProxyAutoBoundsNode>
               <y:Realizers active="0">
                 <y:GroupNode>
-                  <y:Geometry height="2414.725508954741" width="1689.52669749701" x="3847.1488940414456" y="-744.1405287746454"/>
+                  <y:Geometry height="2414.725508954741" width="1689.52669749701" x="-2126.5460488623066" y="-4513.257576082966"/>
                   <y:Fill color="#F5F5F5" transparent="false"/>
                   <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="30" fontStyle="plain" hasLineColor="false" height="38.921875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="1689.52669749701" x="0.0" y="0.0">SYSTEM RPG: ALGORYTM WALKI</y:NodeLabel>
@@ -2174,7 +2289,7 @@ tick_time(o-&gt;get_last_tick())
             <node id="n2::n0::n0">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="63.20210969704158" width="195.82677297028022" x="4487.8147114712765" y="-545.6890553588767"/>
+                  <y:Geometry height="63.20210969704158" width="195.82677297028022" x="-1485.8802314324757" y="-4314.806102667197"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="123.94140625" x="35.94268336014011" y="22.61667984852079">Start::WALKA::ATAK<y:LabelModel>
@@ -2191,7 +2306,7 @@ tick_time(o-&gt;get_last_tick())
             <node id="n2::n0::n1">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="41.76163295540957" width="263.59399410008245" x="4453.931100906376" y="-168.6426310466738"/>
+                  <y:Geometry height="41.76163295540957" width="263.59399410008245" x="-1519.7638419973764" y="-3937.7596783549934"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="225.23828125" x="19.177856425040773" y="4.912066477704769">Wybór atakowanej części ciała:
@@ -2209,7 +2324,7 @@ BODYPART = głowa, noga, ręka, tors<y:LabelModel>
             <node id="n2::n0::n2">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="73.39144102473148" width="183.14626244022838" x="4494.154966736302" y="-281.9534127228209"/>
+                  <y:Geometry height="73.39144102473148" width="183.14626244022838" x="-1479.5399761674498" y="-4051.0704600311406"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="119.107421875" x="32.01942028261419" y="27.71134551236574">Weapon_Skill &gt;= 5<y:LabelModel>
@@ -2226,7 +2341,7 @@ BODYPART = głowa, noga, ręka, tors<y:LabelModel>
             <node id="n2::n0::n3">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="43.14505419278635" width="233.5569071601385" x="4715.51618021627" y="-266.8302193068483"/>
+                  <y:Geometry height="43.14505419278635" width="233.5569071601385" x="-1258.178762687482" y="-4035.9472666151682"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="192.05078125" x="20.753062955069254" y="5.6037770963931735">Wybór atakowanej części ciała:
@@ -2244,7 +2359,7 @@ BODYREGION = góra, dół<y:LabelModel>
             <node id="n2::n0::n4">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="47.228954524525676" width="263.59399410008155" x="4453.931100906377" y="-86.9616574398487"/>
+                  <y:Geometry height="47.228954524525676" width="263.59399410008155" x="-1519.7638419973755" y="-3856.0787047481685"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="229.708984375" x="16.942504862540773" y="7.645727262262838">Obliczenie Puli Ataku:
@@ -2262,7 +2377,7 @@ PA = DEX + WPN_SKILL + WPN_ATAK<y:LabelModel>
             <node id="n2::n0::n5">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="41.761632955409596" width="288.5211007499356" x="4441.467547581449" y="0.18663773609253553"/>
+                  <y:Geometry height="41.761632955409596" width="288.5211007499356" x="-1532.227395322303" y="-3768.9304095722273"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="269.107421875" x="9.706839437467352" y="4.912066477704798">Test Puli Ataku:
@@ -2280,7 +2395,7 @@ SUCCESS_COUNT = TEST(PA,0,TEST_LEVEL)<y:LabelModel>
             <node id="n2::n0::n6">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="80.53826660527534" width="347.0127632512731" x="4412.2217163307805" y="103.03242481215716"/>
+                  <y:Geometry height="80.53826660527534" width="347.0127632512731" x="-1561.4732265729717" y="-3666.0846224961624"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="59.875" modelName="custom" textColor="#000000" visible="true" width="308.18359375" x="19.414584750636095" y="10.33163330263767">Obliczenie Puli Obrony broniącego się:
@@ -2300,7 +2415,7 @@ ENEMY_PO = DEX
             <node id="n2::n0::n7">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="51.950964283099324" width="347.0127632512731" x="4412.2217163307805" y="244.65484553808756"/>
+                  <y:Geometry height="51.950964283099324" width="347.0127632512731" x="-1561.4732265729717" y="-3524.4622017702322"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="318.16796875" x="14.422397250636095" y="10.006732141549662">Test Puli Obrony broniącego się:
@@ -2318,7 +2433,7 @@ ENEMY_SUCCESS_COUNT = TEST(PO,0,TEST_LEVEL)<y:LabelModel>
             <node id="n2::n0::n8">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="105.77549443657153" width="158.7385768638169" x="4506.358809524509" y="491.37434750477564"/>
+                  <y:Geometry height="105.77549443657153" width="158.7385768638169" x="-1467.3361333792436" y="-3277.7426998035444"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="117.876953125" x="20.43081186940799" y="43.90337221828577">SUCCESS_DIFF &gt; 0<y:LabelModel>
@@ -2335,7 +2450,7 @@ ENEMY_SUCCESS_COUNT = TEST(PO,0,TEST_LEVEL)<y:LabelModel>
             <node id="n2::n0::n9">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="99.3944001682288" width="195.42986890678912" x="4833.681045365531" y="494.56489463894695"/>
+                  <y:Geometry height="99.3944001682288" width="195.42986890678912" x="-1140.0138975382215" y="-3274.552152669373"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="144.26171875" x="25.584075078394562" y="40.712825084114456">SUCCESS_COUNT == 0<y:LabelModel>
@@ -2352,7 +2467,7 @@ ENEMY_SUCCESS_COUNT = TEST(PO,0,TEST_LEVEL)<y:LabelModel>
             <node id="n2::n0::n10">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="40.84786025618291" width="164.80061641874363" x="4503.327789747046" y="690.8148476306437"/>
+                  <y:Geometry height="40.84786025618291" width="164.80061641874363" x="-1470.367153156706" y="-3078.302199677676"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="64.0703125" x="50.36515195937227" y="11.439555128091456">TRAFIONY<y:LabelModel>
@@ -2369,7 +2484,7 @@ ENEMY_SUCCESS_COUNT = TEST(PO,0,TEST_LEVEL)<y:LabelModel>
             <node id="n2::n0::n11">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="40.84786025618291" width="164.80061641874363" x="4848.995671609553" y="690.8148476306437"/>
+                  <y:Geometry height="40.84786025618291" width="164.80061641874363" x="-1124.6992712941992" y="-3078.302199677676"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="84.16796875" x="40.31632383437136" y="11.439555128091456">NIETRAFIONY<y:LabelModel>
@@ -2386,7 +2501,7 @@ ENEMY_SUCCESS_COUNT = TEST(PO,0,TEST_LEVEL)<y:LabelModel>
             <node id="n2::n0::n12">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="40.84786025618291" width="164.80061641874363" x="5356.874975119712" y="690.8148476306437"/>
+                  <y:Geometry height="40.84786025618291" width="164.80061641874363" x="-616.8199677840403" y="-3078.302199677676"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="92.294921875" x="36.25284727187136" y="11.439555128091456">ODPAROWANY<y:LabelModel>
@@ -2403,7 +2518,7 @@ ENEMY_SUCCESS_COUNT = TEST(PO,0,TEST_LEVEL)<y:LabelModel>
             <node id="n2::n0::n13">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="35.104875414674325" width="164.80061641874363" x="4848.995671609553" y="1592.6536343937178"/>
+                  <y:Geometry height="35.104875414674325" width="164.80061641874363" x="-1124.6992712941992" y="-2176.463412914602"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="44.130859375" x="60.33487852187136" y="8.568062707337049">Koniec<y:LabelModel>
@@ -2420,7 +2535,7 @@ ENEMY_SUCCESS_COUNT = TEST(PO,0,TEST_LEVEL)<y:LabelModel>
             <node id="n2::n0::n14">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="21.423809303347298" width="21.423809303347298" x="4920.684075167252" y="831.0209473250584"/>
+                  <y:Geometry height="21.423809303347298" width="21.423809303347298" x="-1053.0108677365006" y="-2938.0960999832614"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" modelName="custom" textColor="#000000" visible="true" width="4.0" x="8.711904651673649" y="8.711904651673649">
@@ -2438,7 +2553,7 @@ ENEMY_SUCCESS_COUNT = TEST(PO,0,TEST_LEVEL)<y:LabelModel>
             <node id="n2::n0::n15">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="112.1565887049145" width="248.07389662061723" x="4461.691149646109" y="785.6545576242748"/>
+                  <y:Geometry height="112.1565887049145" width="248.07389662061723" x="-1512.0037932576433" y="-2983.462489684045"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="119.107421875" x="64.48323737280862" y="47.09391935245719">Weapon_Skill &gt;= 5<y:LabelModel>
@@ -2455,7 +2570,7 @@ ENEMY_SUCCESS_COUNT = TEST(PO,0,TEST_LEVEL)<y:LabelModel>
             <node id="n2::n0::n16">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="80.53826660527534" width="274.26828859216494" x="4448.5939536603355" y="1205.0526748414943"/>
+                  <y:Geometry height="80.53826660527534" width="274.26828859216494" x="-1525.1009892434167" y="-2564.0643724668253"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="73.84375" modelName="custom" textColor="#000000" visible="true" width="256.7265625" x="8.770863046082013" y="3.9999999999997726">Obliczenie siły ciosu:
@@ -2476,7 +2591,7 @@ HIT_STR = WPN_DMG
             <node id="n2::n0::n17">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="112.1565887049145" width="248.07389662061723" x="4131.319403015816" y="785.6545576242747"/>
+                  <y:Geometry height="112.1565887049145" width="248.07389662061723" x="-1842.3755398879366" y="-2983.462489684045"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="140.412109375" x="53.83089362280862" y="47.093919352457306">BODYREGION == góra<y:LabelModel>
@@ -2493,7 +2608,7 @@ HIT_STR = WPN_DMG
             <node id="n2::n0::n18">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="94.32143022489595" width="205.99057992089638" x="4152.361061365676" y="938.8413983340658"/>
+                  <y:Geometry height="94.32143022489595" width="205.99057992089638" x="-1821.3338815380766" y="-2830.275648974254"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="73.84375" modelName="custom" textColor="#000000" visible="true" width="196.544921875" x="3.9999999999990905" y="10.238840112448088">Obliczenie trafionej częsci ciała:
@@ -2514,7 +2629,7 @@ BODYPART = switch(RZUT)
             <node id="n2::n0::n19">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="73.26381913936461" width="205.99057992089638" x="3862.1488940414456" y="938.8413983340658"/>
+                  <y:Geometry height="73.26381913936461" width="205.99057992089638" x="-2111.5460488623066" y="-2830.275648974254"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="59.875" modelName="custom" textColor="#000000" visible="true" width="262.75" x="4.0" y="6.694409569682421">Obliczenie trafionej częsci ciała:
@@ -2534,7 +2649,7 @@ BODYPART = switch(RZUT)
             <node id="n2::n0::n20">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="21.423809303347298" width="21.423809303347298" x="4244.644446674451" y="1101.8287156560943"/>
+                  <y:Geometry height="21.423809303347298" width="21.423809303347298" x="-1729.0504962293016" y="-2667.2883316522257"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" modelName="custom" textColor="#000000" visible="true" width="4.0" x="8.711904651673649" y="8.711904651673649">
@@ -2552,7 +2667,7 @@ BODYPART = switch(RZUT)
             <node id="n2::n0::n21">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="21.423809303347298" width="21.423809303347298" x="4575.016193304744" y="1101.8287156560943"/>
+                  <y:Geometry height="21.423809303347298" width="21.423809303347298" x="-1398.6787495990084" y="-2667.2883316522257"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" modelName="custom" textColor="#000000" visible="true" width="4.0" x="8.711904651673649" y="8.711904651673649">
@@ -2570,7 +2685,7 @@ BODYPART = switch(RZUT)
             <node id="n2::n0::n22">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="51.950964283099324" width="398.061517398015" x="4386.69733925741" y="352.13588154408717"/>
+                  <y:Geometry height="51.950964283099324" width="398.061517398015" x="-1586.9976036463422" y="-3416.9811657642326"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="379.802734375" x="9.129391511507492" y="10.006732141549662">Obliczenie różnicy sukcesów:
@@ -2588,7 +2703,7 @@ SUCCESS_DIFF = SUCCESS_COUNT - ENEMY_SUCCESS_COUNT<y:LabelModel>
             <node id="n2::n0::n23">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="71.96207590862241" width="321.3915244392647" x="4425.032335736786" y="1324.6057004337893"/>
+                  <y:Geometry height="71.96207590862241" width="321.3915244392647" x="-1548.6626071669662" y="-2444.5113468745303"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="59.875" modelName="custom" textColor="#000000" visible="true" width="296.119140625" x="12.636191907131433" y="4.0">Obliczenie obrażeń:
@@ -2608,7 +2723,7 @@ x = SUCCESS_DIFF<y:LabelModel>
             <node id="n2::n0::n24">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="99.3944001682288" width="195.42986890678912" x="5087.62069712061" y="494.56489463894695"/>
+                  <y:Geometry height="99.3944001682288" width="195.42986890678912" x="-886.074245783142" y="-3274.552152669373"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="148.591796875" x="23.419036015894562" y="40.712825084114456">SUCCESS_COUNT == -1<y:LabelModel>
@@ -2625,7 +2740,7 @@ x = SUCCESS_DIFF<y:LabelModel>
             <node id="n2::n0::n25">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="40.84786025618291" width="164.80061641874363" x="5102.9353233646325" y="690.8148476306437"/>
+                  <y:Geometry height="40.84786025618291" width="164.80061641874363" x="-870.7596195391197" y="-3078.302199677676"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="142.732421875" x="11.03409727187045" y="11.439555128091456">NIETRAFIONY &amp;&amp; PECH<y:LabelModel>
@@ -2642,7 +2757,7 @@ x = SUCCESS_DIFF<y:LabelModel>
             <node id="n2::n0::n26">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="21.423809303347298" width="21.423809303347298" x="5174.62372692233" y="831.0209473250584"/>
+                  <y:Geometry height="21.423809303347298" width="21.423809303347298" x="-799.071215981422" y="-2938.0960999832614"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" modelName="custom" textColor="#000000" visible="true" width="4.0" x="8.711904651673649" y="8.711904651673649">
@@ -2660,7 +2775,7 @@ x = SUCCESS_DIFF<y:LabelModel>
             <node id="n2::n0::n27">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="27.137534493088424" width="274.26828859216494" x="4448.5939536603355" y="1435.5825353294313"/>
+                  <y:Geometry height="27.137534493088424" width="274.26828859216494" x="-1525.1009892434167" y="-2333.5345119788885"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="244.3046875" x="14.981800546082013" y="4.0">ENEMY.DAMAGE_LEVEL += DMG_LV^2 <y:LabelModel>
@@ -2677,7 +2792,7 @@ x = SUCCESS_DIFF<y:LabelModel>
             <node id="n2::n0::n28">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="47.22895452452565" width="428.4553335966175" x="4371.500431158108" y="-443.16983785199255"/>
+                  <y:Geometry height="47.22895452452565" width="428.4553335966175" x="-1602.1945117456444" y="-4212.2868851603125"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="386.81640625" x="20.819463673308746" y="7.645727262262824">Inicjatywa:
@@ -2695,7 +2810,7 @@ INICJATYWA=REFLEKS+SKILL_INICJATYWA+1K6+WPN_REFLEKS<y:LabelModel>
             <node id="n2::n0::n29">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="33.76004183956951" width="279.62384842785286" x="4445.91617374249" y="-355.82716894492864"/>
+                  <y:Geometry height="33.76004183956951" width="279.62384842785286" x="-1527.778769161262" y="-4124.944216253249"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="267.033203125" x="6.2953226514264315" y="7.8956459197847835">Rozpoczyna postac o najwyzszej inicjatywie<y:LabelModel>
@@ -2712,7 +2827,7 @@ INICJATYWA=REFLEKS+SKILL_INICJATYWA+1K6+WPN_REFLEKS<y:LabelModel>
             <node id="n2::n0::n30">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="90.75781615808069" width="204.6235550329434" x="3862.8324064854223" y="1564.8271640220148"/>
+                  <y:Geometry height="90.75781615808069" width="204.6235550329434" x="-2110.86253641833" y="-2204.2898832863048"/>
                   <y:Fill color="#FF9900" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="45.90625" modelName="custom" textColor="#000000" visible="true" width="148.533203125" x="28.04517595397192" y="22.425783079040457">Dodatkowe warianty:
@@ -2736,7 +2851,7 @@ Walka zasięgowa - s157<y:LabelModel>
             <y:ProxyAutoBoundsNode>
               <y:Realizers active="0">
                 <y:GroupNode>
-                  <y:Geometry height="2023.5456720453753" width="1051.791004887522" x="5663.507189231996" y="-742.2255033143892"/>
+                  <y:Geometry height="2023.5456720453744" width="1051.791004887522" x="-310.1877536717566" y="-4511.342550622709"/>
                   <y:Fill color="#F5F5F5" transparent="false"/>
                   <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="30" fontStyle="plain" hasLineColor="false" height="38.921875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="1051.791004887522" x="0.0" y="0.0">SYSTEM RPG : ALGORYTM TESTOWANIA</y:NodeLabel>
@@ -2762,7 +2877,7 @@ Walka zasięgowa - s157<y:LabelModel>
             <node id="n2::n1::n0">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="79.5172915223406" width="263.86455249705796" x="6019.09882979419" y="-677.2912183542338"/>
+                  <y:Geometry height="79.5172915223406" width="263.86455249705796" x="45.403886890438116" y="-4446.408265662553"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="33.314453125" x="115.27504968602898" y="30.774270761170328">Start<y:LabelModel>
@@ -2779,7 +2894,7 @@ Walka zasięgowa - s157<y:LabelModel>
             <node id="n2::n1::n1">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="118.05910090313145" width="147.4121345375088" x="6077.325038773964" y="-103.30012723263579"/>
+                  <y:Geometry height="118.05910090313145" width="147.4121345375088" x="103.63009587021133" y="-3872.417174540956"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="88.01171875" x="29.70020789375394" y="50.045175451565726">SKILL &lt;= ATR<y:LabelModel>
@@ -2796,7 +2911,7 @@ Walka zasięgowa - s157<y:LabelModel>
             <node id="n2::n1::n2">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="30.0" width="97.89484301516768" x="5889.8087373583985" y="-59.27057678107005"/>
+                  <y:Geometry height="30.0" width="97.89484301516768" x="-83.88620554535373" y="-3828.3876240893896"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="77.95703125" x="9.968905882584295" y="6.015625">SKILL = ATR<y:LabelModel>
@@ -2813,7 +2928,7 @@ Walka zasięgowa - s157<y:LabelModel>
             <node id="n2::n1::n3">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="30.0" width="209.181127055067" x="6046.4405425151845" y="-562.4930239084794"/>
+                  <y:Geometry height="30.0" width="209.181127055067" x="72.74559961143223" y="-4331.610071216799"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="155.658203125" x="26.76146196503305" y="6.015625">ATR = testowany atrybut<y:LabelModel>
@@ -2830,7 +2945,7 @@ Walka zasięgowa - s157<y:LabelModel>
             <node id="n2::n1::n4">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="30.0" width="209.181127055067" x="6046.440542515186" y="-502.7659815567902"/>
+                  <y:Geometry height="30.0" width="209.181127055067" x="72.74559961143405" y="-4271.88302886511"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="193.638671875" x="7.77122759003305" y="6.015625">SKILL = testowana umiejętność<y:LabelModel>
@@ -2847,7 +2962,7 @@ Walka zasięgowa - s157<y:LabelModel>
             <node id="n2::n1::n5">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="30.0" width="209.181127055067" x="6046.440542515186" y="-442.7659815567902"/>
+                  <y:Geometry height="30.0" width="209.181127055067" x="72.74559961143405" y="-4211.88302886511"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="181.41015625" x="13.88548540253305" y="6.015625">TEST_LEVEL = trudność testu<y:LabelModel>
@@ -2864,7 +2979,7 @@ Walka zasięgowa - s157<y:LabelModel>
             <node id="n2::n1::n6">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="38.93353197568001" width="350.9690416976464" x="5975.546585193896" y="102.82693151241574"/>
+                  <y:Geometry height="38.93353197568001" width="350.9690416976464" x="1.8516422901439" y="-3666.290115795904"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="337.71484375" x="6.627098973823195" y="10.482390987840006">PULA = ATR+SKILL+TEST_LEVEL - 3*MOCNE_STARANIE<y:LabelModel>
@@ -2881,7 +2996,7 @@ Walka zasięgowa - s157<y:LabelModel>
             <node id="n2::n1::n7">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="30.0" width="156.9278113376522" x="6072.567200373894" y="180.9741001382265"/>
+                  <y:Geometry height="30.0" width="156.9278113376522" x="98.87225747014145" y="-3588.142947170093"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="84.208984375" x="36.359413481325646" y="6.015625">RZUT = 1k12<y:LabelModel>
@@ -2898,7 +3013,7 @@ Walka zasięgowa - s157<y:LabelModel>
             <node id="n2::n1::n8">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="38.93353197568001" width="288.4343178678864" x="6006.813947108776" y="618.558824295057"/>
+                  <y:Geometry height="38.93353197568001" width="288.4343178678864" x="33.119004205023884" y="-3150.5582230132627"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="262.99609375" x="12.71911205894321" y="10.482390987839949">PASSED = (RZUT &lt;= PULA) || (RZUT == 1)<y:LabelModel>
@@ -2915,7 +3030,7 @@ Walka zasięgowa - s157<y:LabelModel>
             <node id="n2::n1::n9">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="118.05910090313145" width="147.4121345375088" x="6077.325038773965" y="734.3856557252742"/>
+                  <y:Geometry height="118.05910090313145" width="147.4121345375088" x="103.63009587021315" y="-3034.7313915830455"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="57.87109375" x="44.77052039375394" y="50.04517545156568">PASSED?<y:LabelModel>
@@ -2932,7 +3047,7 @@ Walka zasięgowa - s157<y:LabelModel>
             <node id="n2::n1::n10">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="30.0" width="147.4121345375088" x="5845.241889149498" y="778.4152061768399"/>
+                  <y:Geometry height="30.0" width="147.4121345375088" x="-128.45305375425414" y="-2990.70184113148"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="134.20703125" x="6.60255164375485" y="6.015625">SUCCESS_COUNT = 0<y:LabelModel>
@@ -2949,7 +3064,7 @@ Walka zasięgowa - s157<y:LabelModel>
             <node id="n2::n1::n11">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="30.0" width="349.33548156495" x="5976.363365260244" y="921.3450031861189"/>
+                  <y:Geometry height="30.0" width="349.33548156495" x="2.6684223564916465" y="-2847.772044122201"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="336.783203125" x="6.276139219975448" y="6.015625">SUCCESS_COUNT = ceil(RZUT / 2) + MOCNE_STARANIE<y:LabelModel>
@@ -2966,7 +3081,7 @@ Walka zasięgowa - s157<y:LabelModel>
             <node id="n2::n1::n12">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="34.78582070125708" width="120.24143514290506" x="6090.910388471267" y="1166.287659135926"/>
+                  <y:Geometry height="34.78582070125708" width="120.24143514290506" x="117.21544556751451" y="-2602.829388172394"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="44.130859375" x="38.05528788395259" y="8.408535350628654">Koniec<y:LabelModel>
@@ -2984,7 +3099,7 @@ Walka zasięgowa - s157<y:LabelModel>
               <data key="d4"/>
               <data key="d6">
                 <y:UMLNoteNode>
-                  <y:Geometry height="55.08774516911552" width="241.78791464257847" x="5678.507189231996" y="-665.0764451776213"/>
+                  <y:Geometry height="55.08774516911552" width="241.78791464257847" x="-295.1877536717566" y="-4434.1934924859415"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="6" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="38.921875" modelName="custom" textColor="#000000" visible="true" width="231.671875" x="5.0580198212892356" y="8.08293508455779">TEST(ATR,SKILL,TEST_LEVEL, MOCNE_STARANIE)
@@ -3005,7 +3120,7 @@ ale jak się uda to dostaje się dodatkow sukcesy w liczbie MOCNE_STARANIE<y:Lab
               <data key="d4"/>
               <data key="d6">
                 <y:UMLNoteNode>
-                  <y:Geometry height="19.423809303347298" width="84.481178739391" x="5949.366524761709" y="970.9346050098461"/>
+                  <y:Geometry height="19.423809303347298" width="84.481178739391" x="-24.32841814204312" y="-2798.1824422984737"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="4" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="8.65625" modelName="custom" textColor="#000000" visible="true" width="62.81640625" x="1.9307903696098947" y="5.383779651673649">assert(SUCCESS_COUNT &gt; 0)<y:LabelModel>
@@ -3021,7 +3136,7 @@ ale jak się uda to dostaje się dodatkow sukcesy w liczbie MOCNE_STARANIE<y:Lab
             <node id="n2::n1::n15">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="158.7385768638171" width="228.4520317454635" x="6036.805090169987" y="267.27958482278257"/>
+                  <y:Geometry height="158.7385768638171" width="228.4520317454635" x="63.11014726623489" y="-3501.8374624855373"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="45.90625" modelName="custom" textColor="#000000" visible="true" width="180.578125" x="29.03289867856347" y="64.32668745878459">(RZUT != 11 &amp;&amp; RZUT != 12)
@@ -3040,7 +3155,7 @@ ale jak się uda to dostaje się dodatkow sukcesy w liczbie MOCNE_STARANIE<y:Lab
             <node id="n2::n1::n16">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="30.0" width="147.4121345375088" x="6352.318886620905" y="331.648873254691"/>
+                  <y:Geometry height="30.0" width="147.4121345375088" x="378.62394371715254" y="-3437.468174053629"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="110.740234375" x="18.33595008125394" y="6.015625">PULA = PULA - 10<y:LabelModel>
@@ -3057,7 +3172,7 @@ ale jak się uda to dostaje się dodatkow sukcesy w liczbie MOCNE_STARANIE<y:Lab
             <node id="n2::n1::n17">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="92.53472382975988" width="134.3308912874063" x="6083.865660399016" y="476.02113107594835"/>
+                  <y:Geometry height="92.53472382975988" width="134.3308912874063" x="110.17071749526349" y="-3293.0959162323716"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="80.8046875" x="26.763101893703606" y="37.282986914879984">RZUT != 12?<y:LabelModel>
@@ -3074,7 +3189,7 @@ ale jak się uda to dostaje się dodatkow sukcesy w liczbie MOCNE_STARANIE<y:Lab
             <node id="n2::n1::n18">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="38.93353197568001" width="147.4121345375088" x="6420.118013222046" y="502.82172700298827"/>
+                  <y:Geometry height="38.93353197568001" width="147.4121345375088" x="446.42307031829387" y="-3266.2953203053316"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="138.537109375" x="4.437512581253941" y="3.498015987839949">Wyjątkowy pech:
@@ -3092,7 +3207,7 @@ SUCCESS_COUNT = -1<y:LabelModel>
             <node id="n2::n1::n19">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="118.05910090313145" width="147.4121345375088" x="6077.325038773965" y="-280.648150211867"/>
+                  <y:Geometry height="118.05910090313145" width="147.4121345375088" x="103.63009587021315" y="-4049.765197520187"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="86.576171875" x="30.41798133125394" y="50.04517545156574">ATR != WOLA<y:LabelModel>
@@ -3109,7 +3224,7 @@ SUCCESS_COUNT = -1<y:LabelModel>
             <node id="n2::n1::n20">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="30.0" width="97.89484301516768" x="6317.793341558149" y="-236.61859976030124"/>
+                  <y:Geometry height="30.0" width="97.89484301516768" x="344.098398654397" y="-4005.735647068621"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="61.71484375" x="18.089999632583385" y="6.015625">SKILL = 0<y:LabelModel>
@@ -3126,7 +3241,7 @@ SUCCESS_COUNT = -1<y:LabelModel>
             <node id="n2::n1::n21">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="30.0" width="342.5459972634326" x="5979.758107411003" y="-382.7659815567902"/>
+                  <y:Geometry height="30.0" width="342.5459972634326" x="6.063164507250804" y="-4151.88302886511"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="341.505859375" x="0.5200689442162911" y="6.015625">MOCNE_STARANIE = modyfikator mocnego starania się.<y:LabelModel>
@@ -3143,7 +3258,7 @@ SUCCESS_COUNT = -1<y:LabelModel>
             <node id="n2::n1::n22">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="92.53472382975988" width="189.3678293518633" x="6056.347191366788" y="1009.9480161369206"/>
+                  <y:Geometry height="92.53472382975988" width="189.3678293518633" x="82.6522484630359" y="-2759.169031171399"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="144.26171875" x="22.55305530093119" y="37.282986914879984">SUCCESS_COUNT &lt;= 7<y:LabelModel>
@@ -3160,7 +3275,7 @@ SUCCESS_COUNT = -1<y:LabelModel>
             <node id="n2::n1::n23">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="30.0" width="147.4121345375088" x="6296.8708755414455" y="1041.2153780518006"/>
+                  <y:Geometry height="30.0" width="147.4121345375088" x="323.1759326376932" y="-2727.901669256519"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="134.20703125" x="6.602551643753941" y="6.015625">SUCCESS_COUNT = 7<y:LabelModel>
@@ -3177,7 +3292,7 @@ SUCCESS_COUNT = -1<y:LabelModel>
             <node id="n2::n1::n24">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="16.931518938433783" width="16.931518938433783" x="6484.4710468564235" y="1047.7496185825837"/>
+                  <y:Geometry height="16.931518938433783" width="16.931518938433783" x="510.7761039526713" y="-2721.3674287257363"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" modelName="custom" textColor="#000000" visible="true" width="4.0" x="6.465759469217119" y="6.465759469216891">
@@ -3200,7 +3315,7 @@ SUCCESS_COUNT = -1<y:LabelModel>
             <y:ProxyAutoBoundsNode>
               <y:Realizers active="0">
                 <y:GroupNode>
-                  <y:Geometry height="1155.1665757550459" width="775.0835024950943" x="6878.4854481829425" y="-742.2255033143892"/>
+                  <y:Geometry height="1155.1665757550463" width="775.0835024950943" x="904.7905052791898" y="-4511.3425506227095"/>
                   <y:Fill color="#F5F5F5" transparent="false"/>
                   <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="30" fontStyle="plain" hasLineColor="false" height="38.921875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="775.0835024950943" x="0.0" y="0.0">ALGORYTM WYKONANIA KOMENDY GRACZA</y:NodeLabel>
@@ -3226,7 +3341,7 @@ SUCCESS_COUNT = -1<y:LabelModel>
             <node id="n2::n2::n0">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="85.01755716483126" width="289.6874104692133" x="7089.792492085381" y="-661.809670168572"/>
+                  <y:Geometry height="85.01755716483126" width="289.6874104692133" x="1116.097549181629" y="-4430.926717476892"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="242.646484375" x="23.520463047106205" y="26.54002858241563">Start
@@ -3244,7 +3359,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
             <node id="n2::n2::n1">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="54.822226616319995" width="283.06562745418887" x="7093.103383592895" y="-462.28588823586557"/>
+                  <y:Geometry height="54.822226616319995" width="283.06562745418887" x="1119.4084406891425" y="-4231.402935544185"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="217.46875" x="32.798438727094435" y="18.426738308159997">command_parser.parse(RAW_CMD)<y:LabelModel>
@@ -3261,7 +3376,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
             <node id="n2::n2::n2">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="54.822226616319995" width="131.7105871107742" x="7168.780903764601" y="-192.22614976558896"/>
+                  <y:Geometry height="54.822226616319995" width="131.7105871107742" x="1195.085960860849" y="-3961.343197073909"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="62.359375" x="34.67560605538711" y="18.426738308159997">index = 0<y:LabelModel>
@@ -3278,7 +3393,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
             <node id="n2::n2::n3">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="119.15757845229257" width="144.22575700917105" x="7162.5233188154025" y="27.709691060718058"/>
+                  <y:Geometry height="119.15757845229257" width="144.22575700917105" x="1188.8283759116503" y="-3741.407356247602"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="74.306640625" x="34.95955819208575" y="50.594414226146284">ACCEPTED?<y:LabelModel>
@@ -3295,7 +3410,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
             <node id="n2::n2::n4">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="54.822226616319995" width="283.06562745418887" x="7093.103383592895" y="-377.4636616195456"/>
+                  <y:Geometry height="54.822226616319995" width="283.06562745418887" x="1119.4084406891425" y="-4146.580708927865"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="218.810546875" x="32.127540289594435" y="18.426738308159997">CMD = command_parser.get_cmd()<y:LabelModel>
@@ -3312,7 +3427,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
             <node id="n2::n2::n5">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="54.822226616319995" width="283.06562745418887" x="7093.103383592895" y="-292.6414350032256"/>
+                  <y:Geometry height="54.822226616319995" width="283.06562745418887" x="1119.4084406891425" y="-4061.7584823115453"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="260.095703125" x="11.484962164594435" y="18.426738308159997">PARAMS = command_parser.get_params()<y:LabelModel>
@@ -3329,7 +3444,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
             <node id="n2::n2::n6">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="54.822226616319995" width="283.06562745418887" x="7093.103383592895" y="-547.1081148521855"/>
+                  <y:Geometry height="54.822226616319995" width="283.06562745418887" x="1119.4084406891425" y="-4316.2251621605055"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="201.9765625" x="40.544532477094435" y="18.426738308159997">command_logger.log(RAW_CMD)<y:LabelModel>
@@ -3346,7 +3461,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
             <node id="n2::n2::n7">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="30.0" width="85.5756788760973" x="7475.047827899501" y="72.2884802868644"/>
+                  <y:Geometry height="30.0" width="85.5756788760973" x="1501.3528849957484" y="-3696.8285670214555"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="57.150390625" x="14.21264412554865" y="6.015625">++index<y:LabelModel>
@@ -3363,7 +3478,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
             <node id="n2::n2::n8">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="54.822226616319995" width="283.06562745418887" x="7093.103383592895" y="-82.25822935243542"/>
+                  <y:Geometry height="54.822226616319995" width="283.06562745418887" x="1119.4084406891425" y="-3851.3752766607554"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="275.576171875" x="3.7447277895944353" y="18.426738308159997">ACCEPTED = commands[index].accept(CMD)<y:LabelModel>
@@ -3380,7 +3495,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
             <node id="n2::n2::n9">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="54.822226616319995" width="283.06562745418887" x="7093.103383592895" y="208.0217642335228"/>
+                  <y:Geometry height="54.822226616319995" width="283.06562745418887" x="1119.4084406891425" y="-3561.095283074797"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="223.849609375" x="29.608009039594435" y="18.426738308159997">commands[index].execute(PARAMS)<y:LabelModel>
@@ -3397,7 +3512,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
             <node id="n2::n2::n10">
               <data key="d6">
                 <y:ShapeNode>
-                  <y:Geometry height="30.0" width="98.58275265560997" x="7185.344820992182" y="330.9239281474496"/>
+                  <y:Geometry height="30.0" width="98.58275265560997" x="1211.6498780884294" y="-3438.19311916087"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="49.791015625" x="24.395868515304755" y="6.015625">KONIEC<y:LabelModel>
@@ -4053,7 +4168,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="4832.294633796339" y="-63.34718017758587"/>
+            <y:Point x="-1141.4003091074128" y="-3832.4642274859057"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -4107,7 +4222,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="24.09765625" x="63.45390745525947" y="-33.223666518790424">NIE<y:LabelModel>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="24.09765625" x="63.45366669994519" y="-33.22364839742295">NIE<y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="false" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -4125,7 +4240,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="27.408203125" x="-43.704030949831576" y="37.8626548445892">TAK<y:LabelModel>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="27.408203125" x="-43.70414963483472" y="37.86261193080054">TAK<y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="false" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -4143,7 +4258,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="27.408203125" x="-43.70411783732561" y="39.447129812659796">TAK<y:LabelModel>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="27.408203125" x="-43.70411445201489" y="39.44702586371477">TAK<y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="false" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -4162,7 +4277,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
           <y:Path sx="0.0" sy="0.0" tx="-40.51907254893649" ty="-1.7577787501986109"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="24.09765625" x="14.582805295175604" y="-23.323898690138208">NIE<y:LabelModel>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="24.09765625" x="14.582869715641891" y="-23.323880568771074">NIE<y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="false" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -4178,7 +4293,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="5439.275283329083" y="841.732851976732"/>
+            <y:Point x="-534.4196595746689" y="-2927.3841953315878"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -4222,7 +4337,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="27.408203125" x="-44.701076929261035" y="133.89570278930728">TAK<y:LabelModel>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="27.408203125" x="-44.70119561426327" y="133.8956598755185">TAK<y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="false" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -4240,7 +4355,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="24.09765625" x="-53.22437692122912" y="-38.984372144361714">NIE<y:LabelModel>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="24.09765625" x="-53.22425146560636" y="-38.98429298783776">NIE<y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="false" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -4258,7 +4373,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="27.408203125" x="-43.70419554887576" y="11.500405632408729">TAK<y:LabelModel>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="27.408203125" x="-43.70407009325322" y="11.500484788932681">TAK<y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="false" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -4274,11 +4389,11 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="3965.1441840018933" y="841.732851976732"/>
+            <y:Point x="-2008.550758901859" y="-2927.3841953315878"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="24.09765625" x="-103.67055024114552" y="-38.984372144361714">NIE<y:LabelModel>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="24.09765625" x="-103.67030271521025" y="-38.98429298783776">NIE<y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="false" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -4304,7 +4419,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="3965.1441840018933" y="1112.540620307768"/>
+            <y:Point x="-2008.550758901859" y="-2656.576427000552"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -4356,7 +4471,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="4585.7280979564175" y="1610.206072101055"/>
+            <y:Point x="-1387.9668449473347" y="-2158.9109752072645"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -4370,7 +4485,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="24.09765625" x="-51.585827587865424" y="-28.774624474670688">NIE<y:LabelModel>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="24.09765625" x="-51.5859004965001" y="-28.77455294754145">NIE<y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="false" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -4418,7 +4533,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="27.408203125" x="-43.70424551978067" y="35.074085289514784">TAK<y:LabelModel>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="27.408203125" x="-43.704104805369354" y="35.07409864251076">TAK<y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="false" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -4434,7 +4549,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="5938.756158865983" y="122.29369750025569"/>
+            <y:Point x="-34.93878403776944" y="-3646.823349808064"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -4468,7 +4583,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="24.09765625" x="-49.52716299349413" y="-29.412749588614588">NIE<y:LabelModel>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="24.09765625" x="-49.52698413210964" y="-29.412670432090636">NIE<y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="false" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -4486,7 +4601,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="27.408203125" x="-43.70424551978067" y="25.487897485387293">TAK<y:LabelModel>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="27.408203125" x="-43.704104805368985" y="25.487793536442496">TAK<y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="false" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -4512,7 +4627,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="5918.947956418252" y="1183.6805694865545"/>
+            <y:Point x="-54.7469864855002" y="-2585.436477821765"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -4556,7 +4671,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="27.408203125" x="-43.70424551978158" y="16.014092182055265">TAK<y:LabelModel>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="27.408203125" x="-43.7041048053693" y="16.014171338579217">TAK<y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="false" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -4582,7 +4697,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="6426.02495388966" y="195.9741001382265"/>
+            <y:Point x="452.3300109859074" y="-3573.142947170093"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -4596,7 +4711,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="27.408203125" x="-43.70424551978158" y="16.029202393351397">TAK<y:LabelModel>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="27.408203125" x="-43.70410480536901" y="16.029159479562622">TAK<y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="false" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -4614,7 +4729,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="24.09765625" x="66.0850475305615" y="-38.98439519276553">NIE<y:LabelModel>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="24.09765625" x="66.08485255161378" y="-38.98431603624158">NIE<y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="false" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -4640,11 +4755,11 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="5439.275283329083" y="544.2620947230614"/>
+            <y:Point x="-534.4196595746689" y="-3224.8549525852586"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="24.09765625" x="74.56478014699132" y="21.01563476212391">NIE<y:LabelModel>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="24.09765625" x="74.56466146198909" y="21.015652883491384">NIE<y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="false" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -4702,7 +4817,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="27.408203125" x="-43.70424551978249" y="20.674659165837767">TAK<y:LabelModel>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="27.408203125" x="-43.7041048053693" y="20.674692545994276">TAK<y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="false" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -4720,7 +4835,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="24.09765625" x="29.606658690040604" y="-31.947450620164147">NIE<y:LabelModel>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="24.09765625" x="29.606890957187147" y="-31.947508792741246">NIE<y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="false" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -4736,7 +4851,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="154.45115204692138" ty="5.6843418860808015E-14">
-            <y:Point x="6366.740763065732" y="122.2936975002558"/>
+            <y:Point x="393.04582016197946" y="-3646.823349808064"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -4760,7 +4875,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="27.408203125" x="-43.70424551978067" y="22.91083431692823">TAK<y:LabelModel>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="27.408203125" x="-43.70410480536873" y="22.910730367983433">TAK<y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="false" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -4778,7 +4893,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="24.09765625" x="5.102932104763568" y="-28.836627950877528">NIE<y:LabelModel>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="24.09765625" x="5.103149113120708" y="-28.836731899823462">NIE<y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="false" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -4804,7 +4919,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="6492.93680632564" y="1183.6805694865545"/>
+            <y:Point x="519.2418634218875" y="-2585.436477821765"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -5123,7 +5238,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="24.09765625" x="70.01655449414102" y="-31.0126724972001">NIE<y:LabelModel>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="24.09765625" x="70.01667994976378" y="-31.0126238582543">NIE<y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="false" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -5159,7 +5274,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="7517.8356673375465" y="-54.847116044275424"/>
+            <y:Point x="1544.1407244337943" y="-3823.9641633525953"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -5173,7 +5288,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="27.408203125" x="-43.70413471126085" y="21.60285732736827">TAK<y:LabelModel>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="27.408203125" x="-43.70413132595104" y="21.602860189947023">TAK<y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="false" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -5431,6 +5546,69 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
             </y:ModelParameter>
             <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
           </y:EdgeLabel>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="n1::e18" source="n1::n13" target="n1::n14">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="11.210151631766621" sy="-74.93421734212069" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="white_diamond" target="plain"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="n1::e19" source="n1::n13" target="n1::n11::n0">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="4.890071407295636" sy="27.03638423507323" tx="0.0" ty="0.0">
+            <y:Point x="2415.2840266066764" y="-1249.9267909911111"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="white_diamond" target="plain"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="n1::e20" source="n1::n12" target="n1::n13">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="7.58754761375576" sy="-15.068293704665393" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="white_diamond" target="plain"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="n1::e21" source="n1::n12" target="n1::n15">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="-21.457733895933416" sy="40.91664988456091" tx="0.0" ty="0.0">
+            <y:Point x="2772.6465723813394" y="-1220.978231636958"/>
+            <y:Point x="2772.6465723813394" y="-948.3201753640295"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="white_diamond" target="none"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="n1::e22" source="n1::n12" target="n1::n16">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="-4.369092534494484" sy="81.3482608063232" tx="0.0" ty="0.0">
+            <y:Point x="2844.4595912174923" y="-1180.5466207151958"/>
+            <y:Point x="2844.4595912174923" y="-611.1249006965239"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="white_diamond" target="plain"/>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
       </data>

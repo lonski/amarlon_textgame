@@ -6,9 +6,15 @@ Game::Game(QWidget *parent) :
   ui(new Ui::Game)
 {
   ui->setupUi(this);
+
+  _console = new Console(this);
+  _console->show();
+
+  this->setCentralWidget(_console);
 }
 
 Game::~Game()
 {
   delete ui;
+  delete _console;
 }

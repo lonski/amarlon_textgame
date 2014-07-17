@@ -66,7 +66,8 @@ SOURCES += main.cpp\
     Commands/commandparser.cpp \
     Commands/commandexecutor.cpp \
     Commands/go.cpp \
-    Commands/take.cpp
+    Commands/take.cpp \
+    console.cpp
 
 HEADERS  += game.h \
     Tests/testlocation.h \
@@ -106,9 +107,11 @@ HEADERS  += game.h \
     Commands/commandparser.h \
     Commands/commandexecutor.h \
     Commands/go.h \
-    Commands/take.h
+    Commands/take.h \
+    console.h
 
-FORMS    += game.ui
+FORMS    += game.ui \
+    console.ui
 
 OTHER_FILES += \
     TODO.txt

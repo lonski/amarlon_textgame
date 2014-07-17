@@ -2,6 +2,9 @@
 #define GAME_H
 
 #include <QMainWindow>
+#include <QLayout>
+
+#include "console.h"
 
 namespace Ui {
   class Game;
@@ -10,6 +13,8 @@ namespace Ui {
 class Game : public QMainWindow
 {
   Q_OBJECT
+private:
+  Console *_console;
   
 public:
   explicit Game(QWidget *parent = 0);

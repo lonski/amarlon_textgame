@@ -5,8 +5,12 @@
 
 class Take : public Command
 {
-public:
+private:
+  friend class Command;
   Take();
+
+public:
+
   virtual ~Take() {}
 
   virtual CommandID id() const;

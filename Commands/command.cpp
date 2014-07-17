@@ -1,4 +1,6 @@
 #include "command.h"
+#include "take.h"
+#include "go.h"
 
 Command::Command()
 {
@@ -22,4 +24,24 @@ void Command::add_name(std::string name)
 void Command::erase_name(std::string name)
 {
   _cmd_names.erase(name);
+}
+
+Command *Command::create(CommandID cmd)
+{
+  Command *r = nullptr;
+
+  switch(cmd)
+  {
+    case CommandID::Take:
+      r = new Take;
+      break;
+    case CommandID::Go:
+      r = new Go;
+      break;
+    default:
+      r = nullptr;
+      break;
+  }
+
+  return r;
 }

@@ -5,8 +5,9 @@
 
 class Go : public Command
 {
-public:
+  friend class Command;
   Go();
+public:  
   virtual ~Go() {}
 
   virtual CommandID id() const;

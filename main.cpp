@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 
   //START GAME
   Game main_window;
-  main_window.show();
+  main_window.show();    
   amarlon.exec();
 
   return 0;

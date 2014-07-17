@@ -21,6 +21,7 @@ public:
   virtual void add_name(std::string name);
   virtual void erase_name(std::string name);
 
+  static Command* create(CommandID cmd);
 };
 
 #endif // COMMAND_H

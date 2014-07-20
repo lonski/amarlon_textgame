@@ -3,14 +3,10 @@
 
 #include "command.h"
 
-class Take : public Command
+class Take : public NonActiveCommand
 {
-private:
-  friend class Command;
-  Take();
-
 public:
-
+  Take();
   virtual ~Take() {}
 
   virtual CommandID id() const;

@@ -32,7 +32,9 @@ enum class CommandID
   Null = 0,
   Go = 1,
   Take = 2,
-  End = 3
+  Exit = 3,
+  GameMenu = 4,
+  End = 5
 };
 
 enum class Bless

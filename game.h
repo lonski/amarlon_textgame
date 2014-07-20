@@ -7,6 +7,7 @@
 #include "console.h"
 
 #define _Game Game::inst()
+#define _Console Game::inst()->console()
 
 namespace Ui {
   class Game;

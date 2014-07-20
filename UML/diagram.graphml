@@ -354,14 +354,14 @@ TIME<y:LabelModel>
         <y:ProxyAutoBoundsNode>
           <y:Realizers active="0">
             <y:GroupNode>
-              <y:Geometry height="3264.8893971663124" width="7065.610970763658" x="-3418.69575558272" y="-1467.6611431863605"/>
+              <y:Geometry height="3416.6707683786253" width="7555.585301381567" x="-3418.69575558272" y="-1619.4425143986734"/>
               <y:Fill color="#F5F5F5" transparent="false"/>
               <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="45" fontStyle="plain" hasLineColor="false" height="56.3828125" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="7065.610970763658" x="0.0" y="0.0">CLASS DIAGRAMS</y:NodeLabel>
+              <y:NodeLabel alignment="center" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="45" fontStyle="plain" hasLineColor="false" height="56.3828125" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="7555.585301381567" x="0.0" y="0.0">CLASS DIAGRAMS</y:NodeLabel>
               <y:Shape type="roundrectangle"/>
               <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
               <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
-              <y:BorderInsets bottom="149" bottomF="149.21033266576296" left="0" leftF="0.0" right="496" rightF="496.1987006002664" top="0" topF="0.0"/>
+              <y:BorderInsets bottom="149" bottomF="149.21033266576296" left="0" leftF="0.0" right="971" rightF="971.1730312181758" top="115" topF="115.32043371231293"/>
             </y:GroupNode>
             <y:GroupNode>
               <y:Geometry height="50.0" width="50.0" x="0.0" y="60.0"/>
@@ -413,7 +413,7 @@ TIME<y:LabelModel>
                   <y:Geometry height="518.1736330088156" width="333.98005608398046" x="-577.538204395325" y="554.0362628182526"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="68.23828125" x="132.87088741699023" y="230.33197363167096">Creature<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="68.23828125" x="132.87088741699023" y="25.96875">Creature<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -456,7 +456,7 @@ TIME<y:LabelModel>
                   <y:Geometry height="229.0252159125855" width="269.8528075842603" x="-10.463142484018249" y="627.4253191838271"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="34.265625" modelName="custom" textColor="#000000" visible="true" width="220.95654296875" x="24.448132307755145" y="88.89878530718602">template Creature::Container
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="34.265625" modelName="custom" textColor="#000000" visible="true" width="220.95654296875" x="24.448132307755145" y="25.96875">template Creature::Container
 &lt;typename T = Creature&gt;<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
@@ -485,7 +485,7 @@ TIME<y:LabelModel>
                   <y:Geometry height="78.25111736320002" width="125.77246357853664" x="-708.606956123656" y="1167.966312999552"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="33.9482421875" x="45.91211069551832" y="26.66144303356782">NPC<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="33.9482421875" x="45.91211069551832" y="3.0">NPC<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -507,7 +507,7 @@ TIME<y:LabelModel>
                   <y:Geometry height="66.2865656100571" width="144.9157463835652" x="-546.4533982767764" y="1167.966312999552"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="37.896484375" x="53.509631004282596" y="21.122225291200493">MOB<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="37.896484375" x="53.509631004282596" y="3.0">MOB<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -528,7 +528,7 @@ TIME<y:LabelModel>
                   <y:Geometry height="450.0516083146365" width="289.7665862749482" x="-371.5376518932113" y="1167.9663129995522"/>
                   <y:Fill color="#FFFF99" transparent="false"/>
                   <y:BorderStyle color="#000000" type="dotted" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="50.45849609375" x="119.65404509059911" y="198.79358125246085">Player<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="50.45849609375" x="119.65404509059911" y="25.96875">Player<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -709,7 +709,7 @@ do wykonywnych testów<y:LabelModel>
                   <y:Geometry height="225.26156842744535" width="317.9791998630146" x="-1406.6538891408504" y="840.6815813045425"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="71.54541015625" x="123.2168948533822" y="94.722739072894">BodyPart<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="71.54541015625" x="123.21689485338231" y="3.0">BodyPart<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -760,7 +760,7 @@ wygenerowane na podstawie stat z bazy<y:LabelModel>
                   <y:Geometry height="201.0779650149699" width="259.2679250694698" x="-10.463142484018249" y="900.8462887549474"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="42.3017578125" x="108.4830836284849" y="83.52647799595297">Stats<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="42.3017578125" x="108.4830836284849" y="25.96875">Stats<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -786,7 +786,7 @@ string Attributes2Str();</y:MethodLabel>
                   <y:Geometry height="161.1195073873148" width="349.836135503007" x="-998.6146562091477" y="865.9231913242821"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="40.61962890625" x="154.6082532983785" y="65.02694687974554">Body<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="40.61962890625" x="154.6082532983785" y="3.0">Body<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -1122,7 +1122,7 @@ enterable = false<y:LabelModel>
                   <y:Geometry height="345.3279245283019" width="323.52143147624105" x="-2597.772949887337" y="529.8166965140358"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="37.4140625" x="143.05368448812033" y="150.30975174978425">Item<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="37.4140625" x="143.05368448812052" y="25.96875">Item<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -1153,7 +1153,7 @@ enterable = false<y:LabelModel>
                   <y:Geometry height="27.418935445853663" width="137.76919601951204" x="-3293.236496563656" y="1083.6241649986991"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="101.55078125" x="18.10920738475579" y="3.1277135826633184">OrdinaryItem<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="101.55078125" x="18.10920738475602" y="3.0">OrdinaryItem<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -1174,7 +1174,7 @@ enterable = false<y:LabelModel>
                   <y:Geometry height="146.3803727745368" width="161.24344930253096" x="-3137.204427185654" y="1083.6241649986991"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="63.42041015625" x="48.911519573140595" y="58.20318301138377">Weapon<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="63.42041015625" x="48.91151957314048" y="3.0">Weapon<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -1201,7 +1201,7 @@ enterable = false<y:LabelModel>
                   <y:Geometry height="79.39763914396679" width="154.5365197930971" x="-2960.2132030906705" y="1083.6241649986991"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="49.3603515625" x="52.58808411529844" y="27.19224718913233">Armor<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="49.3603515625" x="52.58808411529856" y="3.0">Armor<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -1222,7 +1222,7 @@ enterable = false<y:LabelModel>
                   <y:Geometry height="79.39763914396701" width="137.76919601951204" x="-2789.9289085051205" y="1083.6241649986991"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="49.65234375" x="44.05842613475579" y="27.19224718913233">Shield<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="49.65234375" x="44.05842613475602" y="3.0">Shield<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -1243,7 +1243,7 @@ enterable = false<y:LabelModel>
                   <y:Geometry height="63.33603593907003" width="137.76919601951204" x="-2454.3905164660964" y="1083.6241649986991"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="40.04833984375" x="48.86042808788079" y="19.756221228522463">Food<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="40.04833984375" x="48.86042808788102" y="3.0">Food<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -1264,7 +1264,7 @@ enterable = false<y:LabelModel>
                   <y:Geometry height="27.418935445853663" width="137.76919601951204" x="-2622.159712485609" y="1083.6241649986991"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="35.18603515625" x="51.29158043163079" y="3.1277135826633184">Tool<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="35.18603515625" x="51.29158043163102" y="3.0">Tool<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -1285,7 +1285,7 @@ enterable = false<y:LabelModel>
                   <y:Geometry height="250.5048187165886" width="353.0859544771407" x="-2084.2605333960532" y="581.5236600163153"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="34.265625" modelName="custom" textColor="#000000" visible="true" width="190.13232421875" x="81.4768151291953" y="98.8431776593427">template Item::Container
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="34.265625" modelName="custom" textColor="#000000" visible="true" width="190.13232421875" x="81.47681512919536" y="25.96875">template Item::Container
 &lt;typename T = Item&gt;<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
@@ -1317,7 +1317,7 @@ enterable = false<y:LabelModel>
                   <y:Geometry height="27.418935445853663" width="137.76919601951204" x="-2286.6213204465844" y="1083.6241649986991"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="57.82177734375" x="39.973709337881246" y="3.1277135826633184">Jewelry<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="57.82177734375" x="39.97370933788102" y="3.0">Jewelry<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -1376,7 +1376,7 @@ to nie jest zapisywany do bazy<y:LabelModel>
                   <y:Geometry height="27.418935445853663" width="137.76919601951204" x="-2118.8521244270723" y="1083.6241649986991"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="114.10009765625" x="11.834549181630791" y="3.1277135826633184">LocationObject<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="114.10009765625" x="11.834549181631019" y="3.0">LocationObject<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -1397,7 +1397,7 @@ to nie jest zapisywany do bazy<y:LabelModel>
                   <y:Geometry height="83.05187789819297" width="151.22883082192948" x="-2996.971541687381" y="529.8166965140358"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="112.798828125" x="19.21500134846474" y="28.884046811875237">AmountedItem<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="112.798828125" x="19.21500134846474" y="3.0">AmountedItem<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -1450,7 +1450,7 @@ to nie jest zapisywany do bazy<y:LabelModel>
                   <y:Geometry height="132.10000000000002" width="246.91615524464402" x="-738.7067740271225" y="-399.32499999999993"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="34.265625" modelName="custom" textColor="#000000" visible="true" width="212.583984375" x="17.16608543482198" y="44.02540544782369">template PrototypeManager
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="34.265625" modelName="custom" textColor="#000000" visible="true" width="212.583984375" x="17.16608543482201" y="3.0">template PrototypeManager
 &lt;class T, typename EnumT&gt;<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
@@ -1473,7 +1473,7 @@ to nie jest zapisywany do bazy<y:LabelModel>
                   <y:Geometry height="132.10000000000002" width="349.13381459252037" x="-1190.138990555784" y="-399.32499999999993"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="34.265625" modelName="custom" textColor="#000000" visible="true" width="212.583984375" x="68.27491510876007" y="44.02540544782369">template Prototypable
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="34.265625" modelName="custom" textColor="#000000" visible="true" width="212.583984375" x="68.27491510876018" y="3.0">template Prototypable
 &lt;class T, typename EnumT&gt;<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
@@ -1498,7 +1498,7 @@ to nie jest zapisywany do bazy<y:LabelModel>
               <y:Geometry height="132.10000000000002" width="199.41853416522258" x="-528.423637988014" y="-781.0540223170731"/>
               <y:Fill color="#FFCC00" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="34.265625" modelName="custom" textColor="#000000" visible="true" width="178.5224609375" x="10.44803661386129" y="44.02540544782357">MCMVal
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="34.265625" modelName="custom" textColor="#000000" visible="true" width="178.5224609375" x="10.44803661386129" y="25.96875">MCMVal
 template&lt;typename T&gt;<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
                 </y:LabelModel>
@@ -1522,7 +1522,7 @@ template&lt;typename T&gt;<y:LabelModel>
               <y:Geometry height="132.10000000000002" width="199.41853416522258" x="-784.4236740582498" y="-781.0540223170731"/>
               <y:Fill color="#FFCC00" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="34.265625" modelName="custom" textColor="#000000" visible="true" width="178.5224609375" x="10.44803661386129" y="44.02540544782357">CMVal
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="34.265625" modelName="custom" textColor="#000000" visible="true" width="178.5224609375" x="10.44803661386129" y="25.96875">CMVal
 template&lt;typename T&gt;<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
                 </y:LabelModel>
@@ -1545,7 +1545,7 @@ template&lt;typename T&gt;<y:LabelModel>
               <y:Geometry height="132.10000000000002" width="199.41853416522258" x="-1040.4237101284862" y="-781.0540223170731"/>
               <y:Fill color="#FFCC00" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="34.265625" modelName="custom" textColor="#000000" visible="true" width="178.5224609375" x="10.448036613861404" y="44.02540544782357">VLVal
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="34.265625" modelName="custom" textColor="#000000" visible="true" width="178.5224609375" x="10.44803661386129" y="25.96875">VLVal
 template&lt;typename T&gt;<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
                 </y:LabelModel>
@@ -1568,7 +1568,7 @@ template&lt;typename T&gt;<y:LabelModel>
               <y:Geometry height="113.74595423085702" width="125.92319546514318" x="-1222.928407498643" y="-781.0540223170731"/>
               <y:Fill color="#FFCC00" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="64.00439453125" x="30.95940046694659" y="43.09445566925763">Damage<y:LabelModel>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="64.00439453125" x="30.95940046694659" y="25.96875">Damage<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
                 </y:LabelModel>
                 <y:ModelParameter>
@@ -2111,120 +2111,148 @@ tick_time(o-&gt;get_last_tick())
             </node>
           </graph>
         </node>
-        <node id="n1::n12">
+        <node id="n1::n12" yfiles.foldertype="group">
           <data key="d4"/>
           <data key="d5"/>
           <data key="d6">
-            <y:UMLClassNode>
-              <y:Geometry height="255.73486053105376" width="250.520036574173" x="2885.196478006499" y="-1389.7623117870457"/>
-              <y:Fill color="#FFCC00" transparent="false"/>
-              <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="45.8056640625" x="102.3571862558365" y="25.96875">Game<y:LabelModel>
-                  <y:SmartNodeLabelModel distance="4.0"/>
-                </y:LabelModel>
-                <y:ModelParameter>
-                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                </y:ModelParameter>
-              </y:NodeLabel>
-              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="main form, singleton" use3DEffect="false">
-                <y:AttributeLabel>Console *_console;
+            <y:ProxyAutoBoundsNode>
+              <y:Realizers active="0">
+                <y:GroupNode>
+                  <y:Geometry height="964.4817977553635" width="922.2676471194509" x="2228.448867461221" y="-1432.7392681863605"/>
+                  <y:Fill color="#F5F5F5" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+                  <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="922.2676471194509" x="0.0" y="0.0">GAME FORMS</y:NodeLabel>
+                  <y:Shape type="roundrectangle"/>
+                  <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
+                  <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                  <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
+                </y:GroupNode>
+                <y:GroupNode>
+                  <y:Geometry height="50.0" width="50.0" x="0.0" y="60.0"/>
+                  <y:Fill color="#F5F5F5" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+                  <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="74.74462890625" x="-12.372314453125" y="0.0">Folder 15</y:NodeLabel>
+                  <y:Shape type="roundrectangle"/>
+                  <y:State closed="true" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
+                  <y:Insets bottom="5" bottomF="5.0" left="5" leftF="5.0" right="5" rightF="5.0" top="5" topF="5.0"/>
+                  <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
+                </y:GroupNode>
+              </y:Realizers>
+            </y:ProxyAutoBoundsNode>
+          </data>
+          <graph edgedefault="directed" id="n1::n12:">
+            <node id="n1::n12::n0">
+              <data key="d4"/>
+              <data key="d6">
+                <y:UMLClassNode>
+                  <y:Geometry height="255.73486053105376" width="250.520036574173" x="2885.196478006499" y="-1389.7623117870457"/>
+                  <y:Fill color="#FFCC00" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="45.8056640625" x="102.3571862558365" y="25.96875">Game<y:LabelModel>
+                      <y:SmartNodeLabelModel distance="4.0"/>
+                    </y:LabelModel>
+                    <y:ModelParameter>
+                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                    </y:ModelParameter>
+                  </y:NodeLabel>
+                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="main form, singleton" use3DEffect="false">
+                    <y:AttributeLabel>Console *_console;
 MiniMap *_minimap;
 Navigator *_navigator;</y:AttributeLabel>
-                <y:MethodLabel/>
-              </y:UML>
-            </y:UMLClassNode>
-          </data>
-        </node>
-        <node id="n1::n13">
-          <data key="d4"/>
-          <data key="d5"/>
-          <data key="d6">
-            <y:UMLClassNode>
-              <y:Geometry height="238.63031092035226" width="222.82695625208453" x="2472.731282480862" y="-1396.2783306863605"/>
-              <y:Fill color="#FFCC00" transparent="false"/>
-              <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="61.66845703125" x="80.57924961041726" y="25.96875">Console<y:LabelModel>
-                  <y:SmartNodeLabelModel distance="4.0"/>
-                </y:LabelModel>
-                <y:ModelParameter>
-                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                </y:ModelParameter>
-              </y:NodeLabel>
-              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="widget" use3DEffect="false">
-                <y:AttributeLabel>CommandExecutor cmd_exec;</y:AttributeLabel>
-                <y:MethodLabel>append(string, FontConf);
+                    <y:MethodLabel/>
+                  </y:UML>
+                </y:UMLClassNode>
+              </data>
+            </node>
+            <node id="n1::n12::n1">
+              <data key="d4"/>
+              <data key="d6">
+                <y:UMLClassNode>
+                  <y:Geometry height="238.63031092035226" width="222.82695625208453" x="2472.731282480862" y="-1396.2783306863605"/>
+                  <y:Fill color="#FFCC00" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="61.66845703125" x="80.57924961041726" y="25.96875">Console<y:LabelModel>
+                      <y:SmartNodeLabelModel distance="4.0"/>
+                    </y:LabelModel>
+                    <y:ModelParameter>
+                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                    </y:ModelParameter>
+                  </y:NodeLabel>
+                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="widget" use3DEffect="false">
+                    <y:AttributeLabel>-CommandExecutor cmd_exec;
+-Action active_action</y:AttributeLabel>
+                    <y:MethodLabel>append(string, FontConf);
 handle_player_cmd(string);</y:MethodLabel>
-              </y:UML>
-            </y:UMLClassNode>
-          </data>
-        </node>
-        <node id="n1::n14">
-          <data key="d4"/>
-          <data key="d5"/>
-          <data key="d6">
-            <y:UMLClassNode>
-              <y:Geometry height="88.76187623611088" width="151.96525072203576" x="2243.448867461221" y="-1396.2783306863605"/>
-              <y:Fill color="#FFCC00" transparent="false"/>
-              <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="70.6630859375" x="40.65108239226788" y="3.0">FontConf<y:LabelModel>
-                  <y:SmartNodeLabelModel distance="4.0"/>
-                </y:LabelModel>
-                <y:ModelParameter>
-                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                </y:ModelParameter>
-              </y:NodeLabel>
-              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="false">
-                <y:AttributeLabel>+QColor kolor
+                  </y:UML>
+                </y:UMLClassNode>
+              </data>
+            </node>
+            <node id="n1::n12::n2">
+              <data key="d4"/>
+              <data key="d6">
+                <y:UMLClassNode>
+                  <y:Geometry height="88.76187623611088" width="151.96525072203576" x="2243.448867461221" y="-1396.2783306863605"/>
+                  <y:Fill color="#FFCC00" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="70.6630859375" x="40.65108239226788" y="3.0">FontConf<y:LabelModel>
+                      <y:SmartNodeLabelModel distance="4.0"/>
+                    </y:LabelModel>
+                    <y:ModelParameter>
+                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                    </y:ModelParameter>
+                  </y:NodeLabel>
+                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="false">
+                    <y:AttributeLabel>+QColor kolor
 +QFont:Weight weight
 +bool italic</y:AttributeLabel>
-                <y:MethodLabel/>
-              </y:UML>
-            </y:UMLClassNode>
-          </data>
-        </node>
-        <node id="n1::n15">
-          <data key="d4"/>
-          <data key="d5"/>
-          <data key="d6">
-            <y:UMLClassNode>
-              <y:Geometry height="255.73486053105376" width="250.520036574173" x="2472.731282480862" y="-1076.1876056295564"/>
-              <y:Fill color="#FFFF99" transparent="false"/>
-              <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="66.1181640625" x="92.2009362558365" y="25.96875">MiniMap<y:LabelModel>
-                  <y:SmartNodeLabelModel distance="4.0"/>
-                </y:LabelModel>
-                <y:ModelParameter>
-                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                </y:ModelParameter>
-              </y:NodeLabel>
-              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="widget" use3DEffect="false">
-                <y:AttributeLabel/>
-                <y:MethodLabel/>
-              </y:UML>
-            </y:UMLClassNode>
-          </data>
-        </node>
-        <node id="n1::n16">
-          <data key="d4"/>
-          <data key="d5"/>
-          <data key="d6">
-            <y:UMLClassNode>
-              <y:Geometry height="255.73486053105376" width="250.520036574173" x="2472.731282480862" y="-738.9923309620508"/>
-              <y:Fill color="#FFFF99" transparent="false"/>
-              <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="76.21728515625" x="87.1513757089615" y="25.96875">Navigator<y:LabelModel>
-                  <y:SmartNodeLabelModel distance="4.0"/>
-                </y:LabelModel>
-                <y:ModelParameter>
-                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                </y:ModelParameter>
-              </y:NodeLabel>
-              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="widget" use3DEffect="false">
-                <y:AttributeLabel/>
-                <y:MethodLabel/>
-              </y:UML>
-            </y:UMLClassNode>
-          </data>
+                    <y:MethodLabel/>
+                  </y:UML>
+                </y:UMLClassNode>
+              </data>
+            </node>
+            <node id="n1::n12::n3">
+              <data key="d4"/>
+              <data key="d6">
+                <y:UMLClassNode>
+                  <y:Geometry height="255.73486053105376" width="250.520036574173" x="2472.731282480862" y="-1076.1876056295564"/>
+                  <y:Fill color="#FFFF99" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="66.1181640625" x="92.2009362558365" y="25.96875">MiniMap<y:LabelModel>
+                      <y:SmartNodeLabelModel distance="4.0"/>
+                    </y:LabelModel>
+                    <y:ModelParameter>
+                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                    </y:ModelParameter>
+                  </y:NodeLabel>
+                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="widget" use3DEffect="false">
+                    <y:AttributeLabel/>
+                    <y:MethodLabel/>
+                  </y:UML>
+                </y:UMLClassNode>
+              </data>
+            </node>
+            <node id="n1::n12::n4">
+              <data key="d4"/>
+              <data key="d6">
+                <y:UMLClassNode>
+                  <y:Geometry height="255.73486053105376" width="250.520036574173" x="2472.731282480862" y="-738.9923309620508"/>
+                  <y:Fill color="#FFFF99" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="76.21728515625" x="87.1513757089615" y="25.96875">Navigator<y:LabelModel>
+                      <y:SmartNodeLabelModel distance="4.0"/>
+                    </y:LabelModel>
+                    <y:ModelParameter>
+                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                    </y:ModelParameter>
+                  </y:NodeLabel>
+                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="widget" use3DEffect="false">
+                    <y:AttributeLabel/>
+                    <y:MethodLabel/>
+                  </y:UML>
+                </y:UMLClassNode>
+              </data>
+            </node>
+          </graph>
         </node>
       </graph>
     </node>
@@ -2292,7 +2320,7 @@ handle_player_cmd(string);</y:MethodLabel>
                   <y:Geometry height="63.20210969704158" width="195.82677297028022" x="-1485.8802314324757" y="-4314.806102667197"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="123.94140625" x="35.94268336014011" y="22.61667984852079">Start::WALKA::ATAK<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="123.94140625" x="35.94268336014011" y="22.616679848521017">Start::WALKA::ATAK<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -2309,7 +2337,7 @@ handle_player_cmd(string);</y:MethodLabel>
                   <y:Geometry height="41.76163295540957" width="263.59399410008245" x="-1519.7638419973764" y="-3937.7596783549934"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="225.23828125" x="19.177856425040773" y="4.912066477704769">Wybór atakowanej części ciała:
+                  <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="225.23828125" x="19.177856425041227" y="4.912066477704684">Wybór atakowanej części ciała:
 BODYPART = głowa, noga, ręka, tors<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
@@ -2327,7 +2355,7 @@ BODYPART = głowa, noga, ręka, tors<y:LabelModel>
                   <y:Geometry height="73.39144102473148" width="183.14626244022838" x="-1479.5399761674498" y="-4051.0704600311406"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="119.107421875" x="32.01942028261419" y="27.71134551236574">Weapon_Skill &gt;= 5<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="119.107421875" x="32.01942028261419" y="27.711345512365824">Weapon_Skill &gt;= 5<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -2344,7 +2372,7 @@ BODYPART = głowa, noga, ręka, tors<y:LabelModel>
                   <y:Geometry height="43.14505419278635" width="233.5569071601385" x="-1258.178762687482" y="-4035.9472666151682"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="192.05078125" x="20.753062955069254" y="5.6037770963931735">Wybór atakowanej części ciała:
+                  <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="192.05078125" x="20.753062955069254" y="5.60377709639306">Wybór atakowanej części ciała:
 BODYREGION = góra, dół<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
@@ -2362,7 +2390,7 @@ BODYREGION = góra, dół<y:LabelModel>
                   <y:Geometry height="47.228954524525676" width="263.59399410008155" x="-1519.7638419973755" y="-3856.0787047481685"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="229.708984375" x="16.942504862540773" y="7.645727262262838">Obliczenie Puli Ataku:
+                  <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="229.708984375" x="16.942504862540773" y="7.645727262262881">Obliczenie Puli Ataku:
 PA = DEX + WPN_SKILL + WPN_ATAK<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
@@ -2380,7 +2408,7 @@ PA = DEX + WPN_SKILL + WPN_ATAK<y:LabelModel>
                   <y:Geometry height="41.761632955409596" width="288.5211007499356" x="-1532.227395322303" y="-3768.9304095722273"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="269.107421875" x="9.706839437467352" y="4.912066477704798">Test Puli Ataku:
+                  <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="269.107421875" x="9.706839437467806" y="4.912066477704684">Test Puli Ataku:
 SUCCESS_COUNT = TEST(PA,0,TEST_LEVEL)<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
@@ -2398,7 +2426,7 @@ SUCCESS_COUNT = TEST(PA,0,TEST_LEVEL)<y:LabelModel>
                   <y:Geometry height="80.53826660527534" width="347.0127632512731" x="-1561.4732265729717" y="-3666.0846224961624"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="59.875" modelName="custom" textColor="#000000" visible="true" width="308.18359375" x="19.414584750636095" y="10.33163330263767">Obliczenie Puli Obrony broniącego się:
+                  <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="59.875" modelName="custom" textColor="#000000" visible="true" width="308.18359375" x="19.41458475063655" y="10.331633302637783">Obliczenie Puli Obrony broniącego się:
 ENEMY_PO = DEX  
                     + (WPN_SKILL || TARCZOWNICTWO) 
                     + (WPN_DEFENCE || SHLD_DEFENCE) <y:LabelModel>
@@ -2418,7 +2446,7 @@ ENEMY_PO = DEX
                   <y:Geometry height="51.950964283099324" width="347.0127632512731" x="-1561.4732265729717" y="-3524.4622017702322"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="318.16796875" x="14.422397250636095" y="10.006732141549662">Test Puli Obrony broniącego się:
+                  <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="318.16796875" x="14.42239725063655" y="10.006732141549492">Test Puli Obrony broniącego się:
 ENEMY_SUCCESS_COUNT = TEST(PO,0,TEST_LEVEL)<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
@@ -2436,7 +2464,7 @@ ENEMY_SUCCESS_COUNT = TEST(PO,0,TEST_LEVEL)<y:LabelModel>
                   <y:Geometry height="105.77549443657153" width="158.7385768638169" x="-1467.3361333792436" y="-3277.7426998035444"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="117.876953125" x="20.43081186940799" y="43.90337221828577">SUCCESS_DIFF &gt; 0<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="117.876953125" x="20.430811869408444" y="43.90337221828577">SUCCESS_DIFF &gt; 0<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -2453,7 +2481,7 @@ ENEMY_SUCCESS_COUNT = TEST(PO,0,TEST_LEVEL)<y:LabelModel>
                   <y:Geometry height="99.3944001682288" width="195.42986890678912" x="-1140.0138975382215" y="-3274.552152669373"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="144.26171875" x="25.584075078394562" y="40.712825084114456">SUCCESS_COUNT == 0<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="144.26171875" x="25.584075078394562" y="40.71282508411423">SUCCESS_COUNT == 0<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -2470,7 +2498,7 @@ ENEMY_SUCCESS_COUNT = TEST(PO,0,TEST_LEVEL)<y:LabelModel>
                   <y:Geometry height="40.84786025618291" width="164.80061641874363" x="-1470.367153156706" y="-3078.302199677676"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="64.0703125" x="50.36515195937227" y="11.439555128091456">TRAFIONY<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="64.0703125" x="50.365151959371815" y="11.439555128091342">TRAFIONY<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -2487,7 +2515,7 @@ ENEMY_SUCCESS_COUNT = TEST(PO,0,TEST_LEVEL)<y:LabelModel>
                   <y:Geometry height="40.84786025618291" width="164.80061641874363" x="-1124.6992712941992" y="-3078.302199677676"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="84.16796875" x="40.31632383437136" y="11.439555128091456">NIETRAFIONY<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="84.16796875" x="40.316323834371815" y="11.439555128091342">NIETRAFIONY<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -2504,7 +2532,7 @@ ENEMY_SUCCESS_COUNT = TEST(PO,0,TEST_LEVEL)<y:LabelModel>
                   <y:Geometry height="40.84786025618291" width="164.80061641874363" x="-616.8199677840403" y="-3078.302199677676"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="92.294921875" x="36.25284727187136" y="11.439555128091456">ODPAROWANY<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="92.294921875" x="36.252847271871815" y="11.439555128091342">ODPAROWANY<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -2521,7 +2549,7 @@ ENEMY_SUCCESS_COUNT = TEST(PO,0,TEST_LEVEL)<y:LabelModel>
                   <y:Geometry height="35.104875414674325" width="164.80061641874363" x="-1124.6992712941992" y="-2176.463412914602"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="44.130859375" x="60.33487852187136" y="8.568062707337049">Koniec<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="44.130859375" x="60.334878521871815" y="8.568062707337049">Koniec<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -2556,7 +2584,7 @@ ENEMY_SUCCESS_COUNT = TEST(PO,0,TEST_LEVEL)<y:LabelModel>
                   <y:Geometry height="112.1565887049145" width="248.07389662061723" x="-1512.0037932576433" y="-2983.462489684045"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="119.107421875" x="64.48323737280862" y="47.09391935245719">Weapon_Skill &gt;= 5<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="119.107421875" x="64.48323737280862" y="47.093919352457306">Weapon_Skill &gt;= 5<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -2573,7 +2601,7 @@ ENEMY_SUCCESS_COUNT = TEST(PO,0,TEST_LEVEL)<y:LabelModel>
                   <y:Geometry height="80.53826660527534" width="274.26828859216494" x="-1525.1009892434167" y="-2564.0643724668253"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="73.84375" modelName="custom" textColor="#000000" visible="true" width="256.7265625" x="8.770863046082013" y="3.9999999999997726">Obliczenie siły ciosu:
+                  <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="73.84375" modelName="custom" textColor="#000000" visible="true" width="256.7265625" x="8.770863046082013" y="4.0">Obliczenie siły ciosu:
 HIT_STR = WPN_DMG 
                   + floor(STR/6) 
                    - ENEMY_ARMOR(BODYPART)
@@ -2611,7 +2639,7 @@ HIT_STR = WPN_DMG
                   <y:Geometry height="94.32143022489595" width="205.99057992089638" x="-1821.3338815380766" y="-2830.275648974254"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="73.84375" modelName="custom" textColor="#000000" visible="true" width="196.544921875" x="3.9999999999990905" y="10.238840112448088">Obliczenie trafionej częsci ciała:
+                  <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="73.84375" modelName="custom" textColor="#000000" visible="true" width="196.544921875" x="4.0" y="10.238840112448088">Obliczenie trafionej częsci ciała:
 BODYPART = switch(RZUT)
                          5 || 10:  głowa
                          isODD: korpus
@@ -2632,7 +2660,7 @@ BODYPART = switch(RZUT)
                   <y:Geometry height="73.26381913936461" width="205.99057992089638" x="-2111.5460488623066" y="-2830.275648974254"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="59.875" modelName="custom" textColor="#000000" visible="true" width="262.75" x="4.0" y="6.694409569682421">Obliczenie trafionej częsci ciała:
+                  <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="59.875" modelName="custom" textColor="#000000" visible="true" width="262.75" x="4.0" y="6.694409569682193">Obliczenie trafionej częsci ciała:
 BODYPART = switch(RZUT)                         
                          isODD: korpus
                          isEVEN: noga<y:LabelModel>
@@ -2688,7 +2716,7 @@ BODYPART = switch(RZUT)
                   <y:Geometry height="51.950964283099324" width="398.061517398015" x="-1586.9976036463422" y="-3416.9811657642326"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="379.802734375" x="9.129391511507492" y="10.006732141549662">Obliczenie różnicy sukcesów:
+                  <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="379.802734375" x="9.129391511507492" y="10.006732141549492">Obliczenie różnicy sukcesów:
 SUCCESS_DIFF = SUCCESS_COUNT - ENEMY_SUCCESS_COUNT<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
@@ -2706,7 +2734,7 @@ SUCCESS_DIFF = SUCCESS_COUNT - ENEMY_SUCCESS_COUNT<y:LabelModel>
                   <y:Geometry height="71.96207590862241" width="321.3915244392647" x="-1548.6626071669662" y="-2444.5113468745303"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="59.875" modelName="custom" textColor="#000000" visible="true" width="296.119140625" x="12.636191907131433" y="4.0">Obliczenie obrażeń:
+                  <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="59.875" modelName="custom" textColor="#000000" visible="true" width="296.119140625" x="12.636191907131888" y="4.0">Obliczenie obrażeń:
 DMG_LV = odczyt z tabelki (s154) na podstawie:
 y = HIT_STR
 x = SUCCESS_DIFF<y:LabelModel>
@@ -2726,7 +2754,7 @@ x = SUCCESS_DIFF<y:LabelModel>
                   <y:Geometry height="99.3944001682288" width="195.42986890678912" x="-886.074245783142" y="-3274.552152669373"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="148.591796875" x="23.419036015894562" y="40.712825084114456">SUCCESS_COUNT == -1<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="148.591796875" x="23.419036015894562" y="40.71282508411423">SUCCESS_COUNT == -1<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -2743,7 +2771,7 @@ x = SUCCESS_DIFF<y:LabelModel>
                   <y:Geometry height="40.84786025618291" width="164.80061641874363" x="-870.7596195391197" y="-3078.302199677676"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="142.732421875" x="11.03409727187045" y="11.439555128091456">NIETRAFIONY &amp;&amp; PECH<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="142.732421875" x="11.03409727187136" y="11.439555128091342">NIETRAFIONY &amp;&amp; PECH<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -2795,7 +2823,7 @@ x = SUCCESS_DIFF<y:LabelModel>
                   <y:Geometry height="47.22895452452565" width="428.4553335966175" x="-1602.1945117456444" y="-4212.2868851603125"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="386.81640625" x="20.819463673308746" y="7.645727262262824">Inicjatywa:
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="386.81640625" x="20.819463673308746" y="7.645727262262881">Inicjatywa:
 INICJATYWA=REFLEKS+SKILL_INICJATYWA+1K6+WPN_REFLEKS<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
@@ -2813,7 +2841,7 @@ INICJATYWA=REFLEKS+SKILL_INICJATYWA+1K6+WPN_REFLEKS<y:LabelModel>
                   <y:Geometry height="33.76004183956951" width="279.62384842785286" x="-1527.778769161262" y="-4124.944216253249"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="267.033203125" x="6.2953226514264315" y="7.8956459197847835">Rozpoczyna postac o najwyzszej inicjatywie<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="267.033203125" x="6.2953226514264315" y="7.895645919784329">Rozpoczyna postac o najwyzszej inicjatywie<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -2830,7 +2858,7 @@ INICJATYWA=REFLEKS+SKILL_INICJATYWA+1K6+WPN_REFLEKS<y:LabelModel>
                   <y:Geometry height="90.75781615808069" width="204.6235550329434" x="-2110.86253641833" y="-2204.2898832863048"/>
                   <y:Fill color="#FF9900" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="45.90625" modelName="custom" textColor="#000000" visible="true" width="148.533203125" x="28.04517595397192" y="22.425783079040457">Dodatkowe warianty:
+                  <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="45.90625" modelName="custom" textColor="#000000" visible="true" width="148.533203125" x="28.04517595397192" y="22.42578307904023">Dodatkowe warianty:
 Walka wręcz - s156
 Walka zasięgowa - s157<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
@@ -2880,7 +2908,7 @@ Walka zasięgowa - s157<y:LabelModel>
                   <y:Geometry height="79.5172915223406" width="263.86455249705796" x="45.403886890438116" y="-4446.408265662553"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="33.314453125" x="115.27504968602898" y="30.774270761170328">Start<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="33.314453125" x="115.27504968602898" y="30.774270761170555">Start<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -2897,7 +2925,7 @@ Walka zasięgowa - s157<y:LabelModel>
                   <y:Geometry height="118.05910090313145" width="147.4121345375088" x="103.63009587021133" y="-3872.417174540956"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="88.01171875" x="29.70020789375394" y="50.045175451565726">SKILL &lt;= ATR<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="88.01171875" x="29.700207893754396" y="50.04517545156568">SKILL &lt;= ATR<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -2914,7 +2942,7 @@ Walka zasięgowa - s157<y:LabelModel>
                   <y:Geometry height="30.0" width="97.89484301516768" x="-83.88620554535373" y="-3828.3876240893896"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="77.95703125" x="9.968905882584295" y="6.015625">SKILL = ATR<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="77.95703125" x="9.96890588258384" y="6.015625">SKILL = ATR<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -2931,7 +2959,7 @@ Walka zasięgowa - s157<y:LabelModel>
                   <y:Geometry height="30.0" width="209.181127055067" x="72.74559961143223" y="-4331.610071216799"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="155.658203125" x="26.76146196503305" y="6.015625">ATR = testowany atrybut<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="155.658203125" x="26.761461965033504" y="6.015625">ATR = testowany atrybut<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -2948,7 +2976,7 @@ Walka zasięgowa - s157<y:LabelModel>
                   <y:Geometry height="30.0" width="209.181127055067" x="72.74559961143405" y="-4271.88302886511"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="193.638671875" x="7.77122759003305" y="6.015625">SKILL = testowana umiejętność<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="193.638671875" x="7.771227590033504" y="6.015625">SKILL = testowana umiejętność<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -2965,7 +2993,7 @@ Walka zasięgowa - s157<y:LabelModel>
                   <y:Geometry height="30.0" width="209.181127055067" x="72.74559961143405" y="-4211.88302886511"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="181.41015625" x="13.88548540253305" y="6.015625">TEST_LEVEL = trudność testu<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="181.41015625" x="13.885485402533504" y="6.015625">TEST_LEVEL = trudność testu<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -2982,7 +3010,7 @@ Walka zasięgowa - s157<y:LabelModel>
                   <y:Geometry height="38.93353197568001" width="350.9690416976464" x="1.8516422901439" y="-3666.290115795904"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="337.71484375" x="6.627098973823195" y="10.482390987840006">PULA = ATR+SKILL+TEST_LEVEL - 3*MOCNE_STARANIE<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="337.71484375" x="6.627098973823195" y="10.482390987840063">PULA = ATR+SKILL+TEST_LEVEL - 3*MOCNE_STARANIE<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -2999,7 +3027,7 @@ Walka zasięgowa - s157<y:LabelModel>
                   <y:Geometry height="30.0" width="156.9278113376522" x="98.87225747014145" y="-3588.142947170093"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="84.208984375" x="36.359413481325646" y="6.015625">RZUT = 1k12<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="84.208984375" x="36.3594134813261" y="6.015625">RZUT = 1k12<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -3016,7 +3044,7 @@ Walka zasięgowa - s157<y:LabelModel>
                   <y:Geometry height="38.93353197568001" width="288.4343178678864" x="33.119004205023884" y="-3150.5582230132627"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="262.99609375" x="12.71911205894321" y="10.482390987839949">PASSED = (RZUT &lt;= PULA) || (RZUT == 1)<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="262.99609375" x="12.71911205894321" y="10.482390987840063">PASSED = (RZUT &lt;= PULA) || (RZUT == 1)<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -3033,7 +3061,7 @@ Walka zasięgowa - s157<y:LabelModel>
                   <y:Geometry height="118.05910090313145" width="147.4121345375088" x="103.63009587021315" y="-3034.7313915830455"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="57.87109375" x="44.77052039375394" y="50.04517545156568">PASSED?<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="57.87109375" x="44.770520393754396" y="50.04517545156568">PASSED?<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -3050,7 +3078,7 @@ Walka zasięgowa - s157<y:LabelModel>
                   <y:Geometry height="30.0" width="147.4121345375088" x="-128.45305375425414" y="-2990.70184113148"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="134.20703125" x="6.60255164375485" y="6.015625">SUCCESS_COUNT = 0<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="134.20703125" x="6.602551643754396" y="6.015625">SUCCESS_COUNT = 0<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -3067,7 +3095,7 @@ Walka zasięgowa - s157<y:LabelModel>
                   <y:Geometry height="30.0" width="349.33548156495" x="2.6684223564916465" y="-2847.772044122201"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="336.783203125" x="6.276139219975448" y="6.015625">SUCCESS_COUNT = ceil(RZUT / 2) + MOCNE_STARANIE<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="336.783203125" x="6.2761392199749935" y="6.015625">SUCCESS_COUNT = ceil(RZUT / 2) + MOCNE_STARANIE<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -3084,7 +3112,7 @@ Walka zasięgowa - s157<y:LabelModel>
                   <y:Geometry height="34.78582070125708" width="120.24143514290506" x="117.21544556751451" y="-2602.829388172394"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="44.130859375" x="38.05528788395259" y="8.408535350628654">Koniec<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="44.130859375" x="38.05528788395253" y="8.408535350628426">Koniec<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -3102,7 +3130,7 @@ Walka zasięgowa - s157<y:LabelModel>
                   <y:Geometry height="55.08774516911552" width="241.78791464257847" x="-295.1877536717566" y="-4434.1934924859415"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="6" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="38.921875" modelName="custom" textColor="#000000" visible="true" width="231.671875" x="5.0580198212892356" y="8.08293508455779">TEST(ATR,SKILL,TEST_LEVEL, MOCNE_STARANIE)
+                  <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="6" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="38.921875" modelName="custom" textColor="#000000" visible="true" width="231.671875" x="5.0580198212892356" y="8.082935084557903">TEST(ATR,SKILL,TEST_LEVEL, MOCNE_STARANIE)
 returns SUCCESS_COUNT
 
 MOCNE_STARANIE - Od puli odejmowane jest 3*MOCNE_STARANIE,
@@ -3139,7 +3167,7 @@ ale jak się uda to dostaje się dodatkow sukcesy w liczbie MOCNE_STARANIE<y:Lab
                   <y:Geometry height="158.7385768638171" width="228.4520317454635" x="63.11014726623489" y="-3501.8374624855373"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="45.90625" modelName="custom" textColor="#000000" visible="true" width="180.578125" x="29.03289867856347" y="64.32668745878459">(RZUT != 11 &amp;&amp; RZUT != 12)
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="45.90625" modelName="custom" textColor="#000000" visible="true" width="180.578125" x="29.03289867856293" y="64.32668745878436">(RZUT != 11 &amp;&amp; RZUT != 12)
 || (PULA &lt;= 10)
 ?<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
@@ -3158,7 +3186,7 @@ ale jak się uda to dostaje się dodatkow sukcesy w liczbie MOCNE_STARANIE<y:Lab
                   <y:Geometry height="30.0" width="147.4121345375088" x="378.62394371715254" y="-3437.468174053629"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="110.740234375" x="18.33595008125394" y="6.015625">PULA = PULA - 10<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="110.740234375" x="18.335950081254396" y="6.015625">PULA = PULA - 10<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -3175,7 +3203,7 @@ ale jak się uda to dostaje się dodatkow sukcesy w liczbie MOCNE_STARANIE<y:Lab
                   <y:Geometry height="92.53472382975988" width="134.3308912874063" x="110.17071749526349" y="-3293.0959162323716"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="80.8046875" x="26.763101893703606" y="37.282986914879984">RZUT != 12?<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="80.8046875" x="26.763101893702895" y="37.282986914879984">RZUT != 12?<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -3192,7 +3220,7 @@ ale jak się uda to dostaje się dodatkow sukcesy w liczbie MOCNE_STARANIE<y:Lab
                   <y:Geometry height="38.93353197568001" width="147.4121345375088" x="446.42307031829387" y="-3266.2953203053316"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="138.537109375" x="4.437512581253941" y="3.498015987839949">Wyjątkowy pech:
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="138.537109375" x="4.437512581254396" y="3.4980159878400627">Wyjątkowy pech:
 SUCCESS_COUNT = -1<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
@@ -3210,7 +3238,7 @@ SUCCESS_COUNT = -1<y:LabelModel>
                   <y:Geometry height="118.05910090313145" width="147.4121345375088" x="103.63009587021315" y="-4049.765197520187"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="86.576171875" x="30.41798133125394" y="50.04517545156574">ATR != WOLA<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="86.576171875" x="30.417981331254396" y="50.04517545156568">ATR != WOLA<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -3227,7 +3255,7 @@ SUCCESS_COUNT = -1<y:LabelModel>
                   <y:Geometry height="30.0" width="97.89484301516768" x="344.098398654397" y="-4005.735647068621"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="61.71484375" x="18.089999632583385" y="6.015625">SKILL = 0<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="61.71484375" x="18.08999963258384" y="6.015625">SKILL = 0<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -3261,7 +3289,7 @@ SUCCESS_COUNT = -1<y:LabelModel>
                   <y:Geometry height="92.53472382975988" width="189.3678293518633" x="82.6522484630359" y="-2759.169031171399"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="144.26171875" x="22.55305530093119" y="37.282986914879984">SUCCESS_COUNT &lt;= 7<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="144.26171875" x="22.553055300931277" y="37.282986914879984">SUCCESS_COUNT &lt;= 7<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -3278,7 +3306,7 @@ SUCCESS_COUNT = -1<y:LabelModel>
                   <y:Geometry height="30.0" width="147.4121345375088" x="323.1759326376932" y="-2727.901669256519"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="134.20703125" x="6.602551643753941" y="6.015625">SUCCESS_COUNT = 7<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="134.20703125" x="6.602551643754396" y="6.015625">SUCCESS_COUNT = 7<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -3295,7 +3323,7 @@ SUCCESS_COUNT = -1<y:LabelModel>
                   <y:Geometry height="16.931518938433783" width="16.931518938433783" x="510.7761039526713" y="-2721.3674287257363"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" modelName="custom" textColor="#000000" visible="true" width="4.0" x="6.465759469217119" y="6.465759469216891">
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" modelName="custom" textColor="#000000" visible="true" width="4.0" x="6.465759469216891" y="6.465759469217119">
                     <y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
@@ -3344,7 +3372,7 @@ SUCCESS_COUNT = -1<y:LabelModel>
                   <y:Geometry height="85.01755716483126" width="289.6874104692133" x="1116.097549181629" y="-4430.926717476892"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="242.646484375" x="23.520463047106205" y="26.54002858241563">Start
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="242.646484375" x="23.52046304710666" y="26.54002858241529">Start
 CommandExecutor.execute(RAW_CMD)<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
@@ -3362,7 +3390,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
                   <y:Geometry height="54.822226616319995" width="283.06562745418887" x="1119.4084406891425" y="-4231.402935544185"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="217.46875" x="32.798438727094435" y="18.426738308159997">command_parser.parse(RAW_CMD)<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="217.46875" x="32.798438727094435" y="18.426738308159656">command_parser.parse(RAW_CMD)<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -3379,7 +3407,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
                   <y:Geometry height="54.822226616319995" width="131.7105871107742" x="1195.085960860849" y="-3961.343197073909"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="62.359375" x="34.67560605538711" y="18.426738308159997">index = 0<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="62.359375" x="34.67560605538711" y="18.42673830816011">index = 0<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -3396,7 +3424,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
                   <y:Geometry height="119.15757845229257" width="144.22575700917105" x="1188.8283759116503" y="-3741.407356247602"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="74.306640625" x="34.95955819208575" y="50.594414226146284">ACCEPTED?<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="74.306640625" x="34.959558192085524" y="50.594414226146455">ACCEPTED?<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -3413,7 +3441,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
                   <y:Geometry height="54.822226616319995" width="283.06562745418887" x="1119.4084406891425" y="-4146.580708927865"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="218.810546875" x="32.127540289594435" y="18.426738308159997">CMD = command_parser.get_cmd()<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="218.810546875" x="32.127540289594435" y="18.426738308159656">CMD = command_parser.get_cmd()<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -3430,7 +3458,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
                   <y:Geometry height="54.822226616319995" width="283.06562745418887" x="1119.4084406891425" y="-4061.7584823115453"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="260.095703125" x="11.484962164594435" y="18.426738308159997">PARAMS = command_parser.get_params()<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="260.095703125" x="11.484962164594435" y="18.42673830816011">PARAMS = command_parser.get_params()<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -3447,7 +3475,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
                   <y:Geometry height="54.822226616319995" width="283.06562745418887" x="1119.4084406891425" y="-4316.2251621605055"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="201.9765625" x="40.544532477094435" y="18.426738308159997">command_logger.log(RAW_CMD)<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="201.9765625" x="40.544532477094435" y="18.426738308159656">command_logger.log(RAW_CMD)<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -3481,7 +3509,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
                   <y:Geometry height="54.822226616319995" width="283.06562745418887" x="1119.4084406891425" y="-3851.3752766607554"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="275.576171875" x="3.7447277895944353" y="18.426738308159997">ACCEPTED = commands[index].accept(CMD)<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="275.576171875" x="3.7447277895944353" y="18.42673830816011">ACCEPTED = commands[index].accept(CMD)<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -3498,7 +3526,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
                   <y:Geometry height="54.822226616319995" width="283.06562745418887" x="1119.4084406891425" y="-3561.095283074797"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="223.849609375" x="29.608009039594435" y="18.426738308159997">commands[index].execute(PARAMS)<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="223.849609375" x="29.608009039594435" y="18.42673830816011">commands[index].execute(PARAMS)<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -3515,7 +3543,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
                   <y:Geometry height="30.0" width="98.58275265560997" x="1211.6498780884294" y="-3438.19311916087"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="49.791015625" x="24.395868515304755" y="6.015625">KONIEC<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="49.791015625" x="24.395868515304983" y="6.015625">KONIEC<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -5550,8 +5578,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n1::e18" source="n1::n13" target="n1::n14">
-      <data key="d9"/>
+    <edge id="n1::n12::e0" source="n1::n12::n1" target="n1::n12::n2">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="11.210151631766621" sy="-74.93421734212069" tx="0.0" ty="0.0"/>
@@ -5561,8 +5588,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n1::e19" source="n1::n13" target="n1::n11::n0">
-      <data key="d9"/>
+    <edge id="n1::e18" source="n1::n12::n1" target="n1::n11::n0">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="4.890071407295636" sy="27.03638423507323" tx="0.0" ty="0.0">
@@ -5574,8 +5600,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n1::e20" source="n1::n12" target="n1::n13">
-      <data key="d9"/>
+    <edge id="n1::n12::e1" source="n1::n12::n0" target="n1::n12::n1">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="7.58754761375576" sy="-15.068293704665393" tx="0.0" ty="0.0"/>
@@ -5585,8 +5610,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n1::e21" source="n1::n12" target="n1::n15">
-      <data key="d9"/>
+    <edge id="n1::n12::e2" source="n1::n12::n0" target="n1::n12::n3">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="-21.457733895933416" sy="40.91664988456091" tx="0.0" ty="0.0">
@@ -5599,8 +5623,7 @@ CommandExecutor.execute(RAW_CMD)<y:LabelModel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n1::e22" source="n1::n12" target="n1::n16">
-      <data key="d9"/>
+    <edge id="n1::n12::e3" source="n1::n12::n0" target="n1::n12::n4">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="-4.369092534494484" sy="81.3482608063232" tx="0.0" ty="0.0">

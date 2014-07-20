@@ -3,11 +3,10 @@
 
 #include "command.h"
 
-class Go : public Command
+class Go : public NonActiveCommand
 {
-  friend class Command;
-  Go();
 public:  
+  Go();
   virtual ~Go() {}
 
   virtual CommandID id() const;

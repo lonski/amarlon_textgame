@@ -7,6 +7,9 @@
 #include "Include/enums.h"
 #include "Commands/commandexecutor.h"
 
+//colors
+#define QBrown QColor(110,70,10)
+
 namespace Ui {
   class Console;
 }
@@ -25,17 +28,21 @@ class Console : public QWidget
   Q_OBJECT
 public:
   static const FontConf font_standard;
+  static const FontConf font_action;
+  static const FontConf font_message;
+  static const FontConf font_message_bold;
 
 private:
-  Ui::Console *ui;
+  Ui::Console* ui;
   CommandExecutor cmd_exec;
 
 public:
   explicit Console(QWidget *parent = 0);  
   ~Console();
 
-  void handle_player_cmd(std::string cmd);
+  void handle_player_input(std::string cmd, bool force = false);
   void append(std::string txt, const FontConf& font);
+  void append_blank();
   void clear();
 
 private slots:

@@ -46,7 +46,7 @@ bool CommandExecutor::erase_command(CommandID cmd_id)
   return r;
 }
 
-bool CommandExecutor::execute(string command)
+bool CommandExecutor::execute(string command, bool force)
 {
   bool r = false;
 
@@ -55,16 +55,35 @@ bool CommandExecutor::execute(string command)
     _logger.log(command);
     string cmd_name = _parser.parse(command);
 
-    for (auto c = _commands.begin(); c != _commands.end(); ++c)
+    //jeżeli jest aktywna komenda to ją uruchom
+    if (!_active_commands.empty() && !force)
     {
-      Command *cmd_exec = c->second;
-      if (cmd_exec->accept(cmd_name))
+      Command *act_cmd = _active_commands.top();
+      act_cmd->execute(command);
+      if (act_cmd->is_finished())
       {
-        cmd_exec->execute(_parser.get_params());
-        r = true;
-        break;
+        _active_commands.pop();
       }
     }
+    //jezeli brak aktywnej komendy, to wyszukaj i odpal pasującą
+    else
+    {
+      for (auto c = _commands.begin(); c != _commands.end(); ++c)
+      {
+        Command *cmd = c->second;
+        if (cmd->accept(cmd_name))
+        {
+          cmd->execute(_parser.get_params());
+          if (cmd->is_active_command())
+          {
+            _active_commands.push(cmd);
+          }
+          r = true;
+          break;
+        }
+      }
+    }
+
   }
 
   return r;

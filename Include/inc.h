@@ -11,11 +11,14 @@
 #include <algorithm>
 #include <set>
 #include <deque>
+#include <QTime>
+#include <QApplication>
 
 #include "soci.h"
 #include "soci-firebird.h"
 
-#define D(X) qDebug() << #X << "=" << X;
+#define _DEBUG(X) qDebug() << #X << "=" << X;
+#define _STR(X) #X
 
 #define _SAVE_TO_DB_ \
   if ( !isTemporary() && ref() != 0 && modified() )\

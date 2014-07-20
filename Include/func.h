@@ -27,6 +27,12 @@ namespace fun{
   //===~~~
 
   //===static inlines
+  static inline void delay(int amt){
+    QTime dieTime= QTime::currentTime().addMSecs(amt);
+    while( QTime::currentTime() < dieTime )
+    QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+  }
+
   static inline void MsgError(std::string e)
   {
     //QMessageBox::critical(NULL, "Error",e.c_str());

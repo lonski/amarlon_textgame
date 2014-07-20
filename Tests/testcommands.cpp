@@ -51,8 +51,8 @@ void TestCommands::TestCommandParser()
 void TestCommands::TestCommandExecutor()
 {
   CommandExecutor exec;
-  exec.add_command(Command::create(CommandID::Take));
-  exec.add_command(Command::create(CommandID::Go));
+  exec.add_command(new Take);
+  exec.add_command(new Go);
 
   QVERIFY(exec.execute("n"));
   QVERIFY(exec.execute("s s s s"));

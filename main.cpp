@@ -45,6 +45,7 @@ int main(int argc, char *argv[])
   //START GAME  
   _Game->console()->clear();
   _Game->show();
+  _Console->handle_player_input("menu");
   amarlon.exec();
 
   return 0;

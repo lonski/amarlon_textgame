@@ -69,7 +69,8 @@ SOURCES += main.cpp\
     Commands/take.cpp \
     console.cpp \
     Commands/exit.cpp \
-    Commands/gamemenu.cpp
+    Commands/gamemenu.cpp \
+    Commands/debug.cpp
 
 HEADERS  += game.h \
     Tests/testlocation.h \
@@ -112,7 +113,8 @@ HEADERS  += game.h \
     Commands/take.h \
     console.h \
     Commands/exit.h \
-    Commands/gamemenu.h
+    Commands/gamemenu.h \
+    Commands/debug.h
 
 FORMS    += game.ui \
     console.ui

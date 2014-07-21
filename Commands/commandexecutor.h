@@ -1,8 +1,6 @@
 #ifndef COMMANDEXECUTOR_H
 #define COMMANDEXECUTOR_H
 
-#include <stack>
-
 #include "Include/inc.h"
 #include "commandlogger.h"
 #include "commandparser.h"
@@ -11,9 +9,10 @@
 class CommandExecutor
 {
 private:
+  friend class Debug;
   CommandLogger _logger;
   CommandParser _parser;
-  std::stack<Command*> _active_commands;
+  Command* _active_command;
   std::map<CommandID, Command*> _commands;
 public:
   CommandExecutor();
@@ -21,7 +20,7 @@ public:
 
   bool add_command(Command* cmd);
   bool erase_command(CommandID cmd_id);  
-  bool execute(std::string command, bool force = false);
+  bool execute(std::string command);
 };
 
 #endif // COMMANDEXECUTOR_H

@@ -3,6 +3,7 @@
 #include "go.h"
 #include "exit.h"
 #include "gamemenu.h"
+#include "debug.h"
 #include "Include/exceptions.h"
 
 Command::Command()
@@ -13,6 +14,11 @@ Command::Command()
 void Command::set_finished()
 {
   _finished = true;
+}
+
+void Command::set_not_finished()
+{
+  _finished = false;
 }
 
 void Command::tick_game_clock(Minute minutes)
@@ -62,6 +68,9 @@ Command *Command::create_by_enum(CommandID cmd)
       break;
     case CommandID::GameMenu:
       r = new GameMenu;
+      break;
+    case CommandID::Debug:
+      r = new Debug;
       break;
     default:
       throw error::creation_error("Nieprawidłowy ID komendy! Prawdopodobnie zapomniano dodać id do enum.h.");

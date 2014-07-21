@@ -7,6 +7,8 @@
 #include "Include/enums.h"
 #include "Commands/commandexecutor.h"
 
+#define cDebug(MSG) _Console->append("DEBUG: "+std::string(MSG), Console::font_standard);
+
 //colors
 #define QBrown QColor(110,70,10)
 
@@ -33,6 +35,7 @@ public:
   static const FontConf font_message_bold;
 
 private:
+  friend class Debug;
   Ui::Console* ui;
   CommandExecutor cmd_exec;
 
@@ -40,7 +43,7 @@ public:
   explicit Console(QWidget *parent = 0);  
   ~Console();
 
-  void handle_player_input(std::string cmd, bool force = false);
+  void handle_player_input(std::string cmd);
   void append(std::string txt, const FontConf& font);
   void append_blank();
   void clear();

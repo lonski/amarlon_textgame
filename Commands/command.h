@@ -11,7 +11,8 @@ private:
   bool _finished;
 protected:
   std::set<std::string> _cmd_names;
-  void set_finished();
+  virtual void set_finished();
+  virtual void set_not_finished();
 public:
   Command();
   virtual ~Command() {}
@@ -36,8 +37,8 @@ protected:
   virtual void reset_status() = 0;
   virtual void set_finished()
   {
-    Command::set_finished();
     reset_status();
+    Command::set_finished();
   }
 
 public:

@@ -27,9 +27,9 @@ Console::~Console()
   delete ui;
 }
 
-void Console::handle_player_input(std::string cmd, bool force)
+void Console::handle_player_input(std::string cmd)
 {
-  cmd_exec.execute(cmd, force);
+  cmd_exec.execute(cmd);
 }
 
 void Console::append(std::string txt, const FontConf &font)

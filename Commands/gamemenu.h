@@ -3,6 +3,8 @@
 
 #include "command.h"
 
+class Exit;
+
 class GameMenu : public ActiveCommand
 {
 protected:
@@ -12,11 +14,13 @@ private:
   enum class Stage
   {
     Start = 0,
-    Menu = 1
+    Menu = 1,
+    Exit = 2
   } stage;
 
   void welcome_screen();
   void start_new_game();
+  Exit* exit;
 
 public:
   GameMenu();

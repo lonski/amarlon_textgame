@@ -5,8 +5,13 @@
 
 #define _Player Player::inst()
 
+class Location;
+
 class Player : public Creature
 {
+public:
+  static uint SightRange;
+
 private:
   static const dbRef player_ref;
   static Player *_instance;
@@ -28,6 +33,9 @@ private:
   VLValue<int> _fame;
   BravePoints _brave;
 
+  Location *_current_loc;
+  Location *_prev_loc;
+
 public:
   static Player *inst();
   ~Player() {}
@@ -42,6 +50,9 @@ public:
   void load(MapRow *data_source = nullptr);
   void save_to_db();
 
+  Location* get_location() const { return _current_loc; }
+  Location* get_prev_loc() const { return _prev_loc; }
+  void set_location(Location* loc);
 };
 
 #endif // PLAYER_H

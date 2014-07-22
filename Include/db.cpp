@@ -3,9 +3,9 @@
 using namespace std;
 using namespace soci;
 
-const string DB::_db_file = "/home/pi/db/data.fdb";
-const string DB::_db_log_file = "../amarlon/Data/db.log";
-const string DB::_db_server = "192.168.1.5";//"lonski.pl";
+string DB::_db_file;
+string DB::_db_log_file;
+string DB::_db_server;
 
 //===DB Object
 void DBObject::save_to_db()
@@ -90,19 +90,16 @@ DBObject::~DBObject()
 DB* DB::_instance = nullptr;
 
 DB::DB()
+  : _session(nullptr)
 {
-  _session = new soci::session;
-  _session->open(*soci::factory_firebird(), "service="+_db_server+":/"+_db_file+" user=SYSDBA password=sl1wkowe");
-
-  _log_stream = new ofstream(_db_log_file, ios::app);
-  _session->set_log_stream(_log_stream);
 }
 
 DB *DB::Instance()
 {
   if (_instance == nullptr)
   {
-    _instance = new DB;
+    _instance = new DB;    
+    _instance->InitDatabase();
   }
 
   return _instance;
@@ -119,6 +116,31 @@ soci::session &DB::Session()
   return DB::Instance()->session();
 }
 
+void DB::SetDatabaseInfo(string db_file, string db_server, string db_log)
+{
+  DB::_db_file = db_file;
+  DB::_db_log_file = db_log;
+  DB::_db_server = db_server;
+}
+
+void DB::InitDatabase()
+{
+  if (_session != nullptr)
+  {
+    _session->close();
+  }
+  else
+  {
+    _session = new soci::session;
+  }
+
+  _session->open(*soci::factory_firebird(), "service="+_db_server+":/"+_db_file+" user=SYSDBA password=sl1wkowe");
+
+  _log_stream = new ofstream(_db_log_file, ios::app);
+  _session->set_log_stream(_log_stream);
+}
+
+
 DB::~DB()
 {
   _log_stream->close();
@@ -127,3 +149,5 @@ DB::~DB()
 }
 
 //===~~~
+
+

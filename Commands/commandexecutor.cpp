@@ -3,6 +3,7 @@
 using namespace std;
 
 CommandExecutor::CommandExecutor()
+  : _active_command(nullptr)
 {
 }
 

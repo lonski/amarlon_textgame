@@ -39,13 +39,14 @@ void TestCommands::TestCommandParser()
 {
   CommandParser parser("wez 5 miedziakow");
   QCOMPARE(parser.get_cmd().c_str(), "wez");
-  QCOMPARE(parser.get_params().size(), (size_t)2);
-  QCOMPARE(parser.get_params().at(0).c_str(), "5");
-  QCOMPARE(parser.get_params().at(1).c_str(), "miedziakow");
+  QCOMPARE(parser.get_params().size(), (size_t)3);
+  QCOMPARE(parser.get_params().at(0).c_str(), "wez");
+  QCOMPARE(parser.get_params().at(1).c_str(), "5");
+  QCOMPARE(parser.get_params().at(2).c_str(), "miedziakow");
 
   parser.parse("lol");
   QCOMPARE(parser.get_cmd().c_str(), "lol");
-  QCOMPARE(parser.get_params().size(), (size_t)0);
+  QCOMPARE(parser.get_params().size(), (size_t)1);
 }
 
 void TestCommands::TestCommandExecutor()

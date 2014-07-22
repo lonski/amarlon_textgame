@@ -78,9 +78,9 @@ void DBObject::save(std::string f_name, T f_val, dbTable tbl)
 class DB
 {
 private:
-  const static std::string _db_file;
-  const static std::string _db_log_file;
-  const static std::string _db_server;
+  static std::string _db_file;
+  static std::string _db_log_file;
+  static std::string _db_server;
   static DB *_instance;
 
   soci::session *_session;
@@ -94,6 +94,8 @@ private:
 public:
   static DB* Instance();
   static soci::session& Session();
+  static void SetDatabaseInfo(std::string db_file, std::string db_server, std::string db_log);
+  void InitDatabase();
   ~DB();
 };
 //===~~~

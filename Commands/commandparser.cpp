@@ -14,7 +14,7 @@ std::string CommandParser::parse(std::string raw_command)
   if (_params.size() > 0)
   {
     _cmd = _params[0];
-    _params.erase(_params.begin());
+    //_params.erase(_params.begin());
   }
 
   return _cmd;

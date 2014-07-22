@@ -12,6 +12,7 @@ public:
 
   void log(std::string cmd);
   std::string retrive(uint index);
+  size_t size() const { return _commands.size(); }
 };
 
 #endif // COMMANDLOGGER_H

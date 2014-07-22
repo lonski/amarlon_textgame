@@ -6,6 +6,7 @@ using namespace soci;
 
 const dbRef Player::player_ref = 5;
 Player* Player::_instance = nullptr;
+uint Player::SightRange = 3;
 
 Player::Player() : Creature(player_ref)
 {
@@ -112,4 +113,10 @@ void Player::save_to_db()
   save(save_query.str());
 
   DBObject::save_to_db();
+}
+
+void Player::set_location(Location *loc)
+{
+  _prev_loc = _current_loc;
+  _current_loc = loc;
 }

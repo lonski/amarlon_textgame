@@ -26,8 +26,12 @@ private:
   }
 
 public:
-  WalkVector(short north = 0, short south = 0, short east = 0, short west = 0 )
-  : _vals{north, south, east, west}
+  WalkVector(short range = 0)
+    : _vals{range, range, range, range}
+  {
+  }
+  WalkVector(short north, short south, short east, short west )
+    : _vals{north, south, east, west}
   {
   }
   void inc(Direction dir, short val = 1)

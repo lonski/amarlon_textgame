@@ -14,6 +14,10 @@ namespace refDict
   {
     Miedziak = 121    
   };
+  enum class Location
+  {
+    StartLocation = 1
+  };
 }
 //~~~
 

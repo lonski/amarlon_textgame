@@ -21,6 +21,7 @@ public:
   bool add_command(Command* cmd);
   bool erase_command(CommandID cmd_id);  
   bool execute(std::string command);
+  CommandLogger& log() { return _logger; }
 };
 
 #endif // COMMANDEXECUTOR_H

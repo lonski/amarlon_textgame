@@ -1,4 +1,7 @@
 #include "go.h"
+#include "game.h"
+#include "Creatures/player.h"
+#include "World/location.h"
 
 Go::Go()
 {
@@ -6,6 +9,7 @@ Go::Go()
   add_name("s");
   add_name("w");
   add_name("e");
+  add_name("rozejrzyj");
 }
 
 CommandID Go::id() const
@@ -15,5 +19,28 @@ CommandID Go::id() const
 
 void Go::execute(std::vector<std::string> params)
 {
-  //TODO
+  if (!params.empty())
+  {
+    execute(params[0]);
+  }
+}
+
+void Go::execute(std::string direction)
+{
+
+  if(!direction.empty())
+  {
+    if (direction == "rozejrzyj")
+    {
+      Location* loc = _Player->get_location();
+
+      _Console->append(Console::Divider, Console::FontDivider);
+      _Console->append(loc->name(), Console::FontLocName);
+      _Console->append(loc->descript(), Console::FontLocDescription);
+
+      loc->loc_walk_within_range(WalkVector(Player::SightRange), &Location::load_no_param);
+    }
+
+  }
+
 }

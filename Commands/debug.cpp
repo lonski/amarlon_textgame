@@ -22,12 +22,12 @@ void Debug::execute(std::vector<std::string> params)
       Command *cmd = _Console->cmd_exec._active_command;
       int cmd_id = ( cmd == nullptr ? -1 : static_cast<int>(cmd->id()) );
 
-      _Console->append("DEBUG: " + fun::toStr(cmd_id), Console::font_standard);
+      _Console->append("DEBUG: " + fun::toStr(cmd_id), Console::FontStandard);
     }
   }
   else //help
   {
-    _Console->append("### DEBUG Help ###",Console::font_message_bold);
-    _Console->append("active_cmd",Console::font_standard);
+    _Console->append("### DEBUG Help ###",Console::FontMessageBold);
+    _Console->append("active_cmd",Console::FontStandard);
   }
 }

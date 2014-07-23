@@ -33,6 +33,7 @@ class Console : public QWidget
   Q_OBJECT
 public:
   static std::string fonts_filename;
+  static std::string Divider;
 
   enum class Font
   {
@@ -75,17 +76,6 @@ private:
     void load(std::string file);
     void save(std::string file);
   } FontsManager;
-
-public:
-  static FontConf FontDivider;
-  static FontConf FontLocName;
-  static FontConf FontLocDescription;
-  static FontConf FontStandard;
-  static FontConf FontAction;
-  static FontConf FontMessage;
-  static FontConf FontMessageBold;
-
-  static std::string Divider;
 
 private:
   friend class Debug;

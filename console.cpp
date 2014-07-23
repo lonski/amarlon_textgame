@@ -3,14 +3,6 @@
 
 using namespace std;
 
-FontConf Console::FontDivider(Qt::darkGreen, QFont::Bold, true);
-FontConf Console::FontLocName(Qt::black, QFont::Bold, true);
-FontConf Console::FontLocDescription(Qt::black, QFont::Normal, false);
-FontConf Console::FontStandard(Qt::black, QFont::Normal, false);
-FontConf Console::FontAction(Qt::black, QFont::Normal, true);
-FontConf Console::FontMessage(QBrown, QFont::Normal, false);
-FontConf Console::FontMessageBold(QBrown, QFont::Bold, false);
-
 std::string Console::fonts_filename("fonts.ini");
 std::string Console::Divider("-~=====~-");
 

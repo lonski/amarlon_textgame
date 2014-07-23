@@ -38,7 +38,7 @@ void INIFile::load()
         {
           if (!section.name.empty())
           {
-            _content.push_back(section);
+            _content[section.name] = section;
             section.clear();
           }
 
@@ -67,11 +67,9 @@ void INIFile::load()
 
     if (!section.name.empty())
     {
-      _content.push_back(section);
+      _content[section.name] = section;
       section.clear();
     }
-
-    file.close();
   }
 }
 
@@ -79,45 +77,28 @@ void INIFile::save()
 {
   if (!filename.empty())
   {
-    ofstream file(filename, ios::out | ios::trunc);
+    ofstream ofs(filename, std::ios::trunc);
 
     for (auto s = _content.begin(); s != _content.end(); ++s)
     {
-      Section& section = *s;
-      file << "[" << section.name << "]" << endl;
+      Section& section = s->second;
+      ofs << "[" << section.name << "]" << endl;
       for (auto k = section.values.begin(); k != section.values.end(); ++k)
       {
-        file << k->first << "=" << k->second << endl;
+        ofs << k->first << "=" << k->second << endl;
       }
     }
 
-    file.close();
   }
-}
-
-std::vector<INIFile::Section>::iterator INIFile::findSection(SectionName sectionName)
-{
-  auto r = _content.end();
-
-  for (auto s = _content.begin(); s!=_content.end(); ++s)
-  {
-    if (s->name == sectionName)
-    {
-      r = s;
-      break;
-    }
-  }
-
-  return r;
 }
 
 INIFile::Value INIFile::getValue(INIFile::SectionName sectionName, INIFile::Key key)
 {
   Value r;
-  auto sectionIter = findSection(sectionName);
+  auto sectionIter = _content.find(sectionName);
   if (sectionIter != _content.end())
   {
-    r = sectionIter->values[key];
+    r = sectionIter->second.values[key];
   }
 
   return r;
@@ -126,10 +107,10 @@ INIFile::Value INIFile::getValue(INIFile::SectionName sectionName, INIFile::Key 
 bool INIFile::setValue(INIFile::SectionName sectionName, INIFile::Key key, INIFile::Value value)
 {
   bool r = false;
-  auto sectionIter = findSection(sectionName);
+  auto sectionIter = _content.find(sectionName);
   if (sectionIter != _content.end())
   {
-    sectionIter->values[key] = value;
+    sectionIter->second.values[key] = value;
     r = true;
   }
   else
@@ -137,7 +118,7 @@ bool INIFile::setValue(INIFile::SectionName sectionName, INIFile::Key key, INIFi
     Section s;
     s.name = sectionName;
     s.values[key] = value;
-    _content.push_back(s);
+    _content[s.name] = s;
   }
 
   return r;
@@ -145,7 +126,7 @@ bool INIFile::setValue(INIFile::SectionName sectionName, INIFile::Key key, INIFi
 
 bool INIFile::eraseSection(INIFile::SectionName sectionName)
 {
-  auto sectionIter = findSection(sectionName);
+  auto sectionIter = _content.find(sectionName);
   if (sectionIter != _content.end())
   {
     _content.erase(sectionIter);
@@ -153,4 +134,15 @@ bool INIFile::eraseSection(INIFile::SectionName sectionName)
   }
 
   return false;
+}
+
+std::vector<string> INIFile::getSections()
+{
+  vector<string> r;
+  for (auto s = _content.begin(); s != _content.end(); ++s)
+  {
+    r.push_back(s->second.name);
+  }
+
+  return r;
 }

@@ -37,6 +37,16 @@
     }\
   }
 
+#ifndef TRACE
+#define TRACE 1
+#endif
+
+#if TRACE
+  #define TRACE_POINT() qDebug() << "[TRACE] " << __PRETTY_FUNCTION__ << "-line " << __LINE__;
+#else
+  #define TRACE_POINT() do {} while(0);
+#endif
+
 typedef std::map<std::string,std::string> MapRow;
 typedef std::vector<MapRow> MapTable;
 

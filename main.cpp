@@ -2,7 +2,7 @@
 
 #include "game.h"
 
-//#define _UT
+#define _UT
 
 #ifdef _UT
 #include <QtTest/QTest>
@@ -13,8 +13,6 @@
 #include "Tests/testcreature.h"
 #include "Tests/testcommands.h"
 #endif
-
-//#define _UT
 
 int main(int argc, char *argv[])
 {
@@ -32,12 +30,12 @@ int main(int argc, char *argv[])
   //TEST EXECUTION
   try
   {
-    QTest::qExec(&db_tests, argc, argv);
-    QTest::qExec(&location_tests, argc, argv);
-    QTest::qExec(&item_tests, argc, argv);
+    //QTest::qExec(&db_tests, argc, argv);
+    //QTest::qExec(&location_tests, argc, argv);
+    //QTest::qExec(&item_tests, argc, argv);
     QTest::qExec(&fun_tests, argc, argv);
-    QTest::qExec(&crt_tests, argc, argv);
-    QTest::qExec(&cmd_tests, argc, argv);
+    //QTest::qExec(&crt_tests, argc, argv);
+    //QTest::qExec(&cmd_tests, argc, argv);
   }
   catch(soci::soci_error &e)
   {

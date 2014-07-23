@@ -5,6 +5,7 @@
 #include "../Include/db.h"
 #include "../Include/func.h"
 #include "../Include/gameclock.h"
+#include "Include/inifile.h"
 
 class TestFun : public QObject
 {
@@ -15,6 +16,7 @@ private slots:
    void skill_group();
    void explode();
    void gameclock();
+   void inifile();
 };
 
 #endif // TESTFUN_H

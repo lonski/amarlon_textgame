@@ -70,7 +70,8 @@ SOURCES += main.cpp\
     console.cpp \
     Commands/exit.cpp \
     Commands/gamemenu.cpp \
-    Commands/debug.cpp
+    Commands/debug.cpp \
+    Include/inifile.cpp
 
 HEADERS  += game.h \
     Tests/testlocation.h \
@@ -114,7 +115,8 @@ HEADERS  += game.h \
     console.h \
     Commands/exit.h \
     Commands/gamemenu.h \
-    Commands/debug.h
+    Commands/debug.h \
+    Include/inifile.h
 
 FORMS    += game.ui \
     console.ui

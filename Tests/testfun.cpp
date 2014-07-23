@@ -117,4 +117,32 @@ void TestFun::gameclock()
 
 }
 
+void TestFun::inifile()
+{
+  INIFile ini("fonts.ini");
+  ini.save();
+
+  ini.eraseSection("nowa");
+
+  QVERIFY( ini.setValue("nowa","pik","pok") == false );
+  QVERIFY( ini.setValue("nowa","pik2","pok8") == true );
+  QCOMPARE(ini.getValue("nowa","pik").c_str(), "pok");
+  ini.save();
+  ini.load();
+  QCOMPARE(ini.getValue("nowa","pik").c_str(), "pok");
+
+  INIFile ini2;
+  ini2.open("fonts.ini");
+  ini2.save();
+
+  ini2.eraseSection("nowa");
+
+  QVERIFY( ini2.setValue("nowa","pik","pok") == false );
+  QVERIFY( ini2.setValue("nowa","pik2","pok8") == true );
+  QCOMPARE(ini2.getValue("nowa","pik").c_str(), "pok");
+  ini2.save();
+  ini2.load();
+  QCOMPARE(ini2.getValue("nowa","pik").c_str(), "pok");
+}
+
 

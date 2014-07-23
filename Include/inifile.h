@@ -31,9 +31,8 @@ public:
   };
 
 private:
-  std::vector<Section> _content;
+  std::map<std::string, Section> _content;
   Filename filename;
-  std::vector<Section>::iterator findSection(INIFile::SectionName sectionName);
 
 public:
   INIFile(Filename file);
@@ -45,6 +44,7 @@ public:
   Value getValue(SectionName sectionName, Key key);
   bool setValue(SectionName sectionName, Key key, Value value);
   bool eraseSection(SectionName sectionName);
+  std::vector<std::string> getSections();
 };
 
 #endif // INIFILE_H

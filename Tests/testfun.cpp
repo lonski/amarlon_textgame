@@ -1,4 +1,6 @@
 #include "testfun.h"
+#include "console.h"
+#include "game.h"
 
 using namespace std;
 
@@ -114,15 +116,11 @@ void TestFun::gameclock()
   QCOMPARE(GameClock::Clock().month(),  (uint)1 );
   QCOMPARE(GameClock::Clock().year(),   (uint)1 );
 
-
 }
 
 void TestFun::inifile()
 {
   INIFile ini("fonts.ini");
-  ini.save();
-
-  ini.eraseSection("nowa");
 
   QVERIFY( ini.setValue("nowa","pik","pok") == false );
   QVERIFY( ini.setValue("nowa","pik2","pok8") == true );
@@ -140,9 +138,16 @@ void TestFun::inifile()
   QVERIFY( ini2.setValue("nowa","pik","pok") == false );
   QVERIFY( ini2.setValue("nowa","pik2","pok8") == true );
   QCOMPARE(ini2.getValue("nowa","pik").c_str(), "pok");
+
   ini2.save();
   ini2.load();
   QCOMPARE(ini2.getValue("nowa","pik").c_str(), "pok");
+  ini2.eraseSection("nowa");
+  ini2.save();
+
+  _Console->save_fonts(Console::fonts_filename);
+
 }
+
 
 

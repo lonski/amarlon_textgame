@@ -55,7 +55,6 @@ bool CommandExecutor::execute(string command)
   {
     _logger.log(command);
     string cmd_name = _parser.parse(command);
-
     //jeżeli jest aktywna komenda to ją uruchom
     if (nullptr != _active_command && cmd_name != "debug")
     {

@@ -40,18 +40,19 @@ void Exit::execute(std::string input)
 
 void Exit::ask_if_sure()
 {
-  _Console->append("Czy jesteś pewien, że chcesz opuścić Amarlon? [t/n]", Console::Font::Message);
+  _Console->append("Czy jesteś pewien, że chcesz opuścić Amarlon? [t/n]", Font::Message);
   stage = Stage::Asked;
 }
 
 void Exit::exit_game()
 {
-  _Console->append_anim("Opuszczasz Amarlon...", Console::Font::Action, 50);
+  _Console->append_anim("Opuszczasz Amarlon...", Font::Action, 50);
+  _StyleConfig->save();
   exit(0);
 }
 
 void Exit::cancel_exit()
 {
-  _Console->append("Zatem kontynuujmy.", Console::Font::Action);
+  _Console->append("Zatem kontynuujmy.", Font::Action);
   set_finished();
 }

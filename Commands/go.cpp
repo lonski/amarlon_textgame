@@ -34,9 +34,9 @@ void Go::execute(std::string direction)
     {
       Location* loc = _Player->get_location();
 
-      _Console->append(Console::Divider, Console::Font::Divider);
-      _Console->append(loc->name(), Console::Font::LocName);
-      _Console->append(loc->descript(), Console::Font::LocDescription);
+      _Console->append(Console::Divider, Font::Divider);
+      _Console->append(loc->name(), Font::LocName);
+      _Console->append(loc->descript(), Font::LocDescription);
 
       loc->loc_walk_within_range(WalkVector(Player::SightRange), &Location::load_no_param);
     }

@@ -1,3 +1,4 @@
+
 #include "testdb.h"
 
 using namespace std;
@@ -22,3 +23,4 @@ void TestDB::TestConnection()
   QVERIFY(ind == i_ok);
   QVERIFY(ref != 0);
 }
+

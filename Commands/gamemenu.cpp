@@ -63,9 +63,9 @@ void GameMenu::execute(std::string input)
 void GameMenu::welcome_screen()
 {
   _Console->clear();
-  _Console->append("Witaj w Amarlonie!", Console::Font::MessageBold);
-  _Console->append("1. Nowa gra", Console::Font::Standard);
-  _Console->append("2. Wyjście", Console::Font::Standard);
+  _Console->append("Witaj w Amarlonie!", Font::MessageBold);
+  _Console->append("1. Nowa gra", Font::Standard);
+  _Console->append("2. Wyjście", Font::Standard);
   _Console->append_blank();
 
   stage = Stage::Menu;
@@ -73,7 +73,7 @@ void GameMenu::welcome_screen()
 
 void GameMenu::start_new_game()
 {
-  _Console->append_anim("Zaczynamy nową grę...", Console::Font::Message, 50);
+  _Console->append_anim("Zaczynamy nową grę...", Font::Message, 50);
   _Console->clear();
 
   //set database

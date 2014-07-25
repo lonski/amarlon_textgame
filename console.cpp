@@ -3,7 +3,6 @@
 
 using namespace std;
 
-std::string Console::fonts_filename("fonts.ini");
 std::string Console::Divider("-~=====~-");
 
 Console::Console(QWidget *parent)
@@ -19,7 +18,7 @@ Console::Console(QWidget *parent)
   }
 
   //wczutaj fonty
-  load_fonts(fonts_filename);
+  load_fonts();
 
   //ustaw focus
   ui->c_msg->setFocus();
@@ -28,13 +27,13 @@ Console::Console(QWidget *parent)
 
 Console::~Console()
 {
-  save_fonts(fonts_filename);
+  save_fonts();
   delete ui;
 }
 
-void Console::load_fonts(string file)
+void Console::load_fonts()
 {
-  FontsManager.load(file);
+  FontsManager.load();
 }
 
 void Console::handle_player_input(std::string cmd)
@@ -88,7 +87,7 @@ void Console::append(std::string txt, Font efont)
   ui->c_log->setFontItalic(false);
 }
 
-void Console::append_anim(std::string text, Console::Font efont, int interval)
+void Console::append_anim(std::string text, Font efont, int interval)
 {
   FontConf& font = FontsManager.get(efont);
 
@@ -118,7 +117,7 @@ void Console::append_anim(std::string text, Console::Font efont, int interval)
 
 void Console::append_blank()
 {
-  append("", Console::Font::Standard);
+  append("", Font::Standard);
 }
 
 void Console::clear()
@@ -132,65 +131,7 @@ void Console::on_c_msg_returnPressed()
   ui->c_msg->clear();
 }
 
-//====================FONT MANAGER=========================
-FontConf& Console::FontManager::get(Console::Font font)
+void Console::save_fonts()
 {
-  return _fonts[font];
-}
-
-void Console::FontManager::add(Console::Font font, FontConf conf)
-{
-  _fonts[font] = conf;
-}
-
-void Console::FontManager::load(std::string file)
-{
-  _fonts_ini.open(file);
-  for (int f = 0; f != (int)Font::End; ++f)
-  {
-    Font font = static_cast<Console::Font>(f);
-    string section = Console::Font2Str(font);
-    FontConf fc;
-
-    fc.italic = fun::CheckField<bool>( _fonts_ini.getValue(section,"italic") );
-    fc.weight = fun::CheckFieldCast<QFont::Weight>( _fonts_ini.getValue(section,"weight") );
-
-    string rgb_color = _fonts_ini.getValue(section,"color_rgb");
-    vector<string> colors = fun::explode(rgb_color, ';');
-    if (colors.size() == 3)
-    {
-      int r = fun::fromStr<int>(colors[0]);
-      int g = fun::fromStr<int>(colors[1]);
-      int b = fun::fromStr<int>(colors[2]);
-      fc.kolor = QColor(r,g,b);
-    }
-
-    _fonts[font] = fc;
-    }
-}
-
-void Console::FontManager::save(string file)
-{
-  _fonts_ini.open(file);
-  for (int f = 0; f != (int)Font::End; ++f)
-  {
-    Font font = static_cast<Console::Font>(f);
-    string section = Console::Font2Str(font);
-    FontConf fc = _fonts[font];
-
-    _fonts_ini.setValue(section,"italic", fun::toStr(fc.italic));
-    _fonts_ini.setValue(section,"weight", fun::toStr(fc.weight));
-    stringstream ss;
-    ss << fc.kolor.red() << ";"
-       << fc.kolor.green() << ";"
-       << fc.kolor.blue();
-    _fonts_ini.setValue(section,"color_rgb", ss.str());
-  }
-  _fonts_ini.save();
-}
-//~~~~~~~~~~~~~~~~~~~~~~
-
-void Console::save_fonts(string file)
-{
-  FontsManager.save(file);
+  FontsManager.save();
 }

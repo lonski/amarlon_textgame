@@ -18,5 +18,5 @@ CommandID Take::id() const
 void Take::execute(std::vector<std::string> params)
 {
   //TODO
-  _Game->console()->append("Hohoh wywołanie tejk!", Console::Font::Standard);
+  _Game->console()->append("Hohoh wywołanie tejk!", Font::Standard);
 }

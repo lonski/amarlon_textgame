@@ -40,6 +40,8 @@ public:
   void open(Filename file);
   void load();
   void save();
+  void clear();
+  void reload();
 
   Value getValue(SectionName sectionName, Key key);
   bool setValue(SectionName sectionName, Key key, Value value);

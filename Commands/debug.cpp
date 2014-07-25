@@ -22,12 +22,13 @@ void Debug::execute(std::vector<std::string> params)
       Command *cmd = _Console->cmd_exec._active_command;
       int cmd_id = ( cmd == nullptr ? -1 : static_cast<int>(cmd->id()) );
 
-      _Console->append("DEBUG: " + fun::toStr(cmd_id), Console::Font::Standard);
+      _Console->append("DEBUG: " + fun::toStr(cmd_id), Font::Standard);
     }
     else if (params[1] == "reload_fonts")
     {
-      _Console->load_fonts(Console::fonts_filename);
-      _Console->append("DEBUG: przeładowano konfiguracje czcionek z pliku "+Console::fonts_filename, Console::Font::Standard);
+      _StyleConfig->reload();
+      _Console->load_fonts();
+      _Console->append("DEBUG: przeładowano konfiguracje czcionek z pliku "+Game::styleConfigFilename, Font::Standard);
     }
     else if (params[1] == "clear")
     {
@@ -36,9 +37,9 @@ void Debug::execute(std::vector<std::string> params)
   }
   else //help
   {
-    _Console->append("### DEBUG Help ###",Console::Font::MessageBold);
-    _Console->append("active_cmd",Console::Font::Standard);
-    _Console->append("reload_fonts",Console::Font::Standard);
-    _Console->append("clear",Console::Font::Standard);
+    _Console->append("### DEBUG Help ###",Font::MessageBold);
+    _Console->append("active_cmd",Font::Standard);
+    _Console->append("reload_fonts",Font::Standard);
+    _Console->append("clear",Font::Standard);
   }
 }

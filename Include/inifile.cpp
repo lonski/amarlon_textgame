@@ -89,7 +89,18 @@ void INIFile::save()
       }
     }
 
-  }
+    }
+}
+
+void INIFile::clear()
+{
+  _content.clear();
+}
+
+void INIFile::reload()
+{
+  clear();
+  open(filename);
 }
 
 INIFile::Value INIFile::getValue(INIFile::SectionName sectionName, INIFile::Key key)

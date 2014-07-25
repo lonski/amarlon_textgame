@@ -120,7 +120,7 @@ void TestFun::gameclock()
 
 void TestFun::inifile()
 {
-  INIFile ini("fonts.ini");
+  INIFile ini("style_conf.ini");
 
   QVERIFY( ini.setValue("nowa","pik","pok") == false );
   QVERIFY( ini.setValue("nowa","pik2","pok8") == true );
@@ -130,7 +130,7 @@ void TestFun::inifile()
   QCOMPARE(ini.getValue("nowa","pik").c_str(), "pok");
 
   INIFile ini2;
-  ini2.open("fonts.ini");
+  ini2.open("style_conf.ini");
   ini2.save();
 
   ini2.eraseSection("nowa");
@@ -144,10 +144,5 @@ void TestFun::inifile()
   QCOMPARE(ini2.getValue("nowa","pik").c_str(), "pok");
   ini2.eraseSection("nowa");
   ini2.save();
-
-  _Console->save_fonts(Console::fonts_filename);
-
 }
-
-
 

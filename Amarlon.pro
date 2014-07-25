@@ -31,47 +31,48 @@ unix:LIBS += -lsoci_core \
              -lsoci_firebird
 
 SOURCES += main.cpp\
-        game.cpp \
-    Tests/testlocation.cpp \
-    World/location.cpp \
-    Tests/testdb.cpp \
-    Include/func.cpp \
-    Include/enums.cpp \
-    Equipment/item.cpp \
-    Include/db.cpp \
-    Tests/testitems.cpp \
-    Equipment/ordinaryitem.cpp \
-    Equipment/weapon.cpp \
-    Equipment/armor.cpp \
-    Equipment/jewelry.cpp \
-    Equipment/food.cpp \
-    Equipment/tool.cpp \
-    Include/comobj.cpp \
-    Equipment/shield.cpp \
-    World/locationobject.cpp \
-    Creatures/creature.cpp \
-    Tests/testfun.cpp \
-    Tests/testcreature.cpp \
-    Creatures/creaturemodificator.cpp \
-    Creatures/creaturestats.cpp \
-    Creatures/bodypart.cpp \
-    Include/gameclock.cpp \
-    Creatures/mob.cpp \
-    Creatures/npc.cpp \
-    Creatures/creaturemonitor.cpp \
-    Creatures/player.cpp \
-    Commands/command.cpp \
-    Commands/commandlogger.cpp \
-    Tests/testcommands.cpp \
-    Commands/commandparser.cpp \
-    Commands/commandexecutor.cpp \
-    Commands/go.cpp \
-    Commands/take.cpp \
-    console.cpp \
-    Commands/exit.cpp \
-    Commands/gamemenu.cpp \
-    Commands/debug.cpp \
-    Include/inifile.cpp
+       game.cpp \
+   Tests/testlocation.cpp \
+   World/location.cpp \
+   Tests/testdb.cpp \
+   Include/func.cpp \
+   Include/enums.cpp \
+   Equipment/item.cpp \
+   Include/db.cpp \
+   Tests/testitems.cpp \
+   Equipment/ordinaryitem.cpp \
+   Equipment/weapon.cpp \
+   Equipment/armor.cpp \
+   Equipment/jewelry.cpp \
+   Equipment/food.cpp \
+   Equipment/tool.cpp \
+   Include/comobj.cpp \
+   Equipment/shield.cpp \
+   World/locationobject.cpp \
+   Creatures/creature.cpp \
+   Tests/testfun.cpp \
+   Tests/testcreature.cpp \
+   Creatures/creaturemodificator.cpp \
+   Creatures/creaturestats.cpp \
+   Creatures/bodypart.cpp \
+   Include/gameclock.cpp \
+   Creatures/mob.cpp \
+   Creatures/npc.cpp \
+   Creatures/creaturemonitor.cpp \
+   Creatures/player.cpp \
+   Commands/command.cpp \
+   Commands/commandlogger.cpp \
+   Tests/testcommands.cpp \
+   Commands/commandparser.cpp \
+   Commands/commandexecutor.cpp \
+   Commands/go.cpp \
+   Commands/take.cpp \
+   console.cpp \
+   Commands/exit.cpp \
+   Commands/gamemenu.cpp \
+   Commands/debug.cpp \
+   Include/inifile.cpp \
+   consolefonts.cpp
 
 HEADERS  += game.h \
     Tests/testlocation.h \
@@ -116,7 +117,8 @@ HEADERS  += game.h \
     Commands/exit.h \
     Commands/gamemenu.h \
     Commands/debug.h \
-    Include/inifile.h
+    Include/inifile.h \
+    consolefonts.h
 
 FORMS    += game.ui \
     console.ui

@@ -24,8 +24,7 @@ public:
   virtual ~Exit() {}
 
   virtual CommandID id() const;
-  virtual void execute(std::vector<std::string>);
-  virtual void execute(std::string);
+  virtual void execute(std::vector<std::string>);  
 };
 
 #endif // EXIT_H

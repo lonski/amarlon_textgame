@@ -9,7 +9,7 @@ using namespace std;
 
 GameMenu::GameMenu()
   : stage(Stage::Start)
-  , exit(nullptr)
+  , sub_cmd(nullptr)
 {
   add_name("menu");
 }
@@ -24,26 +24,23 @@ void GameMenu::reset_status()
   stage = Stage::Start;
 }
 
-void GameMenu::execute(std::vector<std::string>)
+void GameMenu::execute(std::vector<std::string> params)
 {
-  execute("");
-}
+  string input = ( params.empty() ? "" : params[params.size()-1] );
 
-void GameMenu::execute(std::string input)
-{
   set_not_finished();
 
   if (stage == Stage::Start)
   {
     welcome_screen();
-  }  
+  }
   else if (stage == Stage::Exit)
   {
-    exit->execute(input);
-    if (exit->is_finished())
+    sub_cmd->execute(params);
+    if (sub_cmd->is_finished())
     {
-      delete exit;
-      exit = nullptr;
+      delete sub_cmd;
+      sub_cmd = nullptr;
       welcome_screen();
     }
   }
@@ -52,10 +49,10 @@ void GameMenu::execute(std::string input)
     start_new_game();
   }
   else if ( input == "2")
-  {    
-    if (nullptr == exit) exit = new Exit;
+  {
+    if (nullptr == sub_cmd) sub_cmd = new Exit;
     stage = Stage::Exit;
-    exit->execute("");
+    sub_cmd->execute();
   }
 
 }
@@ -63,7 +60,7 @@ void GameMenu::execute(std::string input)
 void GameMenu::welcome_screen()
 {
   _Console->clear();
-  _Console->append("Witaj w Amarlonie!", Font::MessageBold);
+  _Console->append("Witaj w Amarlonie!", Font::Header);
   _Console->append("1. Nowa gra", Font::Standard);
   _Console->append("2. Wyjście", Font::Standard);
   _Console->append_blank();

@@ -5,6 +5,9 @@
 #include "gamemenu.h"
 #include "debug.h"
 #include "Include/exceptions.h"
+#include "Include/func.h"
+
+using namespace std;
 
 Command::Command()
   : _finished(false)
@@ -31,9 +34,9 @@ bool Command::accept(std::string cmd)
   return _cmd_names.find(cmd) != _cmd_names.end();
 }
 
-void Command::execute(std::string)
+void Command::execute(string str)
 {
-  throw error::execution_error("Próba wywołania komendy bez wymaganych parametrów!");
+  execute(fun::explode(str,' '));
 }
 
 bool Command::is_finished() const

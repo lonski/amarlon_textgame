@@ -14,7 +14,7 @@ enum class Font
   LocDescription,
   Action,
   Message,
-  MessageBold,
+  Header,
 
   End
 };
@@ -30,7 +30,7 @@ static inline std::string Font2Str(Font font)
     STRINGIFY_FONT(Font::LocDescription)
     STRINGIFY_FONT(Font::Action)
     STRINGIFY_FONT(Font::Message)
-    STRINGIFY_FONT(Font::MessageBold)
+    STRINGIFY_FONT(Font::Header)
     default: break;
   }
   return r;
@@ -40,8 +40,10 @@ struct FontConf{
   QColor kolor;
   QFont::Weight weight;
   bool italic;
-  FontConf(QColor k = Qt::black, QFont::Weight w = QFont::Normal, bool i = false)
-    : kolor(k), weight(w), italic(i)
+  double size;
+  std::string family;
+  FontConf(QColor k = Qt::black, QFont::Weight w = QFont::Normal, bool i = false, double fsize = 10.0, std::string ffamily = "verdana")
+    : kolor(k), weight(w), italic(i), size(fsize), family(ffamily)
   {}
 };
 
@@ -53,8 +55,8 @@ public:
   ConsoleFonts();
   FontConf& get(Font font);
   void add(Font font, FontConf conf);
-  void load();
-  void save();
+  void load(INIFile *inifile);
+  void save(INIFile* inifile);
 };
 
 #endif // CONSOLEFONTS_H

@@ -7,9 +7,8 @@
 #include "Include/inifile.h"
 #include "console.h"
 
-#define _Game Game::inst()
-#define _Console Game::inst()->console()
-#define _StyleConfig Game::inst()->style_config()
+#define _Console Game::console
+#define _StyleConfig Game::styleConfig
 
 namespace Ui {
   class Game;
@@ -20,20 +19,12 @@ class Game : public QMainWindow
   Q_OBJECT
 public:
   static const std::string styleConfigFilename;  
-private:
-  explicit Game(QWidget *parent = 0);
-
-  static Game *_instance;
-  Console *_console;  
-  INIFile * _styleConfig;
-
+  static Console *console;
+  static INIFile * styleConfig;
 
 public:  
+  explicit Game(QWidget *parent = 0);
   ~Game();
-  static Game* inst();
-  Console* console() { return _console; }
-  INIFile* style_config() { return _styleConfig; }
-
 
 private:
   Ui::Game *ui;

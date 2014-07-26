@@ -17,23 +17,58 @@ Console::Console(QWidget *parent)
     cmd_exec.add_command( Command::create_by_enum(static_cast<CommandID>(c)));
   }
 
-  //wczutaj fonty
-  load_fonts();
-
   //ustaw focus
   ui->c_msg->setFocus();
 
 }
 
 Console::~Console()
-{
-  save_fonts();
+{  
   delete ui;
 }
 
-void Console::load_fonts()
+void Console::load_skin(INIFile *inifile)
 {
-  FontsManager.load();
+  load_fonts(inifile);
+  load_controls_skin(inifile);
+}
+
+void Console::load_fonts(INIFile* inifile)
+{
+  FontsManager.load(inifile);
+}
+
+void Console::load_controls_skin(INIFile *inifile)
+{
+  //load log style
+  string style;
+
+  string bg_color = inifile->getValue("console","bg_color");
+  if (!bg_color.empty())
+  {
+    QColor kolor = fun::Str2Color(bg_color);
+    style += " background-color: " + kolor.name().toStdString() + ";";
+  }
+
+  ui->c_log->setStyleSheet(style.c_str());
+  //~~~
+  //load input control style
+  bg_color = inifile->getValue("console","input_bg_color");
+  if (!bg_color.empty())
+  {
+    QColor kolor = fun::Str2Color(bg_color);
+    style += " background-color: " + kolor.name().toStdString() + ";";
+  }
+  ui->c_msg->setStyleSheet(style.c_str());
+
+  int input_size = fun::CheckField<int>(inifile->getValue("console","input_font_size"));
+  if (input_size)
+  {
+    QFont font = ui->c_msg->font();
+    font.setPointSize(input_size);
+    ui->c_msg->setFont(font);
+  }
+  //~~~
 }
 
 void Console::handle_player_input(std::string cmd)
@@ -77,9 +112,13 @@ void Console::keyPressEvent(QKeyEvent *event)
 void Console::append(std::string txt, Font efont)
 {
   FontConf& font = FontsManager.get(efont);
+
   ui->c_log->setFontItalic(font.italic);
-  ui->c_log->setTextColor(font.kolor);
+  ui->c_log->setFontPointSize(font.size);
   ui->c_log->setFontWeight(font.weight);
+  ui->c_log->setFontFamily(font.family.c_str());
+
+  ui->c_log->setTextColor(font.kolor);
   ui->c_log->setAlignment(Qt::AlignJustify);
 
   ui->c_log->append(txt.c_str());
@@ -99,7 +138,12 @@ void Console::append_anim(std::string text, Font efont, int interval)
     default : fw_b = ""; fw_e = ""; break;
   }
 
-  fw_b += "<span style=\"color: " + font.kolor.name() + ";\">";
+  if (font.italic)
+    fw_b = "<i>"; fw_e = "</i>";
+
+  QString fsize = fun::toStr(font.size).c_str();
+  QString ffamily = font.family.c_str();
+  fw_b += "<span style=\"color: " + font.kolor.name() + "; font-size:"+ fsize +"pt; font-family:"+ ffamily +";\">";
   fw_e =+ "</span>";
 
   QString::iterator it = txt.begin();
@@ -129,9 +173,4 @@ void Console::on_c_msg_returnPressed()
 {
   handle_player_input(ui->c_msg->text().toStdString());  
   ui->c_msg->clear();
-}
-
-void Console::save_fonts()
-{
-  FontsManager.save();
 }

@@ -49,8 +49,7 @@ bool CommandExecutor::erase_command(CommandID cmd_id)
 
 bool CommandExecutor::execute(string command)
 {
-  bool r = false;
-
+  bool r = false;  
   if (!command.empty())
   {
     _logger.log(command);
@@ -58,7 +57,7 @@ bool CommandExecutor::execute(string command)
     //jeżeli jest aktywna komenda to ją uruchom
     if (nullptr != _active_command && cmd_name != "debug")
     {
-      _active_command->execute(command);
+      _active_command->execute(fun::explode(command));
       if (_active_command->is_finished())
       {
         _active_command = nullptr;
@@ -71,7 +70,7 @@ bool CommandExecutor::execute(string command)
       {
         Command *cmd = c->second;
         if (cmd->accept(cmd_name))
-        {
+        {          
           cmd->execute(_parser.get_params());
           if (cmd->is_active_command())
           {

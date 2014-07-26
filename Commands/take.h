@@ -10,7 +10,7 @@ public:
   virtual ~Take() {}
 
   virtual CommandID id() const;
-  virtual void execute(std::vector<std::string> params);
+  virtual void execute(std::vector<std::string>);
 };
 
 #endif // TAKE_H

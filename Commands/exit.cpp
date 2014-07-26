@@ -1,6 +1,8 @@
 #include "exit.h"
 #include "game.h"
 
+using namespace std;
+
 Exit::Exit()
   : stage(Stage::Start)
 {
@@ -17,13 +19,10 @@ CommandID Exit::id() const
   return CommandID::Exit;
 }
 
-void Exit::execute(std::vector<std::string>)
+void Exit::execute(std::vector<std::string> params)
 {
-  execute("");
-}
+  string input = ( params.empty() ? "" : params[params.size()-1] );
 
-void Exit::execute(std::string input)
-{
   if (stage == Stage::Start)
   {
     ask_if_sure();

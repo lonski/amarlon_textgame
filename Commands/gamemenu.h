@@ -20,7 +20,7 @@ private:
 
   void welcome_screen();
   void start_new_game();
-  Exit* exit;
+  Command* sub_cmd;
 
 public:
   GameMenu();
@@ -28,7 +28,6 @@ public:
 
   virtual CommandID id() const;
   virtual void execute(std::vector<std::string>);
-  virtual void execute(std::string);
 };
 
 #endif // GAMEMENU_H

@@ -21,8 +21,8 @@ public:
 
   virtual CommandID id() const = 0;
   virtual bool accept(std::string cmd);
-  virtual void execute(std::vector<std::string> params) = 0;
-  virtual void execute(std::string = "");
+  virtual void execute(std::vector<std::string> params) = 0;  
+  virtual void execute(std::string str = "");
   virtual bool is_active_command() const = 0;
   virtual bool is_finished() const;
   virtual void add_name(std::string name);

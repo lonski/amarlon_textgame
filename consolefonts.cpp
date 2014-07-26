@@ -17,7 +17,7 @@ void ConsoleFonts::add(Font font, FontConf conf)
   _fonts[font] = conf;
 }
 
-void ConsoleFonts::load()
+void ConsoleFonts::load(INIFile* inifile)
 {
   for (int f = 0; f != (int)Font::End; ++f)
   {
@@ -25,24 +25,25 @@ void ConsoleFonts::load()
     string section = Font2Str(font);
     FontConf fc;
 
-    fc.italic = fun::CheckField<bool>( _StyleConfig->getValue(section,"italic") );
-    fc.weight = fun::CheckFieldCast<QFont::Weight>( _StyleConfig->getValue(section,"weight") );
+    string ffamily = fun::CheckField<string>( inifile->getValue(section,"family") );
+    if( !ffamily.empty()) fc.family = ffamily;
 
-    string rgb_color = _StyleConfig->getValue(section,"color_rgb");
-    vector<string> colors = fun::explode(rgb_color, ';');
-    if (colors.size() == 3)
-    {
-      int r = fun::fromStr<int>(colors[0]);
-      int g = fun::fromStr<int>(colors[1]);
-      int b = fun::fromStr<int>(colors[2]);
-      fc.kolor = QColor(r,g,b);
-    }
+    double fsize = fun::CheckField<double>( inifile->getValue(section,"size") );
+    if (fsize) fc.size = fsize;
+
+    fc.italic = fun::CheckField<bool>( inifile->getValue(section,"italic") );
+
+    bool bold = fun::CheckFieldCast<bool>( inifile->getValue(section,"bold") );
+    fc.weight = ( bold ? QFont::Weight::Bold : QFont::Weight::Normal);
+
+    string rgb_color = inifile->getValue(section,"color_rgb");
+    fc.kolor = fun::Str2Color(rgb_color);
 
     _fonts[font] = fc;
   }
 }
 
-void ConsoleFonts::save()
+void ConsoleFonts::save(INIFile *inifile)
 {
   for (int f = 0; f != (int)Font::End; ++f)
   {
@@ -50,14 +51,16 @@ void ConsoleFonts::save()
     string section = Font2Str(font);
     FontConf fc = _fonts[font];
 
-    _StyleConfig->setValue(section,"italic", fun::toStr(fc.italic));
-    _StyleConfig->setValue(section,"weight", fun::toStr(fc.weight));
+    inifile->setValue(section,"family", fc.family);
+    inifile->setValue(section,"size", fun::toStr(fc.size));
+    inifile->setValue(section,"italic", fun::toStr(fc.italic));
+    inifile->setValue(section,"bold", fun::toStr( static_cast<int>(fc.weight == QFont::Bold) ));
     stringstream ss;
     ss << fc.kolor.red() << ";"
        << fc.kolor.green() << ";"
        << fc.kolor.blue();
-    _StyleConfig->setValue(section,"color_rgb", ss.str());
+    inifile->setValue(section,"color_rgb", ss.str());
   }
 
-  _StyleConfig->save();
+  inifile->save();
 }

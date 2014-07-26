@@ -1,8 +1,9 @@
 #include "game.h"
 #include "ui_game.h"
 
-Game* Game::_instance = nullptr;
 const std::string Game::styleConfigFilename = "style_config.ini";
+Console* Game::console(nullptr);
+INIFile* Game::styleConfig(nullptr);
 
 Game::Game(QWidget *parent)
   : QMainWindow(parent)
@@ -10,27 +11,18 @@ Game::Game(QWidget *parent)
 {
   ui->setupUi(this);
 
-  _styleConfig = new INIFile(styleConfigFilename);
+  styleConfig = new INIFile(styleConfigFilename);
 
-  _console = new Console(this);
-  _console->show();
+  console = new Console(this);
+  console->load_skin(styleConfig);
+  console->show();
 
-  this->setCentralWidget(_console);
+  this->setCentralWidget(console);
 }
 
 Game::~Game()
 {
   delete ui;
-  delete _console;
-  delete _styleConfig;
-}
-
-Game *Game::inst()
-{
-  if (nullptr == _instance)
-  {
-    _instance = new Game;
-  }
-
-  return _instance;
+  delete console;
+  delete styleConfig;
 }

@@ -13,7 +13,8 @@ namespace fun{
   void MapQuery(const std::string &query, MapTable &result);
   MapRow MapQuery(const std::string &query);  
   Profession skill_group(Skill skill);
-  std::vector<std::string> explode(std::string str, char ch);
+  std::vector<std::string> explode(std::string str, char ch = ' ');
+  QColor Str2Color(std::string rgb_color);
   std::string Enum2Str(BodyPartType bp);
   std::string Enum2Str(BodyRegion bp);
   std::string Enum2Str(BodySide bp);

@@ -24,22 +24,28 @@ void Debug::execute(std::vector<std::string> params)
 
       _Console->append("DEBUG: " + fun::toStr(cmd_id), Font::Standard);
     }
-    else if (params[1] == "reload_fonts")
+    else if (params[1] == "reload_console_skin")
     {
       _StyleConfig->reload();
-      _Console->load_fonts();
-      _Console->append("DEBUG: przeładowano konfiguracje czcionek z pliku "+Game::styleConfigFilename, Font::Standard);
+      _Console->load_skin(_StyleConfig);
+      _Console->append("DEBUG: przeładowano konfiguracje stylu z pliku "+Game::styleConfigFilename, Font::Standard);
     }
-    else if (params[1] == "clear")
+    else if (params[1] == "clear_console")
     {
       _Console->clear();
+    }
+    else if (params[1] == "save_style_config")
+    {
+      _StyleConfig->save();
+      _Console->append("DEBUG: zapisano styleConfig do pliku "+Game::styleConfigFilename, Font::Standard);
     }
   }
   else //help
   {
-    _Console->append("### DEBUG Help ###",Font::MessageBold);
+    _Console->append("### DEBUG Help ###",Font::Header);
     _Console->append("active_cmd",Font::Standard);
-    _Console->append("reload_fonts",Font::Standard);
-    _Console->append("clear",Font::Standard);
+    _Console->append("reload_console_skin",Font::Standard);
+    _Console->append("save_style_config",Font::Standard);
+    _Console->append("clear_console",Font::Standard);
   }
 }

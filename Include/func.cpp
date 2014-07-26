@@ -375,3 +375,19 @@ string fun::Enum2Str(BodyPartType bp)
   }
   return s;
 }
+
+
+QColor fun::Str2Color(string rgb_color)
+{
+  QColor kolor;
+  vector<string> colors = fun::explode(rgb_color, ';');
+  if (colors.size() == 3)
+  {
+    int r = fun::fromStr<int>(colors[0]);
+    int g = fun::fromStr<int>(colors[1]);
+    int b = fun::fromStr<int>(colors[2]);
+    kolor = QColor(r,g,b);
+  }
+
+  return kolor;
+}

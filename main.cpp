@@ -50,9 +50,10 @@ int main(int argc, char *argv[])
 #endif
 
   //START GAME
-  _Game->show();
-  _Game->console()->clear();
+  Game game;
+  _Console->clear();
   _Console->handle_player_input("menu");
+  game.show();
 
   return amarlon.exec();
 

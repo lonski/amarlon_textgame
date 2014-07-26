@@ -32,6 +32,8 @@ private:
   ConsoleFonts FontsManager;
 
   void retrive_command_history(QKeyEvent *event);
+  void load_fonts(INIFile *inifile);
+  void load_controls_skin(INIFile *inifile);
 
 protected:
   void keyPressEvent(QKeyEvent *event);
@@ -40,8 +42,7 @@ public:
   explicit Console(QWidget *parent = 0);  
   ~Console();
 
-  void load_fonts();
-  void save_fonts();
+  void load_skin(INIFile *inifile);
   void handle_player_input(std::string cmd);
   void append(std::string txt, Font efont);
   void append_anim(std::string text, Font efont, int interval = 10);

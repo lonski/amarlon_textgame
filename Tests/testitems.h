@@ -21,7 +21,6 @@ private slots:
    void TemporaryItem();
    void PrototypeTest();
    void ContainerCreation();
-   void ContainerCreationFromPrototype();
    void ContainerInsertionEraseNonStackable();
    void ContainerInsertionEraseStackable();
    void ItemAsAContainer();

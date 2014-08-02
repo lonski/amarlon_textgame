@@ -107,14 +107,16 @@ void Item::load(MapRow *data_source)
         _mods.add( shared_ptr<CreatureModificator>(new CreatureModificator(*m)) );
 
       //INVENTORY
-      try
+      dbRef inv_ref = Item::Container::byOwner(table(), ref());
+      if (inv_ref != 0)
       {
-        _inventory = Container<>::create(Container<>::byOwner( table(),ref() ));
+        _inventory.reset(new Item::Container(inv_ref));
       }
-      catch(error::creation_error)
+      else
       {
-        _inventory = unique_ptr<Container<> >(nullptr);
+        _inventory.reset();
       }
+
     }
     catch(soci_error &e)
     {
@@ -152,7 +154,7 @@ Item::Inventory &Item::inventory()
   {
     //TODO REFACTOR
 
-    _inventory.reset( Item::Container<>::Forge(ItemContainerPrototype::Inventory) );
+    _inventory.reset( new Item::Container );
     _inventory->set_oref(ref());
     _inventory->set_otable(table());
   }

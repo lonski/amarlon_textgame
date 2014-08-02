@@ -87,7 +87,7 @@ string CreatureMonitor::print_inventory()
   ss << "\n===== INVENTORY =====";
   for (auto i = _crt->inventory().begin(); i != _crt->inventory().end(); ++i)
   {
-    AmountedItem<Item> itm = *i;
+    AmountedItem itm = *i;
     if (itm.item != nullptr)
     {
       ss << "\n\t"+itm.item->name()+ " ["+fun::toStr(itm.amount)+"], ref = " + fun::toStr(itm.item->ref());

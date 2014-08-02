@@ -616,7 +616,7 @@ void TestCreature::creature_eq()
   for (auto i = crt->body().equipped_items().begin(); i!=crt->body().equipped_items().end(); ++i)
     (*i)->purge();
 
-  vector<AmountedItem<Item> > inv = crt->inventory();
+  vector<AmountedItem > inv = crt->inventory();
   for (auto i = inv.begin(); i!=inv.end(); ++i)
     i->item->purge();
 

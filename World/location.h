@@ -57,7 +57,7 @@ private:
   std::string _descript;
 
   std::map<Direction, Location* > _neighbours;
-  std::unique_ptr<LocationObjectContainer> _objects;
+  std::unique_ptr<Item::Container> _objects;
 
   void createNeighbours();
   void copyConnectionsToNeighbour(Direction dir);

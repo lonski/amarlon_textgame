@@ -75,7 +75,8 @@ SOURCES += main.cpp\
    consolefonts.cpp \
    World/location_utils.cpp \
     World/walkvector.cpp \
-    World/locationmanager.cpp
+    World/locationmanager.cpp \
+    Equipment/item_container.cpp
 
 HEADERS  += game.h \
     Tests/testlocation.h \

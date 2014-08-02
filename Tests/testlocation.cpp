@@ -23,8 +23,7 @@ void TestLocation::LocCreation()
   try
   {
     //create loc "Test1"
-    Location *loc = nullptr;
-    loc = Location::create(1);
+    Location *loc = new Location(1);
 
     //validate data
     QVERIFY(loc != nullptr);
@@ -45,7 +44,7 @@ void TestLocation::LoadingData()
   try
   {
     //create loc "Test3"
-    Location *loc = Location::create(3);
+    Location *loc = new Location(3);
     QVERIFY(loc->loaded() == false);
 
     //then load it
@@ -83,7 +82,7 @@ void TestLocation::LocWalkWithinRange()
   try
   {
     //create loc "Test5"
-    Location *loc = Location::create(5);
+    Location *loc = new Location(5);
 
     //perform load-walk within the range of 1
     loc->locWalkWithinRange(WalkVector(1,1,1,1), &Location::loadNoParam);
@@ -140,7 +139,7 @@ void TestLocation::LocWalkWithinRange()
 void TestLocation::SaveData()
 {
   //create loc "Test5"
-  Location *loc = Location::create(5);
+  Location *loc = new Location(5);
   loc->load();
 
   //validate

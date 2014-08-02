@@ -382,17 +382,6 @@ enum class ItemType
 };
 
 //===
-enum class LocType
-{
-  Null     = 0,
-  Ordinary = 1,
-  Draw     = 2,
-  End      = 3
-};
-
-//~~~
-
-//===
 enum class ObjType
 {
   Null = 0,

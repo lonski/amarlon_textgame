@@ -91,7 +91,7 @@ void GameMenu::setDatabaseForNewGame()
 
 void GameMenu::setPlayerForNewGame()
 {
-  Location* startLocation = Location::create((int)refDict::Location::StartLocation);
+  Location* startLocation = new Location( (int)refDict::Location::StartLocation );
   startLocation->load();
   _Player->setLocation(startLocation);
 }

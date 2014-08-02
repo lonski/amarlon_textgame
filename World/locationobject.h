@@ -10,6 +10,11 @@ private:
   LocationObject(dbRef ref, bool temporary = false);
 public:
   virtual ~LocationObject() {}
+
+  inline static LocationObject* Forge(ItemPrototype proto)
+  {
+    return dynamic_cast<LocationObject*>(Item::prototypes().clone(proto).release());
+  }
 };
 
 #endif // LOCATIONOBJECT_H

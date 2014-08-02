@@ -8,9 +8,16 @@ class Debug : public NonActiveCommand
 public:
   Debug();
   virtual ~Debug() {}
-
   virtual CommandID id() const;
   virtual void execute(std::vector<std::string> params);
+
+private:
+  void cmdexecActiveCommand();
+  void reloadConsoleSkin();
+  void saveStyleConfig();
+  void displayHelp();
+  void clearConsole();
+  void createLocObj();
 };
 
 

@@ -22,7 +22,12 @@ private:
   void movePlayerFail();
 
   void displayLocationInfo(Location* loc);
+  void displayDivider();
+  void displayLocName(Location* loc);
   void displayPossibleExits(Location* loc);
+  void displayLocDescription(Location* loc);
+  void dispalyLocationObjects(Location *loc);
+
   void loadNeighbourLocations(Location* loc);
   std::map<Direction, bool> getPossibleExits(Location *loc);
 };

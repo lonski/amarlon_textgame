@@ -146,6 +146,20 @@ void Item::saveToDB()
   DBObject::saveToDB();
 }
 
+Item::Inventory &Item::inventory()
+{
+  if (_inventory == nullptr)
+  {
+    //TODO REFACTOR
+
+    _inventory.reset( Item::Container<>::Forge(ItemContainerPrototype::Inventory) );
+    _inventory->set_oref(ref());
+    _inventory->set_otable(table());
+  }
+
+  return _inventory;
+}
+
 std::unique_ptr<Item> Item::clone()
 {
   if (!isTemporary())

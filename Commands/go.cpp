@@ -138,12 +138,42 @@ void Go::loadNeighbourLocations(Location* loc)
   loc->locWalkWithinRange(WalkVector(Player::SightRange), &Location::loadNoParam);
 }
 
+
+
+
 void Go::displayLocationInfo(Location* loc)
 {
-  _Console->append(Console::Divider, Font::Divider);
-  _Console->append(loc->name(), Font::LocName);
+  displayDivider();
+  displayLocName(loc);
   displayPossibleExits(loc);
+  displayLocDescription(loc);
+
+  dispalyLocationObjects(loc);
+}
+
+void Go::displayDivider()
+{
+  _Console->append(Console::Divider, Font::Divider);
+}
+
+void Go::displayLocName(Location* loc)
+{
+  _Console->append(loc->name(), Font::LocName);
+}
+
+void Go::displayLocDescription(Location* loc)
+{
   _Console->append(loc->descript(), Font::LocDescription);
+}
+
+void Go::dispalyLocationObjects(Location* loc)
+{
+  vector<LocationObjectPtr> objs = loc->getAllObjects();
+  for (auto o = objs.begin(); o != objs.end(); ++o)
+  {
+    LocationObjectPtr obj = *o;
+    _Console->append(obj->name(), Font::LocObject);
+  }
 }
 
 void Go::displayPossibleExits(Location *loc)

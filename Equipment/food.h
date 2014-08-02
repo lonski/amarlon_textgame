@@ -25,6 +25,11 @@ public:
   void set_hunger(int hunger);
 
   virtual ~Food();
+
+  inline static Food* Forge(ItemPrototype proto)
+  {
+    return dynamic_cast<Food*>(Item::prototypes().clone(proto).release());
+  }
 };
 //===
 

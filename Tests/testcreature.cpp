@@ -255,7 +255,7 @@ void TestCreature::modmanager()
   manager.add(mod3);
 
   //validate size
-  QCOMPARE(manager.get_all().size(), (size_t)3);
+  QCOMPARE(manager.getAll().size(), (size_t)3);
   //validate complex mod
   QCOMPARE(manager.get_complex_mod()->creature_stats().attribute(Attribute::CHR), 6);
   QCOMPARE(manager.get_complex_mod()->creature_stats().attribute(Attribute::STR), 1);
@@ -266,7 +266,7 @@ void TestCreature::modmanager()
   manager.remove(mod2->ref());
 
   //validate size
-  QCOMPARE(manager.get_all().size(), (size_t)2);
+  QCOMPARE(manager.getAll().size(), (size_t)2);
   //validate complex mod
   QCOMPARE(manager.get_complex_mod()->creature_stats().attribute(Attribute::CHR), 4);
   QCOMPARE(manager.get_complex_mod()->creature_stats().attribute(Attribute::STR), 1);
@@ -301,25 +301,25 @@ void TestCreature::modmanager_ticktime()
   manager.add(mod4);
 
   //validate size
-  QCOMPARE(manager.get_all().size(), (size_t)4);
+  QCOMPARE(manager.getAll().size(), (size_t)4);
 
   //TICK 4
   GameClock::Clock().tick_time(4);
 
   //validate size
-  QCOMPARE(manager.get_all().size(), (size_t)4);
+  QCOMPARE(manager.getAll().size(), (size_t)4);
 
   //TICK 10
   GameClock::Clock().tick_time(10);
 
   //validate size
-  QCOMPARE(manager.get_all().size(), (size_t)2);
+  QCOMPARE(manager.getAll().size(), (size_t)2);
 
   //TICK 6
   GameClock::Clock().tick_time(6);
 
   //validate size
-  QCOMPARE(manager.get_all().size(), (size_t)1);
+  QCOMPARE(manager.getAll().size(), (size_t)1);
 
   mod1->purge();
   mod2->purge();
@@ -449,9 +449,9 @@ void TestCreature::creature_load_inventory()
   crt = Creature::create(ref);
   crtp = crt.get();
 
-  QCOMPARE(crtp->_inventory->get_all().size(), (size_t)1);
+  QCOMPARE(crtp->_inventory->getAll().size(), (size_t)1);
 
-  auto items = crtp->_inventory->get_all();
+  auto items = crtp->_inventory->getAll();
   for (auto i = items.begin(); i != items.end(); ++i)
     i->item->purge();
 
@@ -771,7 +771,7 @@ void TestCreature::creature_container_insert_erase()
   cont->insert(ogr2);
 
   //validate
-  QCOMPARE(cont->get_all().size(), (size_t)2);
+  QCOMPARE(cont->getAll().size(), (size_t)2);
   QVERIFY(cont->find(ogr1_ref) != nullptr);
   QVERIFY(cont->find(ogr2_ref) != nullptr);
 
@@ -782,14 +782,14 @@ void TestCreature::creature_container_insert_erase()
 
   cont = new Creature::Container(cont_ref);
 
-  QCOMPARE(cont->get_all().size(), (size_t)2);
+  QCOMPARE(cont->getAll().size(), (size_t)2);
   QVERIFY(cont->find(ogr1_ref) != nullptr);
   QVERIFY(cont->find(ogr2_ref) != nullptr);
 
   //==========erase
   cont->erase(ogr2_ref);
 
-  QCOMPARE(cont->get_all().size(), (size_t)1);
+  QCOMPARE(cont->getAll().size(), (size_t)1);
   QVERIFY(cont->find(ogr1_ref) != nullptr);
   QVERIFY(cont->find(ogr2_ref) == nullptr);
 
@@ -797,7 +797,7 @@ void TestCreature::creature_container_insert_erase()
   delete cont;
   cont = new Creature::Container(cont_ref);
 
-  QCOMPARE(cont->get_all().size(), (size_t)1);
+  QCOMPARE(cont->getAll().size(), (size_t)1);
   QVERIFY(cont->find(ogr1_ref) != nullptr);
   QVERIFY(cont->find(ogr2_ref) == nullptr);
 

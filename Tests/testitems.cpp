@@ -320,7 +320,7 @@ void TestItems::ContainerInsertionEraseNonStackable()
   QCOMPARE(cont->name().c_str(), "TestCont");
 
   //check content
-  QCOMPARE(cont->get_all().size(), static_cast<size_t>(0));
+  QCOMPARE(cont->getAll().size(), static_cast<size_t>(0));
 
   //create some new items
   shared_ptr<Item> item1( Item::prototypes().clone(ItemPrototype::Nozyk).release() );
@@ -331,24 +331,24 @@ void TestItems::ContainerInsertionEraseNonStackable()
   cont->insert(item2);
 
   //check content
-  QCOMPARE(cont->get_all().size(), static_cast<size_t>(2));
+  QCOMPARE(cont->getAll().size(), static_cast<size_t>(2));
 
   //recreate and check content
   dbRef cont_ref = cont->ref();
   delete cont.release();
   cont = Item::Container<>::create(cont_ref);
-  QCOMPARE(cont->get_all().size(), static_cast<size_t>(2));
+  QCOMPARE(cont->getAll().size(), static_cast<size_t>(2));
 
   //====================ERASE======================
   cont->erase(item1->ref());
-  QCOMPARE(cont->get_all().size(), static_cast<size_t>(1));
+  QCOMPARE(cont->getAll().size(), static_cast<size_t>(1));
   cont->erase(item2->ref());
-  QCOMPARE(cont->get_all().size(), static_cast<size_t>(0));
+  QCOMPARE(cont->getAll().size(), static_cast<size_t>(0));
 
   //recreate and check content
   delete cont.release();
   cont = Item::Container<>::create(cont_ref);
-  QCOMPARE(cont->get_all().size(), static_cast<size_t>(0));
+  QCOMPARE(cont->getAll().size(), static_cast<size_t>(0));
 
   //clean up
   cont->purge();
@@ -365,7 +365,7 @@ void TestItems::ContainerInsertionEraseStackable()
   QCOMPARE(cont->name().c_str(), "TestCont");
 
   //check content
-  QCOMPARE(cont->get_all().size(), static_cast<size_t>(0));
+  QCOMPARE(cont->getAll().size(), static_cast<size_t>(0));
 
   //create some new items
   shared_ptr<Item> miedziak( Item::create( (int)refDict::Item::Miedziak ) );
@@ -376,7 +376,7 @@ void TestItems::ContainerInsertionEraseStackable()
 
   //validate
   cont->reload();
-  QCOMPARE(cont->get_all().size(), static_cast<size_t>(1));
+  QCOMPARE(cont->getAll().size(), static_cast<size_t>(1));
   QVERIFY(cont->find(miedziak->ref()).item.get() != nullptr);
   QCOMPARE(cont->find(miedziak->ref()).amount, 10);
 
@@ -385,7 +385,7 @@ void TestItems::ContainerInsertionEraseStackable()
 
   //validate
   cont->reload();
-  QCOMPARE(cont->get_all().size(), static_cast<size_t>(1));
+  QCOMPARE(cont->getAll().size(), static_cast<size_t>(1));
   QVERIFY(cont->find(miedziak->ref()).item.get() != nullptr);
   QCOMPARE(cont->find(miedziak->ref()).amount, 14);
 
@@ -396,7 +396,7 @@ void TestItems::ContainerInsertionEraseStackable()
 
   //validate
   cont->reload();
-  QCOMPARE(cont->get_all().size(), static_cast<size_t>(2));
+  QCOMPARE(cont->getAll().size(), static_cast<size_t>(2));
   QVERIFY(cont->find(miedziak->ref()).item.get() != nullptr);
   QCOMPARE(cont->find(miedziak->ref()).amount, 16);
 
@@ -405,7 +405,7 @@ void TestItems::ContainerInsertionEraseStackable()
 
   //validate
   cont->reload();
-  QCOMPARE(cont->get_all().size(), static_cast<size_t>(2));
+  QCOMPARE(cont->getAll().size(), static_cast<size_t>(2));
   QVERIFY(cont->find(miedziak->ref()).item.get() != nullptr);
   QCOMPARE(cont->find(miedziak->ref()).amount, 4);
 
@@ -414,7 +414,7 @@ void TestItems::ContainerInsertionEraseStackable()
 
   //validate
   cont->reload();
-  QCOMPARE(cont->get_all().size(), static_cast<size_t>(1));
+  QCOMPARE(cont->getAll().size(), static_cast<size_t>(1));
   QVERIFY(cont->find(miedziak->ref()).item.get() == nullptr);
 
   //clean up
@@ -449,7 +449,7 @@ void TestItems::ItemAsAContainer()
   szkatulka->inventory()->insert(i1, 5);
   szkatulka->inventory()->insert(i2);
 
-  QCOMPARE(szkatulka->inventory()->get_all().size(), (size_t)2 );
+  QCOMPARE(szkatulka->inventory()->getAll().size(), (size_t)2 );
 
   //clean up!
   szkatulka->inventory()->purge();
@@ -492,7 +492,7 @@ void TestItems::ItemModManager()
   //VALIDATE MOD MANAGER
 
   //validate size
-  QCOMPARE(itm->mods().get_all().size(), (size_t)3);
+  QCOMPARE(itm->mods().getAll().size(), (size_t)3);
   //validate complex mod
   QCOMPARE(itm->mods().get_complex_mod()->creature_stats().attribute(Attribute::CHR), 6);
   QCOMPARE(itm->mods().get_complex_mod()->creature_stats().attribute(Attribute::STR), 1);
@@ -503,7 +503,7 @@ void TestItems::ItemModManager()
   itm->mods().remove(mod2->ref());
 
   //validate size
-  QCOMPARE(itm->mods().get_all().size(), (size_t)2);
+  QCOMPARE(itm->mods().getAll().size(), (size_t)2);
   //validate complex mod
   QCOMPARE(itm->mods().get_complex_mod()->creature_stats().attribute(Attribute::CHR), 4);
   QCOMPARE(itm->mods().get_complex_mod()->creature_stats().attribute(Attribute::STR), 1);

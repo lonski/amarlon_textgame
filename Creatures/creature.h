@@ -153,10 +153,10 @@ public:
   //body & inventory & mods
   CreatureModificatorManager& mods() { return _mods; }
   Body& body() { set_modified(); return _body; }
-  std::vector< AmountedItem<Item> > inventory();
+  std::vector< AmountedItem > inventory();
 
   void take(std::shared_ptr<Item> item, int amount = 1);
-  AmountedItem<Item> drop(dbRef item_ref, int amount = 1);
+  AmountedItem drop(dbRef item_ref, int amount = 1);
 
   void equip(std::shared_ptr<Item> item);
   std::shared_ptr<Item> unequip(dbRef item_ref);

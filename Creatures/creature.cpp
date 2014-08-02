@@ -159,15 +159,14 @@ void Creature::load(MapRow *data_source)
       }
 
       //INVENTORY
-      try
+      dbRef inv_ref = Item::Container::byOwner( table(),ref() );
+      if (inv_ref != 0)
       {
-        _inventory = Item::Container<>::create(Item::Container<>::byOwner( table(),ref() ));
+        _inventory.reset( new Item::Container(inv_ref));
       }
-      catch(error::creation_error){}
-
-      if ( _inventory == nullptr)
+      else
       {
-        _inventory = Item::Container<>::prototypes().clone(ItemContainerPrototype::Inventory);
+        _inventory.reset(new Item::Container);
         _inventory->set_otable(table());
         _inventory->set_oref(ref());
         _inventory->saveToDB();
@@ -257,13 +256,13 @@ void Creature::take(std::shared_ptr<Item> item, int amount)
   set_modified();
 }
 
-AmountedItem<Item> Creature::drop(dbRef item_ref, int amount)
+AmountedItem Creature::drop(dbRef item_ref, int amount)
 {
   set_modified();
   return _inventory->erase(item_ref, amount);
 }
 
-std::vector<AmountedItem<Item> > Creature::inventory()
+std::vector<AmountedItem > Creature::inventory()
 {
   return _inventory->getAll();
 }

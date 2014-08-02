@@ -15,7 +15,6 @@ Location::Location(dbRef ref)
 {
   initalizeNeighbours();
   initalizeLocationObjects(ref);
-
   Location::Manager.add(this);
 }
 
@@ -27,15 +26,16 @@ void Location::initalizeNeighbours()
 
 void Location::initalizeLocationObjects(dbRef ref)
 {
-  try
-  {
-    _objects = LocationObjectContainer::create( LocationObjectContainer::byOwner(table_name, ref) );
-  }
-  catch(error::creation_error&)
-  {
-    _objects = std::unique_ptr<LocationObjectContainer>(nullptr);
-  }
+  dbRef objects_ref = Item::Container::byOwner(table_name, ref);
 
+  if (objects_ref != 0)
+  {
+    _objects.reset(new Item::Container(objects_ref));
+  }
+  else
+  {
+    _objects.reset(nullptr);
+  }
 }
 
 void Location::createObjectsContainer()
@@ -43,7 +43,7 @@ void Location::createObjectsContainer()
   if (_objects == nullptr)
   {
     //TODO REFACTOR
-    _objects.reset( Item::Container<LocationObject>::prototypes().clone(ItemContainerPrototype::Inventory).release());
+    _objects.reset( new Item::Container );
     _objects->set_oref(ref());
     _objects->set_otable(table());
   }
@@ -68,7 +68,8 @@ void Location::insertObject(LocationObjectPtr &obj)
     createObjectsContainer();
   }
 
-  _objects->insert(obj, 1);
+  ItemPtr item = std::dynamic_pointer_cast<Item>(obj);
+  _objects->insert(item, 1);
 }
 
 LocationObjectPtr Location::eraseObject(dbRef obj_ref)
@@ -78,7 +79,7 @@ LocationObjectPtr Location::eraseObject(dbRef obj_ref)
     createObjectsContainer();
   }
 
-  return _objects->erase(obj_ref, 1).item;
+  return dynamic_pointer_cast<LocationObject>(_objects->erase(obj_ref, 1).item);
 }
 
 LocationObjectPtr Location::findObject(dbRef obj_ref)
@@ -88,7 +89,7 @@ LocationObjectPtr Location::findObject(dbRef obj_ref)
     createObjectsContainer();
   }
 
-  return _objects->find(obj_ref).item;;
+  return dynamic_pointer_cast<LocationObject>(_objects->find(obj_ref).item);
 }
 
 std::vector<LocationObjectPtr > Location::getAllObjects()
@@ -100,11 +101,11 @@ std::vector<LocationObjectPtr > Location::getAllObjects()
     createObjectsContainer();
   }
 
-  vector<AmountedItem<LocationObject> > a_items = _objects->getAll();
+  vector<AmountedItem> a_items = _objects->getAll();
 
   for (auto o = a_items.begin(); o != a_items.end(); ++o)
   {
-    r.push_back(o->item);
+    r.push_back(dynamic_pointer_cast<LocationObject>(o->item));
   }
 
   return r;

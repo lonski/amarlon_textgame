@@ -299,23 +299,16 @@ void TestItems::PrototypeTest()
 
 void TestItems::ContainerCreation()
 {
-  unique_ptr<Item::Container<> > cont = Item::Container<>::create(1,true);
+  Item::Container* cont = new Item::Container(1,true);
   QCOMPARE(cont->name().c_str(), "Ekwipunek");
-}
-
-void TestItems::ContainerCreationFromPrototype()
-{
-  unique_ptr<Item::Container<> > cont = Item::Container<>::prototypes().clone(ItemContainerPrototype::Inventory);
-  QVERIFY(cont->ref() != 1);
-  QCOMPARE(cont->name().c_str(), "Ekwipunek");
-  cont->purge();
+  delete cont;
 }
 
 void TestItems::ContainerInsertionEraseNonStackable()
 {
   //===================INSERT===================
   //create some new container
-  unique_ptr<Item::Container<> > cont = Item::Container<>::prototypes().clone(ItemContainerPrototype::Inventory);
+  Item::Container* cont = new Item::Container;
   cont->set_name("TestCont");
   QCOMPARE(cont->name().c_str(), "TestCont");
 
@@ -335,8 +328,8 @@ void TestItems::ContainerInsertionEraseNonStackable()
 
   //recreate and check content
   dbRef cont_ref = cont->ref();
-  delete cont.release();
-  cont = Item::Container<>::create(cont_ref);
+  delete cont;
+  cont = new Item::Container(cont_ref);
   QCOMPARE(cont->getAll().size(), static_cast<size_t>(2));
 
   //====================ERASE======================
@@ -346,21 +339,22 @@ void TestItems::ContainerInsertionEraseNonStackable()
   QCOMPARE(cont->getAll().size(), static_cast<size_t>(0));
 
   //recreate and check content
-  delete cont.release();
-  cont = Item::Container<>::create(cont_ref);
+  delete cont;
+  cont = new Item::Container(cont_ref);
   QCOMPARE(cont->getAll().size(), static_cast<size_t>(0));
 
   //clean up
   cont->purge();
   item1->purge();
   item2->purge();
+  delete cont;
 
 }
 
 void TestItems::ContainerInsertionEraseStackable()
 {
   //create some new container
-  unique_ptr<Item::Container<> > cont = Item::Container<>::prototypes().clone(ItemContainerPrototype::Inventory);
+  Item::Container* cont = new Item::Container;
   cont->set_name("TestCont");
   QCOMPARE(cont->name().c_str(), "TestCont");
 
@@ -420,6 +414,7 @@ void TestItems::ContainerInsertionEraseStackable()
   //clean up
   cont->purge();
   item1->purge();
+  delete cont;
 }
 
 void TestItems::ItemAsAContainer()
@@ -429,7 +424,7 @@ void TestItems::ItemAsAContainer()
   szkatulka->set_name("Szkatułka");
 
   //create a container for that item
-  Item::Container<>* cont = Item::Container<>::prototypes().clone(ItemContainerPrototype::Null).release();
+  Item::Container* cont = new Item::Container;
   cont->set_max_weight(5);
   cont->set_otable(szkatulka->table());
   cont->set_oref(szkatulka->ref());

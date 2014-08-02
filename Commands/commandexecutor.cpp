@@ -58,7 +58,7 @@ bool CommandExecutor::execute(string command)
     if (nullptr != _active_command && cmd_name != "debug")
     {
       _active_command->execute(fun::explode(command));
-      if (_active_command->is_finished())
+      if (_active_command->isFinished())
       {
         _active_command = nullptr;
       }
@@ -72,7 +72,7 @@ bool CommandExecutor::execute(string command)
         if (cmd->accept(cmd_name))
         {          
           cmd->execute(_parser.get_params());
-          if (cmd->is_active_command())
+          if (cmd->isActiveCommand())
           {
             _active_command = cmd;
           }

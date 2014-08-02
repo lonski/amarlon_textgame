@@ -8,7 +8,7 @@ string DB::_db_log_file;
 string DB::_db_server;
 
 //===DB Object
-void DBObject::save_to_db()
+void DBObject::saveToDB()
 {
   if (!isTemporary())
   {
@@ -41,7 +41,7 @@ void DBObject::save_to_db()
 
 void DBObject::reload()
 {
-  save_to_db();
+  saveToDB();
   set_not_loaded();
   load();
 }
@@ -71,7 +71,7 @@ DBObject::~DBObject()
   {
     try
     {
-      save_to_db();
+      saveToDB();
     }
     catch(std::exception &e)
     {

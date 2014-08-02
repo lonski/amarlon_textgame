@@ -15,7 +15,7 @@ private:
 public:
   //operations
   virtual void load(MapRow *data_source = nullptr);
-  virtual void save_to_db();
+  virtual void saveToDB();
 
   //data access
   int defence() const { return _defence; }

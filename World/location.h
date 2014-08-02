@@ -57,7 +57,7 @@ class Location : public DBObject
 {
 private:
   //parameters
-  static unsigned int _draw_range;
+  static unsigned int _drawRange;
 
   //flags  
   bool _drawn;
@@ -75,8 +75,8 @@ protected:
   virtual ~Location() = 0;
 
   //establish neighbour connections
-  virtual void create_neighbours();
-  virtual void copy_connections_to_neighbour(Direction dir);
+  virtual void createNeighbours();
+  virtual void copyConnectionsToNeighbour(Direction dir);
 
 public:  
   const static dbTable table_name;
@@ -97,28 +97,28 @@ public:
   static Location* create(dbRef ref, LocType loc_type = LocType::Ordinary);
 
   //operations
-  virtual void loc_walk_within_range(WalkVector dir_vector, void (Location::*Fun)() );
+  virtual void locWalkWithinRange(WalkVector dir_vector, void (Location::*Fun)() );
   virtual void load(MapRow *data_source = nullptr);  
-  virtual void save_to_db();
-  void load_no_param();
+  virtual void saveToDB();
+  void loadNoParam();
   virtual void draw();
-  virtual void set_not_drawn() { _drawn = false; }
+  virtual void setNotDrawn() { _drawn = false; }
 
   //access data
   virtual Location* connection(Direction dir) { return _neighbours[dir]; }
   virtual bool drawn() const { return _drawn; }
   virtual bool enterable() const { return true; }
-  virtual unsigned int draw_range() const { return _draw_range; }
+  virtual unsigned int drawRange() const { return _drawRange; }
   virtual dbTable table() const { return table_name; }
 
   virtual std::string name() const { return _name; }
   virtual std::string descript() const { return _descript; }
 
   //set data  
-  virtual void set_draw_range(unsigned int range) { _draw_range = range; }
-  virtual void set_connection(Direction dir, Location* loc);
-  void set_name(std::string name);
-  void set_destript(std::string dsc);
+  virtual void setDrawRange(unsigned int range) { _drawRange = range; }
+  virtual void setConnection(Direction dir, Location* loc);
+  void setName(std::string name);
+  void setDestript(std::string dsc);
 
 };
 //===~~~

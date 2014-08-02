@@ -2,9 +2,9 @@
 #include <QDebug>
 #include "game.h"
 
-//#define _UT
+#define _UT 1
 
-#ifdef _UT
+#if _UT
 #include <QtTest/QTest>
 #include "Tests/testlocation.h"
 #include "Tests/testdb.h"
@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 {
   QApplication amarlon(argc, argv);
 
-#ifdef _UT
+#if _UT
   //TESTS
   TestDB db_tests;
   TestLocation location_tests;

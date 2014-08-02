@@ -20,12 +20,12 @@
 #define _DEBUG(X) qDebug() << #X << "=" << X;
 #define _STR(X) #X
 
-#define _SAVE_TO_DB_ \
+#define _saveToDB_ \
   if ( !isTemporary() && ref() != 0 && modified() )\
   {\
     try\
     {\
-      save_to_db();\
+      saveToDB();\
     }\
     catch(std::exception &e)\
     {\

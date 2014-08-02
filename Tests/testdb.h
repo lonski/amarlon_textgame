@@ -8,6 +8,12 @@ class TestDB : public QObject
   Q_OBJECT
 public:
   TestDB();
+
+private:
+  void setDBConnectionLocalServer();
+  void setDBConnectionRemote();
+  void setDBConnectionLocalMachine();
+
 private slots:
    void TestConnection();
 };

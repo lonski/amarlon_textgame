@@ -54,7 +54,7 @@ public:
   virtual bool modified() const { return _modified; }
 
   //operations
-  virtual void save_to_db();
+  virtual void saveToDB();
   virtual void load(MapRow *data_source = nullptr) = 0;
   virtual void reload();
   virtual void purge();

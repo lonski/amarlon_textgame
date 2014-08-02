@@ -14,24 +14,24 @@ Command::Command()
 {
 }
 
-void Command::set_finished()
+void Command::setFinished()
 {
   _finished = true;
 }
 
-void Command::set_not_finished()
+void Command::setNotFinished()
 {
   _finished = false;
 }
 
-void Command::tick_game_clock(Minute minutes)
+void Command::tickGameClock(Minute minutes)
 {
   GameClock::Clock().tick_time(minutes);
 }
 
 bool Command::accept(std::string cmd)
 {
-  return _cmd_names.find(cmd) != _cmd_names.end();
+  return _cmdNames.find(cmd) != _cmdNames.end();
 }
 
 void Command::execute(string str)
@@ -39,22 +39,22 @@ void Command::execute(string str)
   execute(fun::explode(str,' '));
 }
 
-bool Command::is_finished() const
+bool Command::isFinished() const
 {
   return _finished;
 }
 
-void Command::add_name(std::string name)
+void Command::addName(std::string name)
 {
-  _cmd_names.insert(name);
+  _cmdNames.insert(name);
 }
 
-void Command::erase_name(std::string name)
+void Command::eraseName(std::string name)
 {
-  _cmd_names.erase(name);
+  _cmdNames.erase(name);
 }
 
-Command *Command::create_by_enum(CommandID cmd)
+Command *Command::createByEnum(CommandID cmd)
 {
   Command *r = nullptr;
 

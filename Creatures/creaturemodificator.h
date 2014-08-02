@@ -49,7 +49,7 @@ public:
 
   //operations
   virtual void load(MapRow *data_source = nullptr);
-  virtual void save_to_db();
+  virtual void saveToDB();
   void augument(const CreatureModificator& mod);
   void remove_augument(const CreatureModificator& mod);
 };

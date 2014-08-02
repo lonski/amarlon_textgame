@@ -5,7 +5,7 @@ using namespace std;
 
 Debug::Debug()
 {
-  add_name("debug");
+  addName("debug");
 }
 
 CommandID Debug::id() const

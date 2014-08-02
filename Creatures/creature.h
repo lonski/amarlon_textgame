@@ -13,6 +13,7 @@
 #include "bodypart.h"
 
 class CreatureMonitor;
+class Location;
 
 class Creature : public DBObject, public Prototypable<Creature, CreaturePrototype>
 {
@@ -43,7 +44,7 @@ public:
 
     //operations
     virtual void load(MapRow *data_source = nullptr);
-    virtual void save_to_db();
+    virtual void saveToDB();
 
     void insert(std::shared_ptr<Creature>& crt);
     std::shared_ptr<Creature> erase(dbRef crt_ref);
@@ -96,6 +97,9 @@ private:
   Weapon* _weapon;
   Weapon* _offhand;
   Shield* _shield;
+
+  Location *_currentLoc;
+  Location *_prevLoc;
 protected:
   //creation
   Creature(dbRef ref, bool temp = false);
@@ -117,7 +121,7 @@ public:
 
   //operations
   virtual void load(MapRow *data_source = nullptr);
-  virtual void save_to_db();
+  virtual void saveToDB();
   virtual void purge();
 
   //data access
@@ -127,6 +131,9 @@ public:
   DamageLevel total_damage() const { return _total_damage; }
 
   CreatureStats& stats() { return _stats; }
+
+  Location* getLocation() const { return _currentLoc; }
+  Location* getPrevLoc() const { return _prevLoc; }
 
   //data set
   void set_name(std::string name);
@@ -157,6 +164,8 @@ public:
   virtual Weapon* weapon() { return _weapon; }
   virtual Weapon* offhand() { return _offhand; }
   virtual Shield* shield() { return _shield; }
+
+  void setLocation(Location* loc);
 
 };
 

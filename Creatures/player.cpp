@@ -4,11 +4,11 @@ using namespace std;
 using namespace fun;
 using namespace soci;
 
-const dbRef Player::player_ref = 5;
+const dbRef Player::playerRef = 5;
 Player* Player::_instance = nullptr;
 uint Player::SightRange = 3;
 
-Player::Player() : Creature(player_ref)
+Player::Player() : Creature(playerRef)
 {
 }
 
@@ -37,7 +37,7 @@ void Player::load(MapRow *data_source)
       }
       else
       {
-        plr_data = MapQuery( "SELECT first 1 p.*, c.tribe, c.clan FROM player p join creatures c on (c.ref = "+fun::toStr(Player::player_ref)+")" );
+        plr_data = MapQuery( "SELECT first 1 p.*, c.tribe, c.clan FROM player p join creatures c on (c.ref = "+fun::toStr(Player::playerRef)+")" );
       }
 
       if (!plr_data.empty())
@@ -46,14 +46,14 @@ void Player::load(MapRow *data_source)
         _prof = CheckFieldCast<Profession>(plr_data["PROFESSION"]);
         _bless = CheckFieldCast<Bless>(plr_data["BLESS"]);
         _splot = CheckField<Splot>(plr_data["SPLOT"]);
-        _birth_season = CheckFieldCast<Season>(plr_data["BIRTH_SEASON"]);
+        _birthSeason = CheckFieldCast<Season>(plr_data["BIRTH_SEASON"]);
         _tribe = CheckFieldCast<Tribe>(plr_data["TRIBE"]);
         _clan = CheckFieldCast<Clan>(plr_data["CLAN"]);
         _hunger = CheckFieldCast<HungerLevel>(plr_data["HUNGER"]);
         _fatigue = CheckFieldCast<FatigueLevel>(plr_data["FATIGUE"]);
         _brave = CheckField<BravePoints>(plr_data["BRAVE"]);
-        _lift_cap.cur = 0;
-        _lift_cap.max = CheckField<int>(plr_data["LIFT_CAP"]);
+        _liftCap.cur = 0;
+        _liftCap.max = CheckField<int>(plr_data["LIFT_CAP"]);
 
         string tmp;
         vector<string> vtmp;
@@ -84,7 +84,7 @@ void Player::load(MapRow *data_source)
   }
 }
 
-void Player::save_to_db()
+void Player::saveToDB()
 {
   stringstream save_query;
 
@@ -92,11 +92,11 @@ void Player::save_to_db()
              << "  profession=" << static_cast<int>(_prof)
              << " ,bless=" << static_cast<int>(_bless)
              << " ,splot=" << static_cast<int>(_splot)
-             << " ,birth_season=" << static_cast<int>(_birth_season)
+             << " ,birth_season=" << static_cast<int>(_birthSeason)
              << " ,hunger=" << static_cast<int>(_hunger)
              << " ,fatigue=" << static_cast<int>(_fatigue)
              << " ,brave=" << static_cast<int>(_brave)
-             << " ,lift_cap=" << _lift_cap.max
+             << " ,lift_cap=" << _liftCap.max
              << " ,exp='" << _exp.left << "/" << _exp.val << "'"
              << " ,fame='" << _fame.left << "/" << _fame.val << "'"
              << " WHERE ref = 1";
@@ -112,11 +112,5 @@ void Player::save_to_db()
 
   save(save_query.str());
 
-  DBObject::save_to_db();
-}
-
-void Player::set_location(Location *loc)
-{
-  _prev_loc = _current_loc;
-  _current_loc = loc;
+  DBObject::saveToDB();
 }

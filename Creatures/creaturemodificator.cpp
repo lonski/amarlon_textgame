@@ -37,7 +37,7 @@ CreatureModificator::CreatureModificator(dbRef ref, bool temporary)
 
 CreatureModificator::~CreatureModificator()
 {
-  _SAVE_TO_DB_
+  _saveToDB_
 }
 
 void CreatureModificator::load(MapRow *data_source)
@@ -72,7 +72,7 @@ void CreatureModificator::load(MapRow *data_source)
   }
 }
 
-void CreatureModificator::save_to_db()
+void CreatureModificator::saveToDB()
 {
   if ( 0 == ref() )
   {    
@@ -112,7 +112,7 @@ void CreatureModificator::save_to_db()
          " WHERE ref=" + toStr(ref()) );
   }
 
-  DBObject::save_to_db();
+  DBObject::saveToDB();
 }
 
 //==================================CreatureModificatorManager====================================
@@ -136,7 +136,7 @@ void CreatureModificatorManager::add(std::shared_ptr<CreatureModificator> new_mo
 {
   if (0 == new_mod->ref())
   {
-    new_mod->save_to_db();
+    new_mod->saveToDB();
   }
 
   if (0 != new_mod->ref())

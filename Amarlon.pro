@@ -72,7 +72,8 @@ SOURCES += main.cpp\
    Commands/gamemenu.cpp \
    Commands/debug.cpp \
    Include/inifile.cpp \
-   consolefonts.cpp
+   consolefonts.cpp \
+   World/location_utils.cpp
 
 HEADERS  += game.h \
     Tests/testlocation.h \
@@ -118,7 +119,8 @@ HEADERS  += game.h \
     Commands/gamemenu.h \
     Commands/debug.h \
     Include/inifile.h \
-    consolefonts.h
+    consolefonts.h \
+    World/location_utils.h
 
 FORMS    += game.ui \
     console.ui

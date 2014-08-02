@@ -83,7 +83,7 @@ void TestItems::SaveData()
   QCOMPARE(itm->value(), 333);
 
   //save
-  itm->save_to_db();
+  itm->saveToDB();
 
   //invoke desctuctor as save
   Item* item = itm.release();
@@ -99,7 +99,7 @@ void TestItems::SaveData()
   itm->set_value(32);
 
   //load again
-  itm->save_to_db();
+  itm->saveToDB();
   itm->reload();
 
   //validate rollback
@@ -279,7 +279,7 @@ void TestItems::TemporaryItem()
   itm->set_weight(6.66);
 
   //save
-  itm->save_to_db();
+  itm->saveToDB();
 
   //load again
   itm->reload();
@@ -433,7 +433,7 @@ void TestItems::ItemAsAContainer()
   cont->set_max_weight(5);
   cont->set_otable(szkatulka->table());
   cont->set_oref(szkatulka->ref());
-  cont->save_to_db();
+  cont->saveToDB();
   delete cont; //is not needed anymore -> will be loaded on item reload
 
   //it should apply new container to item
@@ -474,15 +474,15 @@ void TestItems::ItemModManager()
   //set the mods and save to DB
   mod1->creature_stats().set_attribute(Attribute::CHR, 1);
   mod1->creature_stats().set_attribute(Attribute::STR, 1);
-  mod1->save_to_db();
+  mod1->saveToDB();
 
   mod2->creature_stats().set_attribute(Attribute::CHR, 2);
   mod2->creature_stats().set_attribute(Attribute::DEX, 1);
-  mod2->save_to_db();
+  mod2->saveToDB();
 
   mod3->creature_stats().set_attribute(Attribute::CHR, 3);
   mod3->creature_stats().set_attribute(Attribute::IMP, 1);
-  mod3->save_to_db();
+  mod3->saveToDB();
 
   //reset item
   delete item.release();

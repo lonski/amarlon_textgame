@@ -128,7 +128,7 @@ void TestCreature::bodypart_creation_fromstr()
 void TestCreature::modificator_creation()
 {
   CreatureModificator mod;
-  mod.save_to_db();
+  mod.saveToDB();
   QVERIFY(mod.ref() != 0);
   mod.purge();
 }
@@ -158,7 +158,7 @@ void TestCreature::modificator_save()
   CreatureModificator* mod = new CreatureModificator;
 
   //create record in db
-  mod->save_to_db();
+  mod->saveToDB();
 
   //set some data
   mod->creature_stats().set_attribute(Attribute::DEX, 3);
@@ -239,15 +239,15 @@ void TestCreature::modmanager()
   //set the mods
   mod1->creature_stats().set_attribute(Attribute::CHR, 1);
   mod1->creature_stats().set_attribute(Attribute::STR, 1);
-  mod1->save_to_db();
+  mod1->saveToDB();
 
   mod2->creature_stats().set_attribute(Attribute::CHR, 2);
   mod2->creature_stats().set_attribute(Attribute::DEX, 1);
-  mod2->save_to_db();
+  mod2->saveToDB();
 
   mod3->creature_stats().set_attribute(Attribute::CHR, 3);
   mod3->creature_stats().set_attribute(Attribute::IMP, 1);
-  mod3->save_to_db();
+  mod3->saveToDB();
 
   //ADD mods to manager
   manager.add(mod1);
@@ -287,12 +287,12 @@ void TestCreature::modmanager_ticktime()
                                   mod3(new CreatureModificator), mod4(new CreatureModificator);
   //set mods time
   mod1->set_effect_time(10);
-  mod1->save_to_db();
+  mod1->saveToDB();
   mod2->set_effect_time(10);
-  mod2->save_to_db();
+  mod2->saveToDB();
   mod3->set_effect_time(20);
-  mod3->save_to_db();
-  mod4->save_to_db();
+  mod3->saveToDB();
+  mod4->saveToDB();
 
   //ADD mods to manager
   manager.add(mod1);
@@ -475,15 +475,15 @@ void TestCreature::creature_load_modificators()
   //1. mod z założonego itema!
   shared_ptr<CreatureModificator> i_mod1(new CreatureModificator);
   i_mod1->creature_stats().set_attribute(Attribute::STR, 1);
-  i_mod1->save_to_db();
+  i_mod1->saveToDB();
   shared_ptr<CreatureModificator> i_mod2(new CreatureModificator);
   i_mod2->creature_stats().set_attribute(Attribute::STR, 2);
-  i_mod2->save_to_db();
+  i_mod2->saveToDB();
 
   shared_ptr<Item> item1( Item::prototypes().clone(ItemPrototype::Noz).release() );
   item1->mods().add(i_mod1);
   item1->mods().add(i_mod2); //nożyk STR+3 oł je
-  //item1->mods().get_complex_mod()->save_to_db();
+  //item1->mods().get_complex_mod()->saveToDB();
 
   QCOMPARE(item1->mods().get_complex_mod()->creature_stats().attribute(Attribute::STR), 3);
 
@@ -493,9 +493,9 @@ void TestCreature::creature_load_modificators()
   shared_ptr<CreatureModificator> n_mod1(new CreatureModificator);
   shared_ptr<CreatureModificator> n_mod2(new CreatureModificator);
   n_mod1->creature_stats().set_skill(Skill::Walka_Miecze, 10);
-  n_mod1->save_to_db();
+  n_mod1->saveToDB();
   n_mod2->creature_stats().set_skill(Skill::Walka_Topory, 6);
-  n_mod2->save_to_db();
+  n_mod2->saveToDB();
 
   crt->mods().add(n_mod1);
   crt->mods().add(n_mod2);
@@ -820,7 +820,9 @@ void TestCreature::npc_load()
   npc.reset( dynamic_cast<NPC*>(Creature::create(ref).release()) );
 
   QCOMPARE(npc->name().c_str(), "Igor");
+  qDebug() << (int)npc->clan();
   QCOMPARE(npc->clan(), Clan::Aep_Tien);
+
   QCOMPARE(npc->tribe(), Tribe::Tuatha_De_Cael);
 
   npc->purge();
@@ -834,6 +836,6 @@ void TestCreature::player_base()
 
 void TestCreature::player_load()
 {
-  _Player->save_to_db();
+  _Player->saveToDB();
 }
 

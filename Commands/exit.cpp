@@ -6,10 +6,10 @@ using namespace std;
 Exit::Exit()
   : stage(Stage::Start)
 {
-  add_name("exit");
+  addName("exit");
 }
 
-void Exit::reset_status()
+void Exit::resetStatus()
 {
   stage = Stage::Start;
 }
@@ -53,5 +53,5 @@ void Exit::exit_game()
 void Exit::cancel_exit()
 {
   _Console->append("Zatem kontynuujmy.", Font::Action);
-  set_finished();
+  setFinished();
 }

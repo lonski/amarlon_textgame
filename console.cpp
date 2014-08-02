@@ -14,7 +14,7 @@ Console::Console(QWidget *parent)
   //dodaj wszystkie komendy
   for (int c = (int)CommandID::Null + 1; c != (int)CommandID::End; ++c )
   {    
-    cmd_exec.add_command( Command::create_by_enum(static_cast<CommandID>(c)));
+    cmd_exec.add_command( Command::createByEnum(static_cast<CommandID>(c)));
   }
 
   //ustaw focus

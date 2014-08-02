@@ -39,7 +39,7 @@ void Shield::load(MapRow *data_source)
   }
 }
 
-void Shield::save_to_db()
+void Shield::saveToDB()
 {
   stringstream save_query;
 
@@ -48,7 +48,7 @@ void Shield::save_to_db()
              << " WHERE ref=" << ref();
 
   save(save_query.str());
-  Item::save_to_db();
+  Item::saveToDB();
 }
 
 void Shield::set_defence(int defence)
@@ -59,5 +59,5 @@ void Shield::set_defence(int defence)
 
 Shield::~Shield()
 {
-  _SAVE_TO_DB_
+  _saveToDB_
 }

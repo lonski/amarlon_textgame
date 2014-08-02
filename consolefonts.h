@@ -15,6 +15,7 @@ enum class Font
   Action,
   Message,
   Header,
+  LocExits,
 
   End
 };
@@ -31,6 +32,7 @@ static inline std::string Font2Str(Font font)
     STRINGIFY_FONT(Font::Action)
     STRINGIFY_FONT(Font::Message)
     STRINGIFY_FONT(Font::Header)
+    STRINGIFY_FONT(Font::LocExits)
     default: break;
   }
   return r;

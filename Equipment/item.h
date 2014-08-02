@@ -36,12 +36,14 @@ public:
 
     //items
     std::map<dbRef, AmountedItem> _items;
+    std::string items2str();
+    void str2items(std::string items);
 
   public:
     const static dbTable table_name;
 
     Container(dbRef ref, bool temporary = false);
-    Container();
+    Container(int pojemnosc = 10);
     ~Container();
     static dbRef byOwner(dbTable otable, dbRef oref);
 

@@ -328,6 +328,7 @@ void TestItems::ContainerInsertionEraseNonStackable()
 
   //recreate and check content
   dbRef cont_ref = cont->ref();
+
   delete cont;
   cont = new Item::Container(cont_ref);
   QCOMPARE(cont->getAll().size(), static_cast<size_t>(2));
@@ -369,6 +370,9 @@ void TestItems::ContainerInsertionEraseStackable()
   cont->insert(miedziak, 10);
 
   //validate
+  QCOMPARE(cont->getAll().size(), static_cast<size_t>(1));
+  QVERIFY(cont->find(miedziak->ref()).item.get() != nullptr);
+  QCOMPARE(cont->find(miedziak->ref()).amount, 10);
   cont->reload();
   QCOMPARE(cont->getAll().size(), static_cast<size_t>(1));
   QVERIFY(cont->find(miedziak->ref()).item.get() != nullptr);

@@ -1,5 +1,8 @@
 #include "item.h"
 
+using namespace std;
+using namespace soci;
+
 const dbTable Item::Container::table_name = "item_containers";
 
 Item::Container::Container(dbRef ref, bool temporary)
@@ -8,16 +11,66 @@ Item::Container::Container(dbRef ref, bool temporary)
   load();
 }
 
-Item::Container::Container()
+Item::Container::Container(int pojemnosc)
   : DBObject(0)
 {
-  set_ref(-1);
-  //TODO
+  dbRef new_ref;
+  _Database << "select new_ref from create_new_item_container", into(new_ref);
+
+  set_ref(new_ref);
+  set_max_weight(pojemnosc);
+
+  set_loaded();
+  set_modified();
 }
 
 Item::Container::~Container()
 {
   _saveToDB_
+}
+
+string Item::Container::items2str()
+{
+  string str;
+
+  for (auto i = _items.begin(); i != _items.end(); ++i)
+  {
+    string item = fun::toStr(i->first);
+    string amount = fun::toStr(i->second.amount);
+    str += (item + "," + amount + ";");
+  }
+
+  return str;
+}
+
+void Item::Container::str2items(string items)
+{
+  _items.clear();
+  if (!items.empty())
+  {
+    vector<string> amounted_items = fun::explode(items,';');
+
+    for (auto ai = amounted_items.begin(); ai != amounted_items.end(); ++ai)
+    {
+      vector<string> one_ai = fun::explode(*ai, ',');
+      if (one_ai.size() == 2)
+      {
+        dbRef item_ref = fun::fromStr<dbRef>(one_ai[0]);
+        int amount = fun::fromStr<int>(one_ai[1]);
+
+        if (item_ref > 0 && amount > 0)
+        {
+          std::shared_ptr<Item> item( Item::create(item_ref).release() );
+          insert(item, amount);
+        }
+      }
+      else
+      {
+        qDebug() << "Problem z wczytaniem itema z item containera " << ref() << " : " << (*ai).c_str();
+      }
+    }
+  }
+
 }
 
 dbRef Item::Container::byOwner(dbTable otable, dbRef oref)
@@ -50,24 +103,8 @@ void Item::Container::load(MapRow *data_source)
         set_max_weight( fun::CheckField<Weight>(cont_data["MAX_WEIGHT"]) );
         set_oref( fun::CheckField<dbRef>(cont_data["OREF"]) );
         set_otable( fun::CheckField<std::string>(cont_data["OTABLE"]) );
+        str2items( fun::CheckField<string>(cont_data["ITEMS"]));
       }
-
-      //==pos data LOAD Z POLA ITEMS
-//      _items.clear();
-//      MapTable pos_data;
-//      fun::MapQuery("SELECT * FROM item_container_pos WHERE container="+fun::toStr(ref()), pos_data);
-//      if (pos_data.size() > 0)
-//      {
-//        for (auto RowIter = pos_data.begin(); RowIter != pos_data.end(); ++RowIter)
-//        {
-//          dbRef item_ref = fun::CheckField<dbRef>( (*RowIter)["ITEM"] );
-//          int amount = fun::CheckField<int>( (*RowIter)["AMOUNT"] );
-
-//          std::shared_ptr<Item> item( dynamic_cast<T*>(Item::create(item_ref).release()) );
-//          insert(item, amount);
-
-//        }
-//      }
 
       set_loaded();
       set_not_modified();
@@ -137,12 +174,6 @@ void Item::Container::insert(std::shared_ptr<Item> &item, int amount)
       amount_to_save = amount;
     }
 
-    save("EXECUTE PROCEDURE UPDINS_ITEM_CONTAINER_POS("+
-          fun::toStr(ref())          +", "+ //container
-          fun::toStr(item->ref())    +", "+ //item
-          fun::toStr(amount_to_save) +")"   //amount
-        );
-
     set_modified();
   }
 }
@@ -172,12 +203,6 @@ AmountedItem Item::Container::erase(dbRef item_ref, int amount)
       amount_to_save = cont_amount;
       ret.amount = amount;
     }
-
-    save("EXECUTE PROCEDURE UPDINS_ITEM_CONTAINER_POS("+
-          fun::toStr(ref())          +", "+ //container
-          fun::toStr(item_ref)       +", "+ //item
-          fun::toStr(amount_to_save) +")"   //amount
-        );
 
     set_modified();
   }
@@ -214,6 +239,7 @@ void Item::Container::saveToDB()
              << " ,NAME='" << _name << "'"
              << " ,OREF=" << _oref
              << " ,OTABLE='" << _otable << "'"
+             << " ,ITEMS='" << items2str() << "'"
              << " WHERE ref=" << ref();
 
   save(save_query.str());

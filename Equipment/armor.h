@@ -26,6 +26,11 @@ public:
   void set_damage_reduction(Damage dmg_red);
 
   virtual ~Armor();
+
+  inline static Armor* Forge(ItemPrototype proto)
+  {
+    return dynamic_cast<Armor*>(Item::prototypes().clone(proto).release());
+  }
 };
 //===
 

@@ -49,7 +49,7 @@ public:
     void insert(std::shared_ptr<Creature>& crt);
     std::shared_ptr<Creature> erase(dbRef crt_ref);
     std::shared_ptr<Creature> find(dbRef crt_ref);
-    std::vector<std::shared_ptr<Creature> > get_all();
+    std::vector<std::shared_ptr<Creature> > getAll();
 
     //owner data
     dbTable otable() const { return _otable; }

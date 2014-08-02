@@ -24,6 +24,11 @@ public:
   void set_defence(int defence);
 
   virtual ~Shield();
+
+  inline static Shield* Forge(ItemPrototype proto)
+  {
+    return dynamic_cast<Shield*>(Item::prototypes().clone(proto).release());
+  }
 };
 //===
 

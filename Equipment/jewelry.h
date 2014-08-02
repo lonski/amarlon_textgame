@@ -11,6 +11,11 @@ private:
   Jewelry(dbRef ref, bool temporary = false);
 public:
   virtual ~Jewelry() {}
+
+  inline static Jewelry* Forge(ItemPrototype proto)
+  {
+    return dynamic_cast<Jewelry*>(Item::prototypes().clone(proto).release());
+  }
 };
 //===
 

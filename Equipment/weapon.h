@@ -42,6 +42,11 @@ public:
   void set_range(int range);
 
   virtual ~Weapon();
+
+  inline static Weapon* Forge(ItemPrototype proto)
+  {
+    return dynamic_cast<Weapon*>(Item::prototypes().clone(proto).release());
+  }
 };
 
 #endif // WEAPON_H

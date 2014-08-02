@@ -35,6 +35,18 @@ void Location::initalizeLocationObjects(dbRef ref)
   {
     _objects = std::unique_ptr<LocationObjectContainer>(nullptr);
   }
+
+}
+
+void Location::createObjectsContainer()
+{
+  if (_objects == nullptr)
+  {
+    //TODO REFACTOR
+    _objects.reset( Item::Container<LocationObject>::prototypes().clone(ItemContainerPrototype::Inventory).release());
+    _objects->set_oref(ref());
+    _objects->set_otable(table());
+  }
 }
 
 void Location::setName(string name)
@@ -47,6 +59,55 @@ void Location::setDestript(string dsc)
 {
   _descript = dsc;
   set_modified();
+}
+
+void Location::insertObject(LocationObjectPtr &obj)
+{
+  if (_objects == nullptr)
+  {
+    createObjectsContainer();
+  }
+
+  _objects->insert(obj, 1);
+}
+
+LocationObjectPtr Location::eraseObject(dbRef obj_ref)
+{
+  if (_objects == nullptr)
+  {
+    createObjectsContainer();
+  }
+
+  return _objects->erase(obj_ref, 1).item;
+}
+
+LocationObjectPtr Location::findObject(dbRef obj_ref)
+{
+  if (_objects == nullptr)
+  {
+    createObjectsContainer();
+  }
+
+  return _objects->find(obj_ref).item;;
+}
+
+std::vector<LocationObjectPtr > Location::getAllObjects()
+{
+  vector<LocationObjectPtr > r;
+
+  if (_objects == nullptr)
+  {
+    createObjectsContainer();
+  }
+
+  vector<AmountedItem<LocationObject> > a_items = _objects->getAll();
+
+  for (auto o = a_items.begin(); o != a_items.end(); ++o)
+  {
+    r.push_back(o->item);
+  }
+
+  return r;
 }
 
 void Location::setConnection(Direction dir, Location *loc)

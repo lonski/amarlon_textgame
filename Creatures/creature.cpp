@@ -154,7 +154,7 @@ void Creature::load(MapRow *data_source)
         //dodaj z itemów założonych na body_parts
       for (auto im = _body.equipped_items().begin(); im != _body.equipped_items().end(); ++im)
       {
-        if (nullptr != *im && !(*im)->mods().get_all().empty())
+        if (nullptr != *im && !(*im)->mods().getAll().empty())
           _mods.add( (*im)->mods().get_complex_mod() );
       }
 
@@ -163,7 +163,9 @@ void Creature::load(MapRow *data_source)
       {
         _inventory = Item::Container<>::create(Item::Container<>::byOwner( table(),ref() ));
       }
-      catch(error::creation_error)
+      catch(error::creation_error){}
+
+      if ( _inventory == nullptr)
       {
         _inventory = Item::Container<>::prototypes().clone(ItemContainerPrototype::Inventory);
         _inventory->set_otable(table());
@@ -263,14 +265,14 @@ AmountedItem<Item> Creature::drop(dbRef item_ref, int amount)
 
 std::vector<AmountedItem<Item> > Creature::inventory()
 {
-  return _inventory->get_all();
+  return _inventory->getAll();
 }
 
 void Creature::equip(std::shared_ptr<Item> item)
 {
   _body.equip(item);
 
-  if (!item->mods().get_all().empty())
+  if (!item->mods().getAll().empty())
   {
     _mods.add( item->mods().get_complex_mod() );
   }
@@ -579,7 +581,7 @@ std::shared_ptr<Creature> Creature::Container::find(dbRef crt_ref)
   return r;
 }
 
-std::vector<std::shared_ptr<Creature> > Creature::Container::get_all()
+std::vector<std::shared_ptr<Creature> > Creature::Container::getAll()
 {
   vector<shared_ptr<Creature> > r;
 

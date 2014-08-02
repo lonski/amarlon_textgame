@@ -43,7 +43,13 @@ public:
   void setName(std::string name);
   void setDestript(std::string dsc);
 
+  void insertObject(LocationObjectPtr& obj);
+  LocationObjectPtr eraseObject(dbRef obj_ref);
+  LocationObjectPtr findObject(dbRef obj_ref);
+  std::vector<LocationObjectPtr > getAllObjects();
+
 private:
+  friend class Debug;
   static unsigned int _drawRange;
   bool _drawn;
 
@@ -57,6 +63,7 @@ private:
   void copyConnectionsToNeighbour(Direction dir);
   void initalizeNeighbours();
   void initalizeLocationObjects(dbRef ref);
+  void createObjectsContainer();
 };
 //===~~~
 

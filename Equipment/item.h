@@ -9,7 +9,10 @@
 #include "Include/comobj.h"
 #include "Creatures/creaturemodificator.h"
 
+#define _ForgeFood(PROTOTYPE) dynamic_cast<Food*>(Item::prototypes().clone(PROTOTYPE).release())
+
 class Item;
+
 
 template<typename T = Item>
 struct AmountedItem
@@ -56,7 +59,7 @@ public:
     void insert(std::shared_ptr<T>& item, int amount = 1);
     AmountedItem<T> erase(dbRef item_ref, int amount = 1);
     AmountedItem<T> find(dbRef item_ref);
-    std::vector<AmountedItem<T> > get_all();
+    std::vector<AmountedItem<T> > getAll();
 
     //cont header data access
     virtual dbTable table() const { return table_name; }
@@ -71,10 +74,15 @@ public:
     void set_oref(dbRef oref);
     void set_max_weight(Weight max_weight);
 
+    static Container* Forge(ItemContainerPrototype proto)
+    {
+      return Item::Container<>::prototypes().clone(proto).release();
+    }
+
   };
   //===~~~
 public:
-  typedef std::unique_ptr<Item::Container<> > Inventory;
+  typedef std::shared_ptr<Item::Container<> > Inventory;
   typedef std::vector<std::shared_ptr<Item> > STLContainer;
 
 private:
@@ -113,7 +121,7 @@ public:
   virtual void saveToDB();
 
   //inventory
-  Inventory& inventory() { return _inventory; }
+  Inventory& inventory();
 
   //creature modificators
   CreatureModificatorManager& mods() { return _mods; }
@@ -142,10 +150,13 @@ public:
   void remove_body_part(BodyPartType body_part);
   void set_stackable(bool stackable);
 
+  inline static Item* Forge(ItemPrototype proto)
+  {
+    return Item::prototypes().clone(proto).release();
+  }
 };
 //===~~~
 
-/* Container typedefs */
 class OrdinaryItem;
 class Weapon;
 class Armor;
@@ -153,6 +164,17 @@ class Shield;
 class Jewelry;
 class Food;
 class LocationObject;
+
+/* item pointers typdefs */
+typedef std::shared_ptr<Item> ItemPtr;
+typedef std::shared_ptr<Shield> ShieldPtr;
+typedef std::shared_ptr<Armor> ArmorPtr;
+typedef std::shared_ptr<Weapon> WeaponPtr;
+typedef std::shared_ptr<Food> FoodPtr;
+typedef std::shared_ptr<Jewelry> JewelryPtr;
+typedef std::shared_ptr<LocationObject> LocationObjectPtr;
+
+/* Container typedefs */
 
 typedef Item::Container<> ItemContainer;
 typedef Item::Container<OrdinaryItem> OItemContainer;
@@ -185,7 +207,6 @@ dbRef Item::Container<T>::byOwner(dbTable otable, dbRef oref)
   soci::indicator ind;
   _Database << "SELECT ref FROM item_container_def WHERE otable='"<<otable<<"' and oref="<<fun::toStr(oref), into(ref, ind);
   if (ind != soci::i_ok) ref = 0;
-
   return ref;
 }
 
@@ -406,7 +427,7 @@ AmountedItem<T> Item::Container<T>::find(dbRef item_ref)
 }
 
 template<typename T>
-std::vector<AmountedItem<T> > Item::Container<T>::get_all()
+std::vector<AmountedItem<T> > Item::Container<T>::getAll()
 {
   std::vector<AmountedItem<T> > ret;
   ret.reserve(_items.size());

@@ -172,7 +172,7 @@ bool CreatureModificatorManager::remove(dbRef mod_to_remove)
   return false;
 }
 
-std::vector<std::weak_ptr<CreatureModificator> > CreatureModificatorManager::get_all()
+std::vector<std::weak_ptr<CreatureModificator> > CreatureModificatorManager::getAll()
 {
   vector<weak_ptr<CreatureModificator> > mods;
   for (auto i = _applied_mods.begin(); i != _applied_mods.end(); ++i)

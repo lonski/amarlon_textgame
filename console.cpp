@@ -139,12 +139,15 @@ void Console::append_anim(std::string text, Font efont, int interval)
   }
 
   if (font.italic)
-    fw_b = "<i>"; fw_e = "</i>";
+  {
+    fw_b += "<i>";
+    fw_e += "</i>";
+  }
 
   QString fsize = fun::toStr(font.size).c_str();
   QString ffamily = font.family.c_str();
   fw_b += "<span style=\"color: " + font.kolor.name() + "; font-size:"+ fsize +"pt; font-family:"+ ffamily +";\">";
-  fw_e =+ "</span>";
+  fw_e += "</span>";
 
   QString::iterator it = txt.begin();
   append("", efont);

@@ -5,7 +5,7 @@ using namespace soci;
 using namespace fun;
 
 //===LOCATION
-unsigned int Location::_draw_range = 5;
+unsigned int Location::_drawRange = 5;
 const dbTable Location::table_name = "locations";
 Location::LocationManager Location::Manager;
 
@@ -17,13 +17,13 @@ Location::Location(dbRef ref)
     _neighbours[i] = nullptr;
 }
 
-void Location::set_name(string name)
+void Location::setName(string name)
 {
   _name = name;  
   set_modified();
 }
 
-void Location::set_destript(string dsc)
+void Location::setDestript(string dsc)
 {
   _descript = dsc;
   set_modified();
@@ -48,7 +48,7 @@ Location *Location::create(dbRef ref, LocType loc_type)
   return loc_ptr;
 }
 
-void Location::set_connection(Direction dir, Location *loc)
+void Location::setConnection(Direction dir, Location *loc)
 {
   if ( _neighbours[dir] != loc)
   {
@@ -68,7 +68,7 @@ void Location::set_connection(Direction dir, Location *loc)
   }
 }
 
-void Location::loc_walk_within_range(WalkVector dir_vector, void (Location::*Fun)())
+void Location::locWalkWithinRange(WalkVector dir_vector, void (Location::*Fun)())
 {
   (this->*Fun)();
 
@@ -79,14 +79,14 @@ void Location::loc_walk_within_range(WalkVector dir_vector, void (Location::*Fun
       if (connection(dir) != nullptr )
       {
         dir_vector.dec(dir);
-        connection(dir)->loc_walk_within_range(dir_vector,Fun);
+        connection(dir)->locWalkWithinRange(dir_vector,Fun);
       }
     }
   }
 
 }
 
-void Location::create_neighbours()
+void Location::createNeighbours()
 {
   MapTable neighbours;
   MapQuery("SELECT * FROM v_loc_neighbours WHERE location="+toStr(ref()), neighbours);
@@ -111,56 +111,56 @@ void Location::create_neighbours()
   for (auto i = _neighbours.begin(); i != _neighbours.end(); ++i)
   {
     if ( i->second != nullptr )
-      copy_connections_to_neighbour(i->first);
+      copyConnectionsToNeighbour(i->first);
   }
 
   set_modified();
 }
 
-void Location::copy_connections_to_neighbour(Direction dir)
+void Location::copyConnectionsToNeighbour(Direction dir)
 {
-  _neighbours[dir]->set_connection(~dir, this );
+  _neighbours[dir]->setConnection(~dir, this );
   switch (dir)
   {
     case Direction::North :
-      _neighbours[dir]->set_connection(Direction::West, connection(Direction::Northwest) );
-      _neighbours[dir]->set_connection(Direction::Southwest, connection(Direction::West) );
-      _neighbours[dir]->set_connection(Direction::East, connection(Direction::Northeast) );
-      _neighbours[dir]->set_connection(Direction::Southeast, connection(Direction::East) );
+      _neighbours[dir]->setConnection(Direction::West, connection(Direction::Northwest) );
+      _neighbours[dir]->setConnection(Direction::Southwest, connection(Direction::West) );
+      _neighbours[dir]->setConnection(Direction::East, connection(Direction::Northeast) );
+      _neighbours[dir]->setConnection(Direction::Southeast, connection(Direction::East) );
     break;
     case Direction::Northeast :
-      _neighbours[dir]->set_connection(Direction::West, connection(Direction::North) );
-      _neighbours[dir]->set_connection(Direction::South, connection(Direction::East) );
+      _neighbours[dir]->setConnection(Direction::West, connection(Direction::North) );
+      _neighbours[dir]->setConnection(Direction::South, connection(Direction::East) );
     break;
     case Direction::East :
-      _neighbours[dir]->set_connection(Direction::North, connection(Direction::Northeast) );
-      _neighbours[dir]->set_connection(Direction::Northwest, connection(Direction::North) );
-      _neighbours[dir]->set_connection(Direction::Southwest, connection(Direction::South) );
-      _neighbours[dir]->set_connection(Direction::South, connection(Direction::Southeast) );
+      _neighbours[dir]->setConnection(Direction::North, connection(Direction::Northeast) );
+      _neighbours[dir]->setConnection(Direction::Northwest, connection(Direction::North) );
+      _neighbours[dir]->setConnection(Direction::Southwest, connection(Direction::South) );
+      _neighbours[dir]->setConnection(Direction::South, connection(Direction::Southeast) );
     break;
     case Direction::Southeast :
-      _neighbours[dir]->set_connection(Direction::West, connection(Direction::South) );
-      _neighbours[dir]->set_connection(Direction::North, connection(Direction::East) );
+      _neighbours[dir]->setConnection(Direction::West, connection(Direction::South) );
+      _neighbours[dir]->setConnection(Direction::North, connection(Direction::East) );
     break;
     case Direction::South :
-      _neighbours[dir]->set_connection(Direction::Northeast, connection(Direction::East) );
-      _neighbours[dir]->set_connection(Direction::East, connection(Direction::Southeast) );
-      _neighbours[dir]->set_connection(Direction::West, connection(Direction::Southwest) );
-      _neighbours[dir]->set_connection(Direction::Northwest, connection(Direction::West) );
+      _neighbours[dir]->setConnection(Direction::Northeast, connection(Direction::East) );
+      _neighbours[dir]->setConnection(Direction::East, connection(Direction::Southeast) );
+      _neighbours[dir]->setConnection(Direction::West, connection(Direction::Southwest) );
+      _neighbours[dir]->setConnection(Direction::Northwest, connection(Direction::West) );
     break;
     case Direction::Southwest :
-      _neighbours[dir]->set_connection(Direction::East, connection(Direction::South) );
-      _neighbours[dir]->set_connection(Direction::North, connection(Direction::West) );
+      _neighbours[dir]->setConnection(Direction::East, connection(Direction::South) );
+      _neighbours[dir]->setConnection(Direction::North, connection(Direction::West) );
     break;
     case Direction::West :
-      _neighbours[dir]->set_connection(Direction::South, connection(Direction::Southwest) );
-      _neighbours[dir]->set_connection(Direction::Southeast, connection(Direction::South) );
-      _neighbours[dir]->set_connection(Direction::Northeast, connection(Direction::North) );
-      _neighbours[dir]->set_connection(Direction::North, connection(Direction::Northwest) );
+      _neighbours[dir]->setConnection(Direction::South, connection(Direction::Southwest) );
+      _neighbours[dir]->setConnection(Direction::Southeast, connection(Direction::South) );
+      _neighbours[dir]->setConnection(Direction::Northeast, connection(Direction::North) );
+      _neighbours[dir]->setConnection(Direction::North, connection(Direction::Northwest) );
     break;
     case Direction::Northwest :
-      _neighbours[dir]->set_connection(Direction::South, connection(Direction::West) );
-      _neighbours[dir]->set_connection(Direction::East, connection(Direction::North) );
+      _neighbours[dir]->setConnection(Direction::South, connection(Direction::West) );
+      _neighbours[dir]->setConnection(Direction::East, connection(Direction::North) );
     break;
     default :;
   }
@@ -186,10 +186,10 @@ void Location::load(MapRow *data_source)
 
       if (!loc_data.empty())
       {
-        set_name( CheckField<string>(loc_data["NAME"]) );
-        set_destript( CheckField<string>(loc_data["DESCRIPTION"]) );
+        setName( CheckField<string>(loc_data["NAME"]) );
+        setDestript( CheckField<string>(loc_data["DESCRIPTION"]) );
 
-        create_neighbours();
+        createNeighbours();
 
         set_loaded();
         set_not_modified();
@@ -203,7 +203,7 @@ void Location::load(MapRow *data_source)
   }
 }
 
-void Location::save_to_db()
+void Location::saveToDB()
 {
   stringstream save_query;
 
@@ -213,10 +213,10 @@ void Location::save_to_db()
              << " WHERE ref=" << ref();
 
   save(save_query.str());
-  DBObject::save_to_db();
+  DBObject::saveToDB();
 }
 
-void Location::load_no_param()
+void Location::loadNoParam()
 {
   load();
 }

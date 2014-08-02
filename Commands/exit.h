@@ -6,7 +6,7 @@
 class Exit : public ActiveCommand
 {
 protected:
-  virtual void reset_status();
+  virtual void resetStatus();
 
 private:
   enum class Stage

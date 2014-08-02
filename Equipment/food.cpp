@@ -39,7 +39,7 @@ void Food::load(MapRow *data_source)
   }
 }
 
-void Food::save_to_db()
+void Food::saveToDB()
 {
   stringstream save_query;
 
@@ -48,7 +48,7 @@ void Food::save_to_db()
              << " WHERE ref=" << ref();
 
   save(save_query.str());
-  Item::save_to_db();
+  Item::saveToDB();
 }
 
 void Food::set_hunger(int hunger)
@@ -59,5 +59,5 @@ void Food::set_hunger(int hunger)
 
 Food::~Food()
 {
-  _SAVE_TO_DB_
+  _saveToDB_
 }

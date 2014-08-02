@@ -17,6 +17,8 @@ Creature::Creature(dbRef ref, bool temp)
   , _weapon(nullptr)
   , _offhand(nullptr)
   , _shield(nullptr)
+  , _currentLoc(nullptr)
+  , _prevLoc(nullptr)
 {  
 }
 
@@ -52,7 +54,7 @@ void Creature::calc_weapons()
 
 Creature::~Creature()
 {
-  _SAVE_TO_DB_
+  _saveToDB_
 }
 
 std::unique_ptr<Creature> Creature::create(dbRef ref, bool prototype, bool temp)
@@ -92,7 +94,7 @@ std::unique_ptr<Creature> Creature::clone()
   if (!isTemporary())
   {
     //save
-    save_to_db();
+    saveToDB();
 
     //clone db record
     dbRef new_ref(0);
@@ -166,7 +168,7 @@ void Creature::load(MapRow *data_source)
         _inventory = Item::Container<>::prototypes().clone(ItemContainerPrototype::Inventory);
         _inventory->set_otable(table());
         _inventory->set_oref(ref());
-        _inventory->save_to_db();
+        _inventory->saveToDB();
       }
 
       calc_total_damage();
@@ -182,7 +184,7 @@ void Creature::load(MapRow *data_source)
   }
 }
 
-void Creature::save_to_db()
+void Creature::saveToDB()
 {
   stringstream save_query;
 
@@ -196,7 +198,7 @@ void Creature::save_to_db()
              << " WHERE ref = " << ref();
 
   save(save_query.str());
-  DBObject::save_to_db();
+  DBObject::saveToDB();
 }
 
 void Creature::purge()
@@ -291,6 +293,12 @@ shared_ptr<Item> Creature::unequip(dbRef item_ref)
   set_modified();
 
   return r;
+}
+
+void Creature::setLocation(Location *loc)
+{
+  _prevLoc = _currentLoc;
+  _currentLoc = loc;
 }
 
 void Creature::calc_total_damage()
@@ -474,7 +482,7 @@ Creature::Container::Container()
 
 Creature::Container::~Container()
 {
-  _SAVE_TO_DB_
+  _saveToDB_
 }
 
 void Creature::Container::load(MapRow *data_source)
@@ -516,7 +524,7 @@ void Creature::Container::load(MapRow *data_source)
   }
 }
 
-void Creature::Container::save_to_db()
+void Creature::Container::saveToDB()
 {
   stringstream save_query;
 
@@ -527,7 +535,7 @@ void Creature::Container::save_to_db()
              << " WHERE ref=" << ref();
 
   save(save_query.str());
-  DBObject::save_to_db();
+  DBObject::saveToDB();
 }
 
 void Creature::Container::insert(std::shared_ptr<Creature> &crt)

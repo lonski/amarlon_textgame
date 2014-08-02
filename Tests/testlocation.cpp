@@ -86,7 +86,7 @@ void TestLocation::LocWalkWithinRange()
     Location *loc = Location::create(5);
 
     //perform load-walk within the range of 1
-    loc->loc_walk_within_range(WalkVector(1,1,1,1), &Location::load_no_param);
+    loc->locWalkWithinRange(WalkVector(1,1,1,1), &Location::loadNoParam);
 
     //validate data (look for loc map at begining of this file):
     //#1. locations of refs 6,4,3 should be loaded
@@ -147,17 +147,17 @@ void TestLocation::SaveData()
   QCOMPARE(loc->name().c_str(), "Test5");
 
   //rename
-  loc->set_name("changed_name");
+  loc->setName("changed_name");
 
   //validate rename
   QCOMPARE(loc->name().c_str(), "changed_name");
-  loc->save_to_db();
+  loc->saveToDB();
   loc->load();
   QCOMPARE(loc->name().c_str(), "changed_name");
 
   //rollback changes
-  loc->set_name("Test5");
-  loc->save_to_db();
+  loc->setName("Test5");
+  loc->saveToDB();
 
   Location::Manager.purge();
 }

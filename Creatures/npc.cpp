@@ -20,7 +20,7 @@ void NPC::set_tribe(Tribe tribe)
   set_modified();
 }
 
-void NPC::save_to_db()
+void NPC::saveToDB()
 {
   stringstream save_query;
 
@@ -30,7 +30,7 @@ void NPC::save_to_db()
              << " WHERE ref = " << ref();
 
   save(save_query.str());
-  Creature::save_to_db();
+  Creature::saveToDB();
 }
 
 void NPC::load(MapRow *data_source)
@@ -69,5 +69,5 @@ void NPC::load(MapRow *data_source)
 
 NPC::~NPC()
 {
-  _SAVE_TO_DB_
+  _saveToDB_
 }

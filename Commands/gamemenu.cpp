@@ -9,9 +9,9 @@ using namespace std;
 
 GameMenu::GameMenu()
   : stage(Stage::Start)
-  , sub_cmd(nullptr)
+  , subCmd(nullptr)
 {
-  add_name("menu");
+  addName("menu");
 }
 
 CommandID GameMenu::id() const
@@ -19,7 +19,7 @@ CommandID GameMenu::id() const
   return CommandID::GameMenu;
 }
 
-void GameMenu::reset_status()
+void GameMenu::resetStatus()
 {
   stage = Stage::Start;
 }
@@ -28,36 +28,36 @@ void GameMenu::execute(std::vector<std::string> params)
 {
   string input = ( params.empty() ? "" : params[params.size()-1] );
 
-  set_not_finished();
+  setNotFinished();
 
   if (stage == Stage::Start)
   {
-    welcome_screen();
+    welcomeScreen();
   }
   else if (stage == Stage::Exit)
   {
-    sub_cmd->execute(params);
-    if (sub_cmd->is_finished())
+    subCmd->execute(params);
+    if (subCmd->isFinished())
     {
-      delete sub_cmd;
-      sub_cmd = nullptr;
-      welcome_screen();
+      delete subCmd;
+      subCmd = nullptr;
+      welcomeScreen();
     }
   }
   else if ( input == "1")
   {
-    start_new_game();
+    startNewGame();
   }
   else if ( input == "2")
   {
-    if (nullptr == sub_cmd) sub_cmd = new Exit;
+    if (nullptr == subCmd) subCmd = new Exit;
     stage = Stage::Exit;
-    sub_cmd->execute();
+    subCmd->execute();
   }
 
 }
 
-void GameMenu::welcome_screen()
+void GameMenu::welcomeScreen()
 {
   _Console->clear();
   _Console->append("Witaj w Amarlonie!", Font::Header);
@@ -68,26 +68,37 @@ void GameMenu::welcome_screen()
   stage = Stage::Menu;
 }
 
-void GameMenu::start_new_game()
+void GameMenu::startNewGame()
 {
   _Console->append_anim("Zaczynamy nową grę...", Font::Message, 50);
   _Console->clear();
 
-  //set database
-  string db_file = "/home/pi/db/data.fdb";
+  setDatabaseForNewGame();
+  setPlayerForNewGame();
+  displayStartLocation();
+
+  setFinished();
+}
+
+void GameMenu::setDatabaseForNewGame()
+{
+  string db_file = "/home/spszenguo/Projects/amarlon/Data/data2.fdb";
   string db_log_file = "../amarlon/Data/db.log";
-  string db_server = "192.168.1.5";//"lonski.pl";
+  string db_server = "localhost";
 
   DB::SetDatabaseInfo(db_file, db_server, db_log_file);
+}
 
-  //set player
-  Location* start_location = Location::create((int)refDict::Location::StartLocation);
-  start_location->load();
-  _Player->set_location(start_location);
+void GameMenu::setPlayerForNewGame()
+{
+  Location* startLocation = Location::create((int)refDict::Location::StartLocation);
+  startLocation->load();
+  _Player->setLocation(startLocation);
+}
 
-  //load location
+void GameMenu::displayStartLocation()
+{
   Go go_cmd;
   go_cmd.execute("rozejrzyj");
-
-  set_finished();
 }
+

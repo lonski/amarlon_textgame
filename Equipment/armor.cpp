@@ -47,7 +47,7 @@ void Armor::load(MapRow *data_source)
     }
 }
 
-void Armor::save_to_db()
+void Armor::saveToDB()
 {
   stringstream save_query;
 
@@ -58,7 +58,7 @@ void Armor::save_to_db()
              << " WHERE ref=" << ref();
 
   save(save_query.str());
-  Item::save_to_db();
+  Item::saveToDB();
 }
 
 void Armor::set_damage_reduction(Damage dmg_red)
@@ -69,5 +69,5 @@ void Armor::set_damage_reduction(Damage dmg_red)
 
 Armor::~Armor()
 {
-  _SAVE_TO_DB_
+  _saveToDB_
 }

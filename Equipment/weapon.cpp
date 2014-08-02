@@ -54,7 +54,7 @@ void Weapon::load(MapRow *data_source)
   }
 }
 
-void Weapon::save_to_db()
+void Weapon::saveToDB()
 {
   stringstream save_query;
 
@@ -71,7 +71,7 @@ void Weapon::save_to_db()
              << " WHERE ref=" << ref();
 
   save(save_query.str());
-  Item::save_to_db();
+  Item::saveToDB();
 }
 
 void Weapon::set_skill(WeaponSkill skill)
@@ -118,5 +118,5 @@ void Weapon::set_range(int range)
 
 Weapon::~Weapon()
 {
-  _SAVE_TO_DB_
+  _saveToDB_
 }

@@ -7,8 +7,16 @@ class Exit;
 
 class GameMenu : public ActiveCommand
 {
+public:
+  GameMenu();
+  virtual ~GameMenu() {}
+
+  virtual CommandID id() const;
+  virtual void execute(std::vector<std::string>);
+
+  void displayStartLocation();
 protected:
-  virtual void reset_status();
+  virtual void resetStatus();
 
 private:
   enum class Stage
@@ -18,16 +26,13 @@ private:
     Exit = 2
   } stage;
 
-  void welcome_screen();
-  void start_new_game();
-  Command* sub_cmd;
+  Command* subCmd;
 
-public:
-  GameMenu();
-  virtual ~GameMenu() {}
+  void welcomeScreen();
+  void startNewGame();
+  void setDatabaseForNewGame();
+  void setPlayerForNewGame();
 
-  virtual CommandID id() const;
-  virtual void execute(std::vector<std::string>);
 };
 
 #endif // GAMEMENU_H

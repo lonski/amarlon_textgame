@@ -21,6 +21,8 @@ namespace fun{
   std::string Enum2Str(ItemType bp);
   std::string Enum2Str(Attribute e);
   std::string Enum2Str(Skill e);
+  std::string Enum2Str(Direction e, bool shortMode);
+  std::string toLower(std::string str);
 
   template<typename T> T CheckField(const std::string &field_val, T* = 0);
   template<> std::string CheckField<std::string>(const std::string &field_val, std::string*);

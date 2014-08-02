@@ -3,11 +3,11 @@
 
 Take::Take()
 {
-  add_name("podnies");
-  add_name("podnieś");
-  add_name("wez");
-  add_name("weź");
-  add_name("zabierz");
+  addName("podnies");
+  addName("podnieś");
+  addName("wez");
+  addName("weź");
+  addName("zabierz");
 }
 
 CommandID Take::id() const

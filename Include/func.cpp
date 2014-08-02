@@ -391,3 +391,44 @@ QColor fun::Str2Color(string rgb_color)
 
   return kolor;
 }
+
+
+string fun::Enum2Str(Direction e, bool shortMode)
+{
+  string s;
+  switch(e)
+  {
+    case Direction::Null: s = shortMode ? "B" : "Brak";
+         break;
+    case Direction::End: s = shortMode ? "B" : "Brak";
+         break;
+    case Direction::North: s = shortMode ? "N" : "Północ";
+         break;
+    case Direction::South: s = shortMode ? "S" : "Południe";
+         break;
+    case Direction::East: s = shortMode ? "E" : "Wschód";
+         break;
+    case Direction::West: s = shortMode ? "W" : "Zachód";
+         break;
+    case Direction::Northwest: s = shortMode ? "NW" : "Pólnocny zachód";
+         break;
+    case Direction::Northeast: s = shortMode ? "NE" : "Północny wschód";
+         break;
+    case Direction::Southeast: s = shortMode ? "SW" : "Południowy wschód";
+         break;
+    case Direction::Southwest: s = shortMode ? "SE" : "Południowy zachód";
+         break;
+
+    default: s = "Uzupełnij Enum2Str";
+         break;
+  }
+  return s;
+}
+
+
+std::string fun::toLower(string str)
+{
+  string r(str);
+  std::transform(r.begin(), r.end(), r.begin(), ::tolower);
+  return r;
+}

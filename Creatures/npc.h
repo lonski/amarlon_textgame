@@ -19,7 +19,7 @@ public:
   void set_clan(Clan clan);
   void set_tribe(Tribe tribe);
 
-  virtual void save_to_db();
+  virtual void saveToDB();
   virtual void load(MapRow *data_source);
 
   virtual ~NPC();

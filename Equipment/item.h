@@ -52,7 +52,7 @@ public:
 
     //general & items operations
     virtual void load(MapRow *data_source = nullptr);
-    virtual void save_to_db();
+    virtual void saveToDB();
     void insert(std::shared_ptr<T>& item, int amount = 1);
     AmountedItem<T> erase(dbRef item_ref, int amount = 1);
     AmountedItem<T> find(dbRef item_ref);
@@ -110,7 +110,7 @@ public:
 
   //operations
   virtual void load(MapRow *data_source = nullptr);
-  virtual void save_to_db();
+  virtual void saveToDB();
 
   //inventory
   Inventory& inventory() { return _inventory; }
@@ -175,7 +175,7 @@ Item::Container<T>::Container(dbRef ref, bool temporary) : DBObject(ref, tempora
 template<typename T>
 Item::Container<T>::~Container()
 {
-  _SAVE_TO_DB_
+  _saveToDB_
 }
 
 template<typename T>
@@ -273,7 +273,7 @@ std::unique_ptr<Item::Container<T> > Item::Container<T>::clone()
   if (!isTemporary())
   {
     //save
-    save_to_db();
+    saveToDB();
 
     //clone db record
     dbRef new_ref(0);
@@ -418,7 +418,7 @@ std::vector<AmountedItem<T> > Item::Container<T>::get_all()
 }
 
 template<typename T>
-void Item::Container<T>::save_to_db()
+void Item::Container<T>::saveToDB()
 {
   std::stringstream save_query;
 
@@ -430,7 +430,7 @@ void Item::Container<T>::save_to_db()
              << " WHERE ref=" << ref();
 
   save(save_query.str());
-  DBObject::save_to_db();
+  DBObject::saveToDB();
 }
 
 //===~~~

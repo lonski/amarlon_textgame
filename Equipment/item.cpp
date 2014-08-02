@@ -124,7 +124,7 @@ void Item::load(MapRow *data_source)
   }
 }
 
-void Item::save_to_db()
+void Item::saveToDB()
 {
 
   stringstream save_query;
@@ -143,7 +143,7 @@ void Item::save_to_db()
     " WHERE ref = " << ref();
 
   save(save_query.str());  
-  DBObject::save_to_db();
+  DBObject::saveToDB();
 }
 
 std::unique_ptr<Item> Item::clone()
@@ -151,7 +151,7 @@ std::unique_ptr<Item> Item::clone()
   if (!isTemporary())
   {
     //save
-    save_to_db();
+    saveToDB();
 
     //clone db record
     dbRef new_ref(0);
@@ -234,7 +234,7 @@ void Item::set_stackable(bool stackable)
 
 Item::~Item()
 {
-  _SAVE_TO_DB_
+  _saveToDB_
 }
 //===~~~
 

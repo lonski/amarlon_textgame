@@ -1,4 +1,5 @@
 #include "location.h"
+#include "Equipment/item_container.h"
 
 using namespace std;
 using namespace soci;
@@ -6,7 +7,7 @@ using namespace fun;
 
 //===LOCATION
 unsigned int Location::_drawRange = 5;
-const dbTable Location::table_name = "locations";
+const dbTable Location::tableName = "locations";
 LocationManager Location::Manager;
 
 Location::Location(dbRef ref)
@@ -26,7 +27,7 @@ void Location::initalizeNeighbours()
 
 void Location::initalizeLocationObjects(dbRef ref)
 {
-  dbRef objects_ref = Item::Container::byOwner(table_name, ref);
+  dbRef objects_ref = Item::Container::byOwner(tableName, ref);
 
   if (objects_ref != 0)
   {

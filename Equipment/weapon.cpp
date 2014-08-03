@@ -25,12 +25,12 @@ void Weapon::load(MapRow *data_source)
 
       if (!item_data.empty())
       {
-        set_skill(CheckFieldCast<WeaponSkill>(item_data["WPN_SKILL"]));
-        set_defence(CheckField<int>(item_data["WPN_DEFENCE"]));
-        set_attack(CheckField<int>(item_data["WPN_ATTACK"]));
-        set_reflex(CheckField<int>(item_data["WPN_REFLEX"]));
-        set_str_req(CheckField<int>(item_data["WPN_STR_REQ"]));
-        set_range(CheckField<int>(item_data["WPN_RANGE"]));
+        setSkill(CheckFieldCast<WeaponSkill>(item_data["WPN_SKILL"]));
+        setDefence(CheckField<int>(item_data["WPN_DEFENCE"]));
+        setAttack(CheckField<int>(item_data["WPN_ATTACK"]));
+        setReflex(CheckField<int>(item_data["WPN_REFLEX"]));
+        setStrReq(CheckField<int>(item_data["WPN_STR_REQ"]));
+        setRange(CheckField<int>(item_data["WPN_RANGE"]));
 
         Damage dmg
         (
@@ -39,7 +39,7 @@ void Weapon::load(MapRow *data_source)
           CheckField<int>(item_data["WPN_D_BASHING"])
         );
 
-        set_damage(dmg);
+        setDamage(dmg);
 
       }
 
@@ -74,43 +74,43 @@ void Weapon::saveToDB()
   Item::saveToDB();
 }
 
-void Weapon::set_skill(WeaponSkill skill)
+void Weapon::setSkill(WeaponSkill skill)
 {
   _wpn_skill = skill;
   set_modified();
 }
 
-void Weapon::set_damage(Damage damage)
+void Weapon::setDamage(Damage damage)
 {
   _damage = damage;
   set_modified();
 }
 
-void Weapon::set_defence(int defence)
+void Weapon::setDefence(int defence)
 {
   _defence = defence;
   set_modified();
 }
 
-void Weapon::set_attack(int attack)
+void Weapon::setAttack(int attack)
 {
   _attack = attack;
   set_modified();
 }
 
-void Weapon::set_reflex(int reflex)
+void Weapon::setReflex(int reflex)
 {
   _reflex = reflex;
   set_modified();
 }
 
-void Weapon::set_str_req(int val)
+void Weapon::setStrReq(int val)
 {
   _str_req = val;
   set_modified();
 }
 
-void Weapon::set_range(int range)
+void Weapon::setRange(int range)
 {
   _range = range;
   set_modified();

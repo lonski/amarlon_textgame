@@ -5,8 +5,12 @@
 #-------------------------------------------------
 
 QT       += core gui
-QT  += testlib
 CONFIG += c++11
+
+QT  += testlib
+LIBS += -lgcov
+QMAKE_CXXFLAGS += -g -Wall -fprofile-arcs -ftest-coverage -O0
+QMAKE_LDFLAGS += -g -Wall -fprofile-arcs -ftest-coverage  -O0
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -125,7 +129,8 @@ HEADERS  += game.h \
     consolefonts.h \
     World/location_utils.h \
     World/walkvector.h \
-    World/locationmanager.h
+    World/locationmanager.h \
+    Equipment/item_container.h
 
 FORMS    += game.ui \
     console.ui

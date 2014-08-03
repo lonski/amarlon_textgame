@@ -151,7 +151,7 @@ MapRow fun::MapQuery(const string &query){
  */
 string fun::BodyParts2Str(vector<BodyPartType> &parts)
 {
-  string str("");//(static_cast<int>(BodyPartType::End), '0');
+  string str("");
 
   for (auto i = parts.begin(); i != parts.end(); ++i)
   {
@@ -159,22 +159,12 @@ string fun::BodyParts2Str(vector<BodyPartType> &parts)
     str += fun::toStr(static_cast<int>(bp)) + ",";
   }
 
-//  for_each(parts.begin(), parts.end(),
-//    [&str](BodyPartType bp)
-//    {
-//      str[static_cast<int>(bp)] = '1';
-//    }
-//  );
-
   return str;
 }
 
 std::vector<BodyPartType> fun::Str2BodyParts(const string &str)
 {
   vector<BodyPartType> p;
-
-//  for (size_t i = 0; i < str.size(); ++i)
-//    if (str[i] == '1') p.push_back(static_cast<BodyPartType>(i));
 
   vector<string> sv = fun::explode(str, ',');
   for (auto s = sv.begin(); s != sv.end(); ++s)

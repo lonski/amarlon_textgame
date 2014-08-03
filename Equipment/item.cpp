@@ -7,13 +7,14 @@
 #include "tool.h"
 #include "shield.h"
 #include "../World/locationobject.h"
+#include "item_container.h"
 
 using namespace std;
 using namespace soci;
 using namespace fun;
 
 //==========ITEM============
-const dbTable Item::table_name = "items";
+const dbTable Item::tableName = "items";
 
 Item::Item(dbRef ref, bool temporary)
   : DBObject(ref, temporary)
@@ -35,7 +36,7 @@ std::unique_ptr<Item> Item::create(dbRef ref, bool prototype, bool temporary)
 
   if (ref > 0)
   {
-    MapRow item_data = MapQuery("SELECT obj_type, item_type FROM "+table_name+" WHERE ref="+toStr(ref));
+    MapRow item_data = MapQuery("SELECT obj_type, item_type FROM "+tableName+" WHERE ref="+toStr(ref));
     ItemType item_type = CheckFieldCast<ItemType>( item_data["ITEM_TYPE"] );
     ObjType obj_type = CheckFieldCast<ObjType>( item_data["OBJ_TYPE"] );
 
@@ -78,18 +79,18 @@ void Item::load(MapRow *data_source)
 
       if (!item_data.empty())
       {
-        set_type( CheckFieldCast<ItemType>(item_data["ITEM_TYPE"]));
-        set_name( CheckField<string>(item_data["NAME"]) );
-        set_descript( CheckField<string>(item_data["DESCRIPTION"]) );
-        set_weight( CheckField<double>(item_data["WEIGHT"]) );
-        set_value( CheckField<int>(item_data["SHOP_VALUE"]) );
-        set_condition( CheckFieldCast<ItemCondition>(item_data["CONDITION"]));
-        _body_parts.clear();
-        _body_parts = Str2BodyParts( CheckField<string>(item_data["BODY_PARTS"]) );        
-        set_durability( CheckField<int>(item_data["DURABILITY"]) );
-        set_stackable( CheckField<bool>(item_data["STACKABLE"]) );
+        setType( CheckFieldCast<ItemType>(item_data["ITEM_TYPE"]));
+        setName( CheckField<string>(item_data["NAME"]) );
+        setDescript( CheckField<string>(item_data["DESCRIPTION"]) );
+        setWeight( CheckField<double>(item_data["WEIGHT"]) );
+        setValue( CheckField<int>(item_data["SHOP_VALUE"]) );
+        setCondition( CheckFieldCast<ItemCondition>(item_data["CONDITION"]));
+        _bodyParts.clear();
+        _bodyParts = Str2BodyParts( CheckField<string>(item_data["BODY_PARTS"]) );
+        setDurability( CheckField<int>(item_data["DURABILITY"]) );
+        setStackable( CheckField<bool>(item_data["STACKABLE"]) );
 
-        _mods.get_complex_mod()->set_name( name() );
+        _mods.get_complex_mod()->setName( name() );
 
         set_loaded();
         set_not_modified();
@@ -140,7 +141,7 @@ void Item::saveToDB()
     ", SHOP_VALUE = " << _value <<
     ", CONDITION = " << static_cast<int>(_condition) <<
     ", DURABILITY = " << _durability <<
-    ", BODY_PARTS = '" << BodyParts2Str(_body_parts) << "'"
+    ", BODY_PARTS = '" << BodyParts2Str(_bodyParts) << "'"
     ", STACKABLE = " << static_cast<int>(_stackable) <<
     " WHERE ref = " << ref();
 
@@ -162,6 +163,61 @@ Item::Inventory &Item::inventory()
   return _inventory;
 }
 
+CreatureModificatorManager &Item::mods()
+{
+  return _mods;
+}
+
+ItemType Item::type() const
+{
+  return _item_type;
+}
+
+string Item::name() const
+{
+  return _name;
+}
+
+string Item::descript() const
+{
+  return _descript;
+}
+
+Weight Item::weight() const
+{
+  return _weight;
+}
+
+int Item::value() const
+{
+  return _value;
+}
+
+ItemCondition Item::condition() const
+{
+  return _condition;
+}
+
+int Item::durability() const
+{
+  return _durability;
+}
+
+std::vector<BodyPartType> Item::bodyParts() const
+{
+  return _bodyParts;
+}
+
+bool Item::checkBodyPart(BodyPartType bp) const
+{
+  return std::find(_bodyParts.begin(), _bodyParts.end(), bp) != _bodyParts.end();
+}
+
+bool Item::isStackable() const
+{
+  return _stackable;
+}
+
 std::unique_ptr<Item> Item::clone()
 {
   if (!isTemporary())
@@ -181,68 +237,73 @@ std::unique_ptr<Item> Item::clone()
   return unique_ptr<Item>(nullptr);
 }
 
-void Item::set_type(ItemType type)
+Item *Item::forge(ItemPrototype proto)
+{
+  return Item::prototypes().clone(proto).release();
+}
+
+void Item::setType(ItemType type)
 {
   _item_type = type;
   set_modified();
 }
 
-void Item::set_name(string name)
+void Item::setName(string name)
 {
   _name = name;
   set_modified();
 }
 
-void Item::set_descript(string dsc)
+void Item::setDescript(string dsc)
 {
   _descript = dsc;
   set_modified();
 }
 
-void Item::set_weight(Weight weight)
+void Item::setWeight(Weight weight)
 {
   _weight = weight;
   set_modified();
 }
 
-void Item::set_value(int value)
+void Item::setValue(int value)
 {
   _value = value;
   set_modified();
 }
 
-void Item::set_condition(ItemCondition condition)
+void Item::setCondition(ItemCondition condition)
 {
   _condition = condition;
   set_modified();
 }
 
-void Item::set_durability(int dura)
+void Item::setDurability(int dura)
 {
   _durability = dura;
   set_modified();
 }
 
-void Item::add_body_part(BodyPartType body_part)
+void Item::addBodyPart(BodyPartType body_part)
 {
-  if (check_body_part(body_part) == false )
+  if (checkBodyPart(body_part) == false )
   {
-    _body_parts.push_back(body_part);
+    _bodyParts.push_back(body_part);
     set_modified();
   }
 }
 
-void Item::remove_body_part(BodyPartType body_part)
+void Item::removeBodyPart(BodyPartType body_part)
 {
-  auto iter = std::find(_body_parts.begin(), _body_parts.end(), body_part);
-  if (iter != _body_parts.end())
+  auto iter = std::find(_bodyParts.begin(), _bodyParts.end(), body_part);
+  if (iter != _bodyParts.end())
   {
-    _body_parts.erase(iter);
+    _bodyParts.erase(iter);
     set_modified();
   }
 }
 
-void Item::set_stackable(bool stackable)
+void Item::setStackable(bool stackable)
 {
   _stackable = stackable;
   set_modified();

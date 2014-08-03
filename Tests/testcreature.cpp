@@ -1,4 +1,5 @@
 ﻿#include "testcreature.h"
+#include "Equipment/item_container.h"
 
 using namespace std;
 
@@ -34,9 +35,9 @@ void TestCreature::stats_skills2str()
 {
   CreatureStats stats;
 
-  stats.set_skill(Skill::Aktorstwo, 43);
-  stats.set_skill(Skill::Empatia, 12);
-  stats.set_skill(Skill::Mocna_glowa, 67);
+  stats.setSkill(Skill::Aktorstwo, 43);
+  stats.setSkill(Skill::Empatia, 12);
+  stats.setSkill(Skill::Mocna_glowa, 67);
 
   QCOMPARE( stats.Skills2Str().c_str(), "0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;12;0;0;0;0;0;0;0;0;43;0;0;0;0;0;0;0;0;0;0;0;67;0;0;0;0;0;0;");
 }
@@ -59,8 +60,8 @@ void TestCreature::bodypart_tostr()
   BodyPart bp;
   bp.set_region(BodyRegion::Dol);
   bp.set_side(BodySide::Left);
-  bp.set_type(BodyPartType::Noga);
-  bp.set_damage(DamageLevel::Brak);
+  bp.setType(BodyPartType::Noga);
+  bp.setDamage(DamageLevel::Brak);
 
   QCOMPARE( bp.toStr().c_str(), "2,1,4,1,0,0,0,0,0,0,0,0,");
 }
@@ -81,7 +82,7 @@ void TestCreature::bodypart_equip()
 {
   Item::STLContainer eq;
   BodyPart bp("2,1,4,1,0,0,0,0,0,0,0,0,", eq);
-  shared_ptr<Item> item( Item::prototypes().clone(ItemPrototype::Noz).release() );
+  ItemPtr item( Item::prototypes().clone(ItemPrototype::Noz).release() );
 
   bp.equip(item);  
   QVERIFY(bp.equipped().size() == 1);
@@ -98,13 +99,13 @@ void TestCreature::bodypart_unequip()
   //equip
   Item::STLContainer eq;
   BodyPart bp("2,1,4,1,0,0,0,0,0,0,0,0,", eq);
-  shared_ptr<Item> item( Item::prototypes().clone(ItemPrototype::Noz).release() );
+  ItemPtr item( Item::prototypes().clone(ItemPrototype::Noz).release() );
 
   bp.equip(item);
   QVERIFY(!bp.equipped().empty());
   //~~~
 
-  shared_ptr<Item> i2 = bp.unequip().at(0);
+  ItemPtr i2 = bp.unequip().at(0);
   QVERIFY(bp.equipped().empty());
   QCOMPARE(i2.get(), item.get());
 
@@ -162,7 +163,7 @@ void TestCreature::modificator_save()
 
   //set some data
   mod->creature_stats().set_attribute(Attribute::DEX, 3);
-  mod->set_name("lol");
+  mod->setName("lol");
 
   //store ref
   dbRef ref = mod->ref();
@@ -186,7 +187,7 @@ void TestCreature::modificator_augument()
 
   //set some stats
   m1.creature_stats().set_attribute(Attribute::IMP, 3);
-  m1.creature_stats().set_skill(Skill::Gornictwo, 34);
+  m1.creature_stats().setSkill(Skill::Gornictwo, 34);
   m1.set_global_test_level_mod(1);
 
   QCOMPARE(m1.creature_stats().attribute(Attribute::IMP), 3);
@@ -197,7 +198,7 @@ void TestCreature::modificator_augument()
   //set augument stats
   m2.creature_stats().set_attribute(Attribute::IMP, 1);
   m2.creature_stats().set_attribute(Attribute::STR, 3);
-  m2.creature_stats().set_skill(Skill::Odpornosc, 4);
+  m2.creature_stats().setSkill(Skill::Odpornosc, 4);
   m2.set_global_test_level_mod(2);
   m2.set_effect_time(50);
 
@@ -357,8 +358,8 @@ void TestCreature::creature_save_base()
   unique_ptr<Creature> crt = Creature::prototypes().clone(CreaturePrototype::Ogr);
   dbRef ref = crt->ref();
 
-  crt->set_name("lol");
-  crt->set_descript("lal");
+  crt->setName("lol");
+  crt->setDescript("lal");
   crt->set_sex(Sex::Female);
 
   QCOMPARE(crt->name().c_str(), "lol");
@@ -384,7 +385,7 @@ void TestCreature::creature_load_save_stats()
   dbRef ref = crt->ref();
 
   //set stats
-  crt->set_skill(Skill::Akrobatyka, 4);
+  crt->setSkill(Skill::Akrobatyka, 4);
   crt->set_attribute(Attribute::DEX, 7);
 
   //reset item
@@ -406,15 +407,15 @@ void TestCreature::creature_load_save_body()
 
   //create some body parts
   BodyPart *bp1 = new BodyPart;
-  bp1->set_type(BodyPartType::Glowa);
+  bp1->setType(BodyPartType::Glowa);
   bp1->set_region(BodyRegion::Gora);
 
   BodyPart *bp2 = new BodyPart;
-  bp2->set_type(BodyPartType::Reka);
+  bp2->setType(BodyPartType::Reka);
   bp2->set_region(BodyRegion::Gora);
 
   BodyPart *bp3 = new BodyPart;
-  bp3->set_type(BodyPartType::Noga);
+  bp3->setType(BodyPartType::Noga);
   bp3->set_region(BodyRegion::Dol);
 
   //dodaj party do kriczera
@@ -440,7 +441,7 @@ void TestCreature::creature_load_inventory()
   dbRef ref = crt->ref();
 
   //create some item
-  shared_ptr<Item> item1( Item::prototypes().clone(ItemPrototype::Noz).release() );
+  ItemPtr item1( Item::prototypes().clone(ItemPrototype::Noz).release() );
 
   //insert item
   crtp->take(item1);
@@ -480,7 +481,7 @@ void TestCreature::creature_load_modificators()
   i_mod2->creature_stats().set_attribute(Attribute::STR, 2);
   i_mod2->saveToDB();
 
-  shared_ptr<Item> item1( Item::prototypes().clone(ItemPrototype::Noz).release() );
+  ItemPtr item1( Item::prototypes().clone(ItemPrototype::Noz).release() );
   item1->mods().add(i_mod1);
   item1->mods().add(i_mod2); //nożyk STR+3 oł je
   //item1->mods().get_complex_mod()->saveToDB();
@@ -492,9 +493,9 @@ void TestCreature::creature_load_modificators()
   //2. Wciapanie modów niezależnych
   shared_ptr<CreatureModificator> n_mod1(new CreatureModificator);
   shared_ptr<CreatureModificator> n_mod2(new CreatureModificator);
-  n_mod1->creature_stats().set_skill(Skill::Walka_Miecze, 10);
+  n_mod1->creature_stats().setSkill(Skill::Walka_Miecze, 10);
   n_mod1->saveToDB();
-  n_mod2->creature_stats().set_skill(Skill::Walka_Topory, 6);
+  n_mod2->creature_stats().setSkill(Skill::Walka_Topory, 6);
   n_mod2->saveToDB();
 
   crt->mods().add(n_mod1);
@@ -520,11 +521,11 @@ void TestCreature::creature_eq()
   CreatureMonitor c_monit(crt.get());
 
   //create some equipment
-  shared_ptr<Armor> zbroja ( dynamic_cast<Armor*>( Item::prototypes().clone(ItemPrototype::LekkaZbrojaSkorzana).release() ) );
-  shared_ptr<Armor> zbroja_druga ( dynamic_cast<Armor*>( Item::prototypes().clone(ItemPrototype::LekkaZbrojaSkorzana).release() ) );
-  shared_ptr<Armor> helm ( dynamic_cast<Armor*>( Item::prototypes().clone(ItemPrototype::HelmSkorzany).release() ) );
-  shared_ptr<Weapon> wpn ( dynamic_cast<Weapon*>( Item::prototypes().clone(ItemPrototype::MieczSzeroki).release() ) );
-  shared_ptr<Shield> shld ( dynamic_cast<Shield*>( Item::prototypes().clone(ItemPrototype::MalaDrewnianaTarcza).release() ) );
+  ArmorPtr zbroja ( dynamic_cast<Armor*>( Item::prototypes().clone(ItemPrototype::LekkaZbrojaSkorzana).release() ) );
+  ArmorPtr zbroja_druga ( dynamic_cast<Armor*>( Item::prototypes().clone(ItemPrototype::LekkaZbrojaSkorzana).release() ) );
+  ArmorPtr helm ( dynamic_cast<Armor*>( Item::prototypes().clone(ItemPrototype::HelmSkorzany).release() ) );
+  WeaponPtr wpn ( dynamic_cast<Weapon*>( Item::prototypes().clone(ItemPrototype::MieczSzeroki).release() ) );
+  ShieldPtr shld ( dynamic_cast<Shield*>( Item::prototypes().clone(ItemPrototype::MalaDrewnianaTarcza).release() ) );
 
   QVERIFY(zbroja != nullptr);
   QVERIFY(helm != nullptr);
@@ -625,7 +626,7 @@ void TestCreature::creature_eq()
   /*STWORZENIE OGRA
   shared_ptr<MOB> ogr ( dynamic_cast<MOB*>(Creature::prototypes().clone(CreaturePrototype::BlankMOB).release()) );
   QVERIFY(ogr != nullptr);
-  ogr->set_name("Ogr");
+  ogr->setName("Ogr");
   ogr->set_sex(Sex::Male);
   ogr->set_attribute(Attribute::STR,6);
   ogr->set_attribute(Attribute::DEX,3);
@@ -635,7 +636,7 @@ void TestCreature::creature_eq()
   ogr->set_attribute(Attribute::CHR,3);
   ogr->set_attribute(Attribute::IMP,1);
   ogr->set_attribute(Attribute::WLL,5);
-  ogr->set_skill(Skill::Walka_Topory, 6);
+  ogr->setSkill(Skill::Walka_Topory, 6);
 
   BodyPart reka_l(BodyPartType::Reka, BodyRegion::Gora, BodySide::Left),
            reka_p(BodyPartType::Reka, BodyRegion::Gora, BodySide::Right),
@@ -655,63 +656,63 @@ void TestCreature::creature_eq()
   */
 
   /*STWORZENIE ZBROI
-  shared_ptr<Armor> zbroja ( dynamic_cast<Armor*>( Item::prototypes().clone(ItemPrototype::BlankArmor).release() ) );
-  zbroja->set_name("Lekka zbroja skórzana");
-  zbroja->set_damage_reduction(Damage(2,2,1));
-  zbroja->set_condition(ItemCondition::Good);
-  zbroja->set_weight(8);
-  zbroja->set_durability(6);
-  zbroja->set_type(ItemType::Armor);
-  zbroja->set_stackable(false);
-  zbroja->add_body_part(BodyPartType::Tors);
-  zbroja->add_body_part(BodyPartType::Reka);
-  zbroja->add_body_part(BodyPartType::Reka);
-  zbroja->add_body_part(BodyPartType::Noga);
-  zbroja->add_body_part(BodyPartType::Noga);
+  ArmorPtr zbroja ( dynamic_cast<Armor*>( Item::prototypes().clone(ItemPrototype::BlankArmor).release() ) );
+  zbroja->setName("Lekka zbroja skórzana");
+  zbroja->setDamageReduction(Damage(2,2,1));
+  zbroja->setCondition(ItemCondition::Good);
+  zbroja->setWeight(8);
+  zbroja->setDurability(6);
+  zbroja->setType(ItemType::Armor);
+  zbroja->setStackable(false);
+  zbroja->addBodyPart(BodyPartType::Tors);
+  zbroja->addBodyPart(BodyPartType::Reka);
+  zbroja->addBodyPart(BodyPartType::Reka);
+  zbroja->addBodyPart(BodyPartType::Noga);
+  zbroja->addBodyPart(BodyPartType::Noga);
   shared_ptr<CreatureModificator> zbroja_mod (new CreatureModificator);
   zbroja_mod->creature_stats().set_attribute(Attribute::DEX, -1);
   zbroja->mods().add(zbroja_mod);
   */
   /*STWORZENIE TARCZY
-  shared_ptr<Shield> sh ( dynamic_cast<Shield*>( Item::prototypes().clone(ItemPrototype::BlankShield).release() ) );
-  sh->add_body_part(BodyPartType::Reka);
-  sh->set_defence(4);
-  sh->set_condition(ItemCondition::Good);
-  sh->set_durability(4);
-  sh->set_name("Mala drewniana tarcza");
-  sh->set_stackable(false);
-  sh->set_type(ItemType::Shield);
-  sh->set_weight(1.7);
+  ShieldPtr sh ( dynamic_cast<Shield*>( Item::prototypes().clone(ItemPrototype::BlankShield).release() ) );
+  sh->addBodyPart(BodyPartType::Reka);
+  sh->setDefence(4);
+  sh->setCondition(ItemCondition::Good);
+  sh->setDurability(4);
+  sh->setName("Mala drewniana tarcza");
+  sh->setStackable(false);
+  sh->setType(ItemType::Shield);
+  sh->setWeight(1.7);
   shared_ptr<CreatureModificator> sh_mod (new CreatureModificator);
   sh_mod->creature_stats().set_attribute(Attribute::DEX, -1);
   sh->mods().add(sh_mod);
   */
   /*STWORZENIE HELMU
-  shared_ptr<Armor> helm ( dynamic_cast<Armor*>( Item::prototypes().clone(ItemPrototype::BlankArmor).release() ) );
-  helm->set_name("Skórzany hełm");
-  helm->set_damage_reduction(Damage(0,1,0));
-  helm->set_condition(ItemCondition::Good);
-  helm->set_weight(0.6);
-  helm->set_durability(5);
-  helm->set_type(ItemType::Armor);
-  helm->set_stackable(false);
-  helm->add_body_part(BodyPartType::Glowa);
+  ArmorPtr helm ( dynamic_cast<Armor*>( Item::prototypes().clone(ItemPrototype::BlankArmor).release() ) );
+  helm->setName("Skórzany hełm");
+  helm->setDamageReduction(Damage(0,1,0));
+  helm->setCondition(ItemCondition::Good);
+  helm->setWeight(0.6);
+  helm->setDurability(5);
+  helm->setType(ItemType::Armor);
+  helm->setStackable(false);
+  helm->addBodyPart(BodyPartType::Glowa);
   */
   /*STWORZENIE BRONI
-  shared_ptr<Weapon> wpn ( dynamic_cast<Weapon*>( Item::prototypes().clone(ItemPrototype::BlankWeapon).release() ) );
-  wpn->set_attack(2);
-  wpn->set_condition(ItemCondition::Good);
-  wpn->set_damage(Damage(4,5,0));
-  wpn->set_defence(4);
-  wpn->set_durability(9);
-  wpn->set_name("Miecz szeroki");
-  wpn->set_range(0);
-  wpn->set_reflex(0);
-  wpn->set_skill(WeaponSkill::Miecze);
-  wpn->set_stackable(false);
-  wpn->set_str_req(3);
-  wpn->set_type(ItemType::Weapon);
-  wpn->set_weight(1.8);
+  WeaponPtr wpn ( dynamic_cast<Weapon*>( Item::prototypes().clone(ItemPrototype::BlankWeapon).release() ) );
+  wpn->setAttack(2);
+  wpn->setCondition(ItemCondition::Good);
+  wpn->setDamage(Damage(4,5,0));
+  wpn->setDefence(4);
+  wpn->setDurability(9);
+  wpn->setName("Miecz szeroki");
+  wpn->setRange(0);
+  wpn->setReflex(0);
+  wpn->setSkill(WeaponSkill::Miecze);
+  wpn->setStackable(false);
+  wpn->setStrReq(3);
+  wpn->setType(ItemType::Weapon);
+  wpn->setWeight(1.8);
   */
 }
 
@@ -760,11 +761,11 @@ void TestCreature::creature_container_insert_erase()
   //create some kriczers
   shared_ptr<Creature> ogr1 ( Creature::prototypes().clone(CreaturePrototype::Ogr).release() );
   dbRef ogr1_ref = ogr1->ref();
-  ogr1->set_name("Karol");
+  ogr1->setName("Karol");
 
   shared_ptr<Creature> ogr2 ( Creature::prototypes().clone(CreaturePrototype::Ogr).release() );
   dbRef ogr2_ref = ogr2->ref();
-  ogr2->set_name("Maciek");
+  ogr2->setName("Maciek");
 
   //=========insert
   cont->insert(ogr1);
@@ -812,7 +813,7 @@ void TestCreature::npc_load()
 {
   shared_ptr<NPC> npc( dynamic_cast<NPC*>(Creature::prototypes().clone(CreaturePrototype::BlankNPC).release()) );
   dbRef ref = npc->ref();
-  npc->set_name("Igor");
+  npc->setName("Igor");
   npc->set_clan(Clan::Aep_Tien);
   npc->set_tribe(Tribe::Tuatha_De_Cael);
 

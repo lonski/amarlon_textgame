@@ -4,6 +4,7 @@
 #include "Equipment/item.h"
 #include "Equipment/weapon.h"
 #include "World/location.h"
+#include "Equipment/item_container.h"
 
 using namespace std;
 
@@ -88,13 +89,13 @@ void Debug::clearConsole()
 void Debug::createLocObj()
 {
   //create object to be inserted into loc
-  LocationObjectPtr lobj (LocationObject::Forge(ItemPrototype::BlankLocationObject));
-  lobj->set_name("Szafka");
-  lobj->set_descript("Niewielka drewniana, prostokątna szafka. Drzwiczki nadgryzł już ząb czasu, a klamka została urwana.");
+  LocationObjectPtr lobj (LocationObject::forge(ItemPrototype::BlankLocationObject));
+  lobj->setName("Szafka");
+  lobj->setDescript("Niewielka drewniana, prostokątna szafka. Drzwiczki nadgryzł już ząb czasu, a klamka została urwana.");
 
   //forge some items
-  ItemPtr wpn(Item::Forge(ItemPrototype::MieczSzeroki));
-  ItemPtr arm(Item::Forge(ItemPrototype::HelmSkorzany));
+  ItemPtr wpn(Item::forge(ItemPrototype::MieczSzeroki));
+  ItemPtr arm(Item::forge(ItemPrototype::HelmSkorzany));
 
   //and add them to obj
   lobj->inventory()->insert(wpn);

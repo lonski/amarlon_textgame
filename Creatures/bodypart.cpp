@@ -20,7 +20,7 @@ BodyPart::BodyPart(BodyPartType type, BodyRegion region, BodySide side)
 {
 }
 
-BodyPart::BodyPart(string str, vector<shared_ptr<Item> >& eq_items)
+BodyPart::BodyPart(string str, vector<ItemPtr >& eq_items)
 {
   fromStr(str, eq_items);
 }
@@ -56,7 +56,7 @@ string BodyPart::toStr()
   return result;
 }
 
-bool BodyPart::fromStr(string str, vector<shared_ptr<Item> >& eq_items)
+bool BodyPart::fromStr(string str, vector<ItemPtr >& eq_items)
 {
   static const size_t data_fields_cnt = 4 + (int)ItemType::End - 1;
   bool result = true;
@@ -92,7 +92,7 @@ bool BodyPart::fromStr(string str, vector<shared_ptr<Item> >& eq_items)
         //nie znaleziono itema -> stwórz nowy
         if (!found)
         {
-          shared_ptr<Item> item( move(Item::create(i_ref)) );
+          ItemPtr item( move(Item::create(i_ref)) );
           eq_items.push_back(item);
           equip( item );
         }
@@ -114,7 +114,7 @@ void BodyPart::calc_armor()
     Armor *arm = dynamic_cast<Armor*>(_equipped[ItemType::Armor].get());
     if (arm != nullptr)
     {
-      _armor = arm->damage_reduction();
+      _armor = arm->damageReduction();
     }
     else
     {
@@ -123,7 +123,7 @@ void BodyPart::calc_armor()
   }
 }
 
-void BodyPart::equip(std::shared_ptr<Item> item)
+void BodyPart::equip(ItemPtr item)
 {
   ItemType itype = item->type();  
   _equipped[itype] = item;
@@ -131,9 +131,9 @@ void BodyPart::equip(std::shared_ptr<Item> item)
   if (itype == ItemType::Armor) calc_armor();
 }
 
-std::shared_ptr<Item> BodyPart::unequip(ItemType itype)
+ItemPtr BodyPart::unequip(ItemType itype)
 {
-  std::shared_ptr<Item> r(nullptr);
+  ItemPtr r(nullptr);
 
   if (_equipped.count(itype) > 0)
   {
@@ -145,12 +145,12 @@ std::shared_ptr<Item> BodyPart::unequip(ItemType itype)
   return r;
 }
 
-std::vector<std::shared_ptr<Item> > BodyPart::unequip()
+std::vector<ItemPtr > BodyPart::unequip()
 {
-  vector<shared_ptr<Item> > result;
+  vector<ItemPtr > result;
   for (int i = (int)ItemType::Null + 1; i != (int)ItemType::End; ++i)
   {
-    shared_ptr<Item> item = unequip(static_cast<ItemType>(i));
+    ItemPtr item = unequip(static_cast<ItemType>(i));
     if (item != nullptr) result.push_back(item);
   }
 

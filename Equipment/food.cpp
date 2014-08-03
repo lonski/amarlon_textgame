@@ -25,7 +25,7 @@ void Food::load(MapRow *data_source)
 
       if (!item_data.empty())
       {
-        set_hunger(CheckField<int>(item_data["FOD_HUNGER"]));
+        setHunger(CheckField<int>(item_data["FOD_HUNGER"]));
       }
 
       Item::load(&item_data);
@@ -51,7 +51,7 @@ void Food::saveToDB()
   Item::saveToDB();
 }
 
-void Food::set_hunger(int hunger)
+void Food::setHunger(int hunger)
 {
   _hunger = hunger;
   set_modified();

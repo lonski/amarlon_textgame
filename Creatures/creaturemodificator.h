@@ -21,8 +21,8 @@ private:
   dbRef _oref;
 public:
   //parameters
-  const static dbTable table_name;
-  virtual dbTable table() const { return table_name; }
+  const static dbTable tableName;
+  virtual dbTable table() const { return tableName; }
   dbTable otable() const {return _otable; }
   dbRef oref() const { return _oref; }
   void set_otable(dbTable otable) { _otable = otable; set_modified();}
@@ -43,7 +43,7 @@ public:
   int effect_time() const { return _effect_time; }
 
   //data mod
-  void set_name(std::string name) { _name = name; set_modified(); }
+  void setName(std::string name) { _name = name; set_modified(); }
   void set_effect_time(int effect_time) { _effect_time = effect_time; set_modified(); }
   void set_global_test_level_mod(int test_level_mod) { _global_test_level_mod = test_level_mod; set_modified(); }
 

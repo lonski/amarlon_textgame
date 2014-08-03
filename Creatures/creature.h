@@ -39,8 +39,8 @@ public:
     ~Container();
 
     //parameters
-    const static dbTable table_name;
-    virtual dbTable table() const { return table_name; }
+    const static dbTable tableName;
+    virtual dbTable table() const { return tableName; }
 
     //operations
     virtual void load(MapRow *data_source = nullptr);
@@ -70,8 +70,8 @@ private:
     Item::STLContainer _equipped_items;
     friend class CreatureMonitor;
   public:
-    std::vector<std::shared_ptr<BodyPart> > equip(std::shared_ptr<Item> item);
-    std::shared_ptr<Item> unequip(dbRef item_ref);
+    std::vector<std::shared_ptr<BodyPart> > equip(ItemPtr item);
+    ItemPtr unequip(dbRef item_ref);
     BodyParts& parts() { return _parts; }
     std::shared_ptr<BodyPart> part(BodyPartType type, BodyRegion region = BodyRegion::Null, BodySide side = BodySide::Null );
     Item::STLContainer& equipped_items() { return _equipped_items; }
@@ -100,6 +100,8 @@ private:
 
   Location *_currentLoc;
   Location *_prevLoc;
+
+  Item::Inventory& inventoryContainer();
 protected:
   //creation
   Creature(dbRef ref, bool temp = false);
@@ -111,8 +113,8 @@ protected:
 public:
 
   //parameters
-  const static dbTable table_name;
-  virtual dbTable table() const { return table_name; }
+  const static dbTable tableName;
+  virtual dbTable table() const { return tableName; }
 
   //creation
   static std::unique_ptr<Creature> create(dbRef ref, bool prototype = false, bool temp = false);
@@ -136,8 +138,8 @@ public:
   Location* getPrevLoc() const { return _prevLoc; }
 
   //data set
-  void set_name(std::string name);
-  void set_descript(std::string descript);
+  void setName(std::string name);
+  void setDescript(std::string descript);
   void set_sex(Sex sex);
 
   //stats access
@@ -147,7 +149,7 @@ public:
   //stats set
   void set_attribute(Attribute atr, int val);
   void mod_attribute(Attribute atr, int mod);
-  void set_skill(Skill skill, int val);
+  void setSkill(Skill skill, int val);
   void mod_skill(Skill skill, int mod);
 
   //body & inventory & mods
@@ -155,11 +157,11 @@ public:
   Body& body() { set_modified(); return _body; }
   std::vector< AmountedItem > inventory();
 
-  void take(std::shared_ptr<Item> item, int amount = 1);
+  void take(ItemPtr item, int amount = 1);
   AmountedItem drop(dbRef item_ref, int amount = 1);
 
-  void equip(std::shared_ptr<Item> item);
-  std::shared_ptr<Item> unequip(dbRef item_ref);
+  void equip(ItemPtr item);
+  ItemPtr unequip(dbRef item_ref);
 
   virtual Weapon* weapon() { return _weapon; }
   virtual Weapon* offhand() { return _offhand; }

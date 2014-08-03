@@ -3,33 +3,33 @@
 
 #include "item.h"
 
-//==Food
+class Food;
+typedef std::shared_ptr<Food> FoodPtr;
+
 class Food : public Item
 {
-private:
-  //data
-  int _hunger;
-
-  friend class Item;
-  Food(dbRef ref,bool temporary = false);
 public:
-  //operations
-  virtual void load(MapRow *data_source = nullptr);
-  virtual void saveToDB();
-
-
-  //data access
-  int hunger() const { return _hunger; }
-
-  //data set
-  void set_hunger(int hunger);
 
   virtual ~Food();
 
-  inline static Food* Forge(ItemPrototype proto)
+  virtual void load(MapRow *data_source = nullptr);
+  virtual void saveToDB();
+
+  int hunger() const { return _hunger; }
+
+  void setHunger(int hunger);
+
+  inline static Food* forge(ItemPrototype proto)
   {
     return dynamic_cast<Food*>(Item::prototypes().clone(proto).release());
   }
+
+private:
+  friend class Item;
+  Food(dbRef ref,bool temporary = false);
+
+  int _hunger;
+
 };
 //===
 

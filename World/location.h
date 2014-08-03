@@ -16,7 +16,7 @@ class Item;
 class Location : public DBObject
 {
 public:
-  const static dbTable table_name;
+  const static dbTable tableName;
   static LocationManager Manager;
 
   Location(dbRef ref);
@@ -33,7 +33,7 @@ public:
   bool drawn() const { return _drawn; }
   bool enterable() const { return true; }
   unsigned int drawRange() const { return _drawRange; }
-  dbTable table() const { return table_name; }
+  dbTable table() const { return tableName; }
 
   std::string name() const { return _name; }
   std::string descript() const { return _descript; }

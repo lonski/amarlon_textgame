@@ -29,11 +29,11 @@
     }\
     catch(std::exception &e)\
     {\
-      qDebug() << "Error saving " << table_name.c_str() << " " << ref() << " : " << e.what();\
+      qDebug() << "Error saving " << tableName.c_str() << " " << ref() << " : " << e.what();\
     }\
     catch(...)\
     {\
-      qDebug() << "Error saving " << table_name.c_str() << " "  << ref() << ".";\
+      qDebug() << "Error saving " << tableName.c_str() << " "  << ref() << ".";\
     }\
   }
 

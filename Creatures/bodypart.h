@@ -16,22 +16,22 @@ private:
   BodyPartType _type;
   DamageLevel _damage;
   Damage _armor;
-  std::map<ItemType, std::shared_ptr<Item> > _equipped;
+  std::map<ItemType, ItemPtr > _equipped;
 
   void calc_armor();
 public:
   //creation
   BodyPart();
   BodyPart(BodyPartType type, BodyRegion region, BodySide side);
-  BodyPart(std::string str, std::vector<std::shared_ptr<Item> > &eq_items);
+  BodyPart(std::string str, std::vector<ItemPtr > &eq_items);
   ~BodyPart() {}
 
   //opeartions
   std::string toStr();
-  bool fromStr(std::string str, std::vector<std::shared_ptr<Item> > &eq_items);
-  void equip(std::shared_ptr<Item> item);
-  std::shared_ptr<Item> unequip(ItemType itype);
-  std::vector<std::shared_ptr<Item> > unequip();
+  bool fromStr(std::string str, std::vector<ItemPtr > &eq_items);
+  void equip(ItemPtr item);
+  ItemPtr unequip(ItemType itype);
+  std::vector<ItemPtr > unequip();
   bool accept(ItemType itype);
 
   //access data
@@ -46,8 +46,8 @@ public:
   //set data
   void set_region(BodyRegion region) { _region = region; }
   void set_side(BodySide side) { _side = side; }
-  void set_type(BodyPartType type) { _type = type; }
-  void set_damage(DamageLevel damage) { _damage = damage; }
+  void setType(BodyPartType type) { _type = type; }
+  void setDamage(DamageLevel damage) { _damage = damage; }
 
 };
 

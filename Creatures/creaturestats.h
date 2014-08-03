@@ -18,7 +18,7 @@ public:
   //set data
   void set_attribute(Attribute atr, int val) { _attributes[atr] = val; }
   void mod_attribute(Attribute atr, int mod) { _attributes[atr] += mod; }
-  void set_skill(Skill skill, int val) { _skills[skill] = val; }
+  void setSkill(Skill skill, int val) { _skills[skill] = val; }
   void mod_skill(Skill skill, int mod) { _skills[skill] += mod; }
 
   //operations

@@ -3,7 +3,7 @@
 using namespace std;
 using namespace fun;
 
-const dbTable CreatureModificator::table_name = "crt_mods";
+const dbTable CreatureModificator::tableName = "crt_mods";
 
 void CreatureModificator::augument(const CreatureModificator &mod)
 {
@@ -51,12 +51,12 @@ void CreatureModificator::load(MapRow *data_source)
     }
     else
     {
-      mod_data = MapQuery("SELECT * FROM "+table_name+" WHERE ref="+toStr(ref()));
+      mod_data = MapQuery("SELECT * FROM "+tableName+" WHERE ref="+toStr(ref()));
     }
 
     if (!mod_data.empty())
     {
-      set_name( CheckField<string>(mod_data["NAME"]) );
+      setName( CheckField<string>(mod_data["NAME"]) );
       set_effect_time( CheckField<int>(mod_data["EFFECT_TIME"]) );
       set_global_test_level_mod( CheckField<int>(mod_data["GLB_TEST_MOD"]) );
 
@@ -101,7 +101,7 @@ void CreatureModificator::saveToDB()
 
   if ( 0 != ref() )
   {
-    save("UPDATE " + table_name + " SET "
+    save("UPDATE " + tableName + " SET "
          " otable='" + _otable + "',"
          " oref=" + toStr(_oref) + ","
          " name='" + _name + "',"

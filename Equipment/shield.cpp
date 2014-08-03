@@ -25,7 +25,7 @@ void Shield::load(MapRow *data_source)
 
       if (!item_data.empty())
       {
-        set_defence(CheckField<int>(item_data["SHD_DEFENCE"]));
+        setDefence(CheckField<int>(item_data["SHD_DEFENCE"]));
       }
 
       Item::load(&item_data);
@@ -51,7 +51,7 @@ void Shield::saveToDB()
   Item::saveToDB();
 }
 
-void Shield::set_defence(int defence)
+void Shield::setDefence(int defence)
 {
   _defence = defence;
   set_modified();

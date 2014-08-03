@@ -32,7 +32,7 @@ void Armor::load(MapRow *data_source)
           CheckField<int>(item_data["ARM_DR_BASHING"])
         );
 
-        set_damage_reduction(dmg);
+        setDamageReduction(dmg);
 
         Item::load(&item_data);
         set_not_modified();
@@ -61,7 +61,7 @@ void Armor::saveToDB()
   Item::saveToDB();
 }
 
-void Armor::set_damage_reduction(Damage dmg_red)
+void Armor::setDamageReduction(Damage dmg_red)
 {
   _damage_red = dmg_red;
   set_modified();

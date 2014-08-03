@@ -4,26 +4,17 @@
 #include "item.h"
 #include "../Include/comobj.h"
 
+class Weapon;
+typedef std::shared_ptr<Weapon> WeaponPtr;
+
 class Weapon : public Item
 {
-private:
-  //data
-  WeaponSkill _wpn_skill;
-  Damage _damage;
-  int _defence;
-  int _attack;
-  int _reflex;
-  int _str_req;
-  int _range;
-
-  friend class Item;
-  Weapon(dbRef ref, bool temporary = false);
 public:
-  //operations
+  virtual ~Weapon();
+
   virtual void load(MapRow *data_source = nullptr);
   virtual void saveToDB();
 
-  //data access
   WeaponSkill skill() const { return _wpn_skill; }
   Damage damage() const { return _damage; }
   int defence() const { return _defence; }
@@ -32,21 +23,31 @@ public:
   int str_req() const { return _str_req; }
   int range() const { return _range; }
 
-  //data set
-  void set_skill(WeaponSkill skill);
-  void set_damage(Damage damage);
-  void set_defence(int defence);
-  void set_attack(int attack);
-  void set_reflex(int reflex);
-  void set_str_req(int val);
-  void set_range(int range);
+  void setSkill(WeaponSkill skill);
+  void setDamage(Damage damage);
+  void setDefence(int defence);
+  void setAttack(int attack);
+  void setReflex(int reflex);
+  void setStrReq(int val);
+  void setRange(int range);
 
-  virtual ~Weapon();
-
-  inline static Weapon* Forge(ItemPrototype proto)
+  inline static Weapon* forge(ItemPrototype proto)
   {
     return dynamic_cast<Weapon*>(Item::prototypes().clone(proto).release());
   }
+
+private:
+  friend class Item;
+  Weapon(dbRef ref, bool temporary = false);
+
+  WeaponSkill _wpn_skill;
+  Damage _damage;
+  int _defence;
+  int _attack;
+  int _reflex;
+  int _str_req;
+  int _range;
+
 };
 
 #endif // WEAPON_H

@@ -1,4 +1,5 @@
 #include "testitems.h"
+#include "Equipment/item_container.h"
 
 using namespace std;
 
@@ -36,9 +37,9 @@ void TestItems::LoadData()
   QVERIFY(itm->condition() == ItemCondition::Good);
   QCOMPARE(itm->durability(), 7);
 
-  QCOMPARE(itm->body_parts().size(), static_cast<size_t>(2));
-  QVERIFY(itm->check_body_part(BodyPartType::Glowa));
-  QVERIFY(itm->check_body_part(BodyPartType::Tors));
+  QCOMPARE(itm->bodyParts().size(), static_cast<size_t>(2));
+  QVERIFY(itm->checkBodyPart(BodyPartType::Glowa));
+  QVERIFY(itm->checkBodyPart(BodyPartType::Tors));
 
   //test weapon
   unique_ptr<Weapon> wpn( dynamic_cast<Weapon*>(Item::create(1).release()) ) ;
@@ -54,9 +55,9 @@ void TestItems::LoadData()
 
   //test armor
   unique_ptr<Armor> arm( dynamic_cast<Armor*>(Item::create(2).release()) ) ;
-  QCOMPARE(arm->damage_reduction().piercing, 5);
-  QCOMPARE(arm->damage_reduction().slashing, 6);
-  QCOMPARE(arm->damage_reduction().bashing, 7);
+  QCOMPARE(arm->damageReduction().piercing, 5);
+  QCOMPARE(arm->damageReduction().slashing, 6);
+  QCOMPARE(arm->damageReduction().bashing, 7);
 
   //test food
   unique_ptr<Food> food( dynamic_cast<Food*>(Item::create(79).release()) ) ;
@@ -77,7 +78,7 @@ void TestItems::SaveData()
   QCOMPARE(itm->value(), 32);
 
   //change data
-  itm->set_value(333);
+  itm->setValue(333);
 
   //validate change
   QCOMPARE(itm->value(), 333);
@@ -96,7 +97,7 @@ void TestItems::SaveData()
   QCOMPARE(itm->value(), 333);
 
   //rollback change
-  itm->set_value(32);
+  itm->setValue(32);
 
   //load again
   itm->saveToDB();
@@ -107,14 +108,14 @@ void TestItems::SaveData()
 
   //===========================
   //#############fast check all fields
-  itm->set_weight(10);
-  itm->set_descript("x");
-  itm->set_name("xx");
-  itm->set_type(ItemType::Food);
-  itm->set_condition(ItemCondition::Damaged);
-  itm->add_body_part(BodyPartType::Reka);
-  itm->remove_body_part(BodyPartType::Tors);
-  itm->set_durability(5);
+  itm->setWeight(10);
+  itm->setDescript("x");
+  itm->setName("xx");
+  itm->setType(ItemType::Food);
+  itm->setCondition(ItemCondition::Damaged);
+  itm->addBodyPart(BodyPartType::Reka);
+  itm->removeBodyPart(BodyPartType::Tors);
+  itm->setDurability(5);
 
   //
   delete itm.release();
@@ -127,20 +128,20 @@ void TestItems::SaveData()
   QCOMPARE(itm->name().c_str(),"xx");
   QVERIFY(itm->type() == ItemType::Food);
   QVERIFY(itm->condition() == ItemCondition::Damaged);
-  QCOMPARE(itm->body_parts().size(), static_cast<size_t>(2));
-  QVERIFY(itm->check_body_part(BodyPartType::Glowa));
-  QVERIFY(itm->check_body_part(BodyPartType::Reka));
+  QCOMPARE(itm->bodyParts().size(), static_cast<size_t>(2));
+  QVERIFY(itm->checkBodyPart(BodyPartType::Glowa));
+  QVERIFY(itm->checkBodyPart(BodyPartType::Reka));
   QCOMPARE(itm->durability(), 5);
 
   //rollback
-  itm->set_weight(1.93);
-  itm->set_descript("lolo");
-  itm->set_name("TestIns2");
-  itm->set_type(ItemType::Armor);
-  itm->set_condition(ItemCondition::Good);
-  itm->add_body_part(BodyPartType::Tors);
-  itm->remove_body_part(BodyPartType::Reka);
-  itm->set_durability(7);
+  itm->setWeight(1.93);
+  itm->setDescript("lolo");
+  itm->setName("TestIns2");
+  itm->setType(ItemType::Armor);
+  itm->setCondition(ItemCondition::Good);
+  itm->addBodyPart(BodyPartType::Tors);
+  itm->removeBodyPart(BodyPartType::Reka);
+  itm->setDurability(7);
 
   delete itm.release();
 
@@ -148,13 +149,13 @@ void TestItems::SaveData()
   unique_ptr<Weapon> wpn(dynamic_cast<Weapon*>(Item::create(1).release()));
 
   //change data
-  wpn->set_skill(WeaponSkill::Kije);
-  wpn->set_defence(7);
-  wpn->set_attack(3);
-  wpn->set_reflex(2);
-  wpn->set_str_req(4);
-  wpn->set_range(6);
-  wpn->set_damage(Damage(2,3,4));
+  wpn->setSkill(WeaponSkill::Kije);
+  wpn->setDefence(7);
+  wpn->setAttack(3);
+  wpn->setReflex(2);
+  wpn->setStrReq(4);
+  wpn->setRange(6);
+  wpn->setDamage(Damage(2,3,4));
 
   //re-create
   delete wpn.release();
@@ -172,13 +173,13 @@ void TestItems::SaveData()
   QCOMPARE(wpn->damage().bashing, 4);
 
   //rollback
-  wpn->set_skill(WeaponSkill::Miecze);
-  wpn->set_defence(6);
-  wpn->set_attack(2);
-  wpn->set_reflex(1);
-  wpn->set_str_req(3);
-  wpn->set_range(5);
-  wpn->set_damage(Damage(1,2,3));
+  wpn->setSkill(WeaponSkill::Miecze);
+  wpn->setDefence(6);
+  wpn->setAttack(2);
+  wpn->setReflex(1);
+  wpn->setStrReq(3);
+  wpn->setRange(5);
+  wpn->setDamage(Damage(1,2,3));
 
   delete wpn.release();
 
@@ -186,19 +187,19 @@ void TestItems::SaveData()
   unique_ptr<Armor> arm(dynamic_cast<Armor*>(Item::create(2).release()));
 
   //change data
-  arm->set_damage_reduction(Damage(2,3,4));
+  arm->setDamageReduction(Damage(2,3,4));
 
   //re-create
   delete arm.release();
   arm = unique_ptr<Armor>(dynamic_cast<Armor*>(Item::create(2).release()));
 
   //validate
-  QCOMPARE(arm->damage_reduction().piercing, 2);
-  QCOMPARE(arm->damage_reduction().slashing, 3);
-  QCOMPARE(arm->damage_reduction().bashing, 4);
+  QCOMPARE(arm->damageReduction().piercing, 2);
+  QCOMPARE(arm->damageReduction().slashing, 3);
+  QCOMPARE(arm->damageReduction().bashing, 4);
 
   //rollback
-  arm->set_damage_reduction(Damage(5,6,7));
+  arm->setDamageReduction(Damage(5,6,7));
 
   delete arm.release();
 
@@ -206,7 +207,7 @@ void TestItems::SaveData()
   unique_ptr<Food> food(dynamic_cast<Food*>(Item::create(79).release()));
 
   //change data
-  food->set_hunger(20);
+  food->setHunger(20);
 
   //re-create
   delete food.release();
@@ -216,7 +217,7 @@ void TestItems::SaveData()
   QCOMPARE(food->hunger(), 20);
 
   //rollback
-  food->set_hunger(35);
+  food->setHunger(35);
 
   delete food.release();
 
@@ -224,7 +225,7 @@ void TestItems::SaveData()
   unique_ptr<Shield> shd(dynamic_cast<Shield*>(Item::create(82).release()));
 
   //change data
-  shd->set_defence(11);
+  shd->setDefence(11);
 
   //re-create
   delete shd.release();
@@ -234,7 +235,7 @@ void TestItems::SaveData()
   QCOMPARE(shd->defence(), 11);
 
   //rollback
-  shd->set_defence(9);
+  shd->setDefence(9);
 
   delete shd.release();
 
@@ -245,21 +246,21 @@ void TestItems::TemporaryItem()
   //rollback error in save item
   unique_ptr<Item> itmx = Item::create(2);
 
-  itmx->set_weight(1.93);
-  itmx->set_descript("lolo");
-  itmx->set_name("TestIns2");
-  itmx->set_type(ItemType::Armor);
-  itmx->set_condition(ItemCondition::Good);
+  itmx->setWeight(1.93);
+  itmx->setDescript("lolo");
+  itmx->setName("TestIns2");
+  itmx->setType(ItemType::Armor);
+  itmx->setCondition(ItemCondition::Good);
 
-  vector<BodyPartType> bps = itmx->body_parts();
+  vector<BodyPartType> bps = itmx->bodyParts();
   for_each(bps.begin(), bps.end(), [&](BodyPartType b)
   {
-    itmx->remove_body_part(b);
+    itmx->removeBodyPart(b);
   });
 
-  itmx->add_body_part(BodyPartType::Tors);
-  itmx->add_body_part(BodyPartType::Glowa);
-  itmx->set_durability(7);
+  itmx->addBodyPart(BodyPartType::Tors);
+  itmx->addBodyPart(BodyPartType::Glowa);
+  itmx->setDurability(7);
   delete itmx.release();
   //~~~
 
@@ -276,7 +277,7 @@ void TestItems::TemporaryItem()
   QVERIFY(itm->type() == ItemType::Armor);
 
   //change some data
-  itm->set_weight(6.66);
+  itm->setWeight(6.66);
 
   //save
   itm->saveToDB();
@@ -309,15 +310,15 @@ void TestItems::ContainerInsertionEraseNonStackable()
   //===================INSERT===================
   //create some new container
   Item::Container* cont = new Item::Container;
-  cont->set_name("TestCont");
+  cont->setName("TestCont");
   QCOMPARE(cont->name().c_str(), "TestCont");
 
   //check content
   QCOMPARE(cont->getAll().size(), static_cast<size_t>(0));
 
   //create some new items
-  shared_ptr<Item> item1( Item::prototypes().clone(ItemPrototype::Nozyk).release() );
-  shared_ptr<Item> item2( Item::prototypes().clone(ItemPrototype::Sztylet_typowy).release() );
+  ItemPtr item1( Item::prototypes().clone(ItemPrototype::Nozyk).release() );
+  ItemPtr item2( Item::prototypes().clone(ItemPrototype::Sztylet_typowy).release() );
 
   //insert them
   cont->insert(item1);
@@ -356,14 +357,14 @@ void TestItems::ContainerInsertionEraseStackable()
 {
   //create some new container
   Item::Container* cont = new Item::Container;
-  cont->set_name("TestCont");
+  cont->setName("TestCont");
   QCOMPARE(cont->name().c_str(), "TestCont");
 
   //check content
   QCOMPARE(cont->getAll().size(), static_cast<size_t>(0));
 
   //create some new items
-  shared_ptr<Item> miedziak( Item::create( (int)refDict::Item::Miedziak ) );
+  ItemPtr miedziak( Item::create( (int)refDict::Item::Miedziak ) );
   QVERIFY(miedziak->isStackable());
 
   //insert
@@ -388,7 +389,7 @@ void TestItems::ContainerInsertionEraseStackable()
   QCOMPARE(cont->find(miedziak->ref()).amount, 14);
 
   //insert even more and some other item
-  shared_ptr<Item> item1( Item::prototypes().clone(ItemPrototype::Nozyk).release() );
+  ItemPtr item1( Item::prototypes().clone(ItemPrototype::Nozyk).release() );
   cont->insert(item1);
   cont->insert(miedziak, 2);
 
@@ -425,7 +426,7 @@ void TestItems::ItemAsAContainer()
 {
   //create some item
   Item* szkatulka = Item::prototypes().clone(ItemPrototype::Null).release();
-  szkatulka->set_name("Szkatułka");
+  szkatulka->setName("Szkatułka");
 
   //create a container for that item
   Item::Container* cont = new Item::Container;
@@ -441,8 +442,8 @@ void TestItems::ItemAsAContainer()
   QVERIFY(szkatulka->inventory().get() != nullptr);
 
   //create some item to insert to szkatułka
-  shared_ptr<Item> i1( Item::create( (int)refDict::Item::Miedziak).release() );
-  shared_ptr<Item> i2( Item::prototypes().clone(ItemPrototype::Sztylet_typowy) );
+  ItemPtr i1( Item::create( (int)refDict::Item::Miedziak).release() );
+  ItemPtr i2( Item::prototypes().clone(ItemPrototype::Sztylet_typowy) );
 
   //insert to szkatułka
   szkatulka->inventory()->insert(i1, 5);

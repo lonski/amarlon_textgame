@@ -3,33 +3,33 @@
 
 #include "item.h"
 
-//==Shield
+class Shield;
+typedef std::shared_ptr<Shield> ShieldPtr;
+
 class Shield : public Item
 {
-private:
-  //data
-  int _defence;
-
-  friend class Item;
-  Shield(dbRef ref,bool temporary = false);
 public:
-  //operations
-  virtual void load(MapRow *data_source = nullptr);
-  virtual void saveToDB();
-
-  //data access
-  int defence() const { return _defence; }
-
-  //data set
-  void set_defence(int defence);
 
   virtual ~Shield();
 
-  inline static Shield* Forge(ItemPrototype proto)
+  virtual void load(MapRow *data_source = nullptr);
+  virtual void saveToDB();
+
+  int defence() const { return _defence; }
+
+  void setDefence(int defence);
+
+  inline static Shield* forge(ItemPrototype proto)
   {
     return dynamic_cast<Shield*>(Item::prototypes().clone(proto).release());
   }
+
+private:
+  friend class Item;
+  Shield(dbRef ref,bool temporary = false);
+
+  int _defence;
+
 };
-//===
 
 #endif // SHIELD_H

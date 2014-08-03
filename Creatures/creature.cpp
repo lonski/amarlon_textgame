@@ -1,13 +1,15 @@
 #include "creature.h"
 #include "mob.h"
 #include "npc.h"
+#include "Equipment/item_container.h"
 
 using namespace std;
 using namespace soci;
 using namespace fun;
 
-const dbTable Creature::table_name = "creatures";
-const dbTable Creature::Container::table_name = "crt_containers";
+const dbTable Creature::tableName = "creatures";
+const dbTable Creature::Container::tableName = "crt_containers";
+
 
 Creature::Creature(dbRef ref, bool temp)
   : DBObject(ref, temp)
@@ -57,13 +59,26 @@ Creature::~Creature()
   _saveToDB_
 }
 
+Item::Inventory &Creature::inventoryContainer()
+{
+  if (_inventory == nullptr)
+  {
+    _inventory.reset(new Item::Container);
+    _inventory->set_otable(table());
+    _inventory->set_oref(ref());
+    _inventory->saveToDB();
+  }
+
+  return _inventory;
+}
+
 std::unique_ptr<Creature> Creature::create(dbRef ref, bool prototype, bool temp)
 {
   Creature* new_crt = nullptr;
 
   if (ref > 0)
   {
-    MapRow crt_data = MapQuery("SELECT crt_type, obj_type FROM "+table_name+" WHERE ref="+toStr(ref));
+    MapRow crt_data = MapQuery("SELECT crt_type, obj_type FROM "+tableName+" WHERE ref="+toStr(ref));
     CreatureType crt_type = CheckFieldCast<CreatureType>( crt_data["CRT_TYPE"] );
     ObjType obj_type = CheckFieldCast<ObjType>( crt_data["OBJ_TYPE"] );
 
@@ -128,8 +143,8 @@ void Creature::load(MapRow *data_source)
       if (!crt_data.empty())
       {
         //base data
-        set_name( CheckField<string>(crt_data["NAME"]) );
-        set_descript( CheckField<string>(crt_data["DESCRIPT"]) );
+        setName( CheckField<string>(crt_data["NAME"]) );
+        setDescript( CheckField<string>(crt_data["DESCRIPT"]) );
         set_sex( CheckFieldCast<Sex>(crt_data["SEX"]));
 
         //stats
@@ -151,7 +166,7 @@ void Creature::load(MapRow *data_source)
       for (auto m = mod_refs.begin(); m != mod_refs.end(); ++m)
         _mods.add( shared_ptr<CreatureModificator>(new CreatureModificator(*m)) );
 
-        //dodaj z itemów założonych na body_parts
+        //dodaj z itemów założonych na bodyParts
       for (auto im = _body.equipped_items().begin(); im != _body.equipped_items().end(); ++im)
       {
         if (nullptr != *im && !(*im)->mods().getAll().empty())
@@ -166,10 +181,7 @@ void Creature::load(MapRow *data_source)
       }
       else
       {
-        _inventory.reset(new Item::Container);
-        _inventory->set_otable(table());
-        _inventory->set_oref(ref());
-        _inventory->saveToDB();
+        _inventory.reset();
       }
 
       calc_total_damage();
@@ -204,17 +216,17 @@ void Creature::saveToDB()
 
 void Creature::purge()
 {
-  if (_inventory != nullptr) _inventory->purge();
+  if (inventoryContainer() != nullptr) inventoryContainer()->purge();
   DBObject::purge();
 }
 
-void Creature::set_name(string name)
+void Creature::setName(string name)
 {
   _name = name;
   set_modified();
 }
 
-void Creature::set_descript(string descript)
+void Creature::setDescript(string descript)
 {
   _descript = descript;  
   set_modified();
@@ -238,9 +250,9 @@ void Creature::mod_attribute(Attribute atr, int mod)
   set_modified();
 }
 
-void Creature::set_skill(Skill skill, int val)
+void Creature::setSkill(Skill skill, int val)
 {
-  _stats.set_skill(skill, val);
+  _stats.setSkill(skill, val);
   set_modified();
 }
 
@@ -250,24 +262,24 @@ void Creature::mod_skill(Skill skill, int mod)
   set_modified();
 }
 
-void Creature::take(std::shared_ptr<Item> item, int amount)
+void Creature::take(ItemPtr item, int amount)
 {  
-  _inventory->insert(item, amount);
+  inventoryContainer()->insert(item, amount);
   set_modified();
 }
 
 AmountedItem Creature::drop(dbRef item_ref, int amount)
 {
   set_modified();
-  return _inventory->erase(item_ref, amount);
+  return inventoryContainer()->erase(item_ref, amount);
 }
 
 std::vector<AmountedItem > Creature::inventory()
 {
-  return _inventory->getAll();
+  return inventoryContainer()->getAll();
 }
 
-void Creature::equip(std::shared_ptr<Item> item)
+void Creature::equip(ItemPtr item)
 {
   _body.equip(item);
 
@@ -280,9 +292,9 @@ void Creature::equip(std::shared_ptr<Item> item)
   set_modified();
 }
 
-shared_ptr<Item> Creature::unequip(dbRef item_ref)
+ItemPtr Creature::unequip(dbRef item_ref)
 {
-  shared_ptr<Item> r = _body.unequip(item_ref);
+  ItemPtr r = _body.unequip(item_ref);
 
   //usun modyfikatory
   if (r != nullptr)
@@ -306,7 +318,7 @@ void Creature::calc_total_damage()
 {
   //TODO
   //algorytm z systemu rpg
-  //na podstawie damage_level z body_parts
+  //na podstawie damage_level z bodyParts
 }
 
 //==============BODY=============================================================
@@ -332,9 +344,9 @@ string Creature::Body::toStr()
 }
 
 
-vector<shared_ptr<BodyPart> > Creature::Body::equip(std::shared_ptr<Item> item)
+vector<shared_ptr<BodyPart> > Creature::Body::equip(ItemPtr item)
 {
-  vector<BodyPartType> req_parts = item->body_parts();
+  vector<BodyPartType> req_parts = item->bodyParts();
   vector<shared_ptr<BodyPart> > temp_eq_parts;
 
   //sprawdz czy mamy dostepna ilosc partsów
@@ -388,10 +400,10 @@ vector<shared_ptr<BodyPart> > Creature::Body::equip(std::shared_ptr<Item> item)
   return temp_eq_parts;
 }
 
-std::shared_ptr<Item> Creature::Body::unequip(dbRef item_ref)
+ItemPtr Creature::Body::unequip(dbRef item_ref)
 {
   ItemType itype = ItemType::Null;
-  shared_ptr<Item> result;
+  ItemPtr result;
 
   //znajdz typ itema
   for (auto eq = _equipped_items.begin(); eq != _equipped_items.end(); ++eq)
@@ -499,7 +511,7 @@ void Creature::Container::load(MapRow *data_source)
       }
       else
       {
-        cont_data = fun::MapQuery("SELECT otable, oref, creatures FROM "+table_name+" WHERE ref="+fun::toStr(ref()));
+        cont_data = fun::MapQuery("SELECT otable, oref, creatures FROM "+tableName+" WHERE ref="+fun::toStr(ref()));
       }
 
       //==header data

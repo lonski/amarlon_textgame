@@ -1,9 +1,9 @@
-#include "item.h"
+#include "item_container.h"
 
 using namespace std;
 using namespace soci;
 
-const dbTable Item::Container::table_name = "item_containers";
+const dbTable Item::Container::tableName = "item_containers";
 
 Item::Container::Container(dbRef ref, bool temporary)
   : DBObject(ref, temporary)
@@ -60,7 +60,7 @@ void Item::Container::str2items(string items)
 
         if (item_ref > 0 && amount > 0)
         {
-          std::shared_ptr<Item> item( Item::create(item_ref).release() );
+          ItemPtr item( Item::create(item_ref).release() );
           insert(item, amount);
         }
       }
@@ -94,12 +94,12 @@ void Item::Container::load(MapRow *data_source)
       }
       else
       {
-        cont_data = fun::MapQuery("SELECT name, otable, oref, max_weight, items FROM "+table_name+" WHERE ref="+fun::toStr(ref()));
+        cont_data = fun::MapQuery("SELECT name, otable, oref, max_weight, items FROM "+tableName+" WHERE ref="+fun::toStr(ref()));
       }
 
       if (!cont_data.empty())
       {
-        set_name( fun::CheckField<std::string>(cont_data["NAME"]) );
+        setName( fun::CheckField<std::string>(cont_data["NAME"]) );
         set_max_weight( fun::CheckField<Weight>(cont_data["MAX_WEIGHT"]) );
         set_oref( fun::CheckField<dbRef>(cont_data["OREF"]) );
         set_otable( fun::CheckField<std::string>(cont_data["OTABLE"]) );
@@ -121,7 +121,7 @@ void Item::Container::load(MapRow *data_source)
   }
 }
 
-void Item::Container::set_name(std::string name)
+void Item::Container::setName(std::string name)
 {
   _name = name;
   set_modified();
@@ -148,7 +148,7 @@ void Item::Container::set_max_weight(Weight max_weight)
 /*
  *  Passing a reference (not by value), because otherwise if insert fail, the item could be lost.
  */
-void Item::Container::insert(std::shared_ptr<Item> &item, int amount)
+void Item::Container::insert(ItemPtr &item, int amount)
 {
   if ( !item->isStackable() ) amount = 1;
   Weight items_weight = amount * item->weight();
@@ -160,18 +160,14 @@ void Item::Container::insert(std::shared_ptr<Item> &item, int amount)
   }
   else
   {
-    int amount_to_save = 0;
-
     if (item->isStackable() && _items.find(item->ref()) != _items.end() )
-    {//update amount
+    {
       AmountedItem& aitem = _items[item->ref()];
       aitem.amount += amount;
-      amount_to_save = aitem.amount;
     }
     else
-    {//insert
+    {
       _items.insert(std::make_pair<dbRef, AmountedItem >(item->ref(), AmountedItem(item, amount)) );
-      amount_to_save = amount;
     }
 
     set_modified();
@@ -188,19 +184,16 @@ AmountedItem Item::Container::erase(dbRef item_ref, int amount)
 
     bool stackable = iter->second.item->isStackable();
     int& cont_amount = iter->second.amount;
-    int amount_to_save = 0;
 
     if (!stackable) amount = 1;
 
     if (!stackable || cont_amount <= amount )
     {
       _items.erase(item_ref);
-      amount_to_save = 0;
     }
     else
     {
       cont_amount -= amount;
-      amount_to_save = cont_amount;
       ret.amount = amount;
     }
 

@@ -1,33 +1,32 @@
 #ifndef CREATURESTATS_H
 #define CREATURESTATS_H
 
-#include "../Include/inc.h"
-#include "../Include/func.h"
-#include "../Include/enums.h"
+#include "Include/inc.h"
+#include "Include/func.h"
+#include "Include/enums.h"
 
 class CreatureStats
 {
+public:
+  int attribute(Attribute atr) const;
+  int skill(Skill skill) const;
+
+  void setAttribute(Attribute atr, int val);
+  void modifyAttribute(Attribute atr, int mod);
+  void setSkill(Skill skill, int val);
+  void modifySkill(Skill skill, int mod);
+
+  void str2attributes(std::string atr_str);
+  void str2skills(std::string skill_str);
+  std::string attributes2str() const;
+  std::string skills2str() const;
+  void augument(const CreatureStats& stats);
+  void removeAugument(const CreatureStats& stats);
+
 private:
   std::map<Attribute, int> _attributes;
   std::map<Skill, int> _skills;
-public:
-  //access data
-  int attribute(Attribute atr) const { return ( _attributes.count(atr) ? _attributes.at(atr) : 0 ); }
-  int skill(Skill skill) const { return ( _skills.count(skill) ? _skills.at(skill) : 0 ); }
 
-  //set data
-  void set_attribute(Attribute atr, int val) { _attributes[atr] = val; }
-  void mod_attribute(Attribute atr, int mod) { _attributes[atr] += mod; }
-  void setSkill(Skill skill, int val) { _skills[skill] = val; }
-  void mod_skill(Skill skill, int mod) { _skills[skill] += mod; }
-
-  //operations
-  void Str2Attributes(std::string atr_str);
-  void Str2Skills(std::string skill_str);
-  std::string Attributes2Str() const;
-  std::string Skills2Str() const;
-  void augument(const CreatureStats& stats);
-  void remove_augument(const CreatureStats& stats);
 };
 
 #endif // CREATURESTATS_H

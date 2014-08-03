@@ -1,15 +1,16 @@
 #ifndef CREATURE_H
 #define CREATURE_H
 
-#include "../Include/inc.h"
-#include "../Include/comobj.h"
-#include "../Include/func.h"
-#include "../Include/enums.h"
-#include "../Equipment/item.h"
-#include "../Equipment/weapon.h"
-#include "../Equipment/shield.h"
+#include "Include/inc.h"
+#include "Include/comobj.h"
+#include "Include/func.h"
+#include "Include/enums.h"
+#include "Equipment/item.h"
+#include "Equipment/weapon.h"
+#include "Equipment/shield.h"
 #include "creaturestats.h"
 #include "creaturemodificator.h"
+#include "body.h"
 #include "bodypart.h"
 
 class CreatureMonitor;
@@ -18,70 +19,62 @@ class Location;
 class Creature : public DBObject, public Prototypable<Creature, CreaturePrototype>
 {
 public:
-  class Container : public DBObject
-  {
-  private:
-    //data
-    dbTable _otable;
-    dbRef _oref;
+  class Container;
 
-    //creatures
-    std::map<dbRef, std::shared_ptr<Creature> > _creatures;
-    void Str2Creatures(std::string crts);
-    std::string Creatures2Str();
+  const static dbTable tableName;
+  virtual dbTable table() const { return tableName; }
 
-    friend class TestCreature;
-  public:
-    //creation
-    static dbRef byOwner(dbTable otable, dbRef oref);
-    Container(dbRef ref);
-    Container();
-    ~Container();
+  static std::unique_ptr<Creature> create(dbRef ref, bool prototype = false, bool temp = false);
+  virtual std::unique_ptr<Creature> clone();
+  virtual ~Creature() = 0;
 
-    //parameters
-    const static dbTable tableName;
-    virtual dbTable table() const { return tableName; }
+  virtual void load(MapRow *data_source = nullptr);
+  virtual void saveToDB();
+  virtual void purge();
 
-    //operations
-    virtual void load(MapRow *data_source = nullptr);
-    virtual void saveToDB();
+  std::string name() const;
+  std::string descript() const;
+  Sex sex() const;
+  DamageLevel totalDamage() const;
+  int attribute(Attribute atr) const;
+  int skill(Skill skill) const;
+  CreatureStats& stats();
 
-    void insert(std::shared_ptr<Creature>& crt);
-    std::shared_ptr<Creature> erase(dbRef crt_ref);
-    std::shared_ptr<Creature> find(dbRef crt_ref);
-    std::vector<std::shared_ptr<Creature> > getAll();
+  Location* getLocation() const;
+  Location* getPrevLoc() const;
 
-    //owner data
-    dbTable otable() const { return _otable; }
-    dbRef oref() const { return _oref; }
+  CreatureModificatorManager& mods();
+  Body& body();
+  std::vector< AmountedItem > inventory();
 
-    void set_otable(dbTable otable);
-    void set_oref(dbRef oref);
-  };
+  void take(ItemPtr item, int amount = 1);
+  AmountedItem drop(dbRef item_ref, int amount = 1);
+  void equip(ItemPtr item);
+  ItemPtr unequip(dbRef item_ref);
+
+  virtual Weapon* weapon();
+  virtual Weapon* offhand();
+  virtual Shield* shield();
+
+  void setName(std::string name);
+  void setDescript(std::string descript);
+  void setSex(Sex sex);
+  void setAttribute(Attribute atr, int val);
+  void modifyAttribute(Attribute atr, int mod);
+  void setSkill(Skill skill, int val);
+  void modifySkill(Skill skill, int mod);
+  void setLocation(Location* loc);
+
+protected:
+  Creature(dbRef ref, bool temp = false);
+
+  virtual void calcWeapons();
+  virtual void calcTotalDamage();
 
 private:
-
-  class Body
-  {
-  public:
-    typedef std::vector<std::shared_ptr<BodyPart> > BodyParts;
-  private:
-    BodyParts _parts;
-    Item::STLContainer _equipped_items;
-    friend class CreatureMonitor;
-  public:
-    std::vector<std::shared_ptr<BodyPart> > equip(ItemPtr item);
-    ItemPtr unequip(dbRef item_ref);
-    BodyParts& parts() { return _parts; }
-    std::shared_ptr<BodyPart> part(BodyPartType type, BodyRegion region = BodyRegion::Null, BodySide side = BodySide::Null );
-    Item::STLContainer& equipped_items() { return _equipped_items; }
-    void load(std::string body_str);
-    std::string toStr();
-  };
-
   friend class TestCreature;
   friend class CreatureMonitor;
-  //data
+
   std::string _name;
   std::string _descript;
   Sex _sex;
@@ -102,72 +95,6 @@ private:
   Location *_prevLoc;
 
   Item::Inventory& inventoryContainer();
-protected:
-  //creation
-  Creature(dbRef ref, bool temp = false);
-
-  //calculations
-  virtual void calc_weapons();
-  virtual void calc_total_damage();
-
-public:
-
-  //parameters
-  const static dbTable tableName;
-  virtual dbTable table() const { return tableName; }
-
-  //creation
-  static std::unique_ptr<Creature> create(dbRef ref, bool prototype = false, bool temp = false);
-  virtual std::unique_ptr<Creature> clone();
-  virtual ~Creature() = 0;
-
-  //operations
-  virtual void load(MapRow *data_source = nullptr);
-  virtual void saveToDB();
-  virtual void purge();
-
-  //data access
-  std::string name() const { return _name; }
-  std::string descript() const { return _descript; }
-  Sex sex() const { return _sex; }
-  DamageLevel total_damage() const { return _total_damage; }
-
-  CreatureStats& stats() { return _stats; }
-
-  Location* getLocation() const { return _currentLoc; }
-  Location* getPrevLoc() const { return _prevLoc; }
-
-  //data set
-  void setName(std::string name);
-  void setDescript(std::string descript);
-  void set_sex(Sex sex);
-
-  //stats access
-  int attribute(Attribute atr) const { return _stats.attribute(atr) + _mods.get_complex_mod()->creature_stats().attribute(atr); }
-  int skill(Skill skill) const { return _stats.skill(skill) + _mods.get_complex_mod()->creature_stats().skill(skill); }
-
-  //stats set
-  void set_attribute(Attribute atr, int val);
-  void mod_attribute(Attribute atr, int mod);
-  void setSkill(Skill skill, int val);
-  void mod_skill(Skill skill, int mod);
-
-  //body & inventory & mods
-  CreatureModificatorManager& mods() { return _mods; }
-  Body& body() { set_modified(); return _body; }
-  std::vector< AmountedItem > inventory();
-
-  void take(ItemPtr item, int amount = 1);
-  AmountedItem drop(dbRef item_ref, int amount = 1);
-
-  void equip(ItemPtr item);
-  ItemPtr unequip(dbRef item_ref);
-
-  virtual Weapon* weapon() { return _weapon; }
-  virtual Weapon* offhand() { return _offhand; }
-  virtual Shield* shield() { return _shield; }
-
-  void setLocation(Location* loc);
 
 };
 

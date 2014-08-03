@@ -101,8 +101,8 @@ void Item::Container::load(MapRow *data_source)
       {
         setName( fun::CheckField<std::string>(cont_data["NAME"]) );
         set_max_weight( fun::CheckField<Weight>(cont_data["MAX_WEIGHT"]) );
-        set_oref( fun::CheckField<dbRef>(cont_data["OREF"]) );
-        set_otable( fun::CheckField<std::string>(cont_data["OTABLE"]) );
+        setORef( fun::CheckField<dbRef>(cont_data["OREF"]) );
+        setOTable( fun::CheckField<std::string>(cont_data["OTABLE"]) );
         str2items( fun::CheckField<string>(cont_data["ITEMS"]));
       }
 
@@ -127,13 +127,13 @@ void Item::Container::setName(std::string name)
   set_modified();
 }
 
-void Item::Container::set_otable(dbTable otable)
+void Item::Container::setOTable(dbTable otable)
 {
   _otable = otable;
   set_modified();
 }
 
-void Item::Container::set_oref(dbRef oref)
+void Item::Container::setORef(dbRef oref)
 {
   _oref = oref;
   set_modified();

@@ -5,14 +5,9 @@
 
 class NPC : public Creature
 {
-private:
-  friend class Creature;
-
-  Clan _clan;
-  Tribe _tribe;
-
-  NPC(dbRef ref, bool temporary = false);
 public:
+  virtual ~NPC();
+
   Clan clan() const { return _clan; }
   Tribe tribe() const { return _tribe; }
 
@@ -22,7 +17,13 @@ public:
   virtual void saveToDB();
   virtual void load(MapRow *data_source);
 
-  virtual ~NPC();
+private:
+  friend class Creature;
+  NPC(dbRef ref, bool temporary = false);
+
+  Clan _clan;
+  Tribe _tribe;
+
 };
 
 #endif // NPC_H

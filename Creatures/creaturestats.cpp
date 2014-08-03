@@ -3,7 +3,7 @@
 using namespace std;
 using namespace fun;
 
-string CreatureStats::Attributes2Str() const
+string CreatureStats::attributes2str() const
 {
   string result;
   for(int a = (int)Attribute::Null; a != (int)Attribute::End; ++a )
@@ -15,7 +15,7 @@ string CreatureStats::Attributes2Str() const
   return result;
 }
 
-string CreatureStats::Skills2Str() const
+string CreatureStats::skills2str() const
 {
   string result;
   for(int a = (int)Skill::Null; a != (int)Skill::End; ++a )
@@ -27,7 +27,37 @@ string CreatureStats::Skills2Str() const
   return result;
 }
 
-void CreatureStats::Str2Attributes(string atr_str)
+int CreatureStats::attribute(Attribute atr) const
+{
+  return ( _attributes.count(atr) ? _attributes.at(atr) : 0 );
+}
+
+int CreatureStats::skill(Skill skill) const
+{
+  return ( _skills.count(skill) ? _skills.at(skill) : 0 );
+}
+
+void CreatureStats::setAttribute(Attribute atr, int val)
+{
+  _attributes[atr] = val;
+}
+
+void CreatureStats::modifyAttribute(Attribute atr, int mod)
+{
+  _attributes[atr] += mod;
+}
+
+void CreatureStats::setSkill(Skill skill, int val)
+{
+  _skills[skill] = val;
+}
+
+void CreatureStats::modifySkill(Skill skill, int mod)
+{
+  _skills[skill] += mod;
+}
+
+void CreatureStats::str2attributes(string atr_str)
 {
   vector<string> atrs = explode(atr_str,';');
   for (size_t a = 0; a<atrs.size(); ++a)
@@ -39,7 +69,7 @@ void CreatureStats::Str2Attributes(string atr_str)
   }
 }
 
-void CreatureStats::Str2Skills(string skill_str)
+void CreatureStats::str2skills(string skill_str)
 {
   vector<string> skills = explode(skill_str,';');
   for (size_t a = 0; a<skills.size(); ++a)
@@ -65,7 +95,7 @@ void CreatureStats::augument(const CreatureStats &stats)
     }
 }
 
-void CreatureStats::remove_augument(const CreatureStats &stats)
+void CreatureStats::removeAugument(const CreatureStats &stats)
 {
   for (int i = (int)Attribute::Null; i != (int)Attribute::End; ++i)
   {

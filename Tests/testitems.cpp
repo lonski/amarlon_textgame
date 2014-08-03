@@ -431,8 +431,8 @@ void TestItems::ItemAsAContainer()
   //create a container for that item
   Item::Container* cont = new Item::Container;
   cont->set_max_weight(5);
-  cont->set_otable(szkatulka->table());
-  cont->set_oref(szkatulka->ref());
+  cont->setOTable(szkatulka->table());
+  cont->setORef(szkatulka->ref());
   cont->saveToDB();
   delete cont; //is not needed anymore -> will be loaded on item reload
 
@@ -472,16 +472,16 @@ void TestItems::ItemModManager()
                                 , mod3(new CreatureModificator(item->table(), item->ref()));
 
   //set the mods and save to DB
-  mod1->creature_stats().set_attribute(Attribute::CHR, 1);
-  mod1->creature_stats().set_attribute(Attribute::STR, 1);
+  mod1->creature_stats().setAttribute(Attribute::CHR, 1);
+  mod1->creature_stats().setAttribute(Attribute::STR, 1);
   mod1->saveToDB();
 
-  mod2->creature_stats().set_attribute(Attribute::CHR, 2);
-  mod2->creature_stats().set_attribute(Attribute::DEX, 1);
+  mod2->creature_stats().setAttribute(Attribute::CHR, 2);
+  mod2->creature_stats().setAttribute(Attribute::DEX, 1);
   mod2->saveToDB();
 
-  mod3->creature_stats().set_attribute(Attribute::CHR, 3);
-  mod3->creature_stats().set_attribute(Attribute::IMP, 1);
+  mod3->creature_stats().setAttribute(Attribute::CHR, 3);
+  mod3->creature_stats().setAttribute(Attribute::IMP, 1);
   mod3->saveToDB();
 
   //reset item

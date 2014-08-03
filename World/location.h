@@ -65,7 +65,6 @@ private:
   void initalizeLocationObjects(dbRef ref);
   void createObjectsContainer();
 };
-//===~~~
 
 
 #endif // LOCATION_H

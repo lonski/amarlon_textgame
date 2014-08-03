@@ -8,6 +8,7 @@
 #include "Include/exceptions.h"
 #include "Include/comobj.h"
 #include "Creatures/creaturemodificator.h"
+#include "Creatures/creaturemodificatormanager.h"
 
 class Item;
 typedef std::shared_ptr<Item> ItemPtr;

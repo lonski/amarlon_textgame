@@ -9,6 +9,18 @@ class Player : public Creature
 {
 public:
   static uint SightRange;
+  static Player *inst();
+  ~Player() {}
+
+  Profession profession() const { return _prof; }
+  Bless bless() const { return _bless; }
+  Splot splot() const { return _splot; }
+  Season birthSeason() const { return _birthSeason; }
+  Tribe tribe() const { return _tribe; }
+  Clan clan() const { return _clan; }
+
+  void load(MapRow *data_source = nullptr);
+  void saveToDB();
 
 private:
   static const dbRef playerRef;
@@ -31,19 +43,6 @@ private:
   VLValue<int> _fame;
   BravePoints _brave;
 
-public:
-  static Player *inst();
-  ~Player() {}
-
-  Profession profession() const { return _prof; }
-  Bless bless() const { return _bless; }
-  Splot splot() const { return _splot; }
-  Season birthSeason() const { return _birthSeason; }
-  Tribe tribe() const { return _tribe; }
-  Clan clan() const { return _clan; }
-
-  void load(MapRow *data_source = nullptr);
-  void saveToDB();
 };
 
 #endif // PLAYER_H

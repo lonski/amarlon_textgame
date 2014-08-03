@@ -157,7 +157,7 @@ void Console::append_anim(std::string text, Font efont, int interval)
 
     ui->c_log->insertHtml(fw_b+c+fw_e);
     fun::delay(interval);
-    it++;
+    ++it;
   }
 
 }

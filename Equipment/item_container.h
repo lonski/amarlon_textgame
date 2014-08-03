@@ -39,8 +39,8 @@ public:
   CMValue<Weight> weight_capacity() const { return _weight_cap; }
 
   void setName(std::string name);
-  void set_otable(dbTable otable);
-  void set_oref(dbRef oref);
+  void setOTable(dbTable otable);
+  void setORef(dbRef oref);
   void set_max_weight(Weight max_weight);
 };
 

@@ -15,6 +15,9 @@
 
 class CreatureMonitor;
 class Location;
+class Creature;
+
+typedef std::shared_ptr<Creature> CreaturePtr;
 
 class Creature : public DBObject, public Prototypable<Creature, CreaturePrototype>
 {
@@ -24,8 +27,8 @@ public:
   const static dbTable tableName;
   virtual dbTable table() const { return tableName; }
 
-  static std::unique_ptr<Creature> create(dbRef ref, bool prototype = false, bool temp = false);
-  virtual std::unique_ptr<Creature> clone();
+  static Creature* create(dbRef ref, bool prototype = false, bool temp = false);
+  virtual Creature *clone();
   virtual ~Creature() = 0;
 
   virtual void load(MapRow *data_source = nullptr);

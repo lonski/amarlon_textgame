@@ -21,7 +21,7 @@ public:
 
   inline static Armor* forge(ItemPrototype proto)
   {
-    return dynamic_cast<Armor*>(Item::prototypes().clone(proto).release());
+    return dynamic_cast<Armor*>(Item::prototypes().clone(proto));
   }
 
 private:

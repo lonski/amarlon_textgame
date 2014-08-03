@@ -13,7 +13,7 @@ public:
 
   inline static Jewelry* forge(ItemPrototype proto)
   {
-    return dynamic_cast<Jewelry*>(Item::prototypes().clone(proto).release());
+    return dynamic_cast<Jewelry*>(Item::prototypes().clone(proto));
   }
 
 private:

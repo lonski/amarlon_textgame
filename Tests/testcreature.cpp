@@ -83,7 +83,7 @@ void TestCreature::bodypart_equip()
 {
   Item::STLContainer eq;
   BodyPart bp("2,1,4,1,0,0,0,0,0,0,0,0,", eq);
-  ItemPtr item( Item::prototypes().clone(ItemPrototype::Noz).release() );
+  ItemPtr item( Item::prototypes().clone(ItemPrototype::Noz) );
 
   bp.equip(item);  
   QVERIFY(bp.equipped().size() == 1);
@@ -100,7 +100,7 @@ void TestCreature::bodypart_unequip()
   //equip
   Item::STLContainer eq;
   BodyPart bp("2,1,4,1,0,0,0,0,0,0,0,0,", eq);
-  ItemPtr item( Item::prototypes().clone(ItemPrototype::Noz).release() );
+  ItemPtr item( Item::prototypes().clone(ItemPrototype::Noz) );
 
   bp.equip(item);
   QVERIFY(!bp.equipped().empty());
@@ -331,13 +331,13 @@ void TestCreature::modmanager_ticktime()
 
 void TestCreature::creature_creation()
 {
-  unique_ptr<Creature> crt = Creature::prototypes().clone(CreaturePrototype::Ogr);
+  unique_ptr<Creature> crt  (Creature::prototypes().clone(CreaturePrototype::Ogr));
 
   dbRef ref = crt->ref();
   QVERIFY(crt->ref() != 0);
 
   delete crt.release();
-  crt = Creature::create(ref);
+  crt.reset(Creature::create(ref));
   QVERIFY(crt->ref() == ref);
 
   crt->purge();
@@ -345,7 +345,7 @@ void TestCreature::creature_creation()
 
 void TestCreature::creature_load_base()
 {
-  unique_ptr<Creature> crt = Creature::prototypes().clone(CreaturePrototype::Ogr);
+  unique_ptr<Creature> crt (Creature::prototypes().clone(CreaturePrototype::Ogr));
 
   QVERIFY(crt->ref() != 0);
   QCOMPARE(crt->name().c_str(), "Ogr");
@@ -357,7 +357,7 @@ void TestCreature::creature_load_base()
 
 void TestCreature::creature_save_base()
 {
-  unique_ptr<Creature> crt = Creature::prototypes().clone(CreaturePrototype::Ogr);
+  unique_ptr<Creature> crt (Creature::prototypes().clone(CreaturePrototype::Ogr));
   dbRef ref = crt->ref();
 
   crt->setName("lol");
@@ -370,7 +370,7 @@ void TestCreature::creature_save_base()
 
   //reset
   delete crt.release();
-  crt = Creature::create(ref);
+  crt.reset( Creature::create(ref) );
 
   //validate
   QCOMPARE(crt->name().c_str(), "lol");
@@ -383,7 +383,7 @@ void TestCreature::creature_save_base()
 void TestCreature::creature_load_save_stats()
 {
   //create some creature
-  unique_ptr<Creature> crt = Creature::prototypes().clone(CreaturePrototype::Ogr);
+  unique_ptr<Creature> crt (Creature::prototypes().clone(CreaturePrototype::Ogr));
   dbRef ref = crt->ref();
 
   //set stats
@@ -392,7 +392,7 @@ void TestCreature::creature_load_save_stats()
 
   //reset item
   delete crt.release();
-  crt = Creature::create(ref);
+  crt.reset( Creature::create(ref) );
 
   //validate load
   QCOMPARE(crt->skill(Skill::Akrobatyka), 4);
@@ -403,7 +403,7 @@ void TestCreature::creature_load_save_stats()
 void TestCreature::creature_load_save_body()
 {
   //create some creature
-  unique_ptr<Creature> crt = Creature::prototypes().clone(CreaturePrototype::Ogr);
+  unique_ptr<Creature> crt (Creature::prototypes().clone(CreaturePrototype::Ogr));
   Creature *crtp = crt.get();
   dbRef ref = crt->ref();
 
@@ -427,7 +427,7 @@ void TestCreature::creature_load_save_body()
 
   //reset
   delete crt.release();
-  crt = Creature::create(ref);
+  crt.reset( Creature::create(ref) );
   crtp = crt.get();
 
   //validate load
@@ -438,18 +438,18 @@ void TestCreature::creature_load_save_body()
 void TestCreature::creature_load_inventory()
 {
   //create some creature
-  unique_ptr<Creature> crt = Creature::prototypes().clone(CreaturePrototype::Ogr);
+  unique_ptr<Creature> crt (Creature::prototypes().clone(CreaturePrototype::Ogr));
   Creature *crtp = crt.get();
   dbRef ref = crt->ref();
 
   //create some item
-  ItemPtr item1( Item::prototypes().clone(ItemPrototype::Noz).release() );
+  ItemPtr item1( Item::prototypes().clone(ItemPrototype::Noz) );
 
   //insert item
   crtp->take(item1);
 
   delete crt.release();
-  crt = Creature::create(ref);
+  crt.reset( Creature::create(ref) );
   crtp = crt.get();
 
   QCOMPARE(crtp->_inventory->getAll().size(), (size_t)1);
@@ -465,7 +465,7 @@ void TestCreature::creature_load_modificators()
 {
   //create some creature
   //a jebne szarda bo ten się nei jebie jak junik z podpowiedziami, a robienie plain pojntera to tez myli lol
-  shared_ptr<Creature> crt (Creature::prototypes().clone(CreaturePrototype::Ogr).release());
+  shared_ptr<Creature> crt (Creature::prototypes().clone(CreaturePrototype::Ogr));
   //dbRef ref = crt->ref();
 
   //bazowe staty bez mod
@@ -483,7 +483,7 @@ void TestCreature::creature_load_modificators()
   i_mod2->creature_stats().setAttribute(Attribute::STR, 2);
   i_mod2->saveToDB();
 
-  ItemPtr item1( Item::prototypes().clone(ItemPrototype::Noz).release() );
+  ItemPtr item1( Item::prototypes().clone(ItemPrototype::Noz) );
   item1->mods().add(i_mod1);
   item1->mods().add(i_mod2); //nożyk STR+3 oł je
   //item1->mods().get_complex_mod()->saveToDB();
@@ -519,15 +519,15 @@ void TestCreature::creature_load_modificators()
 void TestCreature::creature_eq()
 {
   //Create some creature
-  shared_ptr<Creature> crt ( Creature::prototypes().clone(CreaturePrototype::Ogr).release() );
+  shared_ptr<Creature> crt ( Creature::prototypes().clone(CreaturePrototype::Ogr) );
   CreatureMonitor c_monit(crt.get());
 
   //create some equipment
-  ArmorPtr zbroja ( dynamic_cast<Armor*>( Item::prototypes().clone(ItemPrototype::LekkaZbrojaSkorzana).release() ) );
-  ArmorPtr zbroja_druga ( dynamic_cast<Armor*>( Item::prototypes().clone(ItemPrototype::LekkaZbrojaSkorzana).release() ) );
-  ArmorPtr helm ( dynamic_cast<Armor*>( Item::prototypes().clone(ItemPrototype::HelmSkorzany).release() ) );
-  WeaponPtr wpn ( dynamic_cast<Weapon*>( Item::prototypes().clone(ItemPrototype::MieczSzeroki).release() ) );
-  ShieldPtr shld ( dynamic_cast<Shield*>( Item::prototypes().clone(ItemPrototype::MalaDrewnianaTarcza).release() ) );
+  ArmorPtr zbroja ( dynamic_cast<Armor*>( Item::prototypes().clone(ItemPrototype::LekkaZbrojaSkorzana) ) );
+  ArmorPtr zbroja_druga ( dynamic_cast<Armor*>( Item::prototypes().clone(ItemPrototype::LekkaZbrojaSkorzana) ) );
+  ArmorPtr helm ( dynamic_cast<Armor*>( Item::prototypes().clone(ItemPrototype::HelmSkorzany) ) );
+  WeaponPtr wpn ( dynamic_cast<Weapon*>( Item::prototypes().clone(ItemPrototype::MieczSzeroki) ) );
+  ShieldPtr shld ( dynamic_cast<Shield*>( Item::prototypes().clone(ItemPrototype::MalaDrewnianaTarcza) ) );
 
   QVERIFY(zbroja != nullptr);
   QVERIFY(helm != nullptr);
@@ -567,7 +567,7 @@ void TestCreature::creature_eq()
   crt.reset();
 
   //stworz od nowa
-  crt.reset(Creature::create(ref).release());
+  crt.reset(Creature::create(ref));
 
   c_monit.reset(crt.get());
   qDebug() << c_monit.print().c_str();
@@ -761,11 +761,11 @@ void TestCreature::creature_container_insert_erase()
   dbRef cont_ref = cont->ref();
 
   //create some kriczers
-  shared_ptr<Creature> ogr1 ( Creature::prototypes().clone(CreaturePrototype::Ogr).release() );
+  shared_ptr<Creature> ogr1 ( Creature::prototypes().clone(CreaturePrototype::Ogr) );
   dbRef ogr1_ref = ogr1->ref();
   ogr1->setName("Karol");
 
-  shared_ptr<Creature> ogr2 ( Creature::prototypes().clone(CreaturePrototype::Ogr).release() );
+  shared_ptr<Creature> ogr2 ( Creature::prototypes().clone(CreaturePrototype::Ogr) );
   dbRef ogr2_ref = ogr2->ref();
   ogr2->setName("Maciek");
 
@@ -804,8 +804,8 @@ void TestCreature::creature_container_insert_erase()
   QVERIFY(cont->find(ogr1_ref) != nullptr);
   QVERIFY(cont->find(ogr2_ref) == nullptr);
 
-  ogr2.reset(Creature::create(ogr2_ref).release());
-  ogr1.reset(Creature::create(ogr1_ref).release());
+  ogr2.reset(Creature::create(ogr2_ref));
+  ogr1.reset(Creature::create(ogr1_ref));
   ogr2->purge();
   ogr1->purge();
   cont->purge();
@@ -813,14 +813,14 @@ void TestCreature::creature_container_insert_erase()
 
 void TestCreature::npc_load()
 {
-  shared_ptr<NPC> npc( dynamic_cast<NPC*>(Creature::prototypes().clone(CreaturePrototype::BlankNPC).release()) );
+  shared_ptr<NPC> npc( dynamic_cast<NPC*>(Creature::prototypes().clone(CreaturePrototype::BlankNPC)) );
   dbRef ref = npc->ref();
   npc->setName("Igor");
   npc->set_clan(Clan::Aep_Tien);
   npc->set_tribe(Tribe::Tuatha_De_Cael);
 
   npc.reset();
-  npc.reset( dynamic_cast<NPC*>(Creature::create(ref).release()) );
+  npc.reset( dynamic_cast<NPC*>(Creature::create(ref)) );
 
   QCOMPARE(npc->name().c_str(), "Igor");
   qDebug() << (int)npc->clan();

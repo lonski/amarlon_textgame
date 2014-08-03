@@ -13,7 +13,7 @@ public:
 
   inline static LocationObject* forge(ItemPrototype proto)
   {
-    return dynamic_cast<LocationObject*>(Item::prototypes().clone(proto).release());
+    return dynamic_cast<LocationObject*>(Item::prototypes().clone(proto));
   }
 
 private:

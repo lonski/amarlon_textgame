@@ -167,7 +167,7 @@ void Creature::Container::str2creatures(string crts)
     dbRef ref = fun::fromStr<dbRef>(*c);
     if (ref != 0)
     {
-      _creatures[ref] = Creature::create(ref);
+      _creatures[ref] = CreaturePtr(Creature::create(ref));
     }
   }
 }

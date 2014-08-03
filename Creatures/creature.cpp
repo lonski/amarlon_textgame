@@ -73,7 +73,7 @@ Item::Inventory &Creature::inventoryContainer()
   return _inventory;
 }
 
-std::unique_ptr<Creature> Creature::create(dbRef ref, bool prototype, bool temp)
+Creature *Creature::create(dbRef ref, bool prototype, bool temp)
 {
   Creature* new_crt = nullptr;
 
@@ -102,10 +102,10 @@ std::unique_ptr<Creature> Creature::create(dbRef ref, bool prototype, bool temp)
     new_crt->load();
   }
 
-  return unique_ptr<Creature>(new_crt);
+  return new_crt;
 }
 
-std::unique_ptr<Creature> Creature::clone()
+Creature* Creature::clone()
 {
   if (!isTemporary())
   {
@@ -121,7 +121,7 @@ std::unique_ptr<Creature> Creature::clone()
     return Creature::create(new_ref);
   }
 
-  return unique_ptr<Creature>(nullptr);
+  return nullptr;
 }
 
 void Creature::load(MapRow *data_source)

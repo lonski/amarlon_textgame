@@ -23,9 +23,9 @@ public:
   const static dbTable tableName;
   virtual dbTable table() const { return tableName; }
 
-  static std::unique_ptr<Item> create(dbRef ref, bool prototype = false, bool temporary = false);
+  static Item* create(dbRef ref, bool prototype = false, bool temporary = false);
   static Item* forge(ItemPrototype proto);
-  std::unique_ptr<Item> clone();
+  virtual Item* clone();
   virtual ~Item() = 0;
 
   virtual void load(MapRow *data_source = nullptr);

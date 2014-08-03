@@ -60,7 +60,7 @@ void Item::Container::str2items(string items)
 
         if (item_ref > 0 && amount > 0)
         {
-          ItemPtr item( Item::create(item_ref).release() );
+          ItemPtr item( Item::create(item_ref) );
           insert(item, amount);
         }
       }

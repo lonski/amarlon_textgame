@@ -41,7 +41,7 @@ string CreatureMonitor::print_bodyparts()
   stringstream ss;
   ss << "\n===== BODY PARTS =====";
 
-  Creature::Body::BodyParts& parts = _crt->body()._parts;
+  Body::BodyPartContainer& parts = _crt->body()._parts;
   for (auto p = parts.begin(); p!=parts.end(); ++p)
   {
     BodyPart *bp = p->get();

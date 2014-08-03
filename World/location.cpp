@@ -45,8 +45,8 @@ void Location::createObjectsContainer()
   {
     //TODO REFACTOR
     _objects.reset( new Item::Container );
-    _objects->set_oref(ref());
-    _objects->set_otable(table());
+    _objects->setORef(ref());
+    _objects->setOTable(table());
   }
 }
 

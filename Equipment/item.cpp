@@ -156,8 +156,8 @@ Item::Inventory &Item::inventory()
     //TODO REFACTOR
 
     _inventory.reset( new Item::Container );
-    _inventory->set_oref(ref());
-    _inventory->set_otable(table());
+    _inventory->setORef(ref());
+    _inventory->setOTable(table());
   }
 
   return _inventory;

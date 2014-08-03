@@ -80,7 +80,10 @@ SOURCES += main.cpp\
    World/location_utils.cpp \
     World/walkvector.cpp \
     World/locationmanager.cpp \
-    Equipment/item_container.cpp
+    Equipment/item_container.cpp \
+    Creatures/creaturecontainer.cpp \
+    Creatures/body.cpp \
+    Creatures/creaturemodificatormanager.cpp
 
 HEADERS  += game.h \
     Tests/testlocation.h \
@@ -130,7 +133,10 @@ HEADERS  += game.h \
     World/location_utils.h \
     World/walkvector.h \
     World/locationmanager.h \
-    Equipment/item_container.h
+    Equipment/item_container.h \
+    Creatures/creaturecontainer.h \
+    Creatures/body.h \
+    Creatures/creaturemodificatormanager.h
 
 FORMS    += game.ui \
     console.ui

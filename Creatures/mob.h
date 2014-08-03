@@ -5,11 +5,13 @@
 
 class MOB : public Creature
 {
+public:
+  virtual ~MOB() {}
+
 private:
   friend class Creature;
   MOB(dbRef ref, bool temporary = false);
-public:
-  virtual ~MOB() {}
+
 };
 
 #endif // MOB_H

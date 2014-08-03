@@ -192,6 +192,7 @@ bool BodyPart::accept(ItemType itype)
   return result;
 }
 
+
 std::weak_ptr<Item> BodyPart::equipped(ItemType itype)
 {
   weak_ptr<Item> result;
@@ -228,4 +229,50 @@ std::vector<std::weak_ptr<Item> > BodyPart::equipped()
   }
 
   return result;
+}
+
+
+void BodyPart::setRegion(BodyRegion region)
+{
+  _region = region;
+}
+
+void BodyPart::setSide(BodySide side)
+{
+  _side = side;
+}
+
+void BodyPart::setType(BodyPartType type)
+{
+  _type = type;
+}
+
+void BodyPart::setDamage(DamageLevel damage)
+{
+  _damage = damage;
+}
+
+BodyRegion BodyPart::region() const
+{
+  return _region;
+}
+
+BodySide BodyPart::side() const
+{
+  return _side;
+}
+
+BodyPartType BodyPart::type() const
+{
+  return _type;
+}
+
+DamageLevel BodyPart::damage() const
+{
+  return _damage;
+}
+
+Damage BodyPart::armor() const
+{
+  return _armor;
 }

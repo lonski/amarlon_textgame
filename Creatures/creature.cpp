@@ -2,6 +2,7 @@
 #include "mob.h"
 #include "npc.h"
 #include "Equipment/item_container.h"
+#include "creaturecontainer.h"
 
 using namespace std;
 using namespace soci;
@@ -24,7 +25,7 @@ Creature::Creature(dbRef ref, bool temp)
 {  
 }
 
-void Creature::calc_weapons()
+void Creature::calcWeapons()
 {
   _weapon = nullptr;
   _offhand = nullptr;
@@ -64,8 +65,8 @@ Item::Inventory &Creature::inventoryContainer()
   if (_inventory == nullptr)
   {
     _inventory.reset(new Item::Container);
-    _inventory->set_otable(table());
-    _inventory->set_oref(ref());
+    _inventory->setOTable(table());
+    _inventory->setORef(ref());
     _inventory->saveToDB();
   }
 
@@ -145,11 +146,11 @@ void Creature::load(MapRow *data_source)
         //base data
         setName( CheckField<string>(crt_data["NAME"]) );
         setDescript( CheckField<string>(crt_data["DESCRIPT"]) );
-        set_sex( CheckFieldCast<Sex>(crt_data["SEX"]));
+        setSex( CheckFieldCast<Sex>(crt_data["SEX"]));
 
         //stats
-        _stats.Str2Attributes( CheckField<string>(crt_data["ATTRIBUTES"]) );
-        _stats.Str2Skills( CheckField<string>(crt_data["SKILLS"]) );
+        _stats.str2attributes( CheckField<string>(crt_data["ATTRIBUTES"]) );
+        _stats.str2skills( CheckField<string>(crt_data["SKILLS"]) );
 
         //body
         _body.load(CheckField<string>(crt_data["BODY"]));
@@ -184,8 +185,8 @@ void Creature::load(MapRow *data_source)
         _inventory.reset();
       }
 
-      calc_total_damage();
-      calc_weapons();
+      calcTotalDamage();
+      calcWeapons();
       set_loaded();
       set_not_modified();
     }
@@ -205,8 +206,8 @@ void Creature::saveToDB()
              << "  NAME='" << _name << "'"
              << ", DESCRIPT='" << _descript << "'"
              << ", SEX=" << static_cast<int>(_sex)
-             << ", ATTRIBUTES='" << _stats.Attributes2Str() << "'"
-             << ", SKILLS='" << _stats.Skills2Str() << "'"
+             << ", ATTRIBUTES='" << _stats.attributes2str() << "'"
+             << ", SKILLS='" << _stats.skills2str() << "'"
              << ", BODY='" << _body.toStr() << "'"
              << " WHERE ref = " << ref();
 
@@ -218,6 +219,62 @@ void Creature::purge()
 {
   if (inventoryContainer() != nullptr) inventoryContainer()->purge();
   DBObject::purge();
+}
+
+string Creature::name() const
+{
+  return _name;
+}
+
+string Creature::descript() const
+{
+  return _descript;
+}
+
+Sex Creature::sex() const
+{
+  return _sex;
+}
+
+DamageLevel Creature::totalDamage() const
+{
+  return _total_damage;
+}
+
+int Creature::attribute(Attribute atr) const
+{
+  return _stats.attribute(atr) + _mods.get_complex_mod()->creature_stats().attribute(atr);
+}
+
+int Creature::skill(Skill skill) const
+{
+  return _stats.skill(skill) + _mods.get_complex_mod()->creature_stats().skill(skill);
+}
+
+CreatureStats &Creature::stats()
+{
+  return _stats;
+}
+
+Location *Creature::getLocation() const
+{
+  return _currentLoc;
+}
+
+Location *Creature::getPrevLoc() const
+{
+  return _prevLoc;
+}
+
+CreatureModificatorManager &Creature::mods()
+{
+  return _mods;
+}
+
+Body &Creature::body()
+{
+  set_modified();
+  return _body;
 }
 
 void Creature::setName(string name)
@@ -232,21 +289,21 @@ void Creature::setDescript(string descript)
   set_modified();
 }
 
-void Creature::set_sex(Sex sex)
+void Creature::setSex(Sex sex)
 {
   _sex = sex;
   set_modified();
 }
 
-void Creature::set_attribute(Attribute atr, int val)
+void Creature::setAttribute(Attribute atr, int val)
 {
-  _stats.set_attribute(atr,val);
+  _stats.setAttribute(atr,val);
   set_modified();
 }
 
-void Creature::mod_attribute(Attribute atr, int mod)
+void Creature::modifyAttribute(Attribute atr, int mod)
 {
-  _stats.mod_attribute(atr, mod);
+  _stats.modifyAttribute(atr, mod);
   set_modified();
 }
 
@@ -256,9 +313,9 @@ void Creature::setSkill(Skill skill, int val)
   set_modified();
 }
 
-void Creature::mod_skill(Skill skill, int mod)
+void Creature::modifySkill(Skill skill, int mod)
 {
-  _stats.mod_skill(skill, mod);
+  _stats.modifySkill(skill, mod);
   set_modified();
 }
 
@@ -288,7 +345,7 @@ void Creature::equip(ItemPtr item)
     _mods.add( item->mods().get_complex_mod() );
   }
 
-  calc_weapons();
+  calcWeapons();
   set_modified();
 }
 
@@ -302,10 +359,25 @@ ItemPtr Creature::unequip(dbRef item_ref)
     _mods.remove(r->mods().get_complex_mod()->ref());
   }
 
-  calc_weapons();
+  calcWeapons();
   set_modified();
 
   return r;
+}
+
+Weapon *Creature::weapon()
+{
+  return _weapon;
+}
+
+Weapon *Creature::offhand()
+{
+  return _offhand;
+}
+
+Shield *Creature::shield()
+{
+  return _shield;
 }
 
 void Creature::setLocation(Location *loc)
@@ -314,333 +386,9 @@ void Creature::setLocation(Location *loc)
   _currentLoc = loc;
 }
 
-void Creature::calc_total_damage()
+void Creature::calcTotalDamage()
 {
   //TODO
   //algorytm z systemu rpg
   //na podstawie damage_level z bodyParts
-}
-
-//==============BODY=============================================================
-void Creature::Body::load(string body_str)
-{
-  _equipped_items.clear();
-  _parts.clear();
-
-  vector<string> body = fun::explode( body_str, ';' );
-  for (auto b = body.begin(); b != body.end(); ++b)
-    _parts.push_back( shared_ptr<BodyPart>(new BodyPart(*b, _equipped_items) ) );
-}
-
-string Creature::Body::toStr()
-{
-  string str;
-  for (auto b = _parts.begin(); b!=_parts.end(); ++b)
-  {
-    BodyPart *bp = (*b).get();
-    str += bp->toStr() + ";";
-  }
-  return str;
-}
-
-
-vector<shared_ptr<BodyPart> > Creature::Body::equip(ItemPtr item)
-{
-  vector<BodyPartType> req_parts = item->bodyParts();
-  vector<shared_ptr<BodyPart> > temp_eq_parts;
-
-  //sprawdz czy mamy dostepna ilosc partsów
-  for (auto r_part = req_parts.begin(); r_part != req_parts.end(); ++r_part)
-  {
-    shared_ptr<BodyPart> prefer_temp(nullptr);
-    auto prefer_iter = req_parts.end();
-
-    for (auto part = _parts.begin(); part != _parts.end(); ++part)
-    {
-      shared_ptr<BodyPart> p = *part;      
-      //jezeli jest aktualnie szukany part i jest wolny
-      if (p->type() == *r_part && p->accept(item->type()) )
-      {
-        //jeżeli weapon to preferuj RIGHT, jeżeli shield to preferuj LEFT
-        if ( (item->type() == ItemType::Weapon && p->side() != BodySide::Right) ||
-             (item->type() == ItemType::Shield && p->side() != BodySide::Left) )
-        {
-          prefer_temp = p;
-        }
-        else
-        //zaloz item i usun typ bodyparta z wymaganych
-        {
-          prefer_temp.reset();
-          p->equip(item);
-          temp_eq_parts.push_back(p);
-          req_parts.erase(r_part);
-          --r_part;
-          break;
-        }
-      }      
-    }
-    //jeżeli nei znaleziono preferowanej strony ciała dla itema, to załóż na inną dostępną
-    if (prefer_temp != nullptr && prefer_iter != req_parts.end())
-    {
-      prefer_temp->equip(item);
-      temp_eq_parts.push_back(prefer_temp);
-      req_parts.erase(prefer_iter);
-    }
-  }
-  //zabrakło jakeigos bodyparta -> rollback i exception
-  if (!req_parts.empty())
-  {
-    for (auto r = temp_eq_parts.begin(); r != temp_eq_parts.end(); ++r)
-      (*r)->unequip(item->type());
-
-    throw error::equip_no_bodyparts("Brak dostępnych części ciała aby założyć przedmiot "+item->name() + ", ref = " + fun::toStr(item->ref()));
-  }
-
-  _equipped_items.push_back(item);
-  return temp_eq_parts;
-}
-
-ItemPtr Creature::Body::unequip(dbRef item_ref)
-{
-  ItemType itype = ItemType::Null;
-  ItemPtr result;
-
-  //znajdz typ itema
-  for (auto eq = _equipped_items.begin(); eq != _equipped_items.end(); ++eq)
-  {
-    if ( (*eq)->ref() == item_ref )
-    {
-      itype = (*eq)->type();
-      break;
-    }
-  }
-
-  //sciagnij ze wszystkich partów
-  for (auto part = _parts.begin(); part != _parts.end(); ++part)
-  {
-    shared_ptr<BodyPart> p = *part;
-    if (p->equipped(itype).lock() != nullptr && p->equipped(itype).lock()->ref() == item_ref )
-    {
-      result = p->unequip(itype);
-    }
-  }
-
-  if ( result != nullptr )
-  {
-    //usun z listy equipped
-    for (auto eq = _equipped_items.begin(); eq != _equipped_items.end(); ++eq)
-    {
-      if ( (*eq)->ref() == result->ref() )
-      {
-        _equipped_items.erase(eq);
-        break;
-      }
-    }
-  }
-
-  return result;
-}
-
-shared_ptr<BodyPart> Creature::Body::part(BodyPartType type, BodyRegion region, BodySide side)
-{
-  shared_ptr<BodyPart> bp;
-
-  for (auto b = _parts.begin(); b != _parts.end(); ++b)
-  {
-    bp = *b;
-    if (  (bp->type() == type) &&
-          (bp->region() == region || region == BodyRegion::Null) &&
-          (bp->side() == side || side == BodySide::Null)
-       )
-    {
-      return bp;
-    }
-  }
-
-  return bp;
-}
-
-//===============CREATURE CONTAINER=========================================================
-dbRef Creature::Container::byOwner(dbTable otable, dbRef oref)
-{
-  dbRef ref = 0;
-  soci::indicator ind;
-  _Database << "SELECT ref FROM crt_containers WHERE otable='"<<otable<<"' and oref="<<fun::toStr(oref), into(ref, ind);  
-  if (ind != soci::i_ok) ref = 0;
-
-  return ref;
-}
-
-Creature::Container::Container(dbRef ref)
-  : DBObject(ref)
-{
-  load();
-}
-
-Creature::Container::Container()
-  : DBObject(0)
-  , _otable("")
-  , _oref(0)
-{
-  dbRef ref = 0;
-  soci::indicator ind;
-  _Database << "SELECT new_ref FROM create_crt_container", into(ref, ind);
-  _Database.commit();
-  if (ind != soci::i_ok) ref = 0;
-
-  DBObject::set_ref(ref);
-  DBObject::set_loaded();
-  DBObject::set_not_modified();
-}
-
-Creature::Container::~Container()
-{
-  _saveToDB_
-}
-
-void Creature::Container::load(MapRow *data_source)
-{
-  if ( !loaded() && ref() > 0 )
-  {
-    try
-    {
-      MapRow cont_data;
-      if (data_source != nullptr)
-      {
-        cont_data = *data_source;
-      }
-      else
-      {
-        cont_data = fun::MapQuery("SELECT otable, oref, creatures FROM "+tableName+" WHERE ref="+fun::toStr(ref()));
-      }
-
-      //==header data
-      if (!cont_data.empty())
-      {
-        set_oref( fun::CheckField<dbRef>(cont_data["OREF"]) );
-        set_otable( fun::CheckField<std::string>(cont_data["OTABLE"]) );        
-        Str2Creatures( fun::CheckField<std::string>(cont_data["CREATURES"]) );
-      }
-
-      set_loaded();
-      set_not_modified();
-    }
-    catch(soci::soci_error &e)
-    {
-      fun::MsgError(e.what());
-      qDebug() << _Database.get_last_query().c_str();
-    }
-    catch(std::exception &e)
-    {
-      fun::MsgError(e.what());
-    }
-  }
-}
-
-void Creature::Container::saveToDB()
-{
-  stringstream save_query;
-
-  save_query << "UPDATE " << table() << " SET"
-             << "  CREATURES='" << Creatures2Str() << "'"
-             << " ,OTABLE='" << _otable << "'"
-             << " ,OREF=" << _oref
-             << " WHERE ref=" << ref();
-
-  save(save_query.str());
-  DBObject::saveToDB();
-}
-
-void Creature::Container::insert(std::shared_ptr<Creature> &crt)
-{
-  if (_creatures.find(crt->ref()) == _creatures.end())
-  {
-    _creatures[crt->ref()] = crt;
-    set_modified();
-  }
-  else
-  {
-    throw error::container_insertion_error("Istota już znajduje się w kontenerze.");
-  }
-}
-
-std::shared_ptr<Creature> Creature::Container::erase(dbRef crt_ref)
-{
-  shared_ptr<Creature> r(nullptr);
-  auto crt_iter = _creatures.find(crt_ref);
-
-  if (crt_iter != _creatures.end())
-  {
-    r = crt_iter->second;
-    _creatures.erase(crt_iter);
-    set_modified();
-  }
-
-  return r;
-}
-
-std::shared_ptr<Creature> Creature::Container::find(dbRef crt_ref)
-{
-  shared_ptr<Creature> r(nullptr);
-  auto crt_iter = _creatures.find(crt_ref);
-
-  if (crt_iter != _creatures.end())
-  {
-    r = crt_iter->second;
-  }
-
-  return r;
-}
-
-std::vector<std::shared_ptr<Creature> > Creature::Container::getAll()
-{
-  vector<shared_ptr<Creature> > r;
-
-  for (auto c = _creatures.begin(); c != _creatures.end(); ++c)
-  {
-    r.push_back(c->second);
-  }
-
-  return r;
-}
-
-void Creature::Container::set_otable(dbTable otable)
-{
-  _otable = otable;
-  set_modified();
-}
-
-void Creature::Container::set_oref(dbRef oref)
-{
-  _oref = oref;
-  set_modified();
-}
-
-
-void Creature::Container::Str2Creatures(string crts)
-{
-  _creatures.clear();
-  vector<string> crts_refs = fun::explode(crts,',');
-  for (auto c = crts_refs.begin(); c != crts_refs.end(); ++c)
-  {
-    dbRef ref = fun::fromStr<dbRef>(*c);
-    if (ref != 0)
-    {
-      _creatures[ref] = Creature::create(ref);
-    }
-  }
-}
-
-string Creature::Container::Creatures2Str()
-{
-  string r("");
-  for (auto c = _creatures.begin(); c != _creatures.end(); ++c)
-  {
-    dbRef ref = c->second->ref();
-    if (ref > 0)
-    {
-      r += fun::toStr(ref) + ",";
-    }
-  }
-  return r;
 }

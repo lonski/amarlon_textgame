@@ -1,5 +1,6 @@
 ﻿#include "testcreature.h"
 #include "Equipment/item_container.h"
+#include "Creatures/body.h"
 
 using namespace std;
 
@@ -7,19 +8,19 @@ void TestCreature::stats_atr2str()
 {
   CreatureStats stats;
 
-  stats.set_attribute(Attribute::CHR, 2);
-  stats.set_attribute(Attribute::IMP, 5);
-  stats.set_attribute(Attribute::STR, 7);
-  stats.set_attribute(Attribute::DEX, 3);
+  stats.setAttribute(Attribute::CHR, 2);
+  stats.setAttribute(Attribute::IMP, 5);
+  stats.setAttribute(Attribute::STR, 7);
+  stats.setAttribute(Attribute::DEX, 3);
 
-  QCOMPARE(stats.Attributes2Str().c_str(), "0;7;3;0;0;0;2;5;0;");
+  QCOMPARE(stats.attributes2str().c_str(), "0;7;3;0;0;0;2;5;0;");
 }
 
 void TestCreature::stats_str2atrs()
 {
   CreatureStats stats;
 
-  stats.Str2Attributes("0;7;3;9;0;0;2;5;0;");
+  stats.str2attributes("0;7;3;9;0;0;2;5;0;");
 
   QCOMPARE(stats.attribute(Attribute::CHR), 2);
   QCOMPARE(stats.attribute(Attribute::IMP), 5);
@@ -39,14 +40,14 @@ void TestCreature::stats_skills2str()
   stats.setSkill(Skill::Empatia, 12);
   stats.setSkill(Skill::Mocna_glowa, 67);
 
-  QCOMPARE( stats.Skills2Str().c_str(), "0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;12;0;0;0;0;0;0;0;0;43;0;0;0;0;0;0;0;0;0;0;0;67;0;0;0;0;0;0;");
+  QCOMPARE( stats.skills2str().c_str(), "0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;12;0;0;0;0;0;0;0;0;43;0;0;0;0;0;0;0;0;0;0;0;67;0;0;0;0;0;0;");
 }
 
 void TestCreature::stats_str2skills()
 {
   CreatureStats stats;
 
-  stats.Str2Skills("0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;12;0;0;0;0;0;0;0;0;43;0;0;0;0;0;0;0;0;0;0;0;67;0;0;0;0;0;1;");
+  stats.str2skills("0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;12;0;0;0;0;0;0;0;0;43;0;0;0;0;0;0;0;0;0;0;0;67;0;0;0;0;0;1;");
 
   QCOMPARE(stats.skill(Skill::Aktorstwo), 43);
   QCOMPARE(stats.skill(Skill::Empatia), 12);
@@ -58,8 +59,8 @@ void TestCreature::stats_str2skills()
 void TestCreature::bodypart_tostr()
 {
   BodyPart bp;
-  bp.set_region(BodyRegion::Dol);
-  bp.set_side(BodySide::Left);
+  bp.setRegion(BodyRegion::Dol);
+  bp.setSide(BodySide::Left);
   bp.setType(BodyPartType::Noga);
   bp.setDamage(DamageLevel::Brak);
 
@@ -162,7 +163,7 @@ void TestCreature::modificator_save()
   mod->saveToDB();
 
   //set some data
-  mod->creature_stats().set_attribute(Attribute::DEX, 3);
+  mod->creature_stats().setAttribute(Attribute::DEX, 3);
   mod->setName("lol");
 
   //store ref
@@ -186,7 +187,7 @@ void TestCreature::modificator_augument()
   CreatureModificator m1, m2;
 
   //set some stats
-  m1.creature_stats().set_attribute(Attribute::IMP, 3);
+  m1.creature_stats().setAttribute(Attribute::IMP, 3);
   m1.creature_stats().setSkill(Skill::Gornictwo, 34);
   m1.set_global_test_level_mod(1);
 
@@ -196,8 +197,8 @@ void TestCreature::modificator_augument()
   QCOMPARE(m1.effect_time(), -1);
 
   //set augument stats
-  m2.creature_stats().set_attribute(Attribute::IMP, 1);
-  m2.creature_stats().set_attribute(Attribute::STR, 3);
+  m2.creature_stats().setAttribute(Attribute::IMP, 1);
+  m2.creature_stats().setAttribute(Attribute::STR, 3);
   m2.creature_stats().setSkill(Skill::Odpornosc, 4);
   m2.set_global_test_level_mod(2);
   m2.set_effect_time(50);
@@ -238,16 +239,16 @@ void TestCreature::modmanager()
   shared_ptr<CreatureModificator> mod1(new CreatureModificator), mod2(new CreatureModificator), mod3(new CreatureModificator);
 
   //set the mods
-  mod1->creature_stats().set_attribute(Attribute::CHR, 1);
-  mod1->creature_stats().set_attribute(Attribute::STR, 1);
+  mod1->creature_stats().setAttribute(Attribute::CHR, 1);
+  mod1->creature_stats().setAttribute(Attribute::STR, 1);
   mod1->saveToDB();
 
-  mod2->creature_stats().set_attribute(Attribute::CHR, 2);
-  mod2->creature_stats().set_attribute(Attribute::DEX, 1);
+  mod2->creature_stats().setAttribute(Attribute::CHR, 2);
+  mod2->creature_stats().setAttribute(Attribute::DEX, 1);
   mod2->saveToDB();
 
-  mod3->creature_stats().set_attribute(Attribute::CHR, 3);
-  mod3->creature_stats().set_attribute(Attribute::IMP, 1);
+  mod3->creature_stats().setAttribute(Attribute::CHR, 3);
+  mod3->creature_stats().setAttribute(Attribute::IMP, 1);
   mod3->saveToDB();
 
   //ADD mods to manager
@@ -331,6 +332,7 @@ void TestCreature::modmanager_ticktime()
 void TestCreature::creature_creation()
 {
   unique_ptr<Creature> crt = Creature::prototypes().clone(CreaturePrototype::Ogr);
+
   dbRef ref = crt->ref();
   QVERIFY(crt->ref() != 0);
 
@@ -360,7 +362,7 @@ void TestCreature::creature_save_base()
 
   crt->setName("lol");
   crt->setDescript("lal");
-  crt->set_sex(Sex::Female);
+  crt->setSex(Sex::Female);
 
   QCOMPARE(crt->name().c_str(), "lol");
   QCOMPARE(crt->descript().c_str(), "lal");
@@ -386,7 +388,7 @@ void TestCreature::creature_load_save_stats()
 
   //set stats
   crt->setSkill(Skill::Akrobatyka, 4);
-  crt->set_attribute(Attribute::DEX, 7);
+  crt->setAttribute(Attribute::DEX, 7);
 
   //reset item
   delete crt.release();
@@ -408,15 +410,15 @@ void TestCreature::creature_load_save_body()
   //create some body parts
   BodyPart *bp1 = new BodyPart;
   bp1->setType(BodyPartType::Glowa);
-  bp1->set_region(BodyRegion::Gora);
+  bp1->setRegion(BodyRegion::Gora);
 
   BodyPart *bp2 = new BodyPart;
   bp2->setType(BodyPartType::Reka);
-  bp2->set_region(BodyRegion::Gora);
+  bp2->setRegion(BodyRegion::Gora);
 
   BodyPart *bp3 = new BodyPart;
   bp3->setType(BodyPartType::Noga);
-  bp3->set_region(BodyRegion::Dol);
+  bp3->setRegion(BodyRegion::Dol);
 
   //dodaj party do kriczera
   crtp->body().load(bp1->toStr()+";"+bp2->toStr()+";"+bp3->toStr()+";");
@@ -475,10 +477,10 @@ void TestCreature::creature_load_modificators()
   //dobra to teraz wciepac trzeba kilka modsów
   //1. mod z założonego itema!
   shared_ptr<CreatureModificator> i_mod1(new CreatureModificator);
-  i_mod1->creature_stats().set_attribute(Attribute::STR, 1);
+  i_mod1->creature_stats().setAttribute(Attribute::STR, 1);
   i_mod1->saveToDB();
   shared_ptr<CreatureModificator> i_mod2(new CreatureModificator);
-  i_mod2->creature_stats().set_attribute(Attribute::STR, 2);
+  i_mod2->creature_stats().setAttribute(Attribute::STR, 2);
   i_mod2->saveToDB();
 
   ItemPtr item1( Item::prototypes().clone(ItemPrototype::Noz).release() );
@@ -628,14 +630,14 @@ void TestCreature::creature_eq()
   QVERIFY(ogr != nullptr);
   ogr->setName("Ogr");
   ogr->set_sex(Sex::Male);
-  ogr->set_attribute(Attribute::STR,6);
-  ogr->set_attribute(Attribute::DEX,3);
-  ogr->set_attribute(Attribute::END,5);
-  ogr->set_attribute(Attribute::REF,4);
-  ogr->set_attribute(Attribute::INT,2);
-  ogr->set_attribute(Attribute::CHR,3);
-  ogr->set_attribute(Attribute::IMP,1);
-  ogr->set_attribute(Attribute::WLL,5);
+  ogr->setAttribute(Attribute::STR,6);
+  ogr->setAttribute(Attribute::DEX,3);
+  ogr->setAttribute(Attribute::END,5);
+  ogr->setAttribute(Attribute::REF,4);
+  ogr->setAttribute(Attribute::INT,2);
+  ogr->setAttribute(Attribute::CHR,3);
+  ogr->setAttribute(Attribute::IMP,1);
+  ogr->setAttribute(Attribute::WLL,5);
   ogr->setSkill(Skill::Walka_Topory, 6);
 
   BodyPart reka_l(BodyPartType::Reka, BodyRegion::Gora, BodySide::Left),
@@ -670,7 +672,7 @@ void TestCreature::creature_eq()
   zbroja->addBodyPart(BodyPartType::Noga);
   zbroja->addBodyPart(BodyPartType::Noga);
   shared_ptr<CreatureModificator> zbroja_mod (new CreatureModificator);
-  zbroja_mod->creature_stats().set_attribute(Attribute::DEX, -1);
+  zbroja_mod->creature_stats().setAttribute(Attribute::DEX, -1);
   zbroja->mods().add(zbroja_mod);
   */
   /*STWORZENIE TARCZY
@@ -684,7 +686,7 @@ void TestCreature::creature_eq()
   sh->setType(ItemType::Shield);
   sh->setWeight(1.7);
   shared_ptr<CreatureModificator> sh_mod (new CreatureModificator);
-  sh_mod->creature_stats().set_attribute(Attribute::DEX, -1);
+  sh_mod->creature_stats().setAttribute(Attribute::DEX, -1);
   sh->mods().add(sh_mod);
   */
   /*STWORZENIE HELMU
@@ -736,8 +738,8 @@ void TestCreature::creature_container_load_save()
 {
   Creature::Container *cont = new Creature::Container;
   dbRef ref = cont->ref();
-  cont->set_oref(2);
-  cont->set_otable("lol");
+  cont->setORef(2);
+  cont->setOTable("lol");
 
   QCOMPARE(cont->oref(), (dbRef)2);
   QCOMPARE(cont->otable().c_str(), "lol");

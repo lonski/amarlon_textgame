@@ -33,7 +33,7 @@ public:
 
   inline static Weapon* forge(ItemPrototype proto)
   {
-    return dynamic_cast<Weapon*>(Item::prototypes().clone(proto).release());
+    return dynamic_cast<Weapon*>(Item::prototypes().clone(proto));
   }
 
 private:

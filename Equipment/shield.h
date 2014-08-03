@@ -21,7 +21,7 @@ public:
 
   inline static Shield* forge(ItemPrototype proto)
   {
-    return dynamic_cast<Shield*>(Item::prototypes().clone(proto).release());
+    return dynamic_cast<Shield*>(Item::prototypes().clone(proto));
   }
 
 private:

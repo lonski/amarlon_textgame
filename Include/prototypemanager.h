@@ -11,11 +11,11 @@ template<class T, typename EnumT>
 class PrototypeManager
 {
 private:
-  std::map<EnumT, std::unique_ptr<T> > _prototypes;
+  std::map<EnumT, T* > _prototypes;
   void load_all();
 public:
   PrototypeManager();
-  std::unique_ptr<T> clone(EnumT key);
+  T* clone(EnumT key);
   size_t count() const;
   void reload();
 };
@@ -27,9 +27,9 @@ PrototypeManager<T,EnumT>::PrototypeManager()
 }
 
 template<class T, typename EnumT>
-std::unique_ptr<T> PrototypeManager<T,EnumT>::clone(EnumT key)
+T* PrototypeManager<T,EnumT>::clone(EnumT key)
 {
-  std::unique_ptr<T> new_t(nullptr);
+  T* new_t(nullptr);
   auto found = _prototypes.find(key);
 
   if (found != _prototypes.end())
@@ -83,7 +83,7 @@ private:
   static PrototypeManager<T, EnumT> *_prototypes;
 public:
   static PrototypeManager<T, EnumT>& prototypes();
-  virtual std::unique_ptr<T> clone() = 0;
+  virtual T* clone() = 0;
 };
 
 template<class T, typename EnumT>

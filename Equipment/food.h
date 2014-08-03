@@ -21,7 +21,7 @@ public:
 
   inline static Food* forge(ItemPrototype proto)
   {
-    return dynamic_cast<Food*>(Item::prototypes().clone(proto).release());
+    return dynamic_cast<Food*>(Item::prototypes().clone(proto));
   }
 
 private:

@@ -30,7 +30,7 @@ Item::Item(dbRef ref, bool temporary)
 {  
 }
 
-std::unique_ptr<Item> Item::create(dbRef ref, bool prototype, bool temporary)
+Item *Item::create(dbRef ref, bool prototype, bool temporary)
 {
   Item* new_item = nullptr;
 
@@ -59,7 +59,7 @@ std::unique_ptr<Item> Item::create(dbRef ref, bool prototype, bool temporary)
     new_item->load();
   }
 
-  return unique_ptr<Item>(new_item);
+  return new_item;
 }
 
 void Item::load(MapRow *data_source)
@@ -218,7 +218,7 @@ bool Item::isStackable() const
   return _stackable;
 }
 
-std::unique_ptr<Item> Item::clone()
+Item *Item::clone()
 {
   if (!isTemporary())
   {
@@ -234,12 +234,12 @@ std::unique_ptr<Item> Item::clone()
     return Item::create(new_ref);
   }else throw error::creation_error("Nie można sklonować obiektu tymczasowego!");
 
-  return unique_ptr<Item>(nullptr);
+  return nullptr;
 }
 
 Item *Item::forge(ItemPrototype proto)
 {
-  return Item::prototypes().clone(proto).release();
+  return Item::prototypes().clone(proto);
 }
 
 void Item::setType(ItemType type)

@@ -12,6 +12,7 @@
 #include "creaturemodificator.h"
 #include "body.h"
 #include "bodypart.h"
+#include "creaturemanager.h"
 
 class CreatureMonitor;
 class Location;
@@ -19,13 +20,16 @@ class Creature;
 
 typedef std::shared_ptr<Creature> CreaturePtr;
 
-class Creature : public DBObject, public Prototypable<Creature, CreaturePrototype>
+class Creature : public DBObject,
+                 public Prototypable<Creature, CreaturePrototype>
 {
 public:
   class Container;
 
   const static dbTable tableName;
   virtual dbTable table() const { return tableName; }
+
+  static CreatureManager Manager;
 
   static Creature* create(dbRef ref, bool prototype = false, bool temp = false);
   virtual Creature *clone();
@@ -36,6 +40,7 @@ public:
   virtual void purge();
 
   std::string name() const;
+  std::string locDescript() const;
   std::string descript() const;
   Sex sex() const;
   DamageLevel totalDamage() const;
@@ -61,6 +66,7 @@ public:
 
   void setName(std::string name);
   void setDescript(std::string descript);
+  void setLocDescript(std::string locDescript);
   void setSex(Sex sex);
   void setAttribute(Attribute atr, int val);
   void modifyAttribute(Attribute atr, int mod);
@@ -79,6 +85,7 @@ private:
   friend class CreatureMonitor;
 
   std::string _name;
+  std::string _locDescript;
   std::string _descript;
   Sex _sex;
 

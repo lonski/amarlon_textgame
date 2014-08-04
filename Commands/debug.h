@@ -18,6 +18,8 @@ private:
   void displayHelp();
   void clearConsole();
   void createLocObj();
+  void printCreatures();
+  void printLocation();
 };
 
 

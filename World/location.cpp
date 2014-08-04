@@ -1,11 +1,11 @@
 #include "location.h"
+#include "Creatures/creature.h"
 #include "Equipment/item_container.h"
 
 using namespace std;
 using namespace soci;
 using namespace fun;
 
-//===LOCATION
 unsigned int Location::_drawRange = 5;
 const dbTable Location::tableName = "locations";
 LocationManager Location::Manager;
@@ -112,6 +112,11 @@ std::vector<LocationObjectPtr > Location::getAllObjects()
   return r;
 }
 
+std::vector<Creature *> Location::getAllCreatures()
+{
+  return Creature::Manager.findByLocation(ref());
+}
+
 void Location::setConnection(Direction dir, Location *loc)
 {
   if ( _neighbours[dir] != loc)
@@ -153,7 +158,7 @@ void Location::locWalkWithinRange(WalkVector dir_vector, void (Location::*Fun)()
 void Location::createNeighbours()
 {
   MapTable neighbours;
-  MapQuery("SELECT * FROM v_loc_neighbours WHERE location="+toStr(ref()), neighbours);
+  MapQuery("SELECT * FROM loc_neighbours WHERE location="+toStr(ref()), neighbours);
 
   //for each connection
   for (auto n = neighbours.begin(); n != neighbours.end(); ++n)
@@ -252,7 +257,8 @@ void Location::load(MapRow *data_source)
         setName( CheckField<string>(loc_data["NAME"]) );
         setDestript( CheckField<string>(loc_data["DESCRIPTION"]) );
 
-        createNeighbours();
+        loadCreatures();
+        createNeighbours();        
 
         set_loaded();
         set_not_modified();
@@ -264,6 +270,21 @@ void Location::load(MapRow *data_source)
       qDebug() << _Database.get_last_query().c_str();
     }
   }
+}
+
+void Location::loadCreatures()
+{
+  vector<dbRef> creatures(100);
+  _Database << "SELECT ref FROM creatures WHERE location=" << ref(), into(creatures);
+
+  for (auto c = creatures.begin(); c != creatures.end(); ++c)
+  {
+    if (*c > 0)
+    {
+      Creature::create(*c)->setLocation(this);
+    }
+  }
+
 }
 
 void Location::saveToDB()
@@ -291,6 +312,7 @@ void Location::draw()
 
 Location::~Location()
 {
+  Manager.remove(ref());
 }
 
 

@@ -1,6 +1,13 @@
 #include "locationmanager.h"
 #include "location.h"
+#include "Include/func.h"
 #include <algorithm>
+
+using namespace std;
+
+LocationManager::LocationManager()
+{
+}
 
 LocationManager::~LocationManager()
 {
@@ -9,12 +16,36 @@ LocationManager::~LocationManager()
 
 void LocationManager::add(Location *loc)
 {
-  _locations.push_back(loc);
+  _locations[loc->ref()] = loc;
+}
+
+void LocationManager::remove(LocationRef ref)
+{
+  _locations.erase(ref);
 }
 
 void LocationManager::purge()
 {
-  std::for_each(_locations.begin(), _locations.end(), [](Location *l){ delete l; } );
-  _locations.clear();
+  for (auto l = _locations.begin(); l!=_locations.end(); ++l)
+  {
+    delete l->second;
+  }
+}
+
+string LocationManager::getPrintableContent()
+{
+  string r = ":: Location Manager ::\n";
+
+  for (auto l = _locations.begin(); l!=_locations.end(); ++l)
+  {
+    string name = l->second->name();
+    string ref = fun::toStr(l->first);
+    r += "[" + ref + "] " + name + "\n";
+  }
+
+  r += "=====";
+
+  return r;
+
 }
 

@@ -38,7 +38,7 @@ void TestDB::setDBConnectionLocalMachine()
 
 void TestDB::TestConnection()
 {
-  setDBConnectionLocalMachine();
+  setDBConnectionLocalServer();
   indicator ind;
   dbRef ref(0);
   DB::Session() << "select first 1 ref from locations", into(ref,ind);

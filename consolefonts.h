@@ -17,6 +17,7 @@ enum class Font
   Header,
   LocExits,
   LocObject,
+  LocCreature,
 
   End
 };
@@ -35,6 +36,7 @@ static inline std::string Font2Str(Font font)
     STRINGIFY_FONT(Font::Header)
     STRINGIFY_FONT(Font::LocExits)
     STRINGIFY_FONT(Font::LocObject)
+    STRINGIFY_FONT(Font::LocCreature)
     default: break;
   }
   return r;

@@ -47,6 +47,7 @@ public:
   LocationObjectPtr eraseObject(dbRef obj_ref);
   LocationObjectPtr findObject(dbRef obj_ref);
   std::vector<LocationObjectPtr > getAllObjects();
+  std::vector<Creature*> getAllCreatures();
 
 private:
   friend class Debug;
@@ -59,6 +60,7 @@ private:
   std::map<Direction, Location* > _neighbours;
   std::unique_ptr<Item::Container> _objects;
 
+  void loadCreatures();
   void createNeighbours();
   void copyConnectionsToNeighbour(Direction dir);
   void initalizeNeighbours();

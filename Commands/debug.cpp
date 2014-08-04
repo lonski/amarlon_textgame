@@ -5,6 +5,7 @@
 #include "Equipment/weapon.h"
 #include "World/location.h"
 #include "Equipment/item_container.h"
+#include "Creatures/creature.h"
 
 using namespace std;
 
@@ -43,6 +44,14 @@ void Debug::execute(std::vector<std::string> params)
     {
       createLocObj();
     }
+    else if (p == "print_creatures")
+    {
+      printCreatures();
+    }
+    else if (p == "print_locations")
+    {
+      printLocation();
+    }
   }
   else
   {
@@ -79,6 +88,8 @@ void Debug::displayHelp()
   _Console->append("save_style_config",Font::Standard);
   _Console->append("clear_console",Font::Standard);
   _Console->append("create_loc_obj_szafka",Font::Standard);
+  _Console->append("print_creatures",Font::Standard);
+  _Console->append("print_locations",Font::Standard);
 }
 
 void Debug::clearConsole()
@@ -106,4 +117,14 @@ void Debug::createLocObj()
   loc->insertObject(lobj);
 
   _Console->append("DEBUG: stworzono szafkę i wrzucono do aktualnej lokacji.", Font::Standard);
+}
+
+void Debug::printCreatures()
+{
+  _Console->append(Creature::Manager.getPrintableContent(), Font::Standard);
+}
+
+void Debug::printLocation()
+{
+  _Console->append(Location::Manager.getPrintableContent(), Font::Standard);
 }

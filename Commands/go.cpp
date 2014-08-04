@@ -1,5 +1,6 @@
 #include "go.h"
 #include "game.h"
+#include "Creatures/creature.h"
 #include "Creatures/player.h"
 #include "World/location.h"
 
@@ -92,7 +93,7 @@ void Go::rozejrzyjSie()
   if (loc != nullptr)
   {
     loadNeighbourLocations(loc);
-    displayLocationInfo(loc);
+    displayLocationInfo(loc);    
   }
 }
 
@@ -148,6 +149,7 @@ void Go::displayLocationInfo(Location* loc)
   displayPossibleExits(loc);
   displayLocDescription(loc);
 
+  displayCreaturesInLoc(loc);
   dispalyLocationObjects(loc);
 }
 
@@ -173,6 +175,21 @@ void Go::dispalyLocationObjects(Location* loc)
   {
     LocationObjectPtr obj = *o;
     _Console->append(obj->name(), Font::LocObject);
+    }
+}
+
+void Go::displayCreaturesInLoc(Location *loc)
+{
+  vector<Creature*> crts = loc->getAllCreatures();
+
+  for(auto c = crts.begin(); c != crts.end(); ++c)
+  {
+    if (*c != nullptr)
+    {/* TODO */
+      string name = (*c)->name();
+      string loc_dsc = (*c)->locDescript();
+      _Console->append( (loc_dsc.empty() ? name : loc_dsc), Font::LocCreature);
+    }
   }
 }
 

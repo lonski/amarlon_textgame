@@ -227,7 +227,7 @@ void Item::Container::saveToDB()
 {
   std::stringstream save_query;
 
-  save_query << "UPDATE " << table() << " SET"
+  save_query << "UPDATE item_containers SET"
              << "  MAX_WEIGHT=" << _weight_cap.max
              << " ,NAME='" << _name << "'"
              << " ,OREF=" << _oref

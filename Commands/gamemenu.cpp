@@ -81,10 +81,11 @@ void GameMenu::startNewGame()
 }
 
 void GameMenu::setDatabaseForNewGame()
-{
-  string db_file = "/home/spszenguo/Projects/amarlon/Data/data2.fdb";
+{  
+  //string db_file = "/home/spszenguo/Projects/amarlon/Data/data2.fdb";
+  string db_file = "/home/pi/db/data.fdb";
   string db_log_file = "../amarlon/Data/db.log";
-  string db_server = "localhost";
+  string db_server = "192.168.1.5";
 
   DB::SetDatabaseInfo(db_file, db_server, db_log_file);
 }

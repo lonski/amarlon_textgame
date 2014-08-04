@@ -452,9 +452,10 @@ void TestCreature::creature_load_inventory()
   crt.reset( Creature::create(ref) );
   crtp = crt.get();
 
-  QCOMPARE(crtp->_inventory->getAll().size(), (size_t)1);
+  QVERIFY(crtp->inventoryContainer() != nullptr);
+  QCOMPARE(crtp->inventoryContainer()->getAll().size(), (size_t)1);
 
-  auto items = crtp->_inventory->getAll();
+  auto items = crtp->inventoryContainer()->getAll();
   for (auto i = items.begin(); i != items.end(); ++i)
     i->item->purge();
 

@@ -83,7 +83,8 @@ SOURCES += main.cpp\
     Equipment/item_container.cpp \
     Creatures/creaturecontainer.cpp \
     Creatures/body.cpp \
-    Creatures/creaturemodificatormanager.cpp
+    Creatures/creaturemodificatormanager.cpp \
+    Creatures/creaturemanager.cpp
 
 HEADERS  += game.h \
     Tests/testlocation.h \
@@ -136,7 +137,8 @@ HEADERS  += game.h \
     Equipment/item_container.h \
     Creatures/creaturecontainer.h \
     Creatures/body.h \
-    Creatures/creaturemodificatormanager.h
+    Creatures/creaturemodificatormanager.h \
+    Creatures/creaturemanager.h
 
 FORMS    += game.ui \
     console.ui

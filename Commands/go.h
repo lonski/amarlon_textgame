@@ -27,6 +27,7 @@ private:
   void displayPossibleExits(Location* loc);
   void displayLocDescription(Location* loc);
   void dispalyLocationObjects(Location *loc);
+  void displayCreaturesInLoc(Location *loc);
 
   void loadNeighbourLocations(Location* loc);
   std::map<Direction, bool> getPossibleExits(Location *loc);

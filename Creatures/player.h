@@ -8,6 +8,7 @@
 #include "Include/enums/e_tribe.h"
 #include "Include/enums/e_hungerlevel.h"
 #include "Include/enums/e_fatiguelevel.h"
+#include "Include/enums/e_profession.h"
 
 #include "Include/custom_values.h"
 

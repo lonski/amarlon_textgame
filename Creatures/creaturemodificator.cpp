@@ -1,4 +1,6 @@
 #include "creaturemodificator.h"
+#include "Include/functions/db_utils.h"
+#include "Include/functions/string_utils.h"
 
 using namespace std;
 using namespace fun;
@@ -56,14 +58,14 @@ void CreatureModificator::load(MapRow *data_source)
 
     if (!mod_data.empty())
     {
-      setName( CheckField<string>(mod_data["NAME"]) );
-      set_effect_time( CheckField<int>(mod_data["EFFECT_TIME"]) );
-      set_global_test_level_mod( CheckField<int>(mod_data["GLB_TEST_MOD"]) );
+      setName( CheckValue<string>(mod_data["NAME"]) );
+      set_effect_time( CheckValue<int>(mod_data["EFFECT_TIME"]) );
+      set_global_test_level_mod( CheckValue<int>(mod_data["GLB_TEST_MOD"]) );
 
-      string atrs = CheckField<string>(mod_data["ATTRIBUTES"]);
+      string atrs = CheckValue<string>(mod_data["ATTRIBUTES"]);
       if (!atrs.empty()) _mods.str2attributes(atrs);
 
-      string skills = CheckField<string>(mod_data["SKILLS"]);
+      string skills = CheckValue<string>(mod_data["SKILLS"]);
       if (!skills.empty()) _mods.str2skills(skills);
     }
 

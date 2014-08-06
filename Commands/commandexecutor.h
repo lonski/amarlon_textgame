@@ -1,6 +1,7 @@
 #ifndef COMMANDEXECUTOR_H
 #define COMMANDEXECUTOR_H
 
+#include <map>
 
 #include "commandlogger.h"
 #include "commandparser.h"

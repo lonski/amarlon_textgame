@@ -8,6 +8,7 @@
 #include "shield.h"
 #include "../World/locationobject.h"
 #include "item_container.h"
+#include "Include/functions/messages.h"
 
 using namespace std;
 using namespace soci;
@@ -37,8 +38,8 @@ Item *Item::create(dbRef ref, bool prototype, bool temporary)
   if (ref > 0)
   {
     MapRow item_data = MapQuery("SELECT obj_type, item_type FROM "+tableName+" WHERE ref="+toStr(ref));
-    ItemType item_type = CheckFieldCast<ItemType>( item_data["ITEM_TYPE"] );
-    ObjType obj_type = CheckFieldCast<ObjType>( item_data["OBJ_TYPE"] );
+    ItemType item_type = CheckValueCast<ItemType>( item_data["ITEM_TYPE"] );
+    ObjType obj_type = CheckValueCast<ObjType>( item_data["OBJ_TYPE"] );
 
     if (item_type != ItemType::Null && (obj_type == ObjType::Instance || prototype) )
     {
@@ -79,16 +80,16 @@ void Item::load(MapRow *data_source)
 
       if (!item_data.empty())
       {
-        setType( CheckFieldCast<ItemType>(item_data["ITEM_TYPE"]));
-        setName( CheckField<string>(item_data["NAME"]) );
-        setDescript( CheckField<string>(item_data["DESCRIPTION"]) );
-        setWeight( CheckField<double>(item_data["WEIGHT"]) );
-        setValue( CheckField<int>(item_data["SHOP_VALUE"]) );
-        setCondition( CheckFieldCast<ItemCondition>(item_data["CONDITION"]));
+        setType( CheckValueCast<ItemType>(item_data["ITEM_TYPE"]));
+        setName( CheckValue<string>(item_data["NAME"]) );
+        setDescript( CheckValue<string>(item_data["DESCRIPTION"]) );
+        setWeight( CheckValue<double>(item_data["WEIGHT"]) );
+        setValue( CheckValue<int>(item_data["SHOP_VALUE"]) );
+        setCondition( CheckValueCast<ItemCondition>(item_data["CONDITION"]));
         _bodyParts.clear();
-        _bodyParts = Str2BodyParts( CheckField<string>(item_data["BODY_PARTS"]) );
-        setDurability( CheckField<int>(item_data["DURABILITY"]) );
-        setStackable( CheckField<bool>(item_data["STACKABLE"]) );
+        _bodyParts = Str2BodyParts( CheckValue<string>(item_data["BODY_PARTS"]) );
+        setDurability( CheckValue<int>(item_data["DURABILITY"]) );
+        setStackable( CheckValue<bool>(item_data["STACKABLE"]) );
 
         _mods.get_complex_mod()->setName( name() );
 
@@ -307,6 +308,33 @@ void Item::setStackable(bool stackable)
 {
   _stackable = stackable;
   set_modified();
+}
+
+std::vector<BodyPartType> Item::Str2BodyParts(const string &str)
+{
+  vector<BodyPartType> p;
+
+  vector<string> sv = fun::explode(str, ',');
+  for (auto s = sv.begin(); s != sv.end(); ++s)
+    p.push_back(static_cast<BodyPartType>( fun::fromStr<int>(*s) ));
+
+  return p;
+}
+
+/*
+ * Function converts BodyPartTypes to a 0-1 string, which is saved to db
+ */
+string Item::BodyParts2Str(vector<BodyPartType> &parts)
+{
+  string str("");
+
+  for (auto i = parts.begin(); i != parts.end(); ++i)
+  {
+    BodyPartType bp = *i;
+    str += fun::toStr(static_cast<int>(bp)) + ",";
+  }
+
+  return str;
 }
 
 Item::~Item()

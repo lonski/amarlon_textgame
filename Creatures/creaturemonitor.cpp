@@ -1,4 +1,5 @@
 #include "creaturemonitor.h"
+#include "Include/functions/enum2str.h"
 
 using namespace std;
 
@@ -48,10 +49,10 @@ string CreatureMonitor::print_bodyparts()
     string str;
 
     //dane podstawowe
-    str += "\n### " + fun::Enum2Str(bp->type())
+    str += "\n### " + fun::enum2str(bp->type())
                  + ", strona: "
-                 + fun::Enum2Str(bp->side())
-                 + ", region: " + fun::Enum2Str(bp->region())
+                 + fun::enum2str(bp->side())
+                 + ", region: " + fun::enum2str(bp->region())
                  + " ###";
 
     //armor
@@ -71,7 +72,7 @@ string CreatureMonitor::print_bodyparts()
       weak_ptr<Item> itm = bp->equipped(static_cast<ItemType>(i));
       if (itm.lock() != nullptr)
       {
-        str += "\n\tZalozony przedmiot ["+fun::Enum2Str(static_cast<ItemType>(i))+"]: " + itm.lock()->name() + ", ref = " + fun::toStr(itm.lock()->ref());
+        str += "\n\tZalozony przedmiot ["+fun::enum2str(static_cast<ItemType>(i))+"]: " + itm.lock()->name() + ", ref = " + fun::toStr(itm.lock()->ref());
       }
     }
 
@@ -116,7 +117,7 @@ string CreatureMonitor::print_mods()
         int val = mod->creature_stats().attribute(atr);
         if (val != 0)
         {
-          ss << "[ " << fun::Enum2Str(atr) << (val > 0 ? " +" : " " ) << val << " ]";
+          ss << "[ " << fun::enum2str(atr) << (val > 0 ? " +" : " " ) << val << " ]";
           psnt = true;
         }
       }
@@ -129,7 +130,7 @@ string CreatureMonitor::print_mods()
         int val = mod->creature_stats().skill(skl);
         if (val != 0)
         {
-          ss << "[ " << fun::Enum2Str(skl) << (val > 0 ? "+" : "" ) << val << " ]";
+          ss << "[ " << fun::enum2str(skl) << (val > 0 ? "+" : "" ) << val << " ]";
           psnt = true;
         }
       }

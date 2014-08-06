@@ -39,7 +39,6 @@ SOURCES += main.cpp\
    Tests/testlocation.cpp \
    World/location.cpp \
    Tests/testdb.cpp \
-   Include/func.cpp \
    Equipment/item.cpp \
    Include/db.cpp \
    Tests/testitems.cpp \
@@ -82,13 +81,16 @@ SOURCES += main.cpp\
     Creatures/creaturecontainer.cpp \
     Creatures/body.cpp \
     Creatures/creaturemodificatormanager.cpp \
-    Creatures/creaturemanager.cpp
+    Creatures/creaturemanager.cpp \
+    Include/functions/enum2str.cpp \
+    Include/functions/string_utils.cpp \
+    Include/functions/db_utils.cpp \
+    Include/functions/common_utils.cpp
 
 HEADERS  += game.h \
     Tests/testlocation.h \
     World/location.h \
     Tests/testdb.h \
-    Include/func.h \
     Include/exceptions.h \
     Equipment/item.h \
     Include/prototypemanager.h \
@@ -163,7 +165,12 @@ HEADERS  += game.h \
     Include/enums/e_refdict.h \
     Include/observer.h \
     Include/damage.h \
-    Include/custom_values.h
+    Include/custom_values.h \
+    Include/functions/enum2str.h \
+    Include/functions/string_utils.h \
+    Include/functions/db_utils.h \
+    Include/functions/messages.h \
+    Include/functions/common_utils.h
 
 FORMS    += game.ui \
     console.ui

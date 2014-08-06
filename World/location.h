@@ -3,7 +3,7 @@
 
 #include "Include/db.h"
 
-#include "Include/func.h"
+
 #include "Include/exceptions.h"
 #include "Equipment/item.h"
 #include "locationobject.h"

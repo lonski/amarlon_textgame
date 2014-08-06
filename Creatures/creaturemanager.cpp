@@ -1,7 +1,7 @@
 #include "creaturemanager.h"
 #include "creature.h"
 #include "World/location.h"
-#include "Include/func.h"
+
 #include <algorithm>
 
 using namespace std;

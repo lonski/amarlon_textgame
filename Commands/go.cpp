@@ -3,6 +3,7 @@
 #include "Creatures/creature.h"
 #include "Creatures/player.h"
 #include "World/location.h"
+#include "Include/functions/enum2str.h"
 
 using namespace std;
 
@@ -206,7 +207,7 @@ void Go::displayPossibleExits(Location *loc)
       if (appended)
         exits_line.append(", ");
 
-      exits_line.append(fun::toLower(fun::Enum2Str(e->first, true)));
+      exits_line.append(fun::toLower(fun::enum2str(e->first, true)));
 
       if (!appended)
         appended = true;

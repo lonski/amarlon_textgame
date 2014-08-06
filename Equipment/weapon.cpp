@@ -1,4 +1,5 @@
 #include "weapon.h"
+#include "Include/functions/messages.h"
 
 using namespace std;
 using namespace soci;
@@ -25,18 +26,18 @@ void Weapon::load(MapRow *data_source)
 
       if (!item_data.empty())
       {
-        setSkill(CheckFieldCast<WeaponSkill>(item_data["WPN_SKILL"]));
-        setDefence(CheckField<int>(item_data["WPN_DEFENCE"]));
-        setAttack(CheckField<int>(item_data["WPN_ATTACK"]));
-        setReflex(CheckField<int>(item_data["WPN_REFLEX"]));
-        setStrReq(CheckField<int>(item_data["WPN_STR_REQ"]));
-        setRange(CheckField<int>(item_data["WPN_RANGE"]));
+        setSkill(CheckValueCast<WeaponSkill>(item_data["WPN_SKILL"]));
+        setDefence(CheckValue<int>(item_data["WPN_DEFENCE"]));
+        setAttack(CheckValue<int>(item_data["WPN_ATTACK"]));
+        setReflex(CheckValue<int>(item_data["WPN_REFLEX"]));
+        setStrReq(CheckValue<int>(item_data["WPN_STR_REQ"]));
+        setRange(CheckValue<int>(item_data["WPN_RANGE"]));
 
         Damage dmg
         (
-          CheckField<int>(item_data["WPN_D_PIERCING"]),
-          CheckField<int>(item_data["WPN_D_SLASHING"]),
-          CheckField<int>(item_data["WPN_D_BASHING"])
+          CheckValue<int>(item_data["WPN_D_PIERCING"]),
+          CheckValue<int>(item_data["WPN_D_SLASHING"]),
+          CheckValue<int>(item_data["WPN_D_BASHING"])
         );
 
         setDamage(dmg);

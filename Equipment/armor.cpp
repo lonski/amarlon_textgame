@@ -1,4 +1,5 @@
 #include "armor.h"
+#include "Include/functions/messages.h"
 
 using namespace std;
 using namespace soci;
@@ -27,9 +28,9 @@ void Armor::load(MapRow *data_source)
       {
         Damage dmg
         (
-          CheckField<int>(item_data["ARM_DR_PIERCING"]),
-          CheckField<int>(item_data["ARM_DR_SLASHING"]),
-          CheckField<int>(item_data["ARM_DR_BASHING"])
+          CheckValue<int>(item_data["ARM_DR_PIERCING"]),
+          CheckValue<int>(item_data["ARM_DR_SLASHING"]),
+          CheckValue<int>(item_data["ARM_DR_BASHING"])
         );
 
         setDamageReduction(dmg);

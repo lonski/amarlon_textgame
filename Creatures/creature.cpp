@@ -6,6 +6,7 @@
 #include "World/location.h"
 
 #include "Include/enums/e_creaturetype.h"
+#include "Include/functions/messages.h"
 
 using namespace std;
 using namespace soci;
@@ -84,8 +85,8 @@ Creature *Creature::create(dbRef ref, bool prototype, bool temp)
   if (ref > 0)
     {
       MapRow crt_data = MapQuery("SELECT crt_type, obj_type FROM "+tableName+" WHERE ref="+toStr(ref));
-      CreatureType crt_type = CheckFieldCast<CreatureType>( crt_data["CRT_TYPE"] );
-      ObjType obj_type = CheckFieldCast<ObjType>( crt_data["OBJ_TYPE"] );
+      CreatureType crt_type = CheckValueCast<CreatureType>( crt_data["CRT_TYPE"] );
+      ObjType obj_type = CheckValueCast<ObjType>( crt_data["OBJ_TYPE"] );
 
       if (crt_type != CreatureType::Null && (obj_type == ObjType::Instance || prototype) )
         {
@@ -150,17 +151,17 @@ void Creature::load(MapRow *data_source)
         if (!crt_data.empty())
           {
             //base data
-            setName( CheckField<string>(crt_data["NAME"]) );
-            setDescript( CheckField<string>(crt_data["DESCRIPT"]) );
-            setLocDescript( CheckField<string>(crt_data["LOC_DESCRIPT"]) );
-            setSex( CheckFieldCast<Sex>(crt_data["SEX"]));
+            setName( CheckValue<string>(crt_data["NAME"]) );
+            setDescript( CheckValue<string>(crt_data["DESCRIPT"]) );
+            setLocDescript( CheckValue<string>(crt_data["LOC_DESCRIPT"]) );
+            setSex( CheckValueCast<Sex>(crt_data["SEX"]));
 
             //stats
-            _stats.str2attributes( CheckField<string>(crt_data["ATTRIBUTES"]) );
-            _stats.str2skills( CheckField<string>(crt_data["SKILLS"]) );
+            _stats.str2attributes( CheckValue<string>(crt_data["ATTRIBUTES"]) );
+            _stats.str2skills( CheckValue<string>(crt_data["SKILLS"]) );
 
             //body
-            _body.load(CheckField<string>(crt_data["BODY"]));
+            _body.load(CheckValue<string>(crt_data["BODY"]));
           }
 
         //MODS

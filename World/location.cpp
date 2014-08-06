@@ -1,6 +1,7 @@
 #include "location.h"
 #include "Creatures/creature.h"
 #include "Equipment/item_container.h"
+#include "Include/functions/messages.h"
 
 using namespace std;
 using namespace soci;
@@ -164,8 +165,8 @@ void Location::createNeighbours()
   for (auto n = neighbours.begin(); n != neighbours.end(); ++n)
   {
     //get connection info
-    dbRef nb_loc = CheckField<dbRef>( (*n)["NB_LOCATION"] );
-    Direction dir = CheckFieldCast<Direction>( (*n)["DIRECTION"] );
+    dbRef nb_loc = CheckValue<dbRef>( (*n)["NB_LOCATION"] );
+    Direction dir = CheckValueCast<Direction>( (*n)["DIRECTION"] );
 
     //if valid and not yet created, then create location
     if (nb_loc != 0 && dir != Direction::Null && _neighbours[dir] == nullptr)
@@ -254,8 +255,8 @@ void Location::load(MapRow *data_source)
 
       if (!loc_data.empty())
       {
-        setName( CheckField<string>(loc_data["NAME"]) );
-        setDestript( CheckField<string>(loc_data["DESCRIPTION"]) );
+        setName( CheckValue<string>(loc_data["NAME"]) );
+        setDestript( CheckValue<string>(loc_data["DESCRIPTION"]) );
 
         loadCreatures();
         createNeighbours();        

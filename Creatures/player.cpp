@@ -1,4 +1,5 @@
 #include "player.h"
+#include "Include/functions/messages.h"
 
 using namespace std;
 using namespace fun;
@@ -43,21 +44,21 @@ void Player::load(MapRow *data_source)
       if (!plr_data.empty())
       {
         //base data
-        _prof = CheckFieldCast<Profession>(plr_data["PROFESSION"]);
-        _bless = CheckFieldCast<Bless>(plr_data["BLESS"]);
-        _splot = CheckField<Splot>(plr_data["SPLOT"]);
-        _birthSeason = CheckFieldCast<Season>(plr_data["BIRTH_SEASON"]);
-        _tribe = CheckFieldCast<Tribe>(plr_data["TRIBE"]);
-        _clan = CheckFieldCast<Clan>(plr_data["CLAN"]);
-        _hunger = CheckFieldCast<HungerLevel>(plr_data["HUNGER"]);
-        _fatigue = CheckFieldCast<FatigueLevel>(plr_data["FATIGUE"]);
-        _brave = CheckField<BravePoints>(plr_data["BRAVE"]);
+        _prof = CheckValueCast<Profession>(plr_data["PROFESSION"]);
+        _bless = CheckValueCast<Bless>(plr_data["BLESS"]);
+        _splot = CheckValue<Splot>(plr_data["SPLOT"]);
+        _birthSeason = CheckValueCast<Season>(plr_data["BIRTH_SEASON"]);
+        _tribe = CheckValueCast<Tribe>(plr_data["TRIBE"]);
+        _clan = CheckValueCast<Clan>(plr_data["CLAN"]);
+        _hunger = CheckValueCast<HungerLevel>(plr_data["HUNGER"]);
+        _fatigue = CheckValueCast<FatigueLevel>(plr_data["FATIGUE"]);
+        _brave = CheckValue<BravePoints>(plr_data["BRAVE"]);
         _liftCap.cur = 0;
-        _liftCap.max = CheckField<int>(plr_data["LIFT_CAP"]);
+        _liftCap.max = CheckValue<int>(plr_data["LIFT_CAP"]);
 
         string tmp;
         vector<string> vtmp;
-        tmp = CheckField<string>(plr_data["EXP"]);
+        tmp = CheckValue<string>(plr_data["EXP"]);
         vtmp = fun::explode(tmp,'/');
         if (vtmp.size() == 2)
         {
@@ -65,7 +66,7 @@ void Player::load(MapRow *data_source)
           _exp.val = fun::fromStr<int>(vtmp[1]);          
         }
 
-        tmp = CheckField<string>(plr_data["FAME"]);
+        tmp = CheckValue<string>(plr_data["FAME"]);
         vtmp = fun::explode(tmp,'/');
         if (vtmp.size() == 2)
         {

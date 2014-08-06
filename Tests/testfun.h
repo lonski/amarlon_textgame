@@ -3,7 +3,7 @@
 
 #include <QtTest/QtTest>
 #include "../Include/db.h"
-#include "../Include/func.h"
+
 #include "../Include/gameclock.h"
 #include "Include/inifile.h"
 

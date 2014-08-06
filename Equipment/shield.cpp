@@ -1,4 +1,5 @@
 #include "shield.h"
+#include "Include/functions/messages.h"
 
 using namespace std;
 using namespace soci;
@@ -25,7 +26,7 @@ void Shield::load(MapRow *data_source)
 
       if (!item_data.empty())
       {
-        setDefence(CheckField<int>(item_data["SHD_DEFENCE"]));
+        setDefence(CheckValue<int>(item_data["SHD_DEFENCE"]));
       }
 
       Item::load(&item_data);

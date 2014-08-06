@@ -1,5 +1,7 @@
 #include "console.h"
 #include "ui_console.h"
+#include "Include/functions/string_utils.h"
+#include "Include/functions/common_utils.h"
 
 using namespace std;
 
@@ -61,7 +63,7 @@ void Console::load_controls_skin(INIFile *inifile)
   }
   ui->c_msg->setStyleSheet(style.c_str());
 
-  int input_size = fun::CheckField<int>(inifile->getValue("console","input_font_size"));
+  int input_size = fun::CheckValue<int>(inifile->getValue("console","input_font_size"));
   if (input_size)
   {
     QFont font = ui->c_msg->font();

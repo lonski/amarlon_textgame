@@ -3,7 +3,7 @@
 
 #include <QtTest/QtTest>
 #include "../Include/db.h"
-#include "../Include/func.h"
+
 #include "../Creatures/creaturecontainer.h"
 #include "../Creatures/creature.h"
 #include "../Creatures/mob.h"

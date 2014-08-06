@@ -1,4 +1,5 @@
 #include "commandparser.h"
+#include "Include/functions/string_utils.h"
 
 CommandParser::CommandParser(std::string raw_command)
 {

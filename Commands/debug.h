@@ -6,7 +6,7 @@
 class Debug : public NonActiveCommand
 {
 public:
-  Debug();
+  Debug(Console *console = nullptr);
   virtual ~Debug() {}
   virtual CommandID id() const;
   virtual void execute(std::vector<std::string> params);

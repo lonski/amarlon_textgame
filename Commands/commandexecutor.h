@@ -5,7 +5,10 @@
 
 #include "commandlogger.h"
 #include "commandparser.h"
-#include "command.h"
+#include "Include/enums/e_command.h"
+
+class Command;
+class Console;
 
 class CommandExecutor
 {
@@ -15,6 +18,7 @@ private:
   CommandParser _parser;
   Command* _active_command;
   std::map<CommandID, Command*> _commands;
+
 public:
   CommandExecutor();
   ~CommandExecutor();

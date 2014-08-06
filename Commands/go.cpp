@@ -1,13 +1,14 @@
 #include "go.h"
-#include "Gui/game.h"
 #include "Creatures/creature.h"
 #include "Creatures/player.h"
 #include "World/location.h"
 #include "Include/functions/enum2str.h"
+#include "Console/console.h"
 
 using namespace std;
 
-Go::Go()
+Go::Go(Console *console)
+  : NonActiveCommand(console)
 {
   addName("n");
   addName("s");
@@ -132,16 +133,13 @@ void Go::movePlayerSuccess()
 
 void Go::movePlayerFail()
 {
-  _GuiConsole->append("Brak drogi w tą stronę.", Font::Message);
+  cAppend("Brak drogi w tą stronę.", Font::Message);
 }
 
 void Go::loadNeighbourLocations(Location* loc)
 {
   loc->locWalkWithinRange(WalkVector(Player::SightRange), &Location::loadNoParam);
 }
-
-
-
 
 void Go::displayLocationInfo(Location* loc)
 {
@@ -156,17 +154,17 @@ void Go::displayLocationInfo(Location* loc)
 
 void Go::displayDivider()
 {
-  _GuiConsole->append(GuiConsole::Divider, Font::Divider);
+  cAppend(_console->divider(), Font::Divider);
 }
 
 void Go::displayLocName(Location* loc)
 {
-  _GuiConsole->append(loc->name(), Font::LocName);
+  cAppend(loc->name(), Font::LocName);
 }
 
 void Go::displayLocDescription(Location* loc)
 {
-  _GuiConsole->append(loc->descript(), Font::LocDescription);
+  cAppend(loc->descript(), Font::LocDescription);
 }
 
 void Go::dispalyLocationObjects(Location* loc)
@@ -175,7 +173,7 @@ void Go::dispalyLocationObjects(Location* loc)
   for (auto o = objs.begin(); o != objs.end(); ++o)
   {
     LocationObjectPtr obj = *o;
-    _GuiConsole->append(obj->name(), Font::LocObject);
+    cAppend(obj->name(), Font::LocObject);
     }
 }
 
@@ -189,7 +187,7 @@ void Go::displayCreaturesInLoc(Location *loc)
     {/* TODO */
       string name = (*c)->name();
       string loc_dsc = (*c)->locDescript();
-      _GuiConsole->append( (loc_dsc.empty() ? name : loc_dsc), Font::LocCreature);
+      cAppend( (loc_dsc.empty() ? name : loc_dsc), Font::LocCreature);
     }
   }
 }
@@ -216,7 +214,7 @@ void Go::displayPossibleExits(Location *loc)
 
   exits_line += " ]";
 
-  _GuiConsole->append(exits_line, Font::LocExits);
+  cAppend(exits_line, Font::LocExits);
 }
 
 map<Direction, bool> Go::getPossibleExits(Location *loc)

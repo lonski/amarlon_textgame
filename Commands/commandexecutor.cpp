@@ -1,5 +1,6 @@
 #include "commandexecutor.h"
 #include "Include/functions/string_utils.h"
+#include "command.h"
 
 using namespace std;
 

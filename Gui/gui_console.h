@@ -24,8 +24,6 @@ class GuiConsole : public QWidget
                  , public Console
 {
   Q_OBJECT
-public:
-  static std::string Divider;
 
 private:
   friend class Debug;
@@ -44,11 +42,11 @@ public:
   explicit GuiConsole(QWidget *parent = 0);  
   virtual ~GuiConsole();
 
-  virtual void load_style(INIFile *inifile);
-  virtual void handle_player_input(std::string cmd);
+  virtual void loadStyle(INIFile *inifile);
+  virtual void handlePlayerInput(std::string cmd);
   virtual void append(std::string txt, Font efont);
-  virtual void append_anim(std::string text, Font efont, int interval = 10);
-  virtual void append_blank();
+  virtual void appendAnim(std::string text, Font efont, int interval = 10);
+  virtual void appendBlank();
   virtual void clear();
 
 private slots:

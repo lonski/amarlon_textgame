@@ -6,7 +6,7 @@
 class Take : public NonActiveCommand
 {
 public:
-  Take();
+  Take(Console *console = nullptr);
   virtual ~Take() {}
 
   virtual CommandID id() const;

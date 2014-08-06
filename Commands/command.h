@@ -6,6 +6,9 @@
 #include "Include/gameclock.h"
 
 #include "Include/enums/e_command.h"
+#include "Include/enums/e_font.h"
+
+class Console;
 
 class Command
 {
@@ -13,10 +16,13 @@ private:
   bool _finished;
 protected:
   std::set<std::string> _cmdNames;
+  Console* _console;
+
   virtual void setFinished();
   virtual void setNotFinished();
+
 public:
-  Command();
+  Command(Console *console);
   virtual ~Command() {}
 
   virtual void tickGameClock(Minute minutes);
@@ -30,7 +36,16 @@ public:
   virtual void addName(std::string name);
   virtual void eraseName(std::string name);
 
-  static Command* createByEnum(CommandID cmd);
+  static Command* createByEnum(CommandID cmd, Console *console);
+
+  Console *console() const;
+  void setConsole(Console *console);
+
+  virtual void cAppend(std::string txt, Font efont);
+  virtual void cAppendAnim(std::string txt, Font efont, int interval = 10);
+  virtual void cAppendBlank();
+  virtual void cClear();
+
 };
 
 class ActiveCommand : public Command
@@ -44,6 +59,10 @@ protected:
   }
 
 public:
+  ActiveCommand(Console *console)
+    : Command(console)
+  {
+  }
   virtual bool isActiveCommand() const
   {
     return true;
@@ -55,6 +74,10 @@ public:
 class NonActiveCommand : public Command
 {
 public:
+  NonActiveCommand(Console *console )
+    : Command(console)
+  {
+  }
   virtual bool isActiveCommand() const
   {
     return false;

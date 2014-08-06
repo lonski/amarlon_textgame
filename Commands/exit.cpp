@@ -1,10 +1,11 @@
 #include "exit.h"
-#include "Gui/game.h"
+#include "Console/console.h"
 
 using namespace std;
 
-Exit::Exit()
-  : stage(Stage::Start)
+Exit::Exit(Console *console)
+  : ActiveCommand(console)
+  , stage(Stage::Start)
 {
   addName("exit");
 }
@@ -39,19 +40,19 @@ void Exit::execute(std::vector<std::string> params)
 
 void Exit::ask_if_sure()
 {
-  _GuiConsole->append("Czy jesteś pewien, że chcesz opuścić Amarlon? [t/n]", Font::Message);
+  cAppend("Czy jesteś pewien, że chcesz opuścić Amarlon? [t/n]", Font::Message);
   stage = Stage::Asked;
 }
 
 void Exit::exit_game()
 {
-  _GuiConsole->append_anim("Opuszczasz Amarlon...", Font::Action, 50);
-  _StyleConfig->save();
+  cAppendAnim("Opuszczasz Amarlon...", Font::Action, 50);
+
   exit(0);
 }
 
 void Exit::cancel_exit()
 {
-  _GuiConsole->append("Zatem kontynuujmy.", Font::Action);
+  cAppend("Zatem kontynuujmy.", Font::Action);
   setFinished();
 }

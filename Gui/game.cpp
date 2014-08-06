@@ -14,7 +14,7 @@ Game::Game(QWidget *parent)
   styleConfig = new INIFile(styleConfigFilename);
 
   console = new GuiConsole(this);
-  console->load_style(styleConfig);
+  console->loadStyle(styleConfig);
   console->show();
 
   this->setCentralWidget(console);

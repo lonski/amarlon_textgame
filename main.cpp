@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
   //START GAME
   Game game;
   _GuiConsole->clear();
-  _GuiConsole->handle_player_input("menu");
+  _GuiConsole->handlePlayerInput("menu");
   game.show();
 
   return amarlon.exec();

@@ -102,7 +102,8 @@ void GameMenu::setPlayerForNewGame()
 
 void GameMenu::displayStartLocation()
 {
-  Go go_cmd(console());
-  go_cmd.execute("rozejrzyj");
+  Go* go_cmd = new Go(console());
+  go_cmd->execute("rozejrzyj");
+  delete go_cmd;
 }
 

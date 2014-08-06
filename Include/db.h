@@ -5,7 +5,7 @@
 #include <sstream>
 #include "soci.h"
 #include "Include/typedefs/def_db_table.h"
-#include "enums.h"
+
 
 #define _Database DB::Session()
 #define _saveToDB_ \

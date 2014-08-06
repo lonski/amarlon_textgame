@@ -1,5 +1,6 @@
 #include "testitems.h"
 #include "Equipment/item_container.h"
+#include "Include/enums/e_refdict.h"
 
 using namespace std;
 

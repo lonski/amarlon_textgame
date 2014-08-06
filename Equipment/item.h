@@ -3,12 +3,15 @@
 
 #include "Include/typedefs/def_measures.h"
 #include "Include/db.h"
-#include "Include/enums.h"
+
 #include "Include/prototypemanager.h"
 #include "Include/exceptions.h"
 #include "Include/comobj.h"
 #include "Creatures/creaturemodificator.h"
 #include "Creatures/creaturemodificatormanager.h"
+
+#include "Include/enums/e_itemprototype.h"
+#include "Include/enums/e_itemcondition.h"
 
 class Item;
 typedef std::shared_ptr<Item> ItemPtr;

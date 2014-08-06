@@ -1,7 +1,8 @@
 #ifndef WALKVECTOR_H
 #define WALKVECTOR_H
 
-#include "Include/enums.h"
+#include "Include/enums/e_direction.h"
+
 
 class WalkVector{
 private:

@@ -4,7 +4,8 @@
 #include <string>
 #include <vector>
 #include "Include/gameclock.h"
-#include "Include/enums.h"
+
+#include "Include/enums/e_command.h"
 
 class Command
 {

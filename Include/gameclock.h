@@ -2,8 +2,9 @@
 #define GAMECLOCK_H
 
 #include "Include/typedefs/def_time.h"
+#include "Include/enums/e_season.h"
 #include "comobj.h"
-#include "enums.h"
+
 
 class GameClock : public Subject
 {

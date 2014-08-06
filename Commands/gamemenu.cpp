@@ -5,6 +5,8 @@
 #include "Creatures/player.h"
 #include "World/location.h"
 
+#include "Include/enums/e_refdict.h"
+
 using namespace std;
 
 GameMenu::GameMenu()

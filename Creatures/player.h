@@ -3,6 +3,12 @@
 
 #include "creature.h"
 
+#include "Include/enums/e_bless.h"
+#include "Include/enums/e_clan.h"
+#include "Include/enums/e_tribe.h"
+#include "Include/enums/e_hungerlevel.h"
+#include "Include/enums/e_fatiguelevel.h"
+
 #define _Player Player::inst()
 
 typedef unsigned int Splot;

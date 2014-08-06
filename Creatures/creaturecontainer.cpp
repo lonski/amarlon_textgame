@@ -1,4 +1,5 @@
 #include "creaturecontainer.h"
+#include "Include/functions/messages.h"
 
 using namespace std;
 
@@ -58,9 +59,9 @@ void Creature::Container::load(MapRow *data_source)
       //==header data
       if (!cont_data.empty())
       {
-        setORef( fun::CheckField<dbRef>(cont_data["OREF"]) );
-        setOTable( fun::CheckField<std::string>(cont_data["OTABLE"]) );
-        str2creatures( fun::CheckField<std::string>(cont_data["CREATURES"]) );
+        setORef( fun::CheckValue<dbRef>(cont_data["OREF"]) );
+        setOTable( fun::CheckValue<std::string>(cont_data["OTABLE"]) );
+        str2creatures( fun::CheckValue<std::string>(cont_data["CREATURES"]) );
       }
 
       set_loaded();

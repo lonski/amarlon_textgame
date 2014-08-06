@@ -7,7 +7,6 @@
 #include "Equipment/armor.h"
 #include "Equipment/food.h"
 #include "Equipment/shield.h"
-#include "../Include/func.h"
 
 class TestItems : public QObject
 {

@@ -1,4 +1,5 @@
 #include "npc.h"
+#include "Include/functions/messages.h"
 
 using namespace std;
 using namespace fun;
@@ -53,8 +54,8 @@ void NPC::load(MapRow *data_source)
       if (!crt_data.empty())
       {
         //base data
-        set_clan( CheckFieldCast<Clan>(crt_data["CLAN"]) );
-        set_tribe( CheckFieldCast<Tribe>(crt_data["TRIBE"]) );
+        set_clan( CheckValueCast<Clan>(crt_data["CLAN"]) );
+        set_tribe( CheckValueCast<Tribe>(crt_data["TRIBE"]) );
       }
 
       Creature::load(&crt_data);

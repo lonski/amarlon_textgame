@@ -1,4 +1,5 @@
 #include "creaturestats.h"
+#include "Include/functions/string_utils.h"
 
 using namespace std;
 using namespace fun;

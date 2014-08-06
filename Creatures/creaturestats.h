@@ -1,9 +1,10 @@
 #ifndef CREATURESTATS_H
 #define CREATURESTATS_H
 
+#include <map>
 
-#include "Include/func.h"
-
+#include "Include/enums/e_attribute.h"
+#include "Include/enums/e_skill.h"
 
 class CreatureStats
 {

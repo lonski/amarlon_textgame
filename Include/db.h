@@ -3,9 +3,10 @@
 
 #include <list>
 #include <sstream>
+#include <QDebug>
+
 #include "soci.h"
 #include "Include/typedefs/def_db_table.h"
-
 
 #define _Database DB::Session()
 #define _saveToDB_ \

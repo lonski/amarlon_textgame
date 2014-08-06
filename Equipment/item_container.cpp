@@ -1,4 +1,5 @@
 #include "item_container.h"
+#include "Include/functions/messages.h"
 
 using namespace std;
 using namespace soci;
@@ -99,11 +100,11 @@ void Item::Container::load(MapRow *data_source)
 
       if (!cont_data.empty())
       {
-        setName( fun::CheckField<std::string>(cont_data["NAME"]) );
-        set_max_weight( fun::CheckField<Weight>(cont_data["MAX_WEIGHT"]) );
-        setORef( fun::CheckField<dbRef>(cont_data["OREF"]) );
-        setOTable( fun::CheckField<std::string>(cont_data["OTABLE"]) );
-        str2items( fun::CheckField<string>(cont_data["ITEMS"]));
+        setName( fun::CheckValue<std::string>(cont_data["NAME"]) );
+        set_max_weight( fun::CheckValue<Weight>(cont_data["MAX_WEIGHT"]) );
+        setORef( fun::CheckValue<dbRef>(cont_data["OREF"]) );
+        setOTable( fun::CheckValue<std::string>(cont_data["OTABLE"]) );
+        str2items( fun::CheckValue<string>(cont_data["ITEMS"]));
       }
 
       set_loaded();

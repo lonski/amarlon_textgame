@@ -1,7 +1,7 @@
 #ifndef CREATURE_H
 #define CREATURE_H
 
-#include "Include/func.h"
+
 
 #include "Equipment/item.h"
 #include "Equipment/weapon.h"

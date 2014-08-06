@@ -3,8 +3,10 @@
 
 #include "Include/enums/e_objtype.h"
 #include "Include/db.h"
-#include "Include/func.h"
+
 #include "Include/exceptions.h"
+#include "Include/functions/db_utils.h"
+#include "Include/functions/string_utils.h"
 
 //==PrototypeManager
 template<class T, typename EnumT>
@@ -52,8 +54,8 @@ void PrototypeManager<T,EnumT>::load_all()
 
   for (auto p = protos.begin(); p != protos.end(); ++p)
   {    
-    dbRef ref = fun::CheckField<dbRef>( (*p)["REF"] );
-    EnumT type = fun::CheckFieldCast<EnumT>( (*p)["PROTOTYPE"] );
+    dbRef ref = fun::CheckValue<dbRef>( (*p)["REF"] );
+    EnumT type = fun::CheckValueCast<EnumT>( (*p)["PROTOTYPE"] );
 
     _prototypes[type] = T::create(ref, true);
   }

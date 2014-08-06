@@ -1,5 +1,6 @@
 #include "consolefonts.h"
 #include "game.h"
+#include "Include/functions/string_utils.h"
 
 using namespace std;
 
@@ -25,15 +26,15 @@ void ConsoleFonts::load(INIFile* inifile)
     string section = Font2Str(font);
     FontConf fc;
 
-    string ffamily = fun::CheckField<string>( inifile->getValue(section,"family") );
+    string ffamily = fun::CheckValue<string>( inifile->getValue(section,"family") );
     if( !ffamily.empty()) fc.family = ffamily;
 
-    double fsize = fun::CheckField<double>( inifile->getValue(section,"size") );
+    double fsize = fun::CheckValue<double>( inifile->getValue(section,"size") );
     if (fsize) fc.size = fsize;
 
-    fc.italic = fun::CheckField<bool>( inifile->getValue(section,"italic") );
+    fc.italic = fun::CheckValue<bool>( inifile->getValue(section,"italic") );
 
-    bool bold = fun::CheckFieldCast<bool>( inifile->getValue(section,"bold") );
+    bool bold = fun::CheckValueCast<bool>( inifile->getValue(section,"bold") );
     fc.weight = ( bold ? QFont::Weight::Bold : QFont::Weight::Normal);
 
     string rgb_color = inifile->getValue(section,"color_rgb");

@@ -5,7 +5,8 @@
 #include "gamemenu.h"
 #include "debug.h"
 #include "Include/exceptions.h"
-#include "Include/func.h"
+
+#include "Include/functions/string_utils.h"
 
 using namespace std;
 

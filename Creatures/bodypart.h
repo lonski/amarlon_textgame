@@ -1,7 +1,7 @@
 #ifndef BODYPART_H
 #define BODYPART_H
 
-#include "Include/func.h"
+
 
 #include "Equipment/item.h"
 #include "Equipment/armor.h"

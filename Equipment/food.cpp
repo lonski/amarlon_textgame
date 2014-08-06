@@ -1,4 +1,5 @@
 #include "food.h"
+#include "Include/functions/messages.h"
 
 using namespace std;
 using namespace soci;
@@ -25,7 +26,7 @@ void Food::load(MapRow *data_source)
 
       if (!item_data.empty())
       {
-        setHunger(CheckField<int>(item_data["FOD_HUNGER"]));
+        setHunger(CheckValue<int>(item_data["FOD_HUNGER"]));
       }
 
       Item::load(&item_data);

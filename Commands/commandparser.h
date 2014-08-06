@@ -1,8 +1,8 @@
 #ifndef COMMANDPARSER_H
 #define COMMANDPARSER_H
 
-
-#include "Include/func.h"
+#include <string>
+#include <vector>
 
 class CommandParser
 {

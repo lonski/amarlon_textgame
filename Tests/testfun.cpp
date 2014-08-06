@@ -1,6 +1,8 @@
 #include "testfun.h"
 #include "console.h"
 #include "game.h"
+#include "Include/functions/string_utils.h"
+#include "Include/functions/common_utils.h"
 
 using namespace std;
 

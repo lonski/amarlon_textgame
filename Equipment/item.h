@@ -11,6 +11,8 @@
 
 #include "Include/enums/e_itemprototype.h"
 #include "Include/enums/e_itemcondition.h"
+#include "Include/enums/e_itemtype.h"
+#include "Include/enums/e_body.h"
 
 class Item;
 typedef std::shared_ptr<Item> ItemPtr;
@@ -62,6 +64,9 @@ protected:
   Item(dbRef ref, bool temporary = false);
 
 private:
+  std::string BodyParts2Str(std::vector<BodyPartType>& parts);
+  std::vector<BodyPartType> Str2BodyParts(const std::string &str);
+
   ItemType _item_type;
   std::string _name;
   std::string _descript;

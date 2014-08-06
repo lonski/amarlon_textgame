@@ -2,7 +2,7 @@
 #define CREATUREMONITOR_H
 
 #include "creature.h"
-#include "Include/func.h"
+
 #include "typeinfo"
 
 class CreatureMonitor

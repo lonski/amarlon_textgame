@@ -5,8 +5,6 @@
 #include <vector>
 #include <map>
 
-#include "func.h"
-
 class INIFile
 {
 public:

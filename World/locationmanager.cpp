@@ -1,6 +1,6 @@
 #include "locationmanager.h"
 #include "location.h"
-#include "Include/func.h"
+
 #include <algorithm>
 
 using namespace std;

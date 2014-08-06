@@ -1,7 +1,7 @@
 #include "take.h"
-#include "Gui/game.h"
 
-Take::Take()
+Take::Take(Console *console)
+  : NonActiveCommand(console)
 {
   addName("podnies");
   addName("podnieś");

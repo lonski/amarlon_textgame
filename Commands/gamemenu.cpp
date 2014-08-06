@@ -1,16 +1,17 @@
 #include "gamemenu.h"
-#include "Gui/game.h"
 #include "exit.h"
 #include "go.h"
 #include "Creatures/player.h"
 #include "World/location.h"
+#include "Console/console.h"
 
 #include "Include/enums/e_refdict.h"
 
 using namespace std;
 
-GameMenu::GameMenu()
-  : stage(Stage::Start)
+GameMenu::GameMenu(Console *console)
+  : ActiveCommand(console)
+  , stage(Stage::Start)
   , subCmd(nullptr)
 {
   addName("menu");
@@ -61,19 +62,19 @@ void GameMenu::execute(std::vector<std::string> params)
 
 void GameMenu::welcomeScreen()
 {
-  _GuiConsole->clear();
-  _GuiConsole->append("Witaj w Amarlonie!", Font::Header);
-  _GuiConsole->append("1. Nowa gra", Font::Standard);
-  _GuiConsole->append("2. Wyjście", Font::Standard);
-  _GuiConsole->append_blank();
+  cClear();
+  cAppend("Witaj w Amarlonie!", Font::Header);
+  cAppend("1. Nowa gra", Font::Standard);
+  cAppend("2. Wyjście", Font::Standard);
+  cAppendBlank();
 
   stage = Stage::Menu;
 }
 
 void GameMenu::startNewGame()
 {
-  _GuiConsole->append_anim("Zaczynamy nową grę...", Font::Message, 50);
-  _GuiConsole->clear();
+  cAppendAnim("Zaczynamy nową grę...", Font::Message, 50);
+  cClear();
 
   setDatabaseForNewGame();
   setPlayerForNewGame();
@@ -101,7 +102,7 @@ void GameMenu::setPlayerForNewGame()
 
 void GameMenu::displayStartLocation()
 {
-  Go go_cmd;
+  Go go_cmd(console());
   go_cmd.execute("rozejrzyj");
 }
 

@@ -8,7 +8,7 @@ class Exit;
 class GameMenu : public ActiveCommand
 {
 public:
-  GameMenu();
+  GameMenu(Console *console = nullptr);
   virtual ~GameMenu() {}
 
   virtual CommandID id() const;

@@ -5,10 +5,9 @@
 #include "Commands/commandexecutor.h"
 #include "Include/inifile.h"
 #include "Console/consolefonts.h"
+#include "Commands/command.h"
 
 using namespace std;
-
-std::string GuiConsole::Divider("-~=====~-");
 
 GuiConsole::GuiConsole(QWidget *parent)
   : QWidget(parent)
@@ -21,7 +20,7 @@ GuiConsole::GuiConsole(QWidget *parent)
   //dodaj wszystkie komendy
   for (int c = (int)CommandID::Null + 1; c != (int)CommandID::End; ++c )
   {    
-    cmd_exec->add_command( Command::createByEnum(static_cast<CommandID>(c)));
+    cmd_exec->add_command( Command::createByEnum(static_cast<CommandID>(c), this));
   }
 
   //ustaw focus
@@ -36,7 +35,7 @@ GuiConsole::~GuiConsole()
   delete FontsManager;
 }
 
-void GuiConsole::load_style(INIFile *inifile)
+void GuiConsole::loadStyle(INIFile *inifile)
 {
   load_fonts(inifile);
   load_controls_skin(inifile);
@@ -80,7 +79,7 @@ void GuiConsole::load_controls_skin(INIFile *inifile)
   //~~~
 }
 
-void GuiConsole::handle_player_input(std::string cmd)
+void GuiConsole::handlePlayerInput(std::string cmd)
 {
   cmd_exec->execute(cmd);
 }
@@ -135,7 +134,7 @@ void GuiConsole::append(std::string txt, Font efont)
   ui->c_log->setFontItalic(false);
 }
 
-void GuiConsole::append_anim(std::string text, Font efont, int interval)
+void GuiConsole::appendAnim(std::string text, Font efont, int interval)
 {
   FontConf& font = FontsManager->get(efont);
 
@@ -171,7 +170,7 @@ void GuiConsole::append_anim(std::string text, Font efont, int interval)
 
 }
 
-void GuiConsole::append_blank()
+void GuiConsole::appendBlank()
 {
   append("", Font::Standard);
 }
@@ -183,6 +182,6 @@ void GuiConsole::clear()
 
 void GuiConsole::on_c_msg_returnPressed()
 {
-  handle_player_input(ui->c_msg->text().toStdString());  
+  handlePlayerInput(ui->c_msg->text().toStdString());
   ui->c_msg->clear();
 }

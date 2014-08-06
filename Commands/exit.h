@@ -20,7 +20,7 @@ private:
   void cancel_exit();
 
 public:
-  Exit();
+  Exit(Console *console = nullptr);
   virtual ~Exit() {}
 
   virtual CommandID id() const;

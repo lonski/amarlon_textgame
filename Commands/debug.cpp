@@ -1,5 +1,4 @@
 #include "debug.h"
-#include "Gui/game.h"
 #include "Creatures/player.h"
 #include "Equipment/item.h"
 #include "Equipment/weapon.h"
@@ -7,10 +6,12 @@
 #include "Equipment/item_container.h"
 #include "Creatures/creature.h"
 #include "Commands/commandexecutor.h"
+#include "Console/console.h"
 
 using namespace std;
 
-Debug::Debug()
+Debug::Debug(Console *console)
+  : NonActiveCommand(console)
 {
   addName("debug");
 }
@@ -29,11 +30,11 @@ void Debug::execute(std::vector<std::string> params)
     {
       cmdexecActiveCommand();
     }
-    else if (p == "reload_GuiConsole_skin")
+    else if (p == "reload_console_skin")
     {
       reloadGuiConsoleSkin();
     }
-    else if (p == "clear_GuiConsole")
+    else if (p == "clear_console")
     {
       clearGuiConsole();
     }
@@ -62,40 +63,46 @@ void Debug::execute(std::vector<std::string> params)
 
 void Debug::cmdexecActiveCommand()
 {
-  Command *cmd = _GuiConsole->cmd_exec->_active_command;
+/*
+  Command *cmd = _console->cmd_exec->_active_command;
   int cmd_id = ( cmd == nullptr ? -1 : static_cast<int>(cmd->id()) );
 
-  _GuiConsole->append("DEBUG: " + fun::toStr(cmd_id), Font::Standard);
+  cAppend("DEBUG: " + fun::toStr(cmd_id), Font::Standard);
+*/
 }
 
 void Debug::reloadGuiConsoleSkin()
 {
+/*
   _StyleConfig->reload();
-  _GuiConsole->load_style(_StyleConfig);
-  _GuiConsole->append("DEBUG: przeładowano konfiguracje stylu z pliku "+Game::styleConfigFilename, Font::Standard);
+  _console->load_style(_StyleConfig);
+  cAppend("DEBUG: przeładowano konfiguracje stylu z pliku "+Game::styleConfigFilename, Font::Standard);
+*/
 }
 
 void Debug::saveStyleConfig()
 {
+/*
   _StyleConfig->save();
-  _GuiConsole->append("DEBUG: zapisano styleConfig do pliku "+Game::styleConfigFilename, Font::Standard);
+  cAppend("DEBUG: zapisano styleConfig do pliku "+Game::styleConfigFilename, Font::Standard);
+*/
 }
 
 void Debug::displayHelp()
 {
-  _GuiConsole->append("### DEBUG Help ###",Font::Header);
-  _GuiConsole->append("active_cmd",Font::Standard);
-  _GuiConsole->append("reload_GuiConsole_skin",Font::Standard);
-  _GuiConsole->append("save_style_config",Font::Standard);
-  _GuiConsole->append("clear_GuiConsole",Font::Standard);
-  _GuiConsole->append("create_loc_obj_szafka",Font::Standard);
-  _GuiConsole->append("print_creatures",Font::Standard);
-  _GuiConsole->append("print_locations",Font::Standard);
+  cAppend("### DEBUG Help ###",Font::Header);
+  cAppend("DISABLED active_cmd",Font::Standard);
+  cAppend("DISABLED reload_console_skin",Font::Standard);
+  cAppend("DISABLED save_style_config",Font::Standard);
+  cAppend("clear_console",Font::Standard);
+  cAppend("create_loc_obj_szafka",Font::Standard);
+  cAppend("print_creatures",Font::Standard);
+  cAppend("print_locations",Font::Standard);
 }
 
 void Debug::clearGuiConsole()
 {
-  _GuiConsole->clear();
+  cClear();
 }
 
 void Debug::createLocObj()
@@ -117,15 +124,15 @@ void Debug::createLocObj()
   Location *loc = _Player->getLocation();
   loc->insertObject(lobj);
 
-  _GuiConsole->append("DEBUG: stworzono szafkę i wrzucono do aktualnej lokacji.", Font::Standard);
+  cAppend("DEBUG: stworzono szafkę i wrzucono do aktualnej lokacji.", Font::Standard);
 }
 
 void Debug::printCreatures()
 {
-  _GuiConsole->append(Creature::Manager.getPrintableContent(), Font::Standard);
+  cAppend(Creature::Manager.getPrintableContent(), Font::Standard);
 }
 
 void Debug::printLocation()
 {
-  _GuiConsole->append(Location::Manager.getPrintableContent(), Font::Standard);
+  cAppend(Location::Manager.getPrintableContent(), Font::Standard);
 }

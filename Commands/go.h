@@ -1,6 +1,7 @@
 #ifndef GO_H
 #define GO_H
 
+#include <map>
 #include "command.h"
 
 class Location;

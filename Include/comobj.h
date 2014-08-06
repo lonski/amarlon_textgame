@@ -1,7 +1,7 @@
 #ifndef COMOBJ_H
 #define COMOBJ_H
 
-#include "inc.h"
+#include <set>
 
 template<typename T>
 struct CMValue

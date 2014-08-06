@@ -1,7 +1,7 @@
 #ifndef ITEM_H
 #define ITEM_H
 
-#include "Include/inc.h"
+#include "Include/typedefs/def_measures.h"
 #include "Include/db.h"
 #include "Include/enums.h"
 #include "Include/prototypemanager.h"

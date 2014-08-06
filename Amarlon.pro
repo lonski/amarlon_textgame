@@ -92,7 +92,6 @@ HEADERS  += game.h \
     Include/enums.h \
     Tests/testdb.h \
     Include/func.h \
-    Include/inc.h \
     Include/exceptions.h \
     Equipment/item.h \
     Include/prototypemanager.h \
@@ -138,7 +137,12 @@ HEADERS  += game.h \
     Creatures/creaturecontainer.h \
     Creatures/body.h \
     Creatures/creaturemodificatormanager.h \
-    Creatures/creaturemanager.h
+    Creatures/creaturemanager.h \
+    Include/typedefs/def_basetypes.h \
+    Include/typedefs/def_db_item.h \
+    Include/typedefs/def_db_table.h \
+    Include/typedefs/def_measures.h \
+    Include/typedefs/def_time.h
 
 FORMS    += game.ui \
     console.ui

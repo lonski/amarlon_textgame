@@ -1,10 +1,30 @@
 #ifndef COMMON_H
 #define COMMON_H
 
-#include "inc.h"
+#include <list>
+#include <sstream>
+#include "soci.h"
+#include "Include/typedefs/def_db_table.h"
 #include "enums.h"
 
 #define _Database DB::Session()
+#define _saveToDB_ \
+  if ( !isTemporary() && ref() != 0 && modified() )\
+  {\
+    try\
+    {\
+      saveToDB();\
+    }\
+    catch(std::exception &e)\
+    {\
+      qDebug() << "Error saving " << tableName.c_str() << " " << ref() << " : " << e.what();\
+    }\
+    catch(...)\
+    {\
+      qDebug() << "Error saving " << tableName.c_str() << " "  << ref() << ".";\
+    }\
+  }
+
 typedef unsigned int dbRef;
 typedef std::string dbTable;
 

@@ -1,3 +1,4 @@
+#include <QColor>
 #include "func.h"
 
 using namespace std;

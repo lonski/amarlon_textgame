@@ -1,7 +1,7 @@
 #ifndef GAMECLOCK_H
 #define GAMECLOCK_H
 
-#include "inc.h"
+#include "Include/typedefs/def_time.h"
 #include "comobj.h"
 #include "enums.h"
 

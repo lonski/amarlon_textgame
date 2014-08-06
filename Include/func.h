@@ -1,7 +1,13 @@
 #ifndef FUNC_H
 #define FUNC_H
 
-#include "inc.h"
+#include <string>
+#include <vector>
+#include <map>
+#include <QCoreApplication>
+#include <QTime>
+#include <QDebug>
+
 #include "db.h"
 #include "enums.h"
 

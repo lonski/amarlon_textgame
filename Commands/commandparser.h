@@ -1,7 +1,7 @@
 #ifndef COMMANDPARSER_H
 #define COMMANDPARSER_H
 
-#include "Include/inc.h"
+
 #include "Include/func.h"
 
 class CommandParser

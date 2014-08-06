@@ -1,7 +1,8 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
-#include "Include/inc.h"
+#include <string>
+#include <vector>
 #include "Include/gameclock.h"
 #include "Include/enums.h"
 

@@ -73,7 +73,6 @@ SOURCES += main.cpp\
    Commands/debug.cpp \
    Include/inifile.cpp \
    Console/consolefonts.cpp \
-   World/location_utils.cpp \
     World/walkvector.cpp \
     World/locationmanager.cpp \
     Equipment/item_container.cpp \
@@ -127,7 +126,6 @@ HEADERS  += Gui/game.h \
     Commands/debug.h \
     Include/inifile.h \
     Console/consolefonts.h \
-    World/location_utils.h \
     World/walkvector.h \
     World/locationmanager.h \
     Equipment/item_container.h \

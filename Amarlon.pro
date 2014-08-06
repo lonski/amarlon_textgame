@@ -49,7 +49,6 @@ SOURCES += main.cpp\
    Equipment/jewelry.cpp \
    Equipment/food.cpp \
    Equipment/tool.cpp \
-   Include/comobj.cpp \
    Equipment/shield.cpp \
    World/locationobject.cpp \
    Creatures/creature.cpp \
@@ -101,7 +100,6 @@ HEADERS  += game.h \
     Equipment/jewelry.h \
     Equipment/food.h \
     Equipment/tool.h \
-    Include/comobj.h \
     Equipment/shield.h \
     World/locationobject.h \
     Creatures/creature.h \
@@ -162,7 +160,10 @@ HEADERS  += game.h \
     Include/enums/e_command.h \
     Include/enums/e_fatiguelevel.h \
     Include/enums/e_hungerlevel.h \
-    Include/enums/e_refdict.h
+    Include/enums/e_refdict.h \
+    Include/observer.h \
+    Include/damage.h \
+    Include/custom_values.h
 
 FORMS    += game.ui \
     console.ui

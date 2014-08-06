@@ -3,8 +3,7 @@
 
 #include "Include/typedefs/def_time.h"
 #include "Include/enums/e_season.h"
-#include "comobj.h"
-
+#include "Include/observer.h"
 
 class GameClock : public Subject
 {

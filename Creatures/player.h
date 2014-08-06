@@ -9,6 +9,8 @@
 #include "Include/enums/e_hungerlevel.h"
 #include "Include/enums/e_fatiguelevel.h"
 
+#include "Include/custom_values.h"
+
 #define _Player Player::inst()
 
 typedef unsigned int Splot;

@@ -170,7 +170,9 @@ HEADERS  += Gui/game.h \
     Include/functions/db_utils.h \
     Include/functions/messages.h \
     Include/functions/common_utils.h \
-    Gui/gui_console.h
+    Gui/gui_console.h \
+    Console/console.h \
+    Include/enums/e_font.h
 
 FORMS    += Gui/game.ui \
     Gui/gui_console.ui

@@ -6,6 +6,7 @@
 #include "World/location.h"
 #include "Equipment/item_container.h"
 #include "Creatures/creature.h"
+#include "Commands/commandexecutor.h"
 
 using namespace std;
 
@@ -61,7 +62,7 @@ void Debug::execute(std::vector<std::string> params)
 
 void Debug::cmdexecActiveCommand()
 {
-  Command *cmd = _GuiConsole->cmd_exec._active_command;
+  Command *cmd = _GuiConsole->cmd_exec->_active_command;
   int cmd_id = ( cmd == nullptr ? -1 : static_cast<int>(cmd->id()) );
 
   _GuiConsole->append("DEBUG: " + fun::toStr(cmd_id), Font::Standard);
@@ -70,7 +71,7 @@ void Debug::cmdexecActiveCommand()
 void Debug::reloadGuiConsoleSkin()
 {
   _StyleConfig->reload();
-  _GuiConsole->load_skin(_StyleConfig);
+  _GuiConsole->load_style(_StyleConfig);
   _GuiConsole->append("DEBUG: przeładowano konfiguracje stylu z pliku "+Game::styleConfigFilename, Font::Standard);
 }
 

@@ -1,7 +1,7 @@
 #ifndef ENUMS_H
 #define ENUMS_H
 
-#include "inc.h"
+
 //===
 /* Słownik dbRef
  * przydatny przy tworzeniu obiektów

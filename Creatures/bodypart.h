@@ -1,7 +1,7 @@
 #ifndef BODYPART_H
 #define BODYPART_H
 
-#include "Include/inc.h"
+
 #include "Include/comobj.h"
 #include "Include/func.h"
 #include "Include/enums.h"

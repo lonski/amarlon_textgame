@@ -1,3 +1,7 @@
+#include <QDebug>
+#include <QMessageBox>
+#include <fstream>
+#include "soci-firebird.h"
 #include "db.h"
 
 using namespace std;

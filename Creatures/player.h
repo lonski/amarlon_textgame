@@ -5,6 +5,9 @@
 
 #define _Player Player::inst()
 
+typedef unsigned int Splot;
+typedef unsigned int BravePoints;
+
 class Player : public Creature
 {
 public:

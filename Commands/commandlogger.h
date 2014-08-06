@@ -1,7 +1,8 @@
 #ifndef COMMANDLOGGER_H
 #define COMMANDLOGGER_H
 
-#include "Include/inc.h"
+#include <deque>
+#include <string>
 
 class CommandLogger
 {

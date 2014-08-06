@@ -1,7 +1,7 @@
 #ifndef PROTOTYPEMANAGER_H
 #define PROTOTYPEMANAGER_H
 
-#include "Include/inc.h"
+
 #include "Include/db.h"
 #include "Include/func.h"
 #include "Include/exceptions.h"

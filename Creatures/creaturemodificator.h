@@ -1,7 +1,7 @@
 #ifndef CREATUREMODIFICATOR_H
 #define CREATUREMODIFICATOR_H
 
-#include "../Include/inc.h"
+
 #include "../Include/exceptions.h"
 #include "creaturestats.h"
 #include "../Include/db.h"

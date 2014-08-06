@@ -1,7 +1,8 @@
 #ifndef CONSOLEFONTS_H
 #define CONSOLEFONTS_H
 
-#include "Include/inc.h"
+#include <QColor>
+#include <QFont>
 #include "Include/inifile.h"
 
 #define STRINGIFY_FONT(ENUM) case ENUM: r = #ENUM; break;

@@ -1,7 +1,7 @@
 #ifndef CREATURESTATS_H
 #define CREATURESTATS_H
 
-#include "Include/inc.h"
+
 #include "Include/func.h"
 #include "Include/enums.h"
 

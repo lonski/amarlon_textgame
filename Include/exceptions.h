@@ -1,7 +1,7 @@
 #ifndef EXCEPTIONS_H
 #define EXCEPTIONS_H
 
-#include "inc.h"
+#include <stdexcept>
 
 namespace error
 {

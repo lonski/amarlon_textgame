@@ -2,7 +2,7 @@
 #define ARMOR_H
 
 #include "item.h"
-#include "../Include/comobj.h"
+#include "Include/damage.h"
 
 class Armor;
 typedef std::shared_ptr<Armor> ArmorPtr;

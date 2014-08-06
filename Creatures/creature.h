@@ -1,8 +1,6 @@
 #ifndef CREATURE_H
 #define CREATURE_H
 
-
-#include "Include/comobj.h"
 #include "Include/func.h"
 
 #include "Equipment/item.h"

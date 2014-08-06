@@ -1,14 +1,13 @@
 #ifndef BODYPART_H
 #define BODYPART_H
 
-
-#include "Include/comobj.h"
 #include "Include/func.h"
 
 #include "Equipment/item.h"
 #include "Equipment/armor.h"
 
 #include "Include/enums/e_damagelevel.h"
+#include "Include/damage.h"
 
 class BodyPart
 {

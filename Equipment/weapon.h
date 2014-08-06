@@ -2,9 +2,9 @@
 #define WEAPON_H
 
 #include "item.h"
-#include "../Include/comobj.h"
 
 #include "Include/enums/e_weaponskill.h"
+#include "Include/damage.h"
 
 class Weapon;
 typedef std::shared_ptr<Weapon> WeaponPtr;

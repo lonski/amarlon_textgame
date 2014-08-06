@@ -2,6 +2,7 @@
 #define ITEM_CONTAINER_H
 
 #include "item.h"
+#include "Include/custom_values.h"
 
 class Item::Container : public DBObject
 {

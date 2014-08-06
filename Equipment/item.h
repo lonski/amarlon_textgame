@@ -6,7 +6,6 @@
 
 #include "Include/prototypemanager.h"
 #include "Include/exceptions.h"
-#include "Include/comobj.h"
 #include "Creatures/creaturemodificator.h"
 #include "Creatures/creaturemodificatormanager.h"
 

@@ -3,6 +3,9 @@
 
 #include "creature.h"
 
+#include "Include/enums/e_clan.h"
+#include "Include/enums/e_tribe.h"
+
 class NPC : public Creature
 {
 public:

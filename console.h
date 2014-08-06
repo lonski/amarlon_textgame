@@ -5,7 +5,7 @@
 #include <QScrollBar>
 #include <QKeyEvent>
 
-#include "Include/enums.h"
+
 #include "Commands/commandexecutor.h"
 #include "Include/inifile.h"
 #include "consolefonts.h"

@@ -4,9 +4,11 @@
 
 #include "Include/comobj.h"
 #include "Include/func.h"
-#include "Include/enums.h"
+
 #include "Equipment/item.h"
 #include "Equipment/armor.h"
+
+#include "Include/enums/e_damagelevel.h"
 
 class BodyPart
 {

@@ -4,7 +4,7 @@
 
 #include "Include/comobj.h"
 #include "Include/func.h"
-#include "Include/enums.h"
+
 #include "Equipment/item.h"
 #include "Equipment/weapon.h"
 #include "Equipment/shield.h"
@@ -13,6 +13,9 @@
 #include "body.h"
 #include "bodypart.h"
 #include "creaturemanager.h"
+
+#include "Include/enums/e_creatureprototype.h"
+#include "Include/enums/e_sex.h"
 
 class CreatureMonitor;
 class Location;

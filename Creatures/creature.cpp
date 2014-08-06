@@ -5,6 +5,8 @@
 #include "creaturecontainer.h"
 #include "World/location.h"
 
+#include "Include/enums/e_creaturetype.h"
+
 using namespace std;
 using namespace soci;
 using namespace fun;

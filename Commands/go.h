@@ -2,6 +2,7 @@
 #define GO_H
 
 #include <map>
+#include "Include/enums/e_direction.h"
 #include "command.h"
 
 class Location;

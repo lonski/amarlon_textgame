@@ -40,7 +40,6 @@ SOURCES += main.cpp\
    World/location.cpp \
    Tests/testdb.cpp \
    Include/func.cpp \
-   Include/enums.cpp \
    Equipment/item.cpp \
    Include/db.cpp \
    Tests/testitems.cpp \
@@ -89,7 +88,6 @@ SOURCES += main.cpp\
 HEADERS  += game.h \
     Tests/testlocation.h \
     World/location.h \
-    Include/enums.h \
     Tests/testdb.h \
     Include/func.h \
     Include/exceptions.h \
@@ -142,7 +140,29 @@ HEADERS  += game.h \
     Include/typedefs/def_db_item.h \
     Include/typedefs/def_db_table.h \
     Include/typedefs/def_measures.h \
-    Include/typedefs/def_time.h
+    Include/typedefs/def_time.h \
+    Include/enums/e_direction.h \
+    Include/enums/e_objtype.h \
+    Include/enums/e_itemtype.h \
+    Include/enums/e_itemprototype.h \
+    Include/enums/e_body.h \
+    Include/enums/e_damagelevel.h \
+    Include/enums/e_itemcondition.h \
+    Include/enums/e_weaponskill.h \
+    Include/enums/e_attribute.h \
+    Include/enums/e_skill.h \
+    Include/enums/e_profession.h \
+    Include/enums/e_season.h \
+    Include/enums/e_sex.h \
+    Include/enums/e_creatureprototype.h \
+    Include/enums/e_creaturetype.h \
+    Include/enums/e_tribe.h \
+    Include/enums/e_clan.h \
+    Include/enums/e_bless.h \
+    Include/enums/e_command.h \
+    Include/enums/e_fatiguelevel.h \
+    Include/enums/e_hungerlevel.h \
+    Include/enums/e_refdict.h
 
 FORMS    += game.ui \
     console.ui

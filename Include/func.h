@@ -9,7 +9,14 @@
 #include <QDebug>
 
 #include "db.h"
-#include "enums.h"
+
+#include "Include/enums/e_itemtype.h"
+#include "Include/enums/e_direction.h"
+#include "Include/enums/e_body.h"
+#include "Include/enums/e_profession.h"
+#include "Include/enums/e_attribute.h"
+#include "Include/enums/e_skill.h"
+
 
 namespace fun{
 

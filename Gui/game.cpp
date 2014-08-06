@@ -1,8 +1,8 @@
-#include "game.h"
+#include "Gui/game.h"
 #include "ui_game.h"
 
 const std::string Game::styleConfigFilename = "style_config.ini";
-Console* Game::console(nullptr);
+GuiConsole* Game::console(nullptr);
 INIFile* Game::styleConfig(nullptr);
 
 Game::Game(QWidget *parent)
@@ -13,7 +13,7 @@ Game::Game(QWidget *parent)
 
   styleConfig = new INIFile(styleConfigFilename);
 
-  console = new Console(this);
+  console = new GuiConsole(this);
   console->load_skin(styleConfig);
   console->show();
 

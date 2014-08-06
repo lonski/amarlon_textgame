@@ -1,5 +1,5 @@
-#ifndef CONSOLEFONTS_H
-#define CONSOLEFONTS_H
+#ifndef GuiConsoleFONTS_H
+#define GuiConsoleFONTS_H
 
 #include <QColor>
 #include <QFont>
@@ -54,16 +54,16 @@ struct FontConf{
   {}
 };
 
-class ConsoleFonts
+class GuiConsoleFonts
 {
 private:
   std::map<Font, FontConf> _fonts;
 public:
-  ConsoleFonts();
+  GuiConsoleFonts();
   FontConf& get(Font font);
   void add(Font font, FontConf conf);
   void load(INIFile *inifile);
   void save(INIFile* inifile);
 };
 
-#endif // CONSOLEFONTS_H
+#endif // GuiConsoleFONTS_H

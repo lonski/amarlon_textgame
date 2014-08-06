@@ -1,5 +1,5 @@
 #include "gamemenu.h"
-#include "game.h"
+#include "Gui/game.h"
 #include "exit.h"
 #include "go.h"
 #include "Creatures/player.h"
@@ -61,19 +61,19 @@ void GameMenu::execute(std::vector<std::string> params)
 
 void GameMenu::welcomeScreen()
 {
-  _Console->clear();
-  _Console->append("Witaj w Amarlonie!", Font::Header);
-  _Console->append("1. Nowa gra", Font::Standard);
-  _Console->append("2. Wyjście", Font::Standard);
-  _Console->append_blank();
+  _GuiConsole->clear();
+  _GuiConsole->append("Witaj w Amarlonie!", Font::Header);
+  _GuiConsole->append("1. Nowa gra", Font::Standard);
+  _GuiConsole->append("2. Wyjście", Font::Standard);
+  _GuiConsole->append_blank();
 
   stage = Stage::Menu;
 }
 
 void GameMenu::startNewGame()
 {
-  _Console->append_anim("Zaczynamy nową grę...", Font::Message, 50);
-  _Console->clear();
+  _GuiConsole->append_anim("Zaczynamy nową grę...", Font::Message, 50);
+  _GuiConsole->clear();
 
   setDatabaseForNewGame();
   setPlayerForNewGame();

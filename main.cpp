@@ -1,6 +1,6 @@
 #include <QApplication>
 #include <QDebug>
-#include "game.h"
+#include "Gui/game.h"
 
 #define _UT 1
 
@@ -51,8 +51,8 @@ int main(int argc, char *argv[])
 
   //START GAME
   Game game;
-  _Console->clear();
-  _Console->handle_player_input("menu");
+  _GuiConsole->clear();
+  _GuiConsole->handle_player_input("menu");
   game.show();
 
   return amarlon.exec();

@@ -1,24 +1,24 @@
 #include "consolefonts.h"
-#include "game.h"
+#include "Gui/game.h"
 #include "Include/functions/string_utils.h"
 
 using namespace std;
 
-ConsoleFonts::ConsoleFonts()
+GuiConsoleFonts::GuiConsoleFonts()
 {
 }
 
-FontConf& ConsoleFonts::get(Font font)
+FontConf& GuiConsoleFonts::get(Font font)
 {
   return _fonts[font];
 }
 
-void ConsoleFonts::add(Font font, FontConf conf)
+void GuiConsoleFonts::add(Font font, FontConf conf)
 {
   _fonts[font] = conf;
 }
 
-void ConsoleFonts::load(INIFile* inifile)
+void GuiConsoleFonts::load(INIFile* inifile)
 {
   for (int f = 0; f != (int)Font::End; ++f)
   {
@@ -44,7 +44,7 @@ void ConsoleFonts::load(INIFile* inifile)
   }
 }
 
-void ConsoleFonts::save(INIFile *inifile)
+void GuiConsoleFonts::save(INIFile *inifile)
 {
   for (int f = 0; f != (int)Font::End; ++f)
   {

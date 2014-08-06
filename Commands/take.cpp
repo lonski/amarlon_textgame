@@ -1,5 +1,5 @@
 #include "take.h"
-#include "game.h"
+#include "Gui/game.h"
 
 Take::Take()
 {

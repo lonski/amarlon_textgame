@@ -1,15 +1,15 @@
-#include "console.h"
-#include "ui_console.h"
+#include "gui_console.h"
+#include "ui_gui_console.h"
 #include "Include/functions/string_utils.h"
 #include "Include/functions/common_utils.h"
 
 using namespace std;
 
-std::string Console::Divider("-~=====~-");
+std::string GuiConsole::Divider("-~=====~-");
 
-Console::Console(QWidget *parent)
+GuiConsole::GuiConsole(QWidget *parent)
   : QWidget(parent)
-  , ui(new Ui::Console)  
+  , ui(new Ui::GuiConsole)
 {
   ui->setupUi(this);
 
@@ -24,28 +24,28 @@ Console::Console(QWidget *parent)
 
 }
 
-Console::~Console()
+GuiConsole::~GuiConsole()
 {  
   delete ui;
 }
 
-void Console::load_skin(INIFile *inifile)
+void GuiConsole::load_skin(INIFile *inifile)
 {
   load_fonts(inifile);
   load_controls_skin(inifile);
 }
 
-void Console::load_fonts(INIFile* inifile)
+void GuiConsole::load_fonts(INIFile* inifile)
 {
   FontsManager.load(inifile);
 }
 
-void Console::load_controls_skin(INIFile *inifile)
+void GuiConsole::load_controls_skin(INIFile *inifile)
 {
   //load log style
   string style;
 
-  string bg_color = inifile->getValue("console","bg_color");
+  string bg_color = inifile->getValue("GuiConsole","bg_color");
   if (!bg_color.empty())
   {
     QColor kolor = fun::Str2Color(bg_color);
@@ -55,7 +55,7 @@ void Console::load_controls_skin(INIFile *inifile)
   ui->c_log->setStyleSheet(style.c_str());
   //~~~
   //load input control style
-  bg_color = inifile->getValue("console","input_bg_color");
+  bg_color = inifile->getValue("GuiConsole","input_bg_color");
   if (!bg_color.empty())
   {
     QColor kolor = fun::Str2Color(bg_color);
@@ -63,7 +63,7 @@ void Console::load_controls_skin(INIFile *inifile)
   }
   ui->c_msg->setStyleSheet(style.c_str());
 
-  int input_size = fun::CheckValue<int>(inifile->getValue("console","input_font_size"));
+  int input_size = fun::CheckValue<int>(inifile->getValue("GuiConsole","input_font_size"));
   if (input_size)
   {
     QFont font = ui->c_msg->font();
@@ -73,12 +73,12 @@ void Console::load_controls_skin(INIFile *inifile)
   //~~~
 }
 
-void Console::handle_player_input(std::string cmd)
+void GuiConsole::handle_player_input(std::string cmd)
 {
   cmd_exec.execute(cmd);
 }
 
-void Console::retrive_command_history(QKeyEvent *event)
+void GuiConsole::retrive_command_history(QKeyEvent *event)
 {
   static uint index = -1;
 
@@ -106,12 +106,12 @@ void Console::retrive_command_history(QKeyEvent *event)
   }
 }
 
-void Console::keyPressEvent(QKeyEvent *event)
+void GuiConsole::keyPressEvent(QKeyEvent *event)
 {
   retrive_command_history(event);
 }
 
-void Console::append(std::string txt, Font efont)
+void GuiConsole::append(std::string txt, Font efont)
 {
   FontConf& font = FontsManager.get(efont);
 
@@ -128,7 +128,7 @@ void Console::append(std::string txt, Font efont)
   ui->c_log->setFontItalic(false);
 }
 
-void Console::append_anim(std::string text, Font efont, int interval)
+void GuiConsole::append_anim(std::string text, Font efont, int interval)
 {
   FontConf& font = FontsManager.get(efont);
 
@@ -164,17 +164,17 @@ void Console::append_anim(std::string text, Font efont, int interval)
 
 }
 
-void Console::append_blank()
+void GuiConsole::append_blank()
 {
   append("", Font::Standard);
 }
 
-void Console::clear()
+void GuiConsole::clear()
 {
   ui->c_log->clear();
 }
 
-void Console::on_c_msg_returnPressed()
+void GuiConsole::on_c_msg_returnPressed()
 {
   handle_player_input(ui->c_msg->text().toStdString());  
   ui->c_msg->clear();

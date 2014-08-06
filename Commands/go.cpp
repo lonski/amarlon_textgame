@@ -1,5 +1,5 @@
 #include "go.h"
-#include "game.h"
+#include "Gui/game.h"
 #include "Creatures/creature.h"
 #include "Creatures/player.h"
 #include "World/location.h"
@@ -132,7 +132,7 @@ void Go::movePlayerSuccess()
 
 void Go::movePlayerFail()
 {
-  _Console->append("Brak drogi w tą stronę.", Font::Message);
+  _GuiConsole->append("Brak drogi w tą stronę.", Font::Message);
 }
 
 void Go::loadNeighbourLocations(Location* loc)
@@ -156,17 +156,17 @@ void Go::displayLocationInfo(Location* loc)
 
 void Go::displayDivider()
 {
-  _Console->append(Console::Divider, Font::Divider);
+  _GuiConsole->append(GuiConsole::Divider, Font::Divider);
 }
 
 void Go::displayLocName(Location* loc)
 {
-  _Console->append(loc->name(), Font::LocName);
+  _GuiConsole->append(loc->name(), Font::LocName);
 }
 
 void Go::displayLocDescription(Location* loc)
 {
-  _Console->append(loc->descript(), Font::LocDescription);
+  _GuiConsole->append(loc->descript(), Font::LocDescription);
 }
 
 void Go::dispalyLocationObjects(Location* loc)
@@ -175,7 +175,7 @@ void Go::dispalyLocationObjects(Location* loc)
   for (auto o = objs.begin(); o != objs.end(); ++o)
   {
     LocationObjectPtr obj = *o;
-    _Console->append(obj->name(), Font::LocObject);
+    _GuiConsole->append(obj->name(), Font::LocObject);
     }
 }
 
@@ -189,7 +189,7 @@ void Go::displayCreaturesInLoc(Location *loc)
     {/* TODO */
       string name = (*c)->name();
       string loc_dsc = (*c)->locDescript();
-      _Console->append( (loc_dsc.empty() ? name : loc_dsc), Font::LocCreature);
+      _GuiConsole->append( (loc_dsc.empty() ? name : loc_dsc), Font::LocCreature);
     }
   }
 }
@@ -216,7 +216,7 @@ void Go::displayPossibleExits(Location *loc)
 
   exits_line += " ]";
 
-  _Console->append(exits_line, Font::LocExits);
+  _GuiConsole->append(exits_line, Font::LocExits);
 }
 
 map<Direction, bool> Go::getPossibleExits(Location *loc)

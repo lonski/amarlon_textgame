@@ -5,9 +5,9 @@
 #include <QLayout>
 
 #include "Include/inifile.h"
-#include "console.h"
+#include "Gui/gui_console.h"
 
-#define _Console Game::console
+#define _GuiConsole Game::console
 #define _StyleConfig Game::styleConfig
 
 namespace Ui {
@@ -19,7 +19,7 @@ class Game : public QMainWindow
   Q_OBJECT
 public:
   static const std::string styleConfigFilename;  
-  static Console *console;
+  static GuiConsole *console;
   static INIFile * styleConfig;
 
 public:  

@@ -35,7 +35,7 @@ unix:LIBS += -lsoci_core \
              -lsoci_firebird
 
 SOURCES += main.cpp\
-       game.cpp \
+       Gui/game.cpp \
    Tests/testlocation.cpp \
    World/location.cpp \
    Tests/testdb.cpp \
@@ -68,12 +68,11 @@ SOURCES += main.cpp\
    Commands/commandexecutor.cpp \
    Commands/go.cpp \
    Commands/take.cpp \
-   console.cpp \
    Commands/exit.cpp \
    Commands/gamemenu.cpp \
    Commands/debug.cpp \
    Include/inifile.cpp \
-   consolefonts.cpp \
+   Console/consolefonts.cpp \
    World/location_utils.cpp \
     World/walkvector.cpp \
     World/locationmanager.cpp \
@@ -85,9 +84,10 @@ SOURCES += main.cpp\
     Include/functions/enum2str.cpp \
     Include/functions/string_utils.cpp \
     Include/functions/db_utils.cpp \
-    Include/functions/common_utils.cpp
+    Include/functions/common_utils.cpp \
+    Gui/gui_console.cpp
 
-HEADERS  += game.h \
+HEADERS  += Gui/game.h \
     Tests/testlocation.h \
     World/location.h \
     Tests/testdb.h \
@@ -122,12 +122,11 @@ HEADERS  += game.h \
     Commands/commandexecutor.h \
     Commands/go.h \
     Commands/take.h \
-    console.h \
     Commands/exit.h \
     Commands/gamemenu.h \
     Commands/debug.h \
     Include/inifile.h \
-    consolefonts.h \
+    Console/consolefonts.h \
     World/location_utils.h \
     World/walkvector.h \
     World/locationmanager.h \
@@ -170,10 +169,11 @@ HEADERS  += game.h \
     Include/functions/string_utils.h \
     Include/functions/db_utils.h \
     Include/functions/messages.h \
-    Include/functions/common_utils.h
+    Include/functions/common_utils.h \
+    Gui/gui_console.h
 
-FORMS    += game.ui \
-    console.ui
+FORMS    += Gui/game.ui \
+    Gui/gui_console.ui
 
 OTHER_FILES += \
     TODO.txt

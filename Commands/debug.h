@@ -13,10 +13,10 @@ public:
 
 private:
   void cmdexecActiveCommand();
-  void reloadConsoleSkin();
+  void reloadGuiConsoleSkin();
   void saveStyleConfig();
   void displayHelp();
-  void clearConsole();
+  void clearGuiConsole();
   void createLocObj();
   void printCreatures();
   void printLocation();

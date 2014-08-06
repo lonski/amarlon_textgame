@@ -1,6 +1,6 @@
 #include "testfun.h"
-#include "console.h"
-#include "game.h"
+#include "Gui/gui_console.h"
+#include "Gui/game.h"
 #include "Include/functions/string_utils.h"
 #include "Include/functions/common_utils.h"
 

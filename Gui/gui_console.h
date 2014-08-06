@@ -5,20 +5,23 @@
 #include <QScrollBar>
 #include <QKeyEvent>
 
-#include "Commands/commandexecutor.h"
-#include "Include/inifile.h"
-#include "Console/consolefonts.h"
+#include "Console/console.h"
 
 #define cDebug(MSG) _GuiConsole->append("DEBUG: "+std::string(MSG), FontStandard);
 
 //colors
 #define QBrown QColor(110,70,10)
 
+class CommandExecutor;
+class ConsoleFonts;
+class INIFile;
+
 namespace Ui {
   class GuiConsole;
 }
 
 class GuiConsole : public QWidget
+                 , public Console
 {
   Q_OBJECT
 public:
@@ -27,8 +30,8 @@ public:
 private:
   friend class Debug;
   Ui::GuiConsole* ui;
-  CommandExecutor cmd_exec;
-  GuiConsoleFonts FontsManager;
+  CommandExecutor* cmd_exec;
+  ConsoleFonts* FontsManager;
 
   void retrive_command_history(QKeyEvent *event);
   void load_fonts(INIFile *inifile);
@@ -39,14 +42,14 @@ protected:
 
 public:
   explicit GuiConsole(QWidget *parent = 0);  
-  ~GuiConsole();
+  virtual ~GuiConsole();
 
-  void load_skin(INIFile *inifile);
-  void handle_player_input(std::string cmd);
-  void append(std::string txt, Font efont);
-  void append_anim(std::string text, Font efont, int interval = 10);
-  void append_blank();
-  void clear();
+  virtual void load_style(INIFile *inifile);
+  virtual void handle_player_input(std::string cmd);
+  virtual void append(std::string txt, Font efont);
+  virtual void append_anim(std::string text, Font efont, int interval = 10);
+  virtual void append_blank();
+  virtual void clear();
 
 private slots:
   void on_c_msg_returnPressed();

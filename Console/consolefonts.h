@@ -1,47 +1,10 @@
-#ifndef GuiConsoleFONTS_H
-#define GuiConsoleFONTS_H
+#ifndef ConsoleFonts_H
+#define ConsoleFonts_H
 
 #include <QColor>
 #include <QFont>
 #include "Include/inifile.h"
-
-#define STRINGIFY_FONT(ENUM) case ENUM: r = #ENUM; break;
-
-enum class Font
-{
-  Standard = 0,
-  Divider,
-  LocName,
-  LocDescription,
-  Action,
-  Message,
-  Header,
-  LocExits,
-  LocObject,
-  LocCreature,
-
-  End
-};
-
-static inline std::string Font2Str(Font font)
-{
-  std::string r;
-  switch(font)
-  {
-    STRINGIFY_FONT(Font::Standard)
-    STRINGIFY_FONT(Font::Divider)
-    STRINGIFY_FONT(Font::LocName)
-    STRINGIFY_FONT(Font::LocDescription)
-    STRINGIFY_FONT(Font::Action)
-    STRINGIFY_FONT(Font::Message)
-    STRINGIFY_FONT(Font::Header)
-    STRINGIFY_FONT(Font::LocExits)
-    STRINGIFY_FONT(Font::LocObject)
-    STRINGIFY_FONT(Font::LocCreature)
-    default: break;
-  }
-  return r;
-}
+#include "Include/enums/e_font.h"
 
 struct FontConf{
   QColor kolor;
@@ -54,16 +17,16 @@ struct FontConf{
   {}
 };
 
-class GuiConsoleFonts
+class ConsoleFonts
 {
 private:
   std::map<Font, FontConf> _fonts;
 public:
-  GuiConsoleFonts();
+  ConsoleFonts();
   FontConf& get(Font font);
   void add(Font font, FontConf conf);
   void load(INIFile *inifile);
   void save(INIFile* inifile);
 };
 
-#endif // GuiConsoleFONTS_H
+#endif // ConsoleFonts_H

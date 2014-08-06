@@ -4,21 +4,21 @@
 
 using namespace std;
 
-GuiConsoleFonts::GuiConsoleFonts()
+ConsoleFonts::ConsoleFonts()
 {
 }
 
-FontConf& GuiConsoleFonts::get(Font font)
+FontConf& ConsoleFonts::get(Font font)
 {
   return _fonts[font];
 }
 
-void GuiConsoleFonts::add(Font font, FontConf conf)
+void ConsoleFonts::add(Font font, FontConf conf)
 {
   _fonts[font] = conf;
 }
 
-void GuiConsoleFonts::load(INIFile* inifile)
+void ConsoleFonts::load(INIFile* inifile)
 {
   for (int f = 0; f != (int)Font::End; ++f)
   {
@@ -44,7 +44,7 @@ void GuiConsoleFonts::load(INIFile* inifile)
   }
 }
 
-void GuiConsoleFonts::save(INIFile *inifile)
+void ConsoleFonts::save(INIFile *inifile)
 {
   for (int f = 0; f != (int)Font::End; ++f)
   {

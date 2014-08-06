@@ -2,6 +2,9 @@
 #include "ui_gui_console.h"
 #include "Include/functions/string_utils.h"
 #include "Include/functions/common_utils.h"
+#include "Commands/commandexecutor.h"
+#include "Include/inifile.h"
+#include "Console/consolefonts.h"
 
 using namespace std;
 
@@ -10,13 +13,15 @@ std::string GuiConsole::Divider("-~=====~-");
 GuiConsole::GuiConsole(QWidget *parent)
   : QWidget(parent)
   , ui(new Ui::GuiConsole)
+  , cmd_exec(new CommandExecutor)
+  , FontsManager(new ConsoleFonts)
 {
   ui->setupUi(this);
 
   //dodaj wszystkie komendy
   for (int c = (int)CommandID::Null + 1; c != (int)CommandID::End; ++c )
   {    
-    cmd_exec.add_command( Command::createByEnum(static_cast<CommandID>(c)));
+    cmd_exec->add_command( Command::createByEnum(static_cast<CommandID>(c)));
   }
 
   //ustaw focus
@@ -27,9 +32,11 @@ GuiConsole::GuiConsole(QWidget *parent)
 GuiConsole::~GuiConsole()
 {  
   delete ui;
+  delete cmd_exec;
+  delete FontsManager;
 }
 
-void GuiConsole::load_skin(INIFile *inifile)
+void GuiConsole::load_style(INIFile *inifile)
 {
   load_fonts(inifile);
   load_controls_skin(inifile);
@@ -37,7 +44,7 @@ void GuiConsole::load_skin(INIFile *inifile)
 
 void GuiConsole::load_fonts(INIFile* inifile)
 {
-  FontsManager.load(inifile);
+  FontsManager->load(inifile);
 }
 
 void GuiConsole::load_controls_skin(INIFile *inifile)
@@ -75,7 +82,7 @@ void GuiConsole::load_controls_skin(INIFile *inifile)
 
 void GuiConsole::handle_player_input(std::string cmd)
 {
-  cmd_exec.execute(cmd);
+  cmd_exec->execute(cmd);
 }
 
 void GuiConsole::retrive_command_history(QKeyEvent *event)
@@ -84,10 +91,10 @@ void GuiConsole::retrive_command_history(QKeyEvent *event)
 
   if(event->key() == Qt::Key_Up)
   {
-    if (index+1 < cmd_exec.log().size())
+    if (index+1 < cmd_exec->log().size())
     {
       ++index;
-      ui->c_msg->setText( cmd_exec.log().retrive(index).c_str() );
+      ui->c_msg->setText( cmd_exec->log().retrive(index).c_str() );
     }
   }
 
@@ -96,7 +103,7 @@ void GuiConsole::retrive_command_history(QKeyEvent *event)
     if (index > 0)
     {
       --index;
-      ui->c_msg->setText( cmd_exec.log().retrive(index).c_str() );
+      ui->c_msg->setText( cmd_exec->log().retrive(index).c_str() );
     }
   }
 
@@ -113,7 +120,7 @@ void GuiConsole::keyPressEvent(QKeyEvent *event)
 
 void GuiConsole::append(std::string txt, Font efont)
 {
-  FontConf& font = FontsManager.get(efont);
+  FontConf& font = FontsManager->get(efont);
 
   ui->c_log->setFontItalic(font.italic);
   ui->c_log->setFontPointSize(font.size);
@@ -130,7 +137,7 @@ void GuiConsole::append(std::string txt, Font efont)
 
 void GuiConsole::append_anim(std::string text, Font efont, int interval)
 {
-  FontConf& font = FontsManager.get(efont);
+  FontConf& font = FontsManager->get(efont);
 
   QString txt = text.c_str();
   QString fw_b, fw_e;

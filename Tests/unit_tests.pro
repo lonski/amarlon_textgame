@@ -29,4 +29,4 @@ unix:LIBS += -lsoci_core \
 HEADERS += testlocation.h
 SOURCES += testlocation.cpp main.cpp
 
-include(../sors.pri)
+include(sors.pri)

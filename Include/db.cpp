@@ -3,12 +3,13 @@
 #include <fstream>
 #include "soci-firebird.h"
 #include "db.h"
+#include <QDir>
 
 using namespace std;
 using namespace soci;
 
-string DB::_db_file = "/home/pi/db/data.fdb";
-string DB::_db_log_file = "../db.log";
+string DB::_db_file( "/home/pi/db/data.fdb");
+string DB::_db_log_file( "db.log" );
 string DB::_db_server = "192.168.1.5";
 
 //===DB Object
@@ -138,7 +139,7 @@ void DB::InitDatabase()
     _session = new soci::session;
   }
 
-  _session->open(*soci::factory_firebird(), "service="+_db_server+":/"+_db_file+" user=SYSDBA password=sl1wkowe");
+  _session->open(*soci::factory_firebird(), "service="+_db_server+":"+_db_file+" user=SYSDBA password=sl1wkowe");
 
   _log_stream = new ofstream(_db_log_file, ios::app);
   _session->set_log_stream(_log_stream);

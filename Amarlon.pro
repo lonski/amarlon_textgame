@@ -7,11 +7,6 @@
 QT       += core gui
 CONFIG += c++11
 
-QT  += testlib
-LIBS += -lgcov
-QMAKE_CXXFLAGS += -g -Wall -fprofile-arcs -ftest-coverage -O0
-QMAKE_LDFLAGS += -g -Wall -fprofile-arcs -ftest-coverage  -O0
-
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Amarlon
@@ -36,12 +31,9 @@ unix:LIBS += -lsoci_core \
 
 SOURCES += main.cpp\
        Gui/game.cpp \
-   Tests/testlocation.cpp \
    World/location.cpp \
-   Tests/testdb.cpp \
    Equipment/item.cpp \
    Include/db.cpp \
-   Tests/testitems.cpp \
    Equipment/ordinaryitem.cpp \
    Equipment/weapon.cpp \
    Equipment/armor.cpp \
@@ -51,8 +43,6 @@ SOURCES += main.cpp\
    Equipment/shield.cpp \
    World/locationobject.cpp \
    Creatures/creature.cpp \
-   Tests/testfun.cpp \
-   Tests/testcreature.cpp \
    Creatures/creaturemodificator.cpp \
    Creatures/creaturestats.cpp \
    Creatures/bodypart.cpp \
@@ -63,7 +53,6 @@ SOURCES += main.cpp\
    Creatures/player.cpp \
    Commands/command.cpp \
    Commands/commandlogger.cpp \
-   Tests/testcommands.cpp \
    Commands/commandparser.cpp \
    Commands/commandexecutor.cpp \
    Commands/go.cpp \
@@ -87,14 +76,11 @@ SOURCES += main.cpp\
     Gui/gui_console.cpp
 
 HEADERS  += Gui/game.h \
-    Tests/testlocation.h \
     World/location.h \
-    Tests/testdb.h \
     Include/exceptions.h \
     Equipment/item.h \
     Include/prototypemanager.h \
     Include/db.h \
-    Tests/testitems.h \
     Equipment/ordinaryitem.h \
     Equipment/weapon.h \
     Equipment/armor.h \
@@ -104,8 +90,6 @@ HEADERS  += Gui/game.h \
     Equipment/shield.h \
     World/locationobject.h \
     Creatures/creature.h \
-    Tests/testfun.h \
-    Tests/testcreature.h \
     Creatures/creaturemodificator.h \
     Creatures/creaturestats.h \
     Creatures/bodypart.h \
@@ -116,7 +100,6 @@ HEADERS  += Gui/game.h \
     Creatures/player.h \
     Commands/command.h \
     Commands/commandlogger.h \
-    Tests/testcommands.h \
     Commands/commandparser.h \
     Commands/commandexecutor.h \
     Commands/go.h \

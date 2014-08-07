@@ -3,16 +3,17 @@
 
 #include <deque>
 #include <string>
+#include "Include/typedefs/def_basetypes.h"
 
 class CommandLogger
 {
-  const uint log_size;
+  const u16 log_size;
   std::deque<std::string> _commands;
 public:
-  CommandLogger(uint logsize = 1000);
+  CommandLogger(u16 logsize = 1000);
 
   void log(std::string cmd);
-  std::string retrive(uint index);
+  std::string retrive(u16 index);
   size_t size() const { return _commands.size(); }
 };
 

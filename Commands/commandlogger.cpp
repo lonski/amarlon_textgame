@@ -1,6 +1,6 @@
 #include "commandlogger.h"
 
-CommandLogger::CommandLogger(uint logsize)
+CommandLogger::CommandLogger(u16 logsize)
   : log_size(logsize)
 {
 }
@@ -14,7 +14,7 @@ void CommandLogger::log(std::string cmd)
   }
 }
 
-std::string CommandLogger::retrive(uint index)
+std::string CommandLogger::retrive(u16 index)
 {
   std::string result;
 

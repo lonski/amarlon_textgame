@@ -7,9 +7,9 @@
 using namespace std;
 using namespace soci;
 
-string DB::_db_file = "../Data/data.fdb";
-string DB::_db_log_file = "../Data/db.log";
-string DB::_db_server = "localhost";
+string DB::_db_file = "/home/pi/db/data.fdb";
+string DB::_db_log_file = "../db.log";
+string DB::_db_server = "192.168.1.5";
 
 //===DB Object
 void DBObject::saveToDB()

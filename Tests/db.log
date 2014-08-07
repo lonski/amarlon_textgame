@@ -1,0 +1,763 @@
+SELECT ref FROM item_containers WHERE otable='locations' and oref=1
+SELECT name, otable, oref, max_weight, items FROM item_containers WHERE ref=644
+SELECT ref FROM item_containers WHERE otable='locations' and oref=3
+SELECT * FROM locations WHERE ref=3
+SELECT ref FROM creatures WHERE location=3
+SELECT * FROM loc_neighbours WHERE location=3
+SELECT ref FROM item_containers WHERE otable='locations' and oref=2
+SELECT ref FROM item_containers WHERE otable='locations' and oref=1
+SELECT name, otable, oref, max_weight, items FROM item_containers WHERE ref=644
+SELECT ref FROM item_containers WHERE otable='locations' and oref=4
+SELECT name, otable, oref, max_weight, items FROM item_containers WHERE ref=645
+SELECT ref FROM item_containers WHERE otable='locations' and oref=5
+SELECT ref FROM item_containers WHERE otable='locations' and oref=5
+SELECT * FROM locations WHERE ref=5
+SELECT ref FROM creatures WHERE location=5
+SELECT * FROM loc_neighbours WHERE location=5
+SELECT ref FROM item_containers WHERE otable='locations' and oref=3
+SELECT ref FROM item_containers WHERE otable='locations' and oref=4
+SELECT name, otable, oref, max_weight, items FROM item_containers WHERE ref=645
+SELECT ref FROM item_containers WHERE otable='locations' and oref=6
+SELECT * FROM locations WHERE ref=4
+SELECT ref FROM creatures WHERE location=4
+SELECT * FROM loc_neighbours WHERE location=4
+SELECT ref FROM item_containers WHERE otable='locations' and oref=1
+SELECT name, otable, oref, max_weight, items FROM item_containers WHERE ref=644
+SELECT ref FROM item_containers WHERE otable='locations' and oref=2
+SELECT * FROM locations WHERE ref=6
+SELECT ref FROM creatures WHERE location=6
+SELECT * FROM loc_neighbours WHERE location=6
+SELECT ref FROM item_containers WHERE otable='locations' and oref=7
+SELECT * FROM locations WHERE ref=3
+SELECT ref FROM creatures WHERE location=3
+SELECT * FROM loc_neighbours WHERE location=3
+SELECT ref FROM item_containers WHERE otable='locations' and oref=5
+SELECT * FROM locations WHERE ref=5
+SELECT ref FROM creatures WHERE location=5
+SELECT * FROM loc_neighbours WHERE location=5
+SELECT ref FROM item_containers WHERE otable='locations' and oref=3
+SELECT ref FROM item_containers WHERE otable='locations' and oref=4
+SELECT name, otable, oref, max_weight, items FROM item_containers WHERE ref=645
+SELECT ref FROM item_containers WHERE otable='locations' and oref=6
+UPDATE locations SET  NAME='changed_name' ,DESCRIPTION='Testowa lokacja5' WHERE ref=5
+UPDATE locations SET  NAME='Test5' ,DESCRIPTION='Testowa lokacja5' WHERE ref=5
+SELECT ref FROM item_containers WHERE otable='locations' and oref=1
+SELECT name, otable, oref, max_weight, items FROM item_containers WHERE ref=644
+SELECT ref FROM item_containers WHERE otable='locations' and oref=3
+SELECT * FROM locations WHERE ref=3
+SELECT ref FROM creatures WHERE location=3
+SELECT * FROM loc_neighbours WHERE location=3
+SELECT ref FROM item_containers WHERE otable='locations' and oref=2
+SELECT ref FROM item_containers WHERE otable='locations' and oref=1
+SELECT name, otable, oref, max_weight, items FROM item_containers WHERE ref=644
+SELECT ref FROM item_containers WHERE otable='locations' and oref=4
+SELECT name, otable, oref, max_weight, items FROM item_containers WHERE ref=645
+SELECT ref FROM item_containers WHERE otable='locations' and oref=5
+SELECT ref FROM item_containers WHERE otable='locations' and oref=5
+SELECT * FROM locations WHERE ref=5
+SELECT ref FROM creatures WHERE location=5
+SELECT * FROM loc_neighbours WHERE location=5
+SELECT ref FROM item_containers WHERE otable='locations' and oref=3
+SELECT ref FROM item_containers WHERE otable='locations' and oref=4
+SELECT name, otable, oref, max_weight, items FROM item_containers WHERE ref=645
+SELECT ref FROM item_containers WHERE otable='locations' and oref=6
+SELECT * FROM locations WHERE ref=4
+SELECT ref FROM creatures WHERE location=4
+SELECT * FROM loc_neighbours WHERE location=4
+SELECT ref FROM item_containers WHERE otable='locations' and oref=1
+SELECT name, otable, oref, max_weight, items FROM item_containers WHERE ref=644
+SELECT ref FROM item_containers WHERE otable='locations' and oref=2
+SELECT * FROM locations WHERE ref=6
+SELECT ref FROM creatures WHERE location=6
+SELECT * FROM loc_neighbours WHERE location=6
+SELECT ref FROM item_containers WHERE otable='locations' and oref=7
+SELECT * FROM locations WHERE ref=3
+SELECT ref FROM creatures WHERE location=3
+SELECT * FROM loc_neighbours WHERE location=3
+SELECT ref FROM item_containers WHERE otable='locations' and oref=5
+SELECT * FROM locations WHERE ref=5
+SELECT ref FROM creatures WHERE location=5
+SELECT * FROM loc_neighbours WHERE location=5
+SELECT ref FROM item_containers WHERE otable='locations' and oref=3
+SELECT ref FROM item_containers WHERE otable='locations' and oref=4
+SELECT name, otable, oref, max_weight, items FROM item_containers WHERE ref=645
+SELECT ref FROM item_containers WHERE otable='locations' and oref=6
+UPDATE locations SET  NAME='changed_name' ,DESCRIPTION='Testowa lokacja5' WHERE ref=5
+UPDATE locations SET  NAME='Test5' ,DESCRIPTION='Testowa lokacja5' WHERE ref=5
+SELECT obj_type, item_type FROM items WHERE ref=2
+SELECT * FROM items WHERE ref=2
+SELECT ref FROM crt_mods WHERE otable='items' and oref=2
+SELECT ref FROM item_containers WHERE otable='items' and oref=2
+SELECT obj_type, item_type FROM items WHERE ref=4
+SELECT obj_type, item_type FROM items WHERE ref=2
+SELECT * FROM items WHERE ref=2
+SELECT ref FROM crt_mods WHERE otable='items' and oref=2
+SELECT ref FROM item_containers WHERE otable='items' and oref=2
+SELECT obj_type, item_type FROM items WHERE ref=1
+SELECT * FROM items WHERE ref=1
+SELECT ref FROM crt_mods WHERE otable='items' and oref=1
+SELECT ref FROM item_containers WHERE otable='items' and oref=1
+SELECT obj_type, item_type FROM items WHERE ref=2
+SELECT * FROM items WHERE ref=2
+SELECT ref FROM crt_mods WHERE otable='items' and oref=2
+SELECT ref FROM item_containers WHERE otable='items' and oref=2
+SELECT obj_type, item_type FROM items WHERE ref=79
+SELECT * FROM items WHERE ref=79
+SELECT ref FROM crt_mods WHERE otable='items' and oref=79
+SELECT ref FROM item_containers WHERE otable='items' and oref=79
+SELECT obj_type, item_type FROM items WHERE ref=82
+SELECT * FROM items WHERE ref=82
+SELECT ref FROM crt_mods WHERE otable='items' and oref=82
+SELECT ref FROM item_containers WHERE otable='items' and oref=82
+SELECT obj_type, item_type FROM items WHERE ref=2
+SELECT * FROM items WHERE ref=2
+SELECT ref FROM crt_mods WHERE otable='items' and oref=2
+SELECT ref FROM item_containers WHERE otable='items' and oref=2
+UPDATE items SET  ARM_DR_PIERCING=5 ,ARM_DR_SLASHING=6 ,ARM_DR_BASHING=7 WHERE ref=2
+UPDATE items SET   ITEM_TYPE = 3, NAME = 'TestIns2', DESCRIPTION = 'lolo', WEIGHT = 1.93, SHOP_VALUE = 333, CONDITION = 2, DURABILITY = 7, BODY_PARTS = '2,1,', STACKABLE = 0 WHERE ref = 2
+SELECT obj_type, item_type FROM items WHERE ref=2
+SELECT * FROM items WHERE ref=2
+SELECT ref FROM crt_mods WHERE otable='items' and oref=2
+SELECT ref FROM item_containers WHERE otable='items' and oref=2
+UPDATE items SET  ARM_DR_PIERCING=5 ,ARM_DR_SLASHING=6 ,ARM_DR_BASHING=7 WHERE ref=2
+UPDATE items SET   ITEM_TYPE = 3, NAME = 'TestIns2', DESCRIPTION = 'lolo', WEIGHT = 1.93, SHOP_VALUE = 32, CONDITION = 2, DURABILITY = 7, BODY_PARTS = '2,1,', STACKABLE = 0 WHERE ref = 2
+UPDATE items SET  ARM_DR_PIERCING=5 ,ARM_DR_SLASHING=6 ,ARM_DR_BASHING=7 WHERE ref=2
+UPDATE items SET   ITEM_TYPE = 3, NAME = 'TestIns2', DESCRIPTION = 'lolo', WEIGHT = 1.93, SHOP_VALUE = 32, CONDITION = 2, DURABILITY = 7, BODY_PARTS = '2,1,', STACKABLE = 0 WHERE ref = 2
+SELECT * FROM items WHERE ref=2
+SELECT ref FROM crt_mods WHERE otable='items' and oref=2
+SELECT ref FROM item_containers WHERE otable='items' and oref=2
+UPDATE items SET  ARM_DR_PIERCING=5 ,ARM_DR_SLASHING=6 ,ARM_DR_BASHING=7 WHERE ref=2
+UPDATE items SET   ITEM_TYPE = 4, NAME = 'xx', DESCRIPTION = 'x', WEIGHT = 10, SHOP_VALUE = 32, CONDITION = 1, DURABILITY = 5, BODY_PARTS = '1,3,', STACKABLE = 0 WHERE ref = 2
+SELECT obj_type, item_type FROM items WHERE ref=2
+SELECT * FROM items WHERE ref=2
+SELECT ref FROM crt_mods WHERE otable='items' and oref=2
+SELECT ref FROM item_containers WHERE otable='items' and oref=2
+UPDATE items SET FOD_HUNGER=0 WHERE ref=2
+UPDATE items SET   ITEM_TYPE = 3, NAME = 'TestIns2', DESCRIPTION = 'lolo', WEIGHT = 1.93, SHOP_VALUE = 32, CONDITION = 2, DURABILITY = 7, BODY_PARTS = '1,2,', STACKABLE = 0 WHERE ref = 2
+SELECT obj_type, item_type FROM items WHERE ref=1
+SELECT * FROM items WHERE ref=1
+SELECT ref FROM crt_mods WHERE otable='items' and oref=1
+SELECT ref FROM item_containers WHERE otable='items' and oref=1
+UPDATE items SET  WPN_SKILL=9 ,WPN_D_PIERCING=2 ,WPN_D_SLASHING=3 ,WPN_D_BASHING=4 ,WPN_DEFENCE=7 ,WPN_ATTACK=3 ,WPN_REFLEX=2 ,WPN_STR_REQ=4 ,WPN_RANGE=6 WHERE ref=1
+UPDATE items SET   ITEM_TYPE = 2, NAME = 'TestIns1', DESCRIPTION = 'blabla', WEIGHT = 2.3, SHOP_VALUE = 43, CONDITION = 2, DURABILITY = 0, BODY_PARTS = '', STACKABLE = 0 WHERE ref = 1
+SELECT obj_type, item_type FROM items WHERE ref=1
+SELECT * FROM items WHERE ref=1
+SELECT ref FROM crt_mods WHERE otable='items' and oref=1
+SELECT ref FROM item_containers WHERE otable='items' and oref=1
+UPDATE items SET  WPN_SKILL=1 ,WPN_D_PIERCING=1 ,WPN_D_SLASHING=2 ,WPN_D_BASHING=3 ,WPN_DEFENCE=6 ,WPN_ATTACK=2 ,WPN_REFLEX=1 ,WPN_STR_REQ=3 ,WPN_RANGE=5 WHERE ref=1
+UPDATE items SET   ITEM_TYPE = 2, NAME = 'TestIns1', DESCRIPTION = 'blabla', WEIGHT = 2.3, SHOP_VALUE = 43, CONDITION = 2, DURABILITY = 0, BODY_PARTS = '', STACKABLE = 0 WHERE ref = 1
+SELECT obj_type, item_type FROM items WHERE ref=2
+SELECT * FROM items WHERE ref=2
+SELECT ref FROM crt_mods WHERE otable='items' and oref=2
+SELECT ref FROM item_containers WHERE otable='items' and oref=2
+UPDATE items SET  ARM_DR_PIERCING=2 ,ARM_DR_SLASHING=3 ,ARM_DR_BASHING=4 WHERE ref=2
+UPDATE items SET   ITEM_TYPE = 3, NAME = 'TestIns2', DESCRIPTION = 'lolo', WEIGHT = 1.93, SHOP_VALUE = 32, CONDITION = 2, DURABILITY = 7, BODY_PARTS = '1,2,', STACKABLE = 0 WHERE ref = 2
+SELECT obj_type, item_type FROM items WHERE ref=2
+SELECT * FROM items WHERE ref=2
+SELECT ref FROM crt_mods WHERE otable='items' and oref=2
+SELECT ref FROM item_containers WHERE otable='items' and oref=2
+UPDATE items SET  ARM_DR_PIERCING=5 ,ARM_DR_SLASHING=6 ,ARM_DR_BASHING=7 WHERE ref=2
+UPDATE items SET   ITEM_TYPE = 3, NAME = 'TestIns2', DESCRIPTION = 'lolo', WEIGHT = 1.93, SHOP_VALUE = 32, CONDITION = 2, DURABILITY = 7, BODY_PARTS = '1,2,', STACKABLE = 0 WHERE ref = 2
+SELECT obj_type, item_type FROM items WHERE ref=79
+SELECT * FROM items WHERE ref=79
+SELECT ref FROM crt_mods WHERE otable='items' and oref=79
+SELECT ref FROM item_containers WHERE otable='items' and oref=79
+UPDATE items SET FOD_HUNGER=20 WHERE ref=79
+UPDATE items SET   ITEM_TYPE = 4, NAME = 'TestInsFood', DESCRIPTION = 'jedzonko', WEIGHT = 1, SHOP_VALUE = 23, CONDITION = 2, DURABILITY = 0, BODY_PARTS = '', STACKABLE = 0 WHERE ref = 79
+SELECT obj_type, item_type FROM items WHERE ref=79
+SELECT * FROM items WHERE ref=79
+SELECT ref FROM crt_mods WHERE otable='items' and oref=79
+SELECT ref FROM item_containers WHERE otable='items' and oref=79
+UPDATE items SET FOD_HUNGER=35 WHERE ref=79
+UPDATE items SET   ITEM_TYPE = 4, NAME = 'TestInsFood', DESCRIPTION = 'jedzonko', WEIGHT = 1, SHOP_VALUE = 23, CONDITION = 2, DURABILITY = 0, BODY_PARTS = '', STACKABLE = 0 WHERE ref = 79
+SELECT obj_type, item_type FROM items WHERE ref=82
+SELECT * FROM items WHERE ref=82
+SELECT ref FROM crt_mods WHERE otable='items' and oref=82
+SELECT ref FROM item_containers WHERE otable='items' and oref=82
+UPDATE items SET SHD_DEFENCE=11 WHERE ref=82
+UPDATE items SET   ITEM_TYPE = 7, NAME = '', DESCRIPTION = '', WEIGHT = 0, SHOP_VALUE = 0, CONDITION = 0, DURABILITY = 0, BODY_PARTS = '', STACKABLE = 0 WHERE ref = 82
+SELECT obj_type, item_type FROM items WHERE ref=82
+SELECT * FROM items WHERE ref=82
+SELECT ref FROM crt_mods WHERE otable='items' and oref=82
+SELECT ref FROM item_containers WHERE otable='items' and oref=82
+UPDATE items SET SHD_DEFENCE=9 WHERE ref=82
+UPDATE items SET   ITEM_TYPE = 7, NAME = '', DESCRIPTION = '', WEIGHT = 0, SHOP_VALUE = 0, CONDITION = 0, DURABILITY = 0, BODY_PARTS = '', STACKABLE = 0 WHERE ref = 82
+SELECT obj_type, item_type FROM items WHERE ref=2
+SELECT * FROM items WHERE ref=2
+SELECT ref FROM crt_mods WHERE otable='items' and oref=2
+SELECT ref FROM item_containers WHERE otable='items' and oref=2
+UPDATE items SET  ARM_DR_PIERCING=5 ,ARM_DR_SLASHING=6 ,ARM_DR_BASHING=7 WHERE ref=2
+UPDATE items SET   ITEM_TYPE = 3, NAME = 'TestIns2', DESCRIPTION = 'lolo', WEIGHT = 1.93, SHOP_VALUE = 32, CONDITION = 2, DURABILITY = 7, BODY_PARTS = '2,1,', STACKABLE = 0 WHERE ref = 2
+SELECT obj_type, item_type FROM items WHERE ref=2
+SELECT * FROM items WHERE ref=2
+SELECT ref FROM crt_mods WHERE otable='items' and oref=2
+SELECT ref FROM item_containers WHERE otable='items' and oref=2
+SELECT * FROM items WHERE ref=2
+SELECT ref FROM crt_mods WHERE otable='items' and oref=2
+SELECT ref FROM item_containers WHERE otable='items' and oref=2
+SELECT ref, prototype FROM items WHERE obj_type=2
+SELECT obj_type, item_type FROM items WHERE ref=3
+SELECT * FROM items WHERE ref=3
+SELECT ref FROM crt_mods WHERE otable='items' and oref=3
+SELECT ref FROM item_containers WHERE otable='items' and oref=3
+SELECT obj_type, item_type FROM items WHERE ref=4
+SELECT * FROM items WHERE ref=4
+SELECT ref FROM crt_mods WHERE otable='items' and oref=4
+SELECT ref FROM item_containers WHERE otable='items' and oref=4
+SELECT obj_type, item_type FROM items WHERE ref=5
+SELECT * FROM items WHERE ref=5
+SELECT ref FROM crt_mods WHERE otable='items' and oref=5
+SELECT ref FROM item_containers WHERE otable='items' and oref=5
+SELECT obj_type, item_type FROM items WHERE ref=14
+SELECT * FROM items WHERE ref=14
+SELECT ref FROM crt_mods WHERE otable='items' and oref=14
+SELECT ref FROM item_containers WHERE otable='items' and oref=14
+SELECT obj_type, item_type FROM items WHERE ref=6
+SELECT * FROM items WHERE ref=6
+SELECT ref FROM crt_mods WHERE otable='items' and oref=6
+SELECT ref FROM item_containers WHERE otable='items' and oref=6
+SELECT obj_type, item_type FROM items WHERE ref=7
+SELECT * FROM items WHERE ref=7
+SELECT ref FROM crt_mods WHERE otable='items' and oref=7
+SELECT ref FROM item_containers WHERE otable='items' and oref=7
+SELECT obj_type, item_type FROM items WHERE ref=8
+SELECT * FROM items WHERE ref=8
+SELECT ref FROM crt_mods WHERE otable='items' and oref=8
+SELECT ref FROM item_containers WHERE otable='items' and oref=8
+SELECT obj_type, item_type FROM items WHERE ref=9
+SELECT * FROM items WHERE ref=9
+SELECT ref FROM crt_mods WHERE otable='items' and oref=9
+SELECT ref FROM item_containers WHERE otable='items' and oref=9
+SELECT obj_type, item_type FROM items WHERE ref=10
+SELECT * FROM items WHERE ref=10
+SELECT ref FROM crt_mods WHERE otable='items' and oref=10
+SELECT ref FROM item_containers WHERE otable='items' and oref=10
+SELECT obj_type, item_type FROM items WHERE ref=11
+SELECT * FROM items WHERE ref=11
+SELECT ref FROM crt_mods WHERE otable='items' and oref=11
+SELECT ref FROM item_containers WHERE otable='items' and oref=11
+SELECT obj_type, item_type FROM items WHERE ref=12
+SELECT * FROM items WHERE ref=12
+SELECT ref FROM crt_mods WHERE otable='items' and oref=12
+SELECT ref FROM item_containers WHERE otable='items' and oref=12
+SELECT obj_type, item_type FROM items WHERE ref=13
+SELECT * FROM items WHERE ref=13
+SELECT ref FROM crt_mods WHERE otable='items' and oref=13
+SELECT ref FROM item_containers WHERE otable='items' and oref=13
+SELECT obj_type, item_type FROM items WHERE ref=123
+SELECT * FROM items WHERE ref=123
+SELECT ref FROM crt_mods WHERE otable='items' and oref=123
+SELECT * FROM crt_mods WHERE ref=15
+SELECT ref FROM item_containers WHERE otable='items' and oref=123
+SELECT obj_type, item_type FROM items WHERE ref=124
+SELECT * FROM items WHERE ref=124
+SELECT ref FROM crt_mods WHERE otable='items' and oref=124
+SELECT ref FROM item_containers WHERE otable='items' and oref=124
+SELECT obj_type, item_type FROM items WHERE ref=122
+SELECT * FROM items WHERE ref=122
+SELECT ref FROM crt_mods WHERE otable='items' and oref=122
+SELECT * FROM crt_mods WHERE ref=14
+SELECT ref FROM item_containers WHERE otable='items' and oref=122
+SELECT obj_type, item_type FROM items WHERE ref=125
+SELECT * FROM items WHERE ref=125
+SELECT ref FROM crt_mods WHERE otable='items' and oref=125
+SELECT ref FROM item_containers WHERE otable='items' and oref=125
+UPDATE items SET  WPN_SKILL=0 ,WPN_D_PIERCING=0 ,WPN_D_SLASHING=0 ,WPN_D_BASHING=0 ,WPN_DEFENCE=0 ,WPN_ATTACK=0 ,WPN_REFLEX=0 ,WPN_STR_REQ=0 ,WPN_RANGE=0 WHERE ref=4
+UPDATE items SET   ITEM_TYPE = 2, NAME = 'TestTpl2', DESCRIPTION = 'lil', WEIGHT = 4.9, SHOP_VALUE = 432, CONDITION = 2, DURABILITY = 0, BODY_PARTS = '', STACKABLE = 0 WHERE ref = 4
+EXECUTE PROCEDURE CLONE_ITEM(4)
+SELECT obj_type, item_type FROM items WHERE ref=7994
+SELECT * FROM items WHERE ref=7994
+SELECT ref FROM crt_mods WHERE otable='items' and oref=7994
+SELECT ref FROM item_containers WHERE otable='items' and oref=7994
+delete from items where ref = 7994
+SELECT name, otable, oref, max_weight, items FROM item_containers WHERE ref=1
+select new_ref from create_new_item_container
+UPDATE items SET  WPN_SKILL=0 ,WPN_D_PIERCING=0 ,WPN_D_SLASHING=0 ,WPN_D_BASHING=0 ,WPN_DEFENCE=0 ,WPN_ATTACK=0 ,WPN_REFLEX=0 ,WPN_STR_REQ=0 ,WPN_RANGE=0 WHERE ref=4
+UPDATE items SET   ITEM_TYPE = 2, NAME = 'TestTpl2', DESCRIPTION = 'lil', WEIGHT = 4.9, SHOP_VALUE = 432, CONDITION = 2, DURABILITY = 0, BODY_PARTS = '', STACKABLE = 0 WHERE ref = 4
+EXECUTE PROCEDURE CLONE_ITEM(4)
+SELECT obj_type, item_type FROM items WHERE ref=7995
+SELECT * FROM items WHERE ref=7995
+SELECT ref FROM crt_mods WHERE otable='items' and oref=7995
+SELECT ref FROM item_containers WHERE otable='items' and oref=7995
+UPDATE items SET   ITEM_TYPE = 1, NAME = 'TestTpl1', DESCRIPTION = 'trolo', WEIGHT = 0.1, SHOP_VALUE = 123, CONDITION = 2, DURABILITY = 0, BODY_PARTS = '', STACKABLE = 0 WHERE ref = 3
+EXECUTE PROCEDURE CLONE_ITEM(3)
+SELECT obj_type, item_type FROM items WHERE ref=7996
+SELECT * FROM items WHERE ref=7996
+SELECT ref FROM crt_mods WHERE otable='items' and oref=7996
+SELECT ref FROM item_containers WHERE otable='items' and oref=7996
+UPDATE item_containers SET  MAX_WEIGHT=10 ,NAME='TestCont' ,OREF=0 ,OTABLE='' ,ITEMS='7995,1;7996,1;' WHERE ref=1658
+SELECT name, otable, oref, max_weight, items FROM item_containers WHERE ref=1658
+SELECT obj_type, item_type FROM items WHERE ref=7995
+SELECT * FROM items WHERE ref=7995
+SELECT ref FROM crt_mods WHERE otable='items' and oref=7995
+SELECT ref FROM item_containers WHERE otable='items' and oref=7995
+SELECT obj_type, item_type FROM items WHERE ref=7996
+SELECT * FROM items WHERE ref=7996
+SELECT ref FROM crt_mods WHERE otable='items' and oref=7996
+SELECT ref FROM item_containers WHERE otable='items' and oref=7996
+UPDATE item_containers SET  MAX_WEIGHT=10 ,NAME='TestCont' ,OREF=0 ,OTABLE='' ,ITEMS='' WHERE ref=1658
+SELECT name, otable, oref, max_weight, items FROM item_containers WHERE ref=1658
+delete from item_containers where ref = 1658
+delete from items where ref = 7995
+delete from items where ref = 7996
+select new_ref from create_new_item_container
+SELECT obj_type, item_type FROM items WHERE ref=121
+SELECT * FROM items WHERE ref=121
+SELECT ref FROM crt_mods WHERE otable='items' and oref=121
+SELECT ref FROM item_containers WHERE otable='items' and oref=121
+UPDATE item_containers SET  MAX_WEIGHT=10 ,NAME='TestCont' ,OREF=0 ,OTABLE='' ,ITEMS='121,10;' WHERE ref=1659
+SELECT name, otable, oref, max_weight, items FROM item_containers WHERE ref=1659
+SELECT obj_type, item_type FROM items WHERE ref=121
+SELECT * FROM items WHERE ref=121
+SELECT ref FROM crt_mods WHERE otable='items' and oref=121
+SELECT ref FROM item_containers WHERE otable='items' and oref=121
+UPDATE item_containers SET  MAX_WEIGHT=10 ,NAME='TestCont' ,OREF=0 ,OTABLE='' ,ITEMS='121,14;' WHERE ref=1659
+SELECT name, otable, oref, max_weight, items FROM item_containers WHERE ref=1659
+SELECT obj_type, item_type FROM items WHERE ref=121
+SELECT * FROM items WHERE ref=121
+SELECT ref FROM crt_mods WHERE otable='items' and oref=121
+SELECT ref FROM item_containers WHERE otable='items' and oref=121
+UPDATE items SET  WPN_SKILL=0 ,WPN_D_PIERCING=0 ,WPN_D_SLASHING=0 ,WPN_D_BASHING=0 ,WPN_DEFENCE=0 ,WPN_ATTACK=0 ,WPN_REFLEX=0 ,WPN_STR_REQ=0 ,WPN_RANGE=0 WHERE ref=4
+UPDATE items SET   ITEM_TYPE = 2, NAME = 'TestTpl2', DESCRIPTION = 'lil', WEIGHT = 4.9, SHOP_VALUE = 432, CONDITION = 2, DURABILITY = 0, BODY_PARTS = '', STACKABLE = 0 WHERE ref = 4
+EXECUTE PROCEDURE CLONE_ITEM(4)
+SELECT obj_type, item_type FROM items WHERE ref=7997
+SELECT * FROM items WHERE ref=7997
+SELECT ref FROM crt_mods WHERE otable='items' and oref=7997
+SELECT ref FROM item_containers WHERE otable='items' and oref=7997
+UPDATE item_containers SET  MAX_WEIGHT=10 ,NAME='TestCont' ,OREF=0 ,OTABLE='' ,ITEMS='121,16;7997,1;' WHERE ref=1659
+SELECT name, otable, oref, max_weight, items FROM item_containers WHERE ref=1659
+SELECT obj_type, item_type FROM items WHERE ref=121
+SELECT * FROM items WHERE ref=121
+SELECT ref FROM crt_mods WHERE otable='items' and oref=121
+SELECT ref FROM item_containers WHERE otable='items' and oref=121
+SELECT obj_type, item_type FROM items WHERE ref=7997
+SELECT * FROM items WHERE ref=7997
+SELECT ref FROM crt_mods WHERE otable='items' and oref=7997
+SELECT ref FROM item_containers WHERE otable='items' and oref=7997
+UPDATE item_containers SET  MAX_WEIGHT=10 ,NAME='TestCont' ,OREF=0 ,OTABLE='' ,ITEMS='121,4;7997,1;' WHERE ref=1659
+SELECT name, otable, oref, max_weight, items FROM item_containers WHERE ref=1659
+SELECT obj_type, item_type FROM items WHERE ref=121
+SELECT * FROM items WHERE ref=121
+SELECT ref FROM crt_mods WHERE otable='items' and oref=121
+SELECT ref FROM item_containers WHERE otable='items' and oref=121
+SELECT obj_type, item_type FROM items WHERE ref=7997
+SELECT * FROM items WHERE ref=7997
+SELECT ref FROM crt_mods WHERE otable='items' and oref=7997
+SELECT ref FROM item_containers WHERE otable='items' and oref=7997
+UPDATE item_containers SET  MAX_WEIGHT=10 ,NAME='TestCont' ,OREF=0 ,OTABLE='' ,ITEMS='7997,1;' WHERE ref=1659
+SELECT name, otable, oref, max_weight, items FROM item_containers WHERE ref=1659
+SELECT obj_type, item_type FROM items WHERE ref=7997
+SELECT * FROM items WHERE ref=7997
+SELECT ref FROM crt_mods WHERE otable='items' and oref=7997
+SELECT ref FROM item_containers WHERE otable='items' and oref=7997
+delete from item_containers where ref = 1659
+delete from items where ref = 7997
+UPDATE items SET   ITEM_TYPE = 1, NAME = '', DESCRIPTION = '', WEIGHT = 0, SHOP_VALUE = 0, CONDITION = 0, DURABILITY = 0, BODY_PARTS = '0,', STACKABLE = 0 WHERE ref = 14
+EXECUTE PROCEDURE CLONE_ITEM(14)
+SELECT obj_type, item_type FROM items WHERE ref=7998
+SELECT * FROM items WHERE ref=7998
+SELECT ref FROM crt_mods WHERE otable='items' and oref=7998
+SELECT ref FROM item_containers WHERE otable='items' and oref=7998
+select new_ref from create_new_item_container
+UPDATE item_containers SET  MAX_WEIGHT=5 ,NAME='' ,OREF=7998 ,OTABLE='items' ,ITEMS='' WHERE ref=1660
+UPDATE items SET   ITEM_TYPE = 1, NAME = 'Szkatułka', DESCRIPTION = '', WEIGHT = 0, SHOP_VALUE = 0, CONDITION = 0, DURABILITY = 0, BODY_PARTS = '0,', STACKABLE = 0 WHERE ref = 7998
+SELECT * FROM items WHERE ref=7998
+SELECT ref FROM crt_mods WHERE otable='items' and oref=7998
+SELECT ref FROM item_containers WHERE otable='items' and oref=7998
+SELECT name, otable, oref, max_weight, items FROM item_containers WHERE ref=1660
+SELECT obj_type, item_type FROM items WHERE ref=121
+SELECT * FROM items WHERE ref=121
+SELECT ref FROM crt_mods WHERE otable='items' and oref=121
+SELECT ref FROM item_containers WHERE otable='items' and oref=121
+UPDATE items SET   ITEM_TYPE = 1, NAME = 'TestTpl1', DESCRIPTION = 'trolo', WEIGHT = 0.1, SHOP_VALUE = 123, CONDITION = 2, DURABILITY = 0, BODY_PARTS = '', STACKABLE = 0 WHERE ref = 3
+EXECUTE PROCEDURE CLONE_ITEM(3)
+SELECT obj_type, item_type FROM items WHERE ref=7999
+SELECT * FROM items WHERE ref=7999
+SELECT ref FROM crt_mods WHERE otable='items' and oref=7999
+SELECT ref FROM item_containers WHERE otable='items' and oref=7999
+delete from item_containers where ref = 1660
+delete from items where ref = 7999
+delete from items where ref = 7998
+UPDATE items SET  WPN_SKILL=0 ,WPN_D_PIERCING=0 ,WPN_D_SLASHING=0 ,WPN_D_BASHING=0 ,WPN_DEFENCE=0 ,WPN_ATTACK=0 ,WPN_REFLEX=0 ,WPN_STR_REQ=0 ,WPN_RANGE=0 WHERE ref=4
+UPDATE items SET   ITEM_TYPE = 2, NAME = 'TestTpl2', DESCRIPTION = 'lil', WEIGHT = 4.9, SHOP_VALUE = 432, CONDITION = 2, DURABILITY = 0, BODY_PARTS = '', STACKABLE = 0 WHERE ref = 4
+EXECUTE PROCEDURE CLONE_ITEM(4)
+SELECT obj_type, item_type FROM items WHERE ref=8000
+SELECT * FROM items WHERE ref=8000
+SELECT ref FROM crt_mods WHERE otable='items' and oref=8000
+SELECT ref FROM item_containers WHERE otable='items' and oref=8000
+SELECT ref FROM CREATE_EMPTY_CRT_MOD
+UPDATE crt_mods SET  otable='items', oref=8000, name='', effect_time=-1, glb_test_mod=0, attributes='0;1;0;0;0;0;1;0;0;', skills='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;' WHERE ref=12366
+SELECT ref FROM CREATE_EMPTY_CRT_MOD
+UPDATE crt_mods SET  otable='items', oref=8000, name='', effect_time=-1, glb_test_mod=0, attributes='0;0;1;0;0;0;2;0;0;', skills='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;' WHERE ref=12367
+SELECT ref FROM CREATE_EMPTY_CRT_MOD
+UPDATE crt_mods SET  otable='items', oref=8000, name='', effect_time=-1, glb_test_mod=0, attributes='0;0;0;0;0;0;3;1;0;', skills='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;' WHERE ref=12368
+SELECT obj_type, item_type FROM items WHERE ref=8000
+SELECT * FROM items WHERE ref=8000
+SELECT ref FROM crt_mods WHERE otable='items' and oref=8000
+SELECT * FROM crt_mods WHERE ref=12366
+SELECT * FROM crt_mods WHERE ref=12367
+SELECT * FROM crt_mods WHERE ref=12368
+SELECT ref FROM item_containers WHERE otable='items' and oref=8000
+UPDATE crt_mods SET  otable='', oref=0, name='', effect_time=-1, glb_test_mod=0, attributes='0;0;1;0;0;0;2;0;0;', skills='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;' WHERE ref=12367
+delete from items where ref = 8000
+select first 1 ref from locations
+UPDATE items SET  ARM_DR_PIERCING=0 ,ARM_DR_SLASHING=0 ,ARM_DR_BASHING=0 WHERE ref=5
+UPDATE items SET   ITEM_TYPE = 3, NAME = 'TestTpl3', DESCRIPTION = 'takitam', WEIGHT = 9.8, SHOP_VALUE = 240, CONDITION = 2, DURABILITY = 0, BODY_PARTS = '', STACKABLE = 0 WHERE ref = 5
+EXECUTE PROCEDURE CLONE_ITEM(5)
+SELECT obj_type, item_type FROM items WHERE ref=8001
+SELECT * FROM items WHERE ref=8001
+SELECT ref FROM crt_mods WHERE otable='items' and oref=8001
+SELECT ref FROM item_containers WHERE otable='items' and oref=8001
+delete from items where ref = 8001
+UPDATE items SET  ARM_DR_PIERCING=0 ,ARM_DR_SLASHING=0 ,ARM_DR_BASHING=0 WHERE ref=5
+UPDATE items SET   ITEM_TYPE = 3, NAME = 'TestTpl3', DESCRIPTION = 'takitam', WEIGHT = 9.8, SHOP_VALUE = 240, CONDITION = 2, DURABILITY = 0, BODY_PARTS = '', STACKABLE = 0 WHERE ref = 5
+EXECUTE PROCEDURE CLONE_ITEM(5)
+SELECT obj_type, item_type FROM items WHERE ref=8002
+SELECT * FROM items WHERE ref=8002
+SELECT ref FROM crt_mods WHERE otable='items' and oref=8002
+SELECT ref FROM item_containers WHERE otable='items' and oref=8002
+delete from items where ref = 8002
+SELECT obj_type, item_type FROM items WHERE ref=121
+SELECT * FROM items WHERE ref=121
+SELECT ref FROM crt_mods WHERE otable='items' and oref=121
+SELECT ref FROM item_containers WHERE otable='items' and oref=121
+SELECT ref FROM CREATE_EMPTY_CRT_MOD
+UPDATE crt_mods SET  otable='', oref=0, name='', effect_time=-1, glb_test_mod=0, attributes='0;0;0;0;0;0;0;0;0;', skills='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;' WHERE ref=12369
+delete from crt_mods where ref = 12369
+SELECT * FROM crt_mods WHERE ref=13
+SELECT * FROM crt_mods WHERE ref=13
+SELECT ref FROM CREATE_EMPTY_CRT_MOD
+UPDATE crt_mods SET  otable='', oref=0, name='', effect_time=-1, glb_test_mod=0, attributes='0;0;0;0;0;0;0;0;0;', skills='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;' WHERE ref=12370
+UPDATE crt_mods SET  otable='', oref=0, name='lol', effect_time=-1, glb_test_mod=0, attributes='0;0;3;0;0;0;0;0;0;', skills='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;' WHERE ref=12370
+SELECT * FROM crt_mods WHERE ref=12370
+delete from crt_mods where ref = 12370
+SELECT ref FROM CREATE_EMPTY_CRT_MOD
+UPDATE crt_mods SET  otable='', oref=0, name='', effect_time=-1, glb_test_mod=0, attributes='0;1;0;0;0;0;1;0;0;', skills='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;' WHERE ref=12371
+SELECT ref FROM CREATE_EMPTY_CRT_MOD
+UPDATE crt_mods SET  otable='', oref=0, name='', effect_time=-1, glb_test_mod=0, attributes='0;0;1;0;0;0;2;0;0;', skills='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;' WHERE ref=12372
+SELECT ref FROM CREATE_EMPTY_CRT_MOD
+UPDATE crt_mods SET  otable='', oref=0, name='', effect_time=-1, glb_test_mod=0, attributes='0;0;0;0;0;0;3;1;0;', skills='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;' WHERE ref=12373
+delete from crt_mods where ref = 12371
+delete from crt_mods where ref = 12372
+delete from crt_mods where ref = 12373
+SELECT ref FROM CREATE_EMPTY_CRT_MOD
+UPDATE crt_mods SET  otable='', oref=0, name='', effect_time=10, glb_test_mod=0, attributes='0;0;0;0;0;0;0;0;0;', skills='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;' WHERE ref=12374
+SELECT ref FROM CREATE_EMPTY_CRT_MOD
+UPDATE crt_mods SET  otable='', oref=0, name='', effect_time=10, glb_test_mod=0, attributes='0;0;0;0;0;0;0;0;0;', skills='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;' WHERE ref=12375
+SELECT ref FROM CREATE_EMPTY_CRT_MOD
+UPDATE crt_mods SET  otable='', oref=0, name='', effect_time=20, glb_test_mod=0, attributes='0;0;0;0;0;0;0;0;0;', skills='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;' WHERE ref=12376
+SELECT ref FROM CREATE_EMPTY_CRT_MOD
+UPDATE crt_mods SET  otable='', oref=0, name='', effect_time=-1, glb_test_mod=0, attributes='0;0;0;0;0;0;0;0;0;', skills='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;' WHERE ref=12377
+delete from crt_mods where ref = 12374
+delete from crt_mods where ref = 12375
+delete from crt_mods where ref = 12376
+delete from crt_mods where ref = 12377
+SELECT ref, prototype FROM creatures WHERE obj_type=2
+SELECT crt_type, obj_type FROM creatures WHERE ref=1
+SELECT * FROM creatures WHERE ref=1
+SELECT ref FROM crt_mods WHERE otable='creatures' and oref=1
+SELECT ref FROM item_containers WHERE otable='creatures' and oref=1
+SELECT crt_type, obj_type FROM creatures WHERE ref=4
+SELECT * FROM creatures WHERE ref=4
+SELECT ref FROM crt_mods WHERE otable='creatures' and oref=4
+SELECT ref FROM item_containers WHERE otable='creatures' and oref=4
+SELECT crt_type, obj_type FROM creatures WHERE ref=3
+SELECT * FROM creatures WHERE ref=3
+SELECT ref FROM crt_mods WHERE otable='creatures' and oref=3
+SELECT ref FROM item_containers WHERE otable='creatures' and oref=3
+UPDATE creatures SET   NAME='Ogr', DESCRIPT='', LOC_DESCRIPT='', SEX=1, ATTRIBUTES='0;6;3;5;4;2;3;1;5;', SKILLS='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;', BODY='1,1,3,0,0,0,0,0,0,0,0,0,;1,3,3,0,0,0,0,0,0,0,0,0,;1,2,1,0,0,0,0,0,0,0,0,0,;1,2,2,0,0,0,0,0,0,0,0,0,;2,1,4,0,0,0,0,0,0,0,0,0,;2,3,4,0,0,0,0,0,0,0,0,0,;', LOCATION=0 WHERE ref = 3
+EXECUTE PROCEDURE CLONE_CRT(3)
+SELECT crt_type, obj_type FROM creatures WHERE ref=4387
+SELECT * FROM creatures WHERE ref=4387
+SELECT ref FROM crt_mods WHERE otable='creatures' and oref=4387
+SELECT ref FROM item_containers WHERE otable='creatures' and oref=4387
+SELECT crt_type, obj_type FROM creatures WHERE ref=4387
+SELECT * FROM creatures WHERE ref=4387
+SELECT ref FROM crt_mods WHERE otable='creatures' and oref=4387
+SELECT ref FROM item_containers WHERE otable='creatures' and oref=4387
+select new_ref from create_new_item_container
+UPDATE item_containers SET  MAX_WEIGHT=10 ,NAME='' ,OREF=4387 ,OTABLE='creatures' ,ITEMS='' WHERE ref=1661
+delete from item_containers where ref = 1661
+delete from creatures where ref = 4387
+UPDATE creatures SET   NAME='Ogr', DESCRIPT='', LOC_DESCRIPT='', SEX=1, ATTRIBUTES='0;6;3;5;4;2;3;1;5;', SKILLS='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;', BODY='1,1,3,0,0,0,0,0,0,0,0,0,;1,3,3,0,0,0,0,0,0,0,0,0,;1,2,1,0,0,0,0,0,0,0,0,0,;1,2,2,0,0,0,0,0,0,0,0,0,;2,1,4,0,0,0,0,0,0,0,0,0,;2,3,4,0,0,0,0,0,0,0,0,0,;', LOCATION=0 WHERE ref = 3
+EXECUTE PROCEDURE CLONE_CRT(3)
+SELECT crt_type, obj_type FROM creatures WHERE ref=4388
+SELECT * FROM creatures WHERE ref=4388
+SELECT ref FROM crt_mods WHERE otable='creatures' and oref=4388
+SELECT ref FROM item_containers WHERE otable='creatures' and oref=4388
+select new_ref from create_new_item_container
+UPDATE item_containers SET  MAX_WEIGHT=10 ,NAME='' ,OREF=4388 ,OTABLE='creatures' ,ITEMS='' WHERE ref=1662
+delete from item_containers where ref = 1662
+delete from creatures where ref = 4388
+UPDATE creatures SET   NAME='Ogr', DESCRIPT='', LOC_DESCRIPT='', SEX=1, ATTRIBUTES='0;6;3;5;4;2;3;1;5;', SKILLS='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;', BODY='1,1,3,0,0,0,0,0,0,0,0,0,;1,3,3,0,0,0,0,0,0,0,0,0,;1,2,1,0,0,0,0,0,0,0,0,0,;1,2,2,0,0,0,0,0,0,0,0,0,;2,1,4,0,0,0,0,0,0,0,0,0,;2,3,4,0,0,0,0,0,0,0,0,0,;', LOCATION=0 WHERE ref = 3
+EXECUTE PROCEDURE CLONE_CRT(3)
+SELECT crt_type, obj_type FROM creatures WHERE ref=4389
+SELECT * FROM creatures WHERE ref=4389
+SELECT ref FROM crt_mods WHERE otable='creatures' and oref=4389
+SELECT ref FROM item_containers WHERE otable='creatures' and oref=4389
+UPDATE creatures SET   NAME='lol', DESCRIPT='lal', LOC_DESCRIPT='', SEX=2, ATTRIBUTES='0;6;3;5;4;2;3;1;5;', SKILLS='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;', BODY='1,1,3,0,0,0,0,0,0,0,0,0,;1,3,3,0,0,0,0,0,0,0,0,0,;1,2,1,0,0,0,0,0,0,0,0,0,;1,2,2,0,0,0,0,0,0,0,0,0,;2,1,4,0,0,0,0,0,0,0,0,0,;2,3,4,0,0,0,0,0,0,0,0,0,;', LOCATION=0 WHERE ref = 4389
+SELECT crt_type, obj_type FROM creatures WHERE ref=4389
+SELECT * FROM creatures WHERE ref=4389
+SELECT ref FROM crt_mods WHERE otable='creatures' and oref=4389
+SELECT ref FROM item_containers WHERE otable='creatures' and oref=4389
+select new_ref from create_new_item_container
+UPDATE item_containers SET  MAX_WEIGHT=10 ,NAME='' ,OREF=4389 ,OTABLE='creatures' ,ITEMS='' WHERE ref=1663
+delete from item_containers where ref = 1663
+delete from creatures where ref = 4389
+UPDATE creatures SET   NAME='Ogr', DESCRIPT='', LOC_DESCRIPT='', SEX=1, ATTRIBUTES='0;6;3;5;4;2;3;1;5;', SKILLS='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;', BODY='1,1,3,0,0,0,0,0,0,0,0,0,;1,3,3,0,0,0,0,0,0,0,0,0,;1,2,1,0,0,0,0,0,0,0,0,0,;1,2,2,0,0,0,0,0,0,0,0,0,;2,1,4,0,0,0,0,0,0,0,0,0,;2,3,4,0,0,0,0,0,0,0,0,0,;', LOCATION=0 WHERE ref = 3
+EXECUTE PROCEDURE CLONE_CRT(3)
+SELECT crt_type, obj_type FROM creatures WHERE ref=4390
+SELECT * FROM creatures WHERE ref=4390
+SELECT ref FROM crt_mods WHERE otable='creatures' and oref=4390
+SELECT ref FROM item_containers WHERE otable='creatures' and oref=4390
+UPDATE creatures SET   NAME='Ogr', DESCRIPT='', LOC_DESCRIPT='', SEX=1, ATTRIBUTES='0;6;7;5;4;2;3;1;5;', SKILLS='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;6;0;0;0;4;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;', BODY='1,1,3,0,0,0,0,0,0,0,0,0,;1,3,3,0,0,0,0,0,0,0,0,0,;1,2,1,0,0,0,0,0,0,0,0,0,;1,2,2,0,0,0,0,0,0,0,0,0,;2,1,4,0,0,0,0,0,0,0,0,0,;2,3,4,0,0,0,0,0,0,0,0,0,;', LOCATION=0 WHERE ref = 4390
+SELECT crt_type, obj_type FROM creatures WHERE ref=4390
+SELECT * FROM creatures WHERE ref=4390
+SELECT ref FROM crt_mods WHERE otable='creatures' and oref=4390
+SELECT ref FROM item_containers WHERE otable='creatures' and oref=4390
+select new_ref from create_new_item_container
+UPDATE item_containers SET  MAX_WEIGHT=10 ,NAME='' ,OREF=4390 ,OTABLE='creatures' ,ITEMS='' WHERE ref=1664
+delete from item_containers where ref = 1664
+delete from creatures where ref = 4390
+UPDATE creatures SET   NAME='Ogr', DESCRIPT='', LOC_DESCRIPT='', SEX=1, ATTRIBUTES='0;6;3;5;4;2;3;1;5;', SKILLS='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;', BODY='1,1,3,0,0,0,0,0,0,0,0,0,;1,3,3,0,0,0,0,0,0,0,0,0,;1,2,1,0,0,0,0,0,0,0,0,0,;1,2,2,0,0,0,0,0,0,0,0,0,;2,1,4,0,0,0,0,0,0,0,0,0,;2,3,4,0,0,0,0,0,0,0,0,0,;', LOCATION=0 WHERE ref = 3
+EXECUTE PROCEDURE CLONE_CRT(3)
+SELECT crt_type, obj_type FROM creatures WHERE ref=4391
+SELECT * FROM creatures WHERE ref=4391
+SELECT ref FROM crt_mods WHERE otable='creatures' and oref=4391
+SELECT ref FROM item_containers WHERE otable='creatures' and oref=4391
+UPDATE creatures SET   NAME='Ogr', DESCRIPT='', LOC_DESCRIPT='', SEX=1, ATTRIBUTES='0;6;3;5;4;2;3;1;5;', SKILLS='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;', BODY='1,0,1,0,0,0,0,0,0,0,0,0,;1,0,3,0,0,0,0,0,0,0,0,0,;2,0,4,0,0,0,0,0,0,0,0,0,;', LOCATION=0 WHERE ref = 4391
+SELECT crt_type, obj_type FROM creatures WHERE ref=4391
+SELECT * FROM creatures WHERE ref=4391
+SELECT ref FROM crt_mods WHERE otable='creatures' and oref=4391
+SELECT ref FROM item_containers WHERE otable='creatures' and oref=4391
+select new_ref from create_new_item_container
+UPDATE item_containers SET  MAX_WEIGHT=10 ,NAME='' ,OREF=4391 ,OTABLE='creatures' ,ITEMS='' WHERE ref=1665
+delete from item_containers where ref = 1665
+delete from creatures where ref = 4391
+UPDATE creatures SET   NAME='Ogr', DESCRIPT='', LOC_DESCRIPT='', SEX=1, ATTRIBUTES='0;6;3;5;4;2;3;1;5;', SKILLS='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;', BODY='1,1,3,0,0,0,0,0,0,0,0,0,;1,3,3,0,0,0,0,0,0,0,0,0,;1,2,1,0,0,0,0,0,0,0,0,0,;1,2,2,0,0,0,0,0,0,0,0,0,;2,1,4,0,0,0,0,0,0,0,0,0,;2,3,4,0,0,0,0,0,0,0,0,0,;', LOCATION=0 WHERE ref = 3
+EXECUTE PROCEDURE CLONE_CRT(3)
+SELECT crt_type, obj_type FROM creatures WHERE ref=4392
+SELECT * FROM creatures WHERE ref=4392
+SELECT ref FROM crt_mods WHERE otable='creatures' and oref=4392
+SELECT ref FROM item_containers WHERE otable='creatures' and oref=4392
+UPDATE items SET  ARM_DR_PIERCING=0 ,ARM_DR_SLASHING=0 ,ARM_DR_BASHING=0 WHERE ref=5
+UPDATE items SET   ITEM_TYPE = 3, NAME = 'TestTpl3', DESCRIPTION = 'takitam', WEIGHT = 9.8, SHOP_VALUE = 240, CONDITION = 2, DURABILITY = 0, BODY_PARTS = '', STACKABLE = 0 WHERE ref = 5
+EXECUTE PROCEDURE CLONE_ITEM(5)
+SELECT obj_type, item_type FROM items WHERE ref=8003
+SELECT * FROM items WHERE ref=8003
+SELECT ref FROM crt_mods WHERE otable='items' and oref=8003
+SELECT ref FROM item_containers WHERE otable='items' and oref=8003
+select new_ref from create_new_item_container
+UPDATE item_containers SET  MAX_WEIGHT=10 ,NAME='' ,OREF=4392 ,OTABLE='creatures' ,ITEMS='' WHERE ref=1666
+UPDATE creatures SET   NAME='Ogr', DESCRIPT='', LOC_DESCRIPT='', SEX=1, ATTRIBUTES='0;6;3;5;4;2;3;1;5;', SKILLS='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;', BODY='1,1,3,0,0,0,0,0,0,0,0,0,;1,3,3,0,0,0,0,0,0,0,0,0,;1,2,1,0,0,0,0,0,0,0,0,0,;1,2,2,0,0,0,0,0,0,0,0,0,;2,1,4,0,0,0,0,0,0,0,0,0,;2,3,4,0,0,0,0,0,0,0,0,0,;', LOCATION=0 WHERE ref = 4392
+UPDATE item_containers SET  MAX_WEIGHT=10 ,NAME='' ,OREF=4392 ,OTABLE='creatures' ,ITEMS='8003,1;' WHERE ref=1666
+SELECT crt_type, obj_type FROM creatures WHERE ref=4392
+SELECT * FROM creatures WHERE ref=4392
+SELECT ref FROM crt_mods WHERE otable='creatures' and oref=4392
+SELECT ref FROM item_containers WHERE otable='creatures' and oref=4392
+SELECT name, otable, oref, max_weight, items FROM item_containers WHERE ref=1666
+SELECT obj_type, item_type FROM items WHERE ref=8003
+SELECT * FROM items WHERE ref=8003
+SELECT ref FROM crt_mods WHERE otable='items' and oref=8003
+SELECT ref FROM item_containers WHERE otable='items' and oref=8003
+delete from items where ref = 8003
+delete from item_containers where ref = 1666
+delete from creatures where ref = 4392
+UPDATE creatures SET   NAME='Ogr', DESCRIPT='', LOC_DESCRIPT='', SEX=1, ATTRIBUTES='0;6;3;5;4;2;3;1;5;', SKILLS='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;', BODY='1,1,3,0,0,0,0,0,0,0,0,0,;1,3,3,0,0,0,0,0,0,0,0,0,;1,2,1,0,0,0,0,0,0,0,0,0,;1,2,2,0,0,0,0,0,0,0,0,0,;2,1,4,0,0,0,0,0,0,0,0,0,;2,3,4,0,0,0,0,0,0,0,0,0,;', LOCATION=0 WHERE ref = 3
+EXECUTE PROCEDURE CLONE_CRT(3)
+SELECT crt_type, obj_type FROM creatures WHERE ref=4393
+SELECT * FROM creatures WHERE ref=4393
+SELECT ref FROM crt_mods WHERE otable='creatures' and oref=4393
+SELECT ref FROM item_containers WHERE otable='creatures' and oref=4393
+SELECT ref FROM CREATE_EMPTY_CRT_MOD
+UPDATE crt_mods SET  otable='', oref=0, name='', effect_time=-1, glb_test_mod=0, attributes='0;1;0;0;0;0;0;0;0;', skills='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;' WHERE ref=12378
+SELECT ref FROM CREATE_EMPTY_CRT_MOD
+UPDATE crt_mods SET  otable='', oref=0, name='', effect_time=-1, glb_test_mod=0, attributes='0;2;0;0;0;0;0;0;0;', skills='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;' WHERE ref=12379
+UPDATE items SET  ARM_DR_PIERCING=0 ,ARM_DR_SLASHING=0 ,ARM_DR_BASHING=0 WHERE ref=5
+UPDATE items SET   ITEM_TYPE = 3, NAME = 'TestTpl3', DESCRIPTION = 'takitam', WEIGHT = 9.8, SHOP_VALUE = 240, CONDITION = 2, DURABILITY = 0, BODY_PARTS = '', STACKABLE = 0 WHERE ref = 5
+EXECUTE PROCEDURE CLONE_ITEM(5)
+SELECT obj_type, item_type FROM items WHERE ref=8004
+SELECT * FROM items WHERE ref=8004
+SELECT ref FROM crt_mods WHERE otable='items' and oref=8004
+SELECT ref FROM item_containers WHERE otable='items' and oref=8004
+SELECT ref FROM CREATE_EMPTY_CRT_MOD
+UPDATE crt_mods SET  otable='items', oref=8004, name='TestTpl3', effect_time=-1, glb_test_mod=0, attributes='0;3;0;0;0;0;0;0;0;', skills='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;' WHERE ref=12380
+SELECT ref FROM CREATE_EMPTY_CRT_MOD
+UPDATE crt_mods SET  otable='', oref=0, name='', effect_time=-1, glb_test_mod=0, attributes='0;0;0;0;0;0;0;0;0;', skills='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;10;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;' WHERE ref=12381
+SELECT ref FROM CREATE_EMPTY_CRT_MOD
+UPDATE crt_mods SET  otable='', oref=0, name='', effect_time=-1, glb_test_mod=0, attributes='0;0;0;0;0;0;0;0;0;', skills='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;' WHERE ref=12382
+delete from crt_mods where ref = 12378
+delete from crt_mods where ref = 12379
+delete from crt_mods where ref = 12381
+delete from crt_mods where ref = 12382
+delete from crt_mods where ref = 12380
+delete from items where ref = 8004
+select new_ref from create_new_item_container
+UPDATE item_containers SET  MAX_WEIGHT=10 ,NAME='' ,OREF=4393 ,OTABLE='creatures' ,ITEMS='' WHERE ref=1667
+delete from item_containers where ref = 1667
+delete from creatures where ref = 4393
+UPDATE creatures SET   NAME='Ogr', DESCRIPT='', LOC_DESCRIPT='', SEX=1, ATTRIBUTES='0;6;3;5;4;2;3;1;5;', SKILLS='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;', BODY='1,1,3,0,0,0,0,0,0,0,0,0,;1,3,3,0,0,0,0,0,0,0,0,0,;1,2,1,0,0,0,0,0,0,0,0,0,;1,2,2,0,0,0,0,0,0,0,0,0,;2,1,4,0,0,0,0,0,0,0,0,0,;2,3,4,0,0,0,0,0,0,0,0,0,;', LOCATION=0 WHERE ref = 3
+EXECUTE PROCEDURE CLONE_CRT(3)
+SELECT crt_type, obj_type FROM creatures WHERE ref=4394
+SELECT * FROM creatures WHERE ref=4394
+SELECT ref FROM crt_mods WHERE otable='creatures' and oref=4394
+SELECT ref FROM item_containers WHERE otable='creatures' and oref=4394
+UPDATE items SET  ARM_DR_PIERCING=2 ,ARM_DR_SLASHING=2 ,ARM_DR_BASHING=1 WHERE ref=122
+UPDATE items SET   ITEM_TYPE = 3, NAME = 'Lekka zbroja skórzana', DESCRIPTION = '', WEIGHT = 8, SHOP_VALUE = 0, CONDITION = 2, DURABILITY = 6, BODY_PARTS = '2,3,3,4,4,', STACKABLE = 0 WHERE ref = 122
+EXECUTE PROCEDURE CLONE_ITEM(122)
+SELECT obj_type, item_type FROM items WHERE ref=8005
+SELECT * FROM items WHERE ref=8005
+SELECT ref FROM crt_mods WHERE otable='items' and oref=8005
+SELECT * FROM crt_mods WHERE ref=12383
+SELECT ref FROM item_containers WHERE otable='items' and oref=8005
+UPDATE items SET  ARM_DR_PIERCING=2 ,ARM_DR_SLASHING=2 ,ARM_DR_BASHING=1 WHERE ref=122
+UPDATE items SET   ITEM_TYPE = 3, NAME = 'Lekka zbroja skórzana', DESCRIPTION = '', WEIGHT = 8, SHOP_VALUE = 0, CONDITION = 2, DURABILITY = 6, BODY_PARTS = '2,3,3,4,4,', STACKABLE = 0 WHERE ref = 122
+EXECUTE PROCEDURE CLONE_ITEM(122)
+SELECT obj_type, item_type FROM items WHERE ref=8006
+SELECT * FROM items WHERE ref=8006
+SELECT ref FROM crt_mods WHERE otable='items' and oref=8006
+SELECT * FROM crt_mods WHERE ref=12384
+SELECT ref FROM item_containers WHERE otable='items' and oref=8006
+UPDATE items SET  ARM_DR_PIERCING=0 ,ARM_DR_SLASHING=1 ,ARM_DR_BASHING=0 WHERE ref=124
+UPDATE items SET   ITEM_TYPE = 3, NAME = 'Skórzany helm', DESCRIPTION = '', WEIGHT = 0.6, SHOP_VALUE = 0, CONDITION = 2, DURABILITY = 5, BODY_PARTS = '1,', STACKABLE = 0 WHERE ref = 124
+EXECUTE PROCEDURE CLONE_ITEM(124)
+SELECT obj_type, item_type FROM items WHERE ref=8007
+SELECT * FROM items WHERE ref=8007
+SELECT ref FROM crt_mods WHERE otable='items' and oref=8007
+SELECT ref FROM item_containers WHERE otable='items' and oref=8007
+UPDATE items SET  WPN_SKILL=1 ,WPN_D_PIERCING=4 ,WPN_D_SLASHING=5 ,WPN_D_BASHING=0 ,WPN_DEFENCE=4 ,WPN_ATTACK=2 ,WPN_REFLEX=0 ,WPN_STR_REQ=3 ,WPN_RANGE=0 WHERE ref=125
+UPDATE items SET   ITEM_TYPE = 2, NAME = 'Miecz szeroki', DESCRIPTION = '', WEIGHT = 1.8, SHOP_VALUE = 0, CONDITION = 2, DURABILITY = 9, BODY_PARTS = '3,', STACKABLE = 0 WHERE ref = 125
+EXECUTE PROCEDURE CLONE_ITEM(125)
+SELECT obj_type, item_type FROM items WHERE ref=8008
+SELECT * FROM items WHERE ref=8008
+SELECT ref FROM crt_mods WHERE otable='items' and oref=8008
+SELECT ref FROM item_containers WHERE otable='items' and oref=8008
+UPDATE items SET SHD_DEFENCE=4 WHERE ref=123
+UPDATE items SET   ITEM_TYPE = 7, NAME = 'Mala drewniana tarcza', DESCRIPTION = '', WEIGHT = 1.7, SHOP_VALUE = 0, CONDITION = 2, DURABILITY = 4, BODY_PARTS = '3,', STACKABLE = 0 WHERE ref = 123
+EXECUTE PROCEDURE CLONE_ITEM(123)
+SELECT obj_type, item_type FROM items WHERE ref=8009
+SELECT * FROM items WHERE ref=8009
+SELECT ref FROM crt_mods WHERE otable='items' and oref=8009
+SELECT * FROM crt_mods WHERE ref=12385
+SELECT ref FROM item_containers WHERE otable='items' and oref=8009
+SELECT ref FROM CREATE_EMPTY_CRT_MOD
+UPDATE crt_mods SET  otable='items', oref=8005, name='Lekka zbroja skórzana', effect_time=-1, glb_test_mod=0, attributes='0;0;-1;0;0;0;0;0;0;', skills='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;' WHERE ref=12386
+SELECT ref FROM CREATE_EMPTY_CRT_MOD
+UPDATE crt_mods SET  otable='items', oref=8009, name='Mala drewniana tarcza', effect_time=-1, glb_test_mod=0, attributes='0;0;-1;0;0;0;0;0;0;', skills='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;' WHERE ref=12387
+UPDATE creatures SET   NAME='Ogr', DESCRIPT='', LOC_DESCRIPT='', SEX=1, ATTRIBUTES='0;6;3;5;4;2;3;1;5;', SKILLS='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;', BODY='1,1,3,0,0,0,8005,0,0,0,8009,0,;1,3,3,0,0,8008,8005,0,0,0,0,0,;1,2,1,0,0,0,8007,0,0,0,0,0,;1,2,2,0,0,0,8005,0,0,0,0,0,;2,1,4,0,0,0,8005,0,0,0,0,0,;2,3,4,0,0,0,8005,0,0,0,0,0,;', LOCATION=0 WHERE ref = 4394
+delete from crt_mods where ref = 12387
+delete from crt_mods where ref = 12386
+SELECT crt_type, obj_type FROM creatures WHERE ref=4394
+SELECT * FROM creatures WHERE ref=4394
+SELECT obj_type, item_type FROM items WHERE ref=8005
+SELECT * FROM items WHERE ref=8005
+SELECT ref FROM crt_mods WHERE otable='items' and oref=8005
+SELECT * FROM crt_mods WHERE ref=12383
+SELECT ref FROM item_containers WHERE otable='items' and oref=8005
+SELECT obj_type, item_type FROM items WHERE ref=8009
+SELECT * FROM items WHERE ref=8009
+SELECT ref FROM crt_mods WHERE otable='items' and oref=8009
+SELECT * FROM crt_mods WHERE ref=12385
+SELECT ref FROM item_containers WHERE otable='items' and oref=8009
+SELECT obj_type, item_type FROM items WHERE ref=8008
+SELECT * FROM items WHERE ref=8008
+SELECT ref FROM crt_mods WHERE otable='items' and oref=8008
+SELECT ref FROM item_containers WHERE otable='items' and oref=8008
+SELECT obj_type, item_type FROM items WHERE ref=8007
+SELECT * FROM items WHERE ref=8007
+SELECT ref FROM crt_mods WHERE otable='items' and oref=8007
+SELECT ref FROM item_containers WHERE otable='items' and oref=8007
+SELECT ref FROM crt_mods WHERE otable='creatures' and oref=4394
+SELECT ref FROM CREATE_EMPTY_CRT_MOD
+UPDATE crt_mods SET  otable='items', oref=8005, name='Lekka zbroja skórzana', effect_time=-1, glb_test_mod=0, attributes='0;0;-1;0;0;0;0;0;0;', skills='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;' WHERE ref=12388
+SELECT ref FROM CREATE_EMPTY_CRT_MOD
+UPDATE crt_mods SET  otable='items', oref=8009, name='Mala drewniana tarcza', effect_time=-1, glb_test_mod=0, attributes='0;0;-1;0;0;0;0;0;0;', skills='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;' WHERE ref=12389
+SELECT ref FROM item_containers WHERE otable='creatures' and oref=4394
+select new_ref from create_new_item_container
+UPDATE item_containers SET  MAX_WEIGHT=10 ,NAME='' ,OREF=4394 ,OTABLE='creatures' ,ITEMS='' WHERE ref=1668
+delete from items where ref = 8006
+delete from items where ref = 8009
+delete from items where ref = 8008
+delete from items where ref = 8005
+delete from items where ref = 8007
+delete from item_containers where ref = 1668
+delete from creatures where ref = 4394
+delete from crt_mods where ref = 12389
+delete from crt_mods where ref = 12388
+SELECT new_ref FROM create_crt_container
+SELECT otable, oref, creatures FROM crt_containers WHERE ref=699
+delete from crt_containers where ref = 699
+SELECT new_ref FROM create_crt_container
+UPDATE crt_containers SET  CREATURES='' ,OTABLE='lol' ,OREF=2 WHERE ref=700
+SELECT otable, oref, creatures FROM crt_containers WHERE ref=700
+delete from crt_containers where ref = 700
+SELECT new_ref FROM create_crt_container
+UPDATE creatures SET   NAME='Ogr', DESCRIPT='', LOC_DESCRIPT='', SEX=1, ATTRIBUTES='0;6;3;5;4;2;3;1;5;', SKILLS='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;', BODY='1,1,3,0,0,0,0,0,0,0,0,0,;1,3,3,0,0,0,0,0,0,0,0,0,;1,2,1,0,0,0,0,0,0,0,0,0,;1,2,2,0,0,0,0,0,0,0,0,0,;2,1,4,0,0,0,0,0,0,0,0,0,;2,3,4,0,0,0,0,0,0,0,0,0,;', LOCATION=0 WHERE ref = 3
+EXECUTE PROCEDURE CLONE_CRT(3)
+SELECT crt_type, obj_type FROM creatures WHERE ref=4395
+SELECT * FROM creatures WHERE ref=4395
+SELECT ref FROM crt_mods WHERE otable='creatures' and oref=4395
+SELECT ref FROM item_containers WHERE otable='creatures' and oref=4395
+UPDATE creatures SET   NAME='Ogr', DESCRIPT='', LOC_DESCRIPT='', SEX=1, ATTRIBUTES='0;6;3;5;4;2;3;1;5;', SKILLS='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;', BODY='1,1,3,0,0,0,0,0,0,0,0,0,;1,3,3,0,0,0,0,0,0,0,0,0,;1,2,1,0,0,0,0,0,0,0,0,0,;1,2,2,0,0,0,0,0,0,0,0,0,;2,1,4,0,0,0,0,0,0,0,0,0,;2,3,4,0,0,0,0,0,0,0,0,0,;', LOCATION=0 WHERE ref = 3
+EXECUTE PROCEDURE CLONE_CRT(3)
+SELECT crt_type, obj_type FROM creatures WHERE ref=4396
+SELECT * FROM creatures WHERE ref=4396
+SELECT ref FROM crt_mods WHERE otable='creatures' and oref=4396
+SELECT ref FROM item_containers WHERE otable='creatures' and oref=4396
+UPDATE crt_containers SET  CREATURES='4395,4396,' ,OTABLE='' ,OREF=0 WHERE ref=701
+UPDATE creatures SET   NAME='Karol', DESCRIPT='', LOC_DESCRIPT='', SEX=1, ATTRIBUTES='0;6;3;5;4;2;3;1;5;', SKILLS='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;', BODY='1,1,3,0,0,0,0,0,0,0,0,0,;1,3,3,0,0,0,0,0,0,0,0,0,;1,2,1,0,0,0,0,0,0,0,0,0,;1,2,2,0,0,0,0,0,0,0,0,0,;2,1,4,0,0,0,0,0,0,0,0,0,;2,3,4,0,0,0,0,0,0,0,0,0,;', LOCATION=0 WHERE ref = 4395
+UPDATE creatures SET   NAME='Maciek', DESCRIPT='', LOC_DESCRIPT='', SEX=1, ATTRIBUTES='0;6;3;5;4;2;3;1;5;', SKILLS='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;', BODY='1,1,3,0,0,0,0,0,0,0,0,0,;1,3,3,0,0,0,0,0,0,0,0,0,;1,2,1,0,0,0,0,0,0,0,0,0,;1,2,2,0,0,0,0,0,0,0,0,0,;2,1,4,0,0,0,0,0,0,0,0,0,;2,3,4,0,0,0,0,0,0,0,0,0,;', LOCATION=0 WHERE ref = 4396
+SELECT otable, oref, creatures FROM crt_containers WHERE ref=701
+SELECT crt_type, obj_type FROM creatures WHERE ref=4395
+SELECT * FROM creatures WHERE ref=4395
+SELECT ref FROM crt_mods WHERE otable='creatures' and oref=4395
+SELECT ref FROM item_containers WHERE otable='creatures' and oref=4395
+SELECT crt_type, obj_type FROM creatures WHERE ref=4396
+SELECT * FROM creatures WHERE ref=4396
+SELECT ref FROM crt_mods WHERE otable='creatures' and oref=4396
+SELECT ref FROM item_containers WHERE otable='creatures' and oref=4396
+UPDATE crt_containers SET  CREATURES='4395,' ,OTABLE='' ,OREF=0 WHERE ref=701
+SELECT otable, oref, creatures FROM crt_containers WHERE ref=701
+SELECT crt_type, obj_type FROM creatures WHERE ref=4395
+SELECT * FROM creatures WHERE ref=4395
+SELECT ref FROM crt_mods WHERE otable='creatures' and oref=4395
+SELECT ref FROM item_containers WHERE otable='creatures' and oref=4395
+SELECT crt_type, obj_type FROM creatures WHERE ref=4396
+SELECT * FROM creatures WHERE ref=4396
+SELECT ref FROM crt_mods WHERE otable='creatures' and oref=4396
+SELECT ref FROM item_containers WHERE otable='creatures' and oref=4396
+SELECT crt_type, obj_type FROM creatures WHERE ref=4395
+SELECT * FROM creatures WHERE ref=4395
+SELECT ref FROM crt_mods WHERE otable='creatures' and oref=4395
+SELECT ref FROM item_containers WHERE otable='creatures' and oref=4395
+select new_ref from create_new_item_container
+UPDATE item_containers SET  MAX_WEIGHT=10 ,NAME='' ,OREF=4396 ,OTABLE='creatures' ,ITEMS='' WHERE ref=1669
+delete from item_containers where ref = 1669
+delete from creatures where ref = 4396
+select new_ref from create_new_item_container
+UPDATE item_containers SET  MAX_WEIGHT=10 ,NAME='' ,OREF=4395 ,OTABLE='creatures' ,ITEMS='' WHERE ref=1670
+delete from item_containers where ref = 1670
+delete from creatures where ref = 4395
+delete from crt_containers where ref = 701
+UPDATE creatures SET   clan=0 ,tribe=0 WHERE ref = 4
+UPDATE creatures SET   NAME='', DESCRIPT='', LOC_DESCRIPT='', SEX=0, ATTRIBUTES='0;0;0;0;0;0;0;0;0;', SKILLS='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;', BODY='', LOCATION=0 WHERE ref = 4
+EXECUTE PROCEDURE CLONE_CRT(4)
+SELECT crt_type, obj_type FROM creatures WHERE ref=4397
+SELECT * FROM creatures WHERE ref=4397
+SELECT ref FROM crt_mods WHERE otable='creatures' and oref=4397
+SELECT ref FROM item_containers WHERE otable='creatures' and oref=4397
+UPDATE creatures SET   clan=5 ,tribe=2 WHERE ref = 4397
+UPDATE creatures SET   NAME='Igor', DESCRIPT='', LOC_DESCRIPT='', SEX=0, ATTRIBUTES='0;0;0;0;0;0;0;0;0;', SKILLS='0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;', BODY='', LOCATION=0 WHERE ref = 4397
+SELECT crt_type, obj_type FROM creatures WHERE ref=4397
+SELECT * FROM creatures WHERE ref=4397
+SELECT ref FROM crt_mods WHERE otable='creatures' and oref=4397
+SELECT ref FROM item_containers WHERE otable='creatures' and oref=4397
+select new_ref from create_new_item_container
+UPDATE item_containers SET  MAX_WEIGHT=10 ,NAME='' ,OREF=4397 ,OTABLE='creatures' ,ITEMS='' WHERE ref=1671
+delete from item_containers where ref = 1671
+delete from creatures where ref = 4397
+SELECT first 1 p.*, c.tribe, c.clan FROM player p join creatures c on (c.ref = 5)
+SELECT ref FROM crt_mods WHERE otable='creatures' and oref=5
+SELECT ref FROM item_containers WHERE otable='creatures' and oref=5
+UPDATE player SET   profession=1 ,bless=3 ,splot=1 ,birth_season=2 ,hunger=1 ,fatigue=2 ,brave=3 ,lift_cap=50 ,exp='5/100' ,fame='30/80' WHERE ref = 1
+UPDATE creatures SET   clan=0 ,tribe=0 WHERE ref = 5

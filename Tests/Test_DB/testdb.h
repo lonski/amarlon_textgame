@@ -1,9 +1,12 @@
 #ifndef TESTDB_H
 #define TESTDB_H
+
+#include "testsuite.h"
+
 #include <QtTest/QtTest>
 #include "../Include/db.h"
 
-class TestDB : public QObject
+class TestDB : public QTestSuite
 {
   Q_OBJECT
 public:

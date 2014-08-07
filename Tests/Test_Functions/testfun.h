@@ -1,13 +1,15 @@
 #ifndef TESTFUN_H
 #define TESTFUN_H
 
+#include "testsuite.h"
+
 #include <QtTest/QtTest>
 #include "../Include/db.h"
 
 #include "../Include/gameclock.h"
 #include "Include/inifile.h"
 
-class TestFun : public QObject
+class TestFun : public QTestSuite
 {
   Q_OBJECT
 public:

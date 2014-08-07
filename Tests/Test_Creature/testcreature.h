@@ -1,6 +1,8 @@
 #ifndef TESTCREATURE_H
 #define TESTCREATURE_H
 
+#include "testsuite.h"
+
 #include <QtTest/QtTest>
 #include "../Include/db.h"
 
@@ -17,7 +19,7 @@
 #include "../Creatures/npc.h"
 #include "../Creatures/player.h"
 
-class TestCreature : public QObject
+class TestCreature : public QTestSuite
 {
   Q_OBJECT
 public:

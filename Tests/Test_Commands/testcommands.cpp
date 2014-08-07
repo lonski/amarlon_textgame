@@ -65,3 +65,5 @@ void TestCommands::TestCommandExecutor()
 //  QVERIFY(!exec.execute("n"));
 //  QVERIFY(exec.execute("podnies tylek lol"));
 }
+
+static TestCommands instance;

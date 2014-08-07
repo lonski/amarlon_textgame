@@ -843,3 +843,4 @@ void TestCreature::player_load()
   _Player->saveToDB();
 }
 
+static TestCreature instance;

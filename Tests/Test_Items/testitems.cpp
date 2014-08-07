@@ -513,3 +513,5 @@ void TestItems::ItemModManager()
 
   itm->purge();
 }
+
+static TestItems instance;

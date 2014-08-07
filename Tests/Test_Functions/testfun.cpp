@@ -147,3 +147,4 @@ void TestFun::inifile()
   ini2.save();
 }
 
+static TestFun instance;

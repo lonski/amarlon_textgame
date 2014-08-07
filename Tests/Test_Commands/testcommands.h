@@ -1,12 +1,14 @@
 #ifndef TESTCOMMANDS_H
 #define TESTCOMMANDS_H
 
+#include "testsuite.h"
+
 #include <QtTest/QtTest>
 #include "Commands/commandlogger.h"
 #include "Commands/commandparser.h"
 #include "Commands/commandexecutor.h"
 
-class TestCommands : public QObject
+class TestCommands : public QTestSuite
 {
   Q_OBJECT
 public:

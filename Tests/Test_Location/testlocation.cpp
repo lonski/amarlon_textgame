@@ -160,3 +160,5 @@ void TestLocation::SaveData()
 
   Location::Manager.purge();
 }
+
+static TestLocation instance;

@@ -9,16 +9,17 @@ CONFIG += console
 
 DEPENDPATH += .
 INCLUDEPATH += .
-INCLUDEPATH += ../../
+INCLUDEPATH += ../
 
-win32:INCLUDEPATH += ../../db-wrapper/soci/core \
-                     ../../db-wrapper/soci/backend \
-                     ../../db-wrapper/ibase \
+win32:INCLUDEPATH += ../db-wrapper/soci/core \
+                     ../db-wrapper/soci/backend \
+                     ../db-wrapper/ibase \
 
 unix:INCLUDEPATH += /usr/local/include/soci \
+                    /usr/local/lib64/ \
                     /usr/local/include/soci/firebird/ \
 
-win32:LIBS += -L$$quote(../../../db-wrapper/soci/lib) \
+win32:LIBS += -L$$quote(../db-wrapper/soci/lib) \
               -l$$quote(soci_core_3_2) \
               -l$$quote(soci_firebird_3_2) \
               -l$$quote(soci_empty_3_2)
@@ -26,7 +27,12 @@ win32:LIBS += -L$$quote(../../../db-wrapper/soci/lib) \
 unix:LIBS += -lsoci_core \
              -lsoci_firebird
 
-HEADERS += testlocation.h
-SOURCES += testlocation.cpp main.cpp
+SOURCES += unit_tests_main.cpp \
+    testsuite.cpp
 
+include(tests.pri)
 include(sors.pri)
+
+HEADERS += \
+    testsuite.h
+

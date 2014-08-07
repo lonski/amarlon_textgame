@@ -1,10 +1,11 @@
 #ifndef TESTLOCATION_H
 #define TESTLOCATION_H
+#include "testsuite.h"
 
 #include "World/location.h"
 #include <QtTest/QtTest>
 
-class TestLocation : public QObject
+class TestLocation : public QTestSuite
 {
   Q_OBJECT
 public:
@@ -15,7 +16,6 @@ private slots:
    void LocWalkWithinRange();
    void SaveData();
 };
-
 
 #endif // TESTLOCATION_H
 

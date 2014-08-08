@@ -10,7 +10,7 @@ class Location;
 class Go : public NonActiveCommand
 {
 public:  
-  Go(Console *console = nullptr);
+  Go(Console *console);
   virtual ~Go() {}
 
   virtual CommandID id() const;

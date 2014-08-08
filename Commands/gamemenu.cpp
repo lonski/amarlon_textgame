@@ -53,7 +53,7 @@ void GameMenu::execute(std::vector<std::string> params)
   }
   else if ( input == "2")
   {
-    if (nullptr == subCmd) subCmd = new Exit;
+    if (nullptr == subCmd) subCmd = new Exit(_console);
     stage = Stage::Exit;
     subCmd->execute();
   }

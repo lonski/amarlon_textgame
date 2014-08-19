@@ -47,4 +47,4 @@ void TestDB::TestConnection()
   QVERIFY(ref != 0);
 }
 
-static TestDB instance;
+

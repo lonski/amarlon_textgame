@@ -111,7 +111,7 @@ void BodyPart::calc_armor()
 {
   if (_equipped.count(ItemType::Armor) > 0)
   {
-    Armor *arm = dynamic_cast<Armor*>(_equipped[ItemType::Armor].get());
+    Item *arm = _equipped[ItemType::Armor].get();
     if (arm != nullptr)
     {
       _armor = arm->damageReduction();

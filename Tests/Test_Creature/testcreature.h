@@ -13,8 +13,6 @@
 #include "../Creatures/bodypart.h"
 #include "../Creatures/creaturemodificator.h"
 #include "../Include/gameclock.h"
-#include "../Equipment/shield.h"
-#include "../Equipment/weapon.h"
 #include "../Creatures/creaturemonitor.h"
 #include "../Creatures/npc.h"
 #include "../Creatures/player.h"

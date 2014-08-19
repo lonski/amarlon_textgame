@@ -25,6 +25,7 @@ private:
 public:
   static GameClock& Clock();
   void tick_time(Minute tick = 1);
+  void reset();
 
   Minute minute() const { return _minute; }
   Hour hour() const { return _hour; }

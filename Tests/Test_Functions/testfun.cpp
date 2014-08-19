@@ -62,6 +62,7 @@ void TestFun::explode()
 
 void TestFun::gameclock()
 {
+  GameClock::Clock().reset();
   //initalized state
   QVERIFY(GameClock::Clock().minute() == 0);
   QVERIFY(GameClock::Clock().hour() == 0);

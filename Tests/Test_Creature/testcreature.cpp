@@ -524,11 +524,11 @@ void TestCreature::creature_eq()
   CreatureMonitor c_monit(crt.get());
 
   //create some equipment
-  ArmorPtr zbroja ( dynamic_cast<Armor*>( Item::prototypes().clone(ItemPrototype::LekkaZbrojaSkorzana) ) );
-  ArmorPtr zbroja_druga ( dynamic_cast<Armor*>( Item::prototypes().clone(ItemPrototype::LekkaZbrojaSkorzana) ) );
-  ArmorPtr helm ( dynamic_cast<Armor*>( Item::prototypes().clone(ItemPrototype::HelmSkorzany) ) );
-  WeaponPtr wpn ( dynamic_cast<Weapon*>( Item::prototypes().clone(ItemPrototype::MieczSzeroki) ) );
-  ShieldPtr shld ( dynamic_cast<Shield*>( Item::prototypes().clone(ItemPrototype::MalaDrewnianaTarcza) ) );
+  ItemPtr zbroja ( ( Item::prototypes().clone(ItemPrototype::LekkaZbrojaSkorzana) ) );
+  ItemPtr zbroja_druga ( ( Item::prototypes().clone(ItemPrototype::LekkaZbrojaSkorzana) ) );
+  ItemPtr helm ( ( Item::prototypes().clone(ItemPrototype::HelmSkorzany) ) );
+  ItemPtr wpn ( Item::prototypes().clone(ItemPrototype::MieczSzeroki) );
+  ItemPtr shld ( ( Item::prototypes().clone(ItemPrototype::MalaDrewnianaTarcza) ) );
 
   QVERIFY(zbroja != nullptr);
   QVERIFY(helm != nullptr);
@@ -583,7 +583,7 @@ void TestCreature::creature_eq()
   QCOMPARE(crt->mods().get_complex_mod()->creature_stats().attribute(Attribute::DEX), -2 );
 
   //sciagnij zbroje, validate, i zaloz z powrotem
-  zbroja = std::dynamic_pointer_cast<Armor>( crt->unequip( zbroja_ref ) );
+  zbroja = ( crt->unequip( zbroja_ref ) );
   QCOMPARE(crt->mods().get_complex_mod()->creature_stats().attribute(Attribute::DEX), -1 );
   QCOMPARE(crt->body().equipped_items().size(), (size_t)3 );
 
@@ -592,7 +592,7 @@ void TestCreature::creature_eq()
   QCOMPARE(crt->mods().get_complex_mod()->creature_stats().attribute(Attribute::DEX), -2 );
 
   //sciagnij helm i wrzuc do ekw
-  helm = std::dynamic_pointer_cast<Armor>( crt->unequip(helm_ref) );
+  helm = ( crt->unequip(helm_ref) );
   crt->take(helm);
 
   QCOMPARE(crt->mods().get_complex_mod()->creature_stats().attribute(Attribute::DEX), -2 );

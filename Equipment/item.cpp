@@ -1,11 +1,4 @@
 #include "item.h"
-#include "ordinaryitem.h"
-#include "weapon.h"
-#include "armor.h"
-#include "jewelry.h"
-#include "food.h"
-#include "tool.h"
-#include "shield.h"
 #include "../World/locationobject.h"
 #include "item_container.h"
 #include "Include/functions/messages.h"
@@ -19,6 +12,7 @@ const dbTable Item::tableName = "items";
 
 Item::Item(dbRef ref, bool temporary)
   : DBObject(ref, temporary)
+  , _mods(this)
   , _item_type(ItemType::Null)
   , _name("")
   , _descript("")
@@ -27,7 +21,13 @@ Item::Item(dbRef ref, bool temporary)
   , _condition(ItemCondition::Null)
   , _durability(0)
   , _stackable(false)
-  , _mods(this)
+  , _wpn_skill(WeaponSkill::Null)
+  , _defence(0)
+  , _attack(0)
+  , _reflex(0)
+  , _str_req(0)
+  , _range(0)
+  , _hunger(0)
 {  
 }
 
@@ -45,13 +45,13 @@ Item *Item::create(dbRef ref, bool prototype, bool temporary)
     {
       switch(item_type)
       {
-        case ItemType::Ordinary: new_item = new OrdinaryItem(ref, temporary); break;
-        case ItemType::Weapon: new_item = new Weapon(ref, temporary); break;
-        case ItemType::Armor: new_item = new Armor(ref, temporary); break;
-        case ItemType::Jewelry: new_item = new Jewelry(ref, temporary); break;
-        case ItemType::Food: new_item = new Food(ref, temporary); break;
-        case ItemType::Tool: new_item = new Tool(ref, temporary); break;
-        case ItemType::Shield: new_item = new Shield(ref, temporary); break;
+        case ItemType::Ordinary: new_item = new Item(ref, temporary); break;
+        case ItemType::Weapon: new_item = new Item(ref, temporary); break;
+        case ItemType::Armor: new_item = new Item(ref, temporary); break;
+        case ItemType::Jewelry: new_item = new Item(ref, temporary); break;
+        case ItemType::Food: new_item = new Item(ref, temporary); break;
+        case ItemType::Tool: new_item = new Item(ref, temporary); break;
+        case ItemType::Shield: new_item = new Item(ref, temporary); break;
         case ItemType::LocationObject: new_item = new LocationObject(ref, temporary); break;
         default : throw error::creation_error("Nieprawidłowy typ itemu."); break;
       }
@@ -80,6 +80,7 @@ void Item::load(MapRow *data_source)
 
       if (!item_data.empty())
       {
+        //item
         setType( CheckValueCast<ItemType>(item_data["ITEM_TYPE"]));
         setName( CheckValue<string>(item_data["NAME"]) );
         setDescript( CheckValue<string>(item_data["DESCRIPTION"]) );
@@ -90,6 +91,38 @@ void Item::load(MapRow *data_source)
         _bodyParts = Str2BodyParts( CheckValue<string>(item_data["BODY_PARTS"]) );
         setDurability( CheckValue<int>(item_data["DURABILITY"]) );
         setStackable( CheckValue<bool>(item_data["STACKABLE"]) );
+
+        //weapon
+        setSkill(CheckValueCast<WeaponSkill>(item_data["WPN_SKILL"]));
+        setDefence(CheckValue<int>(item_data["WPN_DEFENCE"]));
+        setAttack(CheckValue<int>(item_data["WPN_ATTACK"]));
+        setReflex(CheckValue<int>(item_data["WPN_REFLEX"]));
+        setStrReq(CheckValue<int>(item_data["WPN_STR_REQ"]));
+        setRange(CheckValue<int>(item_data["WPN_RANGE"]));
+
+        Damage dmg
+        (
+          CheckValue<int>(item_data["WPN_D_PIERCING"]),
+          CheckValue<int>(item_data["WPN_D_SLASHING"]),
+          CheckValue<int>(item_data["WPN_D_BASHING"])
+        );
+
+        setDamage(dmg);
+
+        //armor
+        Damage dmgred
+        (
+          CheckValue<int>(item_data["ARM_DR_PIERCING"]),
+          CheckValue<int>(item_data["ARM_DR_SLASHING"]),
+          CheckValue<int>(item_data["ARM_DR_BASHING"])
+        );
+
+        setDamageReduction(dmgred);
+
+        //food
+        setHunger(CheckValue<int>(item_data["FOD_HUNGER"]));
+
+        //
 
         _mods.get_complex_mod()->setName( name() );
 
@@ -143,7 +176,21 @@ void Item::saveToDB()
     ", CONDITION = " << static_cast<int>(_condition) <<
     ", DURABILITY = " << _durability <<
     ", BODY_PARTS = '" << BodyParts2Str(_bodyParts) << "'"
-    ", STACKABLE = " << static_cast<int>(_stackable) <<
+    ", STACKABLE = " << static_cast<int>(_stackable)
+             << " ,WPN_SKILL=" << static_cast<int>(_wpn_skill)
+             << " ,WPN_D_PIERCING=" << _damage.piercing
+             << " ,WPN_D_SLASHING=" << _damage.slashing
+             << " ,WPN_D_BASHING=" << _damage.bashing
+             << " ,WPN_DEFENCE=" << _defence
+             << " ,WPN_ATTACK=" << _attack
+             << " ,WPN_REFLEX=" << _reflex
+             << " ,WPN_STR_REQ=" << _str_req
+             << " ,WPN_RANGE=" << _range
+             << " ,ARM_DR_PIERCING=" << _damage_red.piercing
+             << " ,ARM_DR_SLASHING=" << _damage_red.slashing
+             << " ,ARM_DR_BASHING=" << _damage_red.bashing
+             << " ,FOD_HUNGER=" << _hunger
+             <<
     " WHERE ref = " << ref();
 
   save(save_query.str());  
@@ -217,6 +264,60 @@ bool Item::checkBodyPart(BodyPartType bp) const
 bool Item::isStackable() const
 {
   return _stackable;
+}
+
+void Item::setSkill(WeaponSkill skill)
+{
+  _wpn_skill = skill;
+  set_modified();
+}
+
+void Item::setDamage(Damage damage)
+{
+  _damage = damage;
+  set_modified();
+}
+
+void Item::setDamageReduction(Damage dmg_red)
+{
+  _damage_red = dmg_red;
+  set_modified();
+}
+
+void Item::setDefence(int defence)
+{
+  _defence = defence;
+  set_modified();
+}
+
+void Item::setAttack(int attack)
+{
+  _attack = attack;
+  set_modified();
+}
+
+void Item::setReflex(int reflex)
+{
+  _reflex = reflex;
+  set_modified();
+}
+
+void Item::setStrReq(int val)
+{
+  _str_req = val;
+  set_modified();
+}
+
+void Item::setRange(int range)
+{
+  _range = range;
+  set_modified();
+}
+
+void Item::setHunger(int hunger)
+{
+  _hunger = hunger;
+  set_modified();
 }
 
 Item *Item::clone()

@@ -2,13 +2,6 @@ SOURCES += \
    ../World/location.cpp \
    ../Equipment/item.cpp \
    ../Include/db.cpp \
-   ../Equipment/ordinaryitem.cpp \
-   ../Equipment/weapon.cpp \
-   ../Equipment/armor.cpp \
-   ../Equipment/jewelry.cpp \
-   ../Equipment/food.cpp \
-   ../Equipment/tool.cpp \
-   ../Equipment/shield.cpp \
    ../World/locationobject.cpp \
    ../Creatures/creature.cpp \
    ../Creatures/creaturemodificator.cpp \
@@ -48,13 +41,6 @@ HEADERS  += \
    ../Equipment/item.h \
    ../Include/prototypemanager.h \
    ../Include/db.h \
-   ../Equipment/ordinaryitem.h \
-   ../Equipment/weapon.h \
-   ../Equipment/armor.h \
-   ../Equipment/jewelry.h \
-   ../Equipment/food.h \
-   ../Equipment/tool.h \
-   ../Equipment/shield.h \
    ../World/locationobject.h \
    ../Creatures/creature.h \
    ../Creatures/creaturemodificator.h \

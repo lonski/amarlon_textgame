@@ -38,8 +38,8 @@ void Creature::calcWeapons()
   for ( auto p = _body.parts().begin(); p != _body.parts().end(); ++p )
     {
       BodyPart *bp = p->get();
-      Weapon *eq_wpn = dynamic_cast<Weapon*>( bp->equipped(ItemType::Weapon).lock().get() );
-      Shield *eq_shd = dynamic_cast<Shield*>( bp->equipped(ItemType::Shield).lock().get() );
+      Item *eq_wpn = bp->equipped(ItemType::Weapon).lock().get();
+      Item *eq_shd = bp->equipped(ItemType::Shield).lock().get();
 
       if (eq_wpn != nullptr)
         {
@@ -386,17 +386,17 @@ ItemPtr Creature::unequip(dbRef item_ref)
   return r;
 }
 
-Weapon *Creature::weapon()
+Item *Creature::weapon()
 {
   return _weapon;
 }
 
-Weapon *Creature::offhand()
+Item *Creature::offhand()
 {
   return _offhand;
 }
 
-Shield *Creature::shield()
+Item *Creature::shield()
 {
   return _shield;
 }

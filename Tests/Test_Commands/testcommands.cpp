@@ -52,8 +52,8 @@ void TestCommands::TestCommandParser()
 void TestCommands::TestCommandExecutor()
 {
   CommandExecutor exec;
-  exec.add_command(new Take);
-  exec.add_command(new Go);
+  exec.add_command(new Take(nullptr));
+  exec.add_command(new Go(nullptr));
 
 //  QVERIFY(exec.execute("n"));
 //  QVERIFY(exec.execute("s s s s"));
@@ -66,4 +66,4 @@ void TestCommands::TestCommandExecutor()
 //  QVERIFY(exec.execute("podnies tylek lol"));
 }
 
-static TestCommands instance;
+

@@ -90,5 +90,15 @@ void GameClock::tick_time(Minute tick)
   oNotify();
 }
 
+void GameClock::reset()
+{
+  _minute = 0;
+  _hour = 0;
+  _day = 0;
+  _month = 0;
+  _year = 0;
+  _season = Season::Null;
+}
+
 
 

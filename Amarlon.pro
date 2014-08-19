@@ -34,13 +34,6 @@ SOURCES += main.cpp\
    World/location.cpp \
    Equipment/item.cpp \
    Include/db.cpp \
-   Equipment/ordinaryitem.cpp \
-   Equipment/weapon.cpp \
-   Equipment/armor.cpp \
-   Equipment/jewelry.cpp \
-   Equipment/food.cpp \
-   Equipment/tool.cpp \
-   Equipment/shield.cpp \
    World/locationobject.cpp \
    Creatures/creature.cpp \
    Creatures/creaturemodificator.cpp \
@@ -73,7 +66,8 @@ SOURCES += main.cpp\
     Include/functions/string_utils.cpp \
     Include/functions/db_utils.cpp \
     Include/functions/common_utils.cpp \
-    Gui/gui_console.cpp
+    Gui/gui_console.cpp \
+    Include/data_gateways/db_gateways/items_gateway_db.cpp
 
 HEADERS  += Gui/game.h \
     World/location.h \
@@ -81,13 +75,6 @@ HEADERS  += Gui/game.h \
     Equipment/item.h \
     Include/prototypemanager.h \
     Include/db.h \
-    Equipment/ordinaryitem.h \
-    Equipment/weapon.h \
-    Equipment/armor.h \
-    Equipment/jewelry.h \
-    Equipment/food.h \
-    Equipment/tool.h \
-    Equipment/shield.h \
     World/locationobject.h \
     Creatures/creature.h \
     Creatures/creaturemodificator.h \
@@ -153,7 +140,9 @@ HEADERS  += Gui/game.h \
     Include/functions/common_utils.h \
     Gui/gui_console.h \
     Console/console.h \
-    Include/enums/e_font.h
+    Include/enums/e_font.h \
+    Include/data_gateways/data_gateway.h \
+    Include/data_gateways/db_gateways/items_gateway_db.h
 
 FORMS    += Gui/game.ui \
     Gui/gui_console.ui

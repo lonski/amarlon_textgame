@@ -8,11 +8,13 @@
 #include "Include/exceptions.h"
 #include "Creatures/creaturemodificator.h"
 #include "Creatures/creaturemodificatormanager.h"
+#include "Include/damage.h"
 
 #include "Include/enums/e_itemprototype.h"
 #include "Include/enums/e_itemcondition.h"
 #include "Include/enums/e_itemtype.h"
 #include "Include/enums/e_body.h"
+#include "Include/enums/e_weaponskill.h"
 
 class Item;
 typedef std::shared_ptr<Item> ItemPtr;
@@ -30,7 +32,7 @@ public:
   static Item* create(dbRef ref, bool prototype = false, bool temporary = false);
   static Item* forge(ItemPrototype proto);
   virtual Item* clone();
-  virtual ~Item() = 0;
+  virtual ~Item();
 
   virtual void load(MapRow *data_source = nullptr);
   virtual void saveToDB();
@@ -38,6 +40,7 @@ public:
   Inventory& inventory();
   CreatureModificatorManager& mods();
 
+//item specyfic
   ItemType type() const;
   std::string name() const;
   std::string descript() const;
@@ -60,13 +63,45 @@ public:
   void removeBodyPart(BodyPartType body_part);
   void setStackable(bool stackable);
 
+//weapon specific
+  WeaponSkill skill() const { return _wpn_skill; }
+  Damage damage() const { return _damage; }
+  int defence() const { return _defence; }
+  int attack() const { return _attack; }
+  int reflex() const { return _reflex; }
+  int str_req() const { return _str_req; }
+  int range() const { return _range; }
+
+  void setSkill(WeaponSkill skill);
+  void setDamage(Damage damage);
+  void setDefence(int defence);
+  void setAttack(int attack);
+  void setReflex(int reflex);
+  void setStrReq(int val);
+  void setRange(int range);
+
+//armor specyfic
+  Damage damageReduction() const { return _damage_red; }
+  void setDamageReduction(Damage dmg_red);
+
+//food specyfic
+  int hunger() const { return _hunger; }
+  void setHunger(int hunger);
+
 protected:
   Item(dbRef ref, bool temporary = false);
 
-private:
+private:  
+  Item& operator=(const Item&) = delete;
+  Item(const Item&) = delete;
+
   std::string BodyParts2Str(std::vector<BodyPartType>& parts);
   std::vector<BodyPartType> Str2BodyParts(const std::string &str);
 
+  Inventory _inventory;
+  CreatureModificatorManager _mods;
+
+//item specific
   ItemType _item_type;
   std::string _name;
   std::string _descript;
@@ -77,11 +112,20 @@ private:
   std::vector<BodyPartType> _bodyParts;
   bool _stackable;
 
-  Inventory _inventory;
-  CreatureModificatorManager _mods;
+//weapon specific
+  WeaponSkill _wpn_skill;
+  Damage _damage;
+  int _defence;
+  int _attack;
+  int _reflex;
+  int _str_req;
+  int _range;
 
-  Item& operator=(const Item&) = delete;
-  Item(const Item&) = delete;
+//armor specyfic
+  Damage _damage_red;
+
+//food specific
+  int _hunger;
 
 };
 

@@ -1,10 +1,7 @@
 #ifndef BODYPART_H
 #define BODYPART_H
 
-
-
 #include "Equipment/item.h"
-#include "Equipment/armor.h"
 
 #include "Include/enums/e_damagelevel.h"
 #include "Include/damage.h"

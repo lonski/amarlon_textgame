@@ -43,7 +43,7 @@ void TestItems::LoadData()
   QVERIFY(itm->checkBodyPart(BodyPartType::Tors));
 
   //test weapon
-  unique_ptr<Weapon> wpn( dynamic_cast<Weapon*>(Item::create(1)) ) ;
+  unique_ptr<Item> wpn( Item::create(1) ) ;
   QVERIFY(wpn->skill() == WeaponSkill::Miecze);
   QCOMPARE(wpn->defence(), 6);
   QCOMPARE(wpn->attack(), 2);
@@ -55,18 +55,14 @@ void TestItems::LoadData()
   QCOMPARE(wpn->damage().bashing, 3);
 
   //test armor
-  unique_ptr<Armor> arm( dynamic_cast<Armor*>(Item::create(2)) ) ;
+  unique_ptr<Item> arm(Item::create(2)) ;
   QCOMPARE(arm->damageReduction().piercing, 5);
   QCOMPARE(arm->damageReduction().slashing, 6);
   QCOMPARE(arm->damageReduction().bashing, 7);
 
   //test food
-  unique_ptr<Food> food( dynamic_cast<Food*>(Item::create(79)) ) ;
+  unique_ptr<Item> food( (Item::create(79)) ) ;
   QCOMPARE(food->hunger(), 35);
-
-  //test shield
-  unique_ptr<Shield> shd( dynamic_cast<Shield*>(Item::create(82)) ) ;
-  QCOMPARE(shd->defence(), 9);
 
 }
 
@@ -147,7 +143,7 @@ void TestItems::SaveData()
   delete itm.release();
 
   //=============test weapon specific save
-  unique_ptr<Weapon> wpn(dynamic_cast<Weapon*>(Item::create(1)));
+  unique_ptr<Item> wpn((Item::create(1)));
 
   //change data
   wpn->setSkill(WeaponSkill::Kije);
@@ -160,7 +156,7 @@ void TestItems::SaveData()
 
   //re-create
   delete wpn.release();
-  wpn = unique_ptr<Weapon>(dynamic_cast<Weapon*>(Item::create(1)));
+  wpn = unique_ptr<Item>((Item::create(1)));
 
   //validate
   QVERIFY(wpn->skill() == WeaponSkill::Kije);
@@ -185,14 +181,14 @@ void TestItems::SaveData()
   delete wpn.release();
 
   //test armor specific ========================
-  unique_ptr<Armor> arm(dynamic_cast<Armor*>(Item::create(2)));
+  unique_ptr<Item> arm((Item::create(2)));
 
   //change data
   arm->setDamageReduction(Damage(2,3,4));
 
   //re-create
   delete arm.release();
-  arm = unique_ptr<Armor>(dynamic_cast<Armor*>(Item::create(2)));
+  arm = unique_ptr<Item>((Item::create(2)));
 
   //validate
   QCOMPARE(arm->damageReduction().piercing, 2);
@@ -205,14 +201,14 @@ void TestItems::SaveData()
   delete arm.release();
 
   //test food specyfic===============================
-  unique_ptr<Food> food(dynamic_cast<Food*>(Item::create(79)));
+  unique_ptr<Item> food((Item::create(79)));
 
   //change data
   food->setHunger(20);
 
   //re-create
   delete food.release();
-  food = unique_ptr<Food>(dynamic_cast<Food*>(Item::create(79)));
+  food = unique_ptr<Item>((Item::create(79)));
 
   //validate
   QCOMPARE(food->hunger(), 20);
@@ -223,14 +219,14 @@ void TestItems::SaveData()
   delete food.release();
 
   //test shield specyfic===============================
-  unique_ptr<Shield> shd(dynamic_cast<Shield*>(Item::create(82)));
+  unique_ptr<Item> shd((Item::create(82)));
 
   //change data
   shd->setDefence(11);
 
   //re-create
   delete shd.release();
-  shd = unique_ptr<Shield>(dynamic_cast<Shield*>(Item::create(82)));
+  shd = unique_ptr<Item>((Item::create(82)));
 
   //validate
   QCOMPARE(shd->defence(), 11);

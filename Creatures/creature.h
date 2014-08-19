@@ -4,8 +4,6 @@
 
 
 #include "Equipment/item.h"
-#include "Equipment/weapon.h"
-#include "Equipment/shield.h"
 #include "creaturestats.h"
 #include "creaturemodificator.h"
 #include "body.h"
@@ -61,9 +59,9 @@ public:
   void equip(ItemPtr item);
   ItemPtr unequip(dbRef item_ref);
 
-  virtual Weapon* weapon();
-  virtual Weapon* offhand();
-  virtual Shield* shield();
+  virtual Item* weapon();
+  virtual Item* offhand();
+  virtual Item* shield();
 
   void setName(std::string name);
   void setDescript(std::string descript);
@@ -98,9 +96,9 @@ private:
 
   DamageLevel _total_damage;
 
-  Weapon* _weapon;
-  Weapon* _offhand;
-  Shield* _shield;
+  Item* _weapon;
+  Item* _offhand;
+  Item* _shield;
 
   Location *_currentLoc;
   Location *_prevLoc;

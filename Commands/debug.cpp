@@ -1,7 +1,6 @@
 #include "debug.h"
 #include "Creatures/player.h"
 #include "Equipment/item.h"
-#include "Equipment/weapon.h"
 #include "World/location.h"
 #include "Equipment/item_container.h"
 #include "Creatures/creature.h"

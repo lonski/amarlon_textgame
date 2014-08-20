@@ -2,6 +2,7 @@
 #include "../World/locationobject.h"
 #include "item_container.h"
 #include "Include/functions/messages.h"
+#include "Include/data_gateways/db_gateways/items_gateway_db.h"
 
 using namespace std;
 using namespace soci;
@@ -9,6 +10,7 @@ using namespace fun;
 
 //==========ITEM============
 const dbTable Item::tableName = "items";
+DataGateway* Item::itemsGateway = new ItemsGatewayDB;
 
 Item::Item(dbRef ref, bool temporary)
   : DBObject(ref, temporary)
@@ -65,136 +67,138 @@ Item *Item::create(dbRef ref, bool prototype, bool temporary)
 
 void Item::load(MapRow *data_source)
 {
-  if ( !loaded() && ref() > 0 ){
-    try
-    {      
-      MapRow item_data;
-      if (data_source != nullptr)
-      {
-        item_data = *data_source;
-      }
-      else
-      {
-        item_data = MapQuery( "SELECT * FROM "+table()+" WHERE ref="+toStr(ref()) );
-      }
+  if ( !loaded() && ref() > 0 )
+    itemsGateway->fetchInto(this);
+//  if ( !loaded() && ref() > 0 ){
+//    try
+//    {
+//      MapRow item_data;
+//      if (data_source != nullptr)
+//      {
+//        item_data = *data_source;
+//      }
+//      else
+//      {
+//        item_data = MapQuery( "SELECT * FROM "+table()+" WHERE ref="+toStr(ref()) );
+//      }
 
-      if (!item_data.empty())
-      {
-        //item
-        setType( CheckValueCast<ItemType>(item_data["ITEM_TYPE"]));
-        setName( CheckValue<string>(item_data["NAME"]) );
-        setDescript( CheckValue<string>(item_data["DESCRIPTION"]) );
-        setWeight( CheckValue<double>(item_data["WEIGHT"]) );
-        setValue( CheckValue<int>(item_data["SHOP_VALUE"]) );
-        setCondition( CheckValueCast<ItemCondition>(item_data["CONDITION"]));
-        _bodyParts.clear();
-        _bodyParts = Str2BodyParts( CheckValue<string>(item_data["BODY_PARTS"]) );
-        setDurability( CheckValue<int>(item_data["DURABILITY"]) );
-        setStackable( CheckValue<bool>(item_data["STACKABLE"]) );
+//      if (!item_data.empty())
+//      {
+//        //item
+//        setType( CheckValueCast<ItemType>(item_data["ITEM_TYPE"]));
+//        setName( CheckValue<string>(item_data["NAME"]) );
+//        setDescript( CheckValue<string>(item_data["DESCRIPTION"]) );
+//        setWeight( CheckValue<double>(item_data["WEIGHT"]) );
+//        setValue( CheckValue<int>(item_data["SHOP_VALUE"]) );
+//        setCondition( CheckValueCast<ItemCondition>(item_data["CONDITION"]));
+//        setBodyParts( CheckValue<string>(item_data["BODY_PARTS"]) );
+//        setDurability( CheckValue<int>(item_data["DURABILITY"]) );
+//        setStackable( CheckValue<bool>(item_data["STACKABLE"]) );
 
-        //weapon
-        setSkill(CheckValueCast<WeaponSkill>(item_data["WPN_SKILL"]));
-        setDefence(CheckValue<int>(item_data["WPN_DEFENCE"]));
-        setAttack(CheckValue<int>(item_data["WPN_ATTACK"]));
-        setReflex(CheckValue<int>(item_data["WPN_REFLEX"]));
-        setStrReq(CheckValue<int>(item_data["WPN_STR_REQ"]));
-        setRange(CheckValue<int>(item_data["WPN_RANGE"]));
+//        //weapon
+//        setWeaponSkill(CheckValueCast<WeaponSkill>(item_data["WPN_SKILL"]));
+//        setDefence(CheckValue<int>(item_data["WPN_DEFENCE"]));
+//        setAttack(CheckValue<int>(item_data["WPN_ATTACK"]));
+//        setReflex(CheckValue<int>(item_data["WPN_REFLEX"]));
+//        setStrReq(CheckValue<int>(item_data["WPN_STR_REQ"]));
+//        setRange(CheckValue<int>(item_data["WPN_RANGE"]));
 
-        Damage dmg
-        (
-          CheckValue<int>(item_data["WPN_D_PIERCING"]),
-          CheckValue<int>(item_data["WPN_D_SLASHING"]),
-          CheckValue<int>(item_data["WPN_D_BASHING"])
-        );
+//        Damage dmg
+//        (
+//          CheckValue<int>(item_data["WPN_D_PIERCING"]),
+//          CheckValue<int>(item_data["WPN_D_SLASHING"]),
+//          CheckValue<int>(item_data["WPN_D_BASHING"])
+//        );
 
-        setDamage(dmg);
+//        setDamage(dmg);
 
-        //armor
-        Damage dmgred
-        (
-          CheckValue<int>(item_data["ARM_DR_PIERCING"]),
-          CheckValue<int>(item_data["ARM_DR_SLASHING"]),
-          CheckValue<int>(item_data["ARM_DR_BASHING"])
-        );
+//        //armor
+//        Damage dmgred
+//        (
+//          CheckValue<int>(item_data["ARM_DR_PIERCING"]),
+//          CheckValue<int>(item_data["ARM_DR_SLASHING"]),
+//          CheckValue<int>(item_data["ARM_DR_BASHING"])
+//        );
 
-        setDamageReduction(dmgred);
+//        setDamageReduction(dmgred);
 
-        //food
-        setHunger(CheckValue<int>(item_data["FOD_HUNGER"]));
+//        //food
+//        setHunger(CheckValue<int>(item_data["FOD_HUNGER"]));
 
-        //
+//        //
 
-        _mods.get_complex_mod()->setName( name() );
+//        _mods.get_complex_mod()->setName( name() );
 
-        set_loaded();
-        set_not_modified();
-      }
+//        set_loaded();
+//        set_not_modified();
+//      }
 
-      //MODS
-      //zaladuj z crt_mods
-      vector<int> mod_refs(100);
-      vector<indicator> inds;
+//      //MODS
+//      //zaladuj z crt_mods
+//      vector<int> mod_refs(100);
+//      vector<indicator> inds;
 
-      string query = "SELECT ref FROM crt_mods WHERE otable='" + table() + "' and oref=" + fun::toStr(ref());
-      _Database << query, into(mod_refs, inds);
+//      string query = "SELECT ref FROM crt_mods WHERE otable='" + table() + "' and oref=" + fun::toStr(ref());
+//      _Database << query, into(mod_refs, inds);
 
-      for (auto m = mod_refs.begin(); m != mod_refs.end(); ++m)
-        _mods.add( shared_ptr<CreatureModificator>(new CreatureModificator(*m)) );
+//      for (auto m = mod_refs.begin(); m != mod_refs.end(); ++m)
+//        _mods.add( shared_ptr<CreatureModificator>(new CreatureModificator(*m)) );
 
-      //INVENTORY
-      dbRef inv_ref = Item::Container::byOwner(table(), ref());
-      if (inv_ref != 0)
-      {
-        _inventory.reset(new Item::Container(inv_ref));
-      }
-      else
-      {
-        _inventory.reset();
-      }
+//      //INVENTORY
+//      dbRef inv_ref = Item::Container::byOwner(table(), ref());
+//      if (inv_ref != 0)
+//      {
+//        _inventory.reset(new Item::Container(inv_ref));
+//      }
+//      else
+//      {
+//        _inventory.reset();
+//      }
 
-    }
-    catch(soci_error &e)
-    {
-      MsgError(e.what());
-      qDebug() << _Database.get_last_query().c_str();
-    }
-  }
+//    }
+//    catch(soci_error &e)
+//    {
+//      MsgError(e.what());
+//      qDebug() << _Database.get_last_query().c_str();
+//    }
+//  }
 }
 
 void Item::saveToDB()
 {
+  if (!isTemporary())
+    itemsGateway->write(this);
+//  stringstream save_query;
 
-  stringstream save_query;
+//  save_query <<
+//    "UPDATE " << table() << " SET " <<
+//    "  ITEM_TYPE = " << static_cast<int>(_item_type) <<
+//    ", NAME = '" << _name << "'"
+//    ", DESCRIPTION = '" << _descript << "'"
+//    ", WEIGHT = " << _weight <<
+//    ", SHOP_VALUE = " << _value <<
+//    ", CONDITION = " << static_cast<int>(_condition) <<
+//    ", DURABILITY = " << _durability <<
+//    ", BODY_PARTS = '" << getBodyPartsString() << "'"
+//    ", STACKABLE = " << static_cast<int>(_stackable)
+//             << " ,WPN_SKILL=" << static_cast<int>(_wpn_skill)
+//             << " ,WPN_D_PIERCING=" << _damage.piercing
+//             << " ,WPN_D_SLASHING=" << _damage.slashing
+//             << " ,WPN_D_BASHING=" << _damage.bashing
+//             << " ,WPN_DEFENCE=" << _defence
+//             << " ,WPN_ATTACK=" << _attack
+//             << " ,WPN_REFLEX=" << _reflex
+//             << " ,WPN_STR_REQ=" << _str_req
+//             << " ,WPN_RANGE=" << _range
+//             << " ,ARM_DR_PIERCING=" << _damage_red.piercing
+//             << " ,ARM_DR_SLASHING=" << _damage_red.slashing
+//             << " ,ARM_DR_BASHING=" << _damage_red.bashing
+//             << " ,FOD_HUNGER=" << _hunger
+//             <<
+//    " WHERE ref = " << ref();
 
-  save_query <<
-    "UPDATE " << table() << " SET " <<
-    "  ITEM_TYPE = " << static_cast<int>(_item_type) <<
-    ", NAME = '" << _name << "'"
-    ", DESCRIPTION = '" << _descript << "'"
-    ", WEIGHT = " << _weight <<
-    ", SHOP_VALUE = " << _value <<
-    ", CONDITION = " << static_cast<int>(_condition) <<
-    ", DURABILITY = " << _durability <<
-    ", BODY_PARTS = '" << BodyParts2Str(_bodyParts) << "'"
-    ", STACKABLE = " << static_cast<int>(_stackable)
-             << " ,WPN_SKILL=" << static_cast<int>(_wpn_skill)
-             << " ,WPN_D_PIERCING=" << _damage.piercing
-             << " ,WPN_D_SLASHING=" << _damage.slashing
-             << " ,WPN_D_BASHING=" << _damage.bashing
-             << " ,WPN_DEFENCE=" << _defence
-             << " ,WPN_ATTACK=" << _attack
-             << " ,WPN_REFLEX=" << _reflex
-             << " ,WPN_STR_REQ=" << _str_req
-             << " ,WPN_RANGE=" << _range
-             << " ,ARM_DR_PIERCING=" << _damage_red.piercing
-             << " ,ARM_DR_SLASHING=" << _damage_red.slashing
-             << " ,ARM_DR_BASHING=" << _damage_red.bashing
-             << " ,FOD_HUNGER=" << _hunger
-             <<
-    " WHERE ref = " << ref();
-
-  save(save_query.str());  
-  DBObject::saveToDB();
+//  save(save_query.str());
+//  DBObject::saveToDB();
 }
 
 Item::Inventory &Item::inventory()
@@ -209,6 +213,11 @@ Item::Inventory &Item::inventory()
   }
 
   return _inventory;
+}
+
+void Item::setInventory(Item::Container *inv)
+{
+  _inventory.reset(inv);
 }
 
 CreatureModificatorManager &Item::mods()
@@ -266,7 +275,7 @@ bool Item::isStackable() const
   return _stackable;
 }
 
-void Item::setSkill(WeaponSkill skill)
+void Item::setWeaponSkill(WeaponSkill skill)
 {
   _wpn_skill = skill;
   set_modified();
@@ -411,7 +420,7 @@ void Item::setStackable(bool stackable)
   set_modified();
 }
 
-std::vector<BodyPartType> Item::Str2BodyParts(const string &str)
+std::vector<BodyPartType> Item::setBodyParts(const string &str)
 {
   vector<BodyPartType> p;
 
@@ -419,17 +428,20 @@ std::vector<BodyPartType> Item::Str2BodyParts(const string &str)
   for (auto s = sv.begin(); s != sv.end(); ++s)
     p.push_back(static_cast<BodyPartType>( fun::fromStr<int>(*s) ));
 
+  _bodyParts.clear();
+  _bodyParts = p;
+
   return p;
 }
 
 /*
  * Function converts BodyPartTypes to a 0-1 string, which is saved to db
  */
-string Item::BodyParts2Str(vector<BodyPartType> &parts)
+string Item::getBodyPartsString()
 {
   string str("");
 
-  for (auto i = parts.begin(); i != parts.end(); ++i)
+  for (auto i = _bodyParts.begin(); i != _bodyParts.end(); ++i)
   {
     BodyPartType bp = *i;
     str += fun::toStr(static_cast<int>(bp)) + ",";

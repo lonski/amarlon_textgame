@@ -44,7 +44,7 @@ void TestItems::LoadData()
 
   //test weapon
   unique_ptr<Item> wpn( Item::create(1) ) ;
-  QVERIFY(wpn->skill() == WeaponSkill::Miecze);
+  QVERIFY(wpn->weaponSkill() == WeaponSkill::Miecze);
   QCOMPARE(wpn->defence(), 6);
   QCOMPARE(wpn->attack(), 2);
   QCOMPARE(wpn->reflex(), 1);
@@ -146,7 +146,7 @@ void TestItems::SaveData()
   unique_ptr<Item> wpn((Item::create(1)));
 
   //change data
-  wpn->setSkill(WeaponSkill::Kije);
+  wpn->setWeaponSkill(WeaponSkill::Kije);
   wpn->setDefence(7);
   wpn->setAttack(3);
   wpn->setReflex(2);
@@ -159,7 +159,7 @@ void TestItems::SaveData()
   wpn = unique_ptr<Item>((Item::create(1)));
 
   //validate
-  QVERIFY(wpn->skill() == WeaponSkill::Kije);
+  QVERIFY(wpn->weaponSkill() == WeaponSkill::Kije);
   QCOMPARE(wpn->defence(), 7);
   QCOMPARE(wpn->attack(), 3);
   QCOMPARE(wpn->reflex(), 2);
@@ -170,7 +170,7 @@ void TestItems::SaveData()
   QCOMPARE(wpn->damage().bashing, 4);
 
   //rollback
-  wpn->setSkill(WeaponSkill::Miecze);
+  wpn->setWeaponSkill(WeaponSkill::Miecze);
   wpn->setDefence(6);
   wpn->setAttack(2);
   wpn->setReflex(1);
@@ -509,5 +509,3 @@ void TestItems::ItemModManager()
 
   itm->purge();
 }
-
-static TestItems instance;

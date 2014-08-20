@@ -1,5 +1,149 @@
 #include "itemsgateway.h"
+#include "Equipment/item.h"
+#include "Equipment/item_container.h"
+#include "Include/db.h"
+#include "Include/functions/db_utils.h"
+
+using namespace std;
+using namespace fun;
+using namespace soci;
 
 ItemsGateway::ItemsGateway()
 {
 }
+
+DBObject *ItemsGateway::fetch(dbRef id)
+{
+  Item* item = nullptr;
+
+  if (itemExistsInDataSource(id))
+  {
+    item = new Item(id);
+    readDataIntoItem(item);
+  }
+
+  return item;
+}
+
+void ItemsGateway::fetchInto(DBObject *obj)
+{
+  Item* item = dynamic_cast<Item*>(obj);
+
+  if (item != nullptr && itemExistsInDataSource(item->ref()))
+    readDataIntoItem(item);
+}
+
+unsigned int ItemsGateway::write(DBObject *obj)
+{
+  Item* item = dynamic_cast<Item*>(obj);
+  unsigned int r = 0;
+
+  if (item != nullptr)
+    r = writeItemToDataSource(item);
+
+  return r;
+}
+
+void ItemsGateway::readDataIntoItem(Item *item)
+{
+  if ( !item->loaded() && item->ref() > 0 )
+  {
+    try
+    {
+      MapRow item_data = getItemDataFromDataSource(item->ref());
+
+      setItemData(item_data, item);
+      setItemModificators(item);
+      setItemInventory(item);
+
+      item->set_loaded();
+      item->set_not_modified();
+    }
+    catch(soci_error &e)
+    {
+      qDebug() << e.what();
+      qDebug() << _Database.get_last_query().c_str();
+    }
+  }
+}
+
+void ItemsGateway::setItemData(MapRow item_data, Item *item)
+{
+  setOrdinaryItemData(item, item_data);
+  setWeaponItemData(item, item_data);
+  setArmorItemData(item, item_data);
+  setFoodItemData(item_data, item);
+}
+
+void ItemsGateway::setOrdinaryItemData(Item *item, MapRow item_data)
+{
+  item->setType( CheckValueCast<ItemType>(item_data["ITEM_TYPE"]));
+  item->setName( CheckValue<string>(item_data["NAME"]) );
+  item->setDescript( CheckValue<string>(item_data["DESCRIPTION"]) );
+  item->setWeight( CheckValue<double>(item_data["WEIGHT"]) );
+  item->setValue( CheckValue<int>(item_data["SHOP_VALUE"]) );
+  item->setCondition( CheckValueCast<ItemCondition>(item_data["CONDITION"]));
+  item->setBodyParts( CheckValue<string>(item_data["BODY_PARTS"]) );
+  item->setDurability( CheckValue<int>(item_data["DURABILITY"]) );
+  item->setStackable( CheckValue<bool>(item_data["STACKABLE"]) );
+}
+
+void ItemsGateway::setWeaponItemData(Item *item, MapRow item_data)
+{
+  item->setWeaponSkill(CheckValueCast<WeaponSkill>(item_data["WPN_SKILL"]));
+  item->setDefence(CheckValue<int>(item_data["WPN_DEFENCE"]));
+  item->setAttack(CheckValue<int>(item_data["WPN_ATTACK"]));
+  item->setReflex(CheckValue<int>(item_data["WPN_REFLEX"]));
+  item->setStrReq(CheckValue<int>(item_data["WPN_STR_REQ"]));
+  item->setRange(CheckValue<int>(item_data["WPN_RANGE"]));
+
+  Damage dmg
+  (
+    CheckValue<int>(item_data["WPN_D_PIERCING"]),
+    CheckValue<int>(item_data["WPN_D_SLASHING"]),
+    CheckValue<int>(item_data["WPN_D_BASHING"])
+  );
+
+  item->setDamage(dmg);
+}
+
+void ItemsGateway::setArmorItemData(Item *item, MapRow item_data)
+{
+  Damage dmgred
+  (
+    CheckValue<int>(item_data["ARM_DR_PIERCING"]),
+    CheckValue<int>(item_data["ARM_DR_SLASHING"]),
+    CheckValue<int>(item_data["ARM_DR_BASHING"])
+  );
+
+  item->setDamageReduction(dmgred);
+}
+
+void ItemsGateway::setFoodItemData(MapRow item_data, Item *item)
+{
+  item->setHunger(CheckValue<int>(item_data["FOD_HUNGER"]));
+}
+
+void ItemsGateway::setItemModificators(Item *item)
+{
+  item->mods().get_complex_mod()->setName( item->name() );
+
+  vector<unsigned int> mod_refs = getItemModificatorIdsFromDataSource(item->ref());
+
+  for (auto m = mod_refs.begin(); m != mod_refs.end(); ++m)
+    item->mods().add( shared_ptr<CreatureModificator>(new CreatureModificator(*m)) );
+}
+
+void ItemsGateway::setItemInventory(Item *item)
+{
+  dbRef inv_ref = Item::Container::byOwner(item->table(), item->ref());
+  if (inv_ref != 0)
+  {
+   item-> setInventory(new Item::Container(inv_ref));
+  }
+  else
+  {
+    item->setInventory(nullptr);
+  }
+}
+

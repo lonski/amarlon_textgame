@@ -28,11 +28,13 @@ unix:LIBS += -lsoci_core \
              -lsoci_firebird
 
 SOURCES += unit_tests_main.cpp \
-    testsuite.cpp
+    testsuite.cpp \
+    Test_Gateways/testitemgatewaydb.cpp
 
 include(tests.pri)
 include(sors.pri)
 
 HEADERS += \
-    testsuite.h
+    testsuite.h \
+    Test_Gateways/testitemgatewaydb.h
 

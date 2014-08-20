@@ -67,7 +67,8 @@ SOURCES += main.cpp\
     Include/functions/db_utils.cpp \
     Include/functions/common_utils.cpp \
     Gui/gui_console.cpp \
-    Include/data_gateways/db_gateways/items_gateway_db.cpp
+    Include/data_gateways/db_gateways/items_gateway_db.cpp \
+    Include/data_gateways/itemsgateway.cpp
 
 HEADERS  += Gui/game.h \
     World/location.h \
@@ -142,7 +143,8 @@ HEADERS  += Gui/game.h \
     Console/console.h \
     Include/enums/e_font.h \
     Include/data_gateways/data_gateway.h \
-    Include/data_gateways/db_gateways/items_gateway_db.h
+    Include/data_gateways/db_gateways/items_gateway_db.h \
+    Include/data_gateways/itemsgateway.h
 
 FORMS    += Gui/game.ui \
     Gui/gui_console.ui

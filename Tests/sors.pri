@@ -34,6 +34,9 @@ SOURCES += \
    ../Include/functions/string_utils.cpp \
    ../Include/functions/db_utils.cpp \
    ../Include/functions/common_utils.cpp \
+   ../Include/data_gateways/db_gateways/items_gateway_db.cpp \
+   ../Include/data_gateways/itemsgateway.cpp
+
 
 HEADERS  += \
    ../World/location.h \
@@ -105,4 +108,8 @@ HEADERS  += \
    ../Include/functions/messages.h \
    ../Include/functions/common_utils.h \
    ../Console/console.h \
-   ../Include/enums/e_font.h
+   ../Include/enums/e_font.h \
+   ../Include/data_gateways/data_gateway.h \
+   ../Include/data_gateways/db_gateways/items_gateway_db.h \
+   ../Include/data_gateways/itemsgateway.h
+

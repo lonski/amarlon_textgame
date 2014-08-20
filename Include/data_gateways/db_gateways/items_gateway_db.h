@@ -1,17 +1,26 @@
 #ifndef ITEMS_GATEWAY_DB_H
 #define ITEMS_GATEWAY_DB_H
 
-#include "Include/data_gateways/data_gateway.h"
-#include "Include/db.h"
+#include "Include/data_gateways/itemsgateway.h"
 
-class ItemsGatewayDB : public DataGateway
+class Item;
+
+class ItemsGatewayDB : public ItemsGateway
 {
 public:
   ItemsGatewayDB();
   virtual ~ItemsGatewayDB() {}
 
-  virtual DBObject* fetch(int id);
-  virtual void write(DBObject *obj);
+protected:
+  virtual MapRow getItemDataFromDataSource(unsigned int item_id);
+  virtual std::vector<unsigned int> getItemModificatorIdsFromDataSource(unsigned int item_id);
+  virtual bool itemExistsInDataSource(unsigned int item_id);
+  virtual unsigned int writeItemToDataSource(Item* item);
+
+private:
+  void updateItemInDataSource(Item *item);
+  void insertItemIntoDataSource(Item *item);
+  unsigned int getNewItemId();
 
 };
 

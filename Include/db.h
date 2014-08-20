@@ -45,20 +45,9 @@ private:
   std::list<std::string> _save_queries;
 
 protected:
-  //save changes
   template<typename T> void save(std::string f_name, T f_val, dbTable tbl = "");
   virtual void save(std::string query);
-  virtual void set_loaded() { _loaded = true; }
-  virtual void set_not_loaded() { _loaded = false; }
-  virtual void set_modified() { _modified = true; }
-  virtual void set_not_modified() { _modified = false; }
-
-  //set data
-  void set_ref(dbRef ref)
-  {
-    _ref = ref;
-    set_not_loaded();
-  }
+  virtual void setTemporary() { _temporary = true; }
 
 public:
   //birth and death
@@ -80,6 +69,17 @@ public:
   virtual void reload();
   virtual void purge();
 
+  virtual void set_loaded() { _loaded = true; }
+  virtual void set_not_loaded() { _loaded = false; }
+  virtual void set_modified() { _modified = true; }
+  virtual void set_not_modified() { _modified = false; }
+
+  //set data
+  void setRef(dbRef ref)
+  {
+    _ref = ref;
+    set_not_loaded();
+  }
 };
 
 template<typename T>

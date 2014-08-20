@@ -88,7 +88,7 @@ void CreatureModificator::saveToDB()
 
       if (soci::i_ok == ind)
       {
-        set_ref(new_ref);
+        setRef(new_ref);
         set_loaded();
         set_not_modified();
       }

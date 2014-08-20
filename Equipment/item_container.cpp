@@ -18,7 +18,7 @@ Item::Container::Container(int pojemnosc)
   dbRef new_ref;
   _Database << "select new_ref from create_new_item_container", into(new_ref);
 
-  set_ref(new_ref);
+  setRef(new_ref);
   set_max_weight(pojemnosc);
 
   set_loaded();

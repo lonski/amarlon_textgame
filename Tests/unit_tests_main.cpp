@@ -9,13 +9,15 @@
 #include "Test_Functions/testfun.h"
 #include "Test_Items/testitems.h"
 #include "Test_Location/testlocation.h"
+#include "Test_Gateways/testitemgatewaydb.h"
 
 static TestDB tdb;
 static TestCommands tcmd;
+static TestItems titm;
 static TestCreature tcrt;
 static TestFun tfun;
-static TestItems titm;
 static TestLocation tloc;
+static TestItemGatewayDB tgidb;
 
 int main(int, char**)
 {

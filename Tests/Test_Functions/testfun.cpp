@@ -147,5 +147,3 @@ void TestFun::inifile()
   ini2.eraseSection("nowa");
   ini2.save();
 }
-
-static TestFun instance;

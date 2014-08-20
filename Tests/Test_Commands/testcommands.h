@@ -19,6 +19,4 @@ private slots:
    void TestCommandExecutor();
 };
 
-static TestCommands instance;
-
 #endif // TESTCOMMANDS_H

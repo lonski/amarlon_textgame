@@ -17,27 +17,35 @@
 #include "Include/enums/e_weaponskill.h"
 
 class Item;
+class DataGateway;
 typedef std::shared_ptr<Item> ItemPtr;
 
 class Item : public DBObject, public Prototypable<Item, ItemPrototype>
 {
-public:
+public:  
   class Container;
   typedef std::shared_ptr<Item::Container > Inventory;
   typedef std::vector<ItemPtr > STLContainer;
 
+  static DataGateway* itemsGateway;
+
   const static dbTable tableName;
   virtual dbTable table() const { return tableName; }
 
+  Item(dbRef ref, bool temporary = false);
+  virtual ~Item();
   static Item* create(dbRef ref, bool prototype = false, bool temporary = false);
   static Item* forge(ItemPrototype proto);
   virtual Item* clone();
-  virtual ~Item();
 
   virtual void load(MapRow *data_source = nullptr);
   virtual void saveToDB();
 
+  std::string getBodyPartsString();
+  std::vector<BodyPartType> setBodyParts(const std::string &str);
+
   Inventory& inventory();
+  void setInventory(Item::Container* inv);
   CreatureModificatorManager& mods();
 
 //item specyfic
@@ -64,7 +72,7 @@ public:
   void setStackable(bool stackable);
 
 //weapon specific
-  WeaponSkill skill() const { return _wpn_skill; }
+  WeaponSkill weaponSkill() const { return _wpn_skill; }
   Damage damage() const { return _damage; }
   int defence() const { return _defence; }
   int attack() const { return _attack; }
@@ -72,7 +80,7 @@ public:
   int str_req() const { return _str_req; }
   int range() const { return _range; }
 
-  void setSkill(WeaponSkill skill);
+  void setWeaponSkill(WeaponSkill weaponSkill);
   void setDamage(Damage damage);
   void setDefence(int defence);
   void setAttack(int attack);
@@ -88,15 +96,9 @@ public:
   int hunger() const { return _hunger; }
   void setHunger(int hunger);
 
-protected:
-  Item(dbRef ref, bool temporary = false);
-
-private:  
+private:
   Item& operator=(const Item&) = delete;
   Item(const Item&) = delete;
-
-  std::string BodyParts2Str(std::vector<BodyPartType>& parts);
-  std::vector<BodyPartType> Str2BodyParts(const std::string &str);
 
   Inventory _inventory;
   CreatureModificatorManager _mods;

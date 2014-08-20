@@ -89,6 +89,7 @@ void TestCreature::bodypart_equip()
   QVERIFY(bp.equipped().size() == 1);
 
   string str = "2,1,4,1,0,0,"+fun::toStr(item->ref())+",0,0,0,0,0,";
+
   QCOMPARE(bp.toStr().c_str(), str.c_str());
   //qDebug() << bp.toStr().c_str();
 
@@ -571,7 +572,7 @@ void TestCreature::creature_eq()
   crt.reset(Creature::create(ref));
 
   c_monit.reset(crt.get());
-  qDebug() << c_monit.print().c_str();
+  //qDebug() << c_monit.print().c_str();
 
   //sprawdz czy helm zalolzony
   bp = crt->body().part(BodyPartType::Glowa);
@@ -842,5 +843,3 @@ void TestCreature::player_load()
 {
   _Player->saveToDB();
 }
-
-static TestCreature instance;

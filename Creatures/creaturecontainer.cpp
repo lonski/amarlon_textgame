@@ -30,7 +30,7 @@ Creature::Container::Container()
   _Database.commit();
   if (ind != soci::i_ok) ref = 0;
 
-  DBObject::set_ref(ref);
+  DBObject::setRef(ref);
   DBObject::set_loaded();
   DBObject::set_not_modified();
 }

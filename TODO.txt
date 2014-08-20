@@ -1,2 +1,0 @@
-BUG:
-zapisywanie bodyparts z itemów do bazy -> brak możliwości wymogu kilku rodzai tego samego bodyparta

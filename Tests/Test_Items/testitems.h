@@ -14,7 +14,7 @@ private slots:
    void ItemCreation();
    void LoadData();
    void SaveData();
-   void TemporaryItem();
+   //void TemporaryItem();
    void PrototypeTest();
    void ContainerCreation();
    void ContainerInsertionEraseNonStackable();

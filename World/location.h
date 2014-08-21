@@ -6,7 +6,6 @@
 
 #include "Include/exceptions.h"
 #include "Equipment/item.h"
-#include "locationobject.h"
 #include "walkvector.h"
 #include "locationmanager.h"
 
@@ -43,10 +42,10 @@ public:
   void setName(std::string name);
   void setDestript(std::string dsc);
 
-  void insertObject(LocationObjectPtr& obj);
-  LocationObjectPtr eraseObject(dbRef obj_ref);
-  LocationObjectPtr findObject(dbRef obj_ref);
-  std::vector<LocationObjectPtr > getAllObjects();
+  void insertObject(ItemPtr& obj);
+  ItemPtr eraseObject(dbRef obj_ref);
+  ItemPtr findObject(dbRef obj_ref);
+  std::vector<ItemPtr > getAllObjects();
   std::vector<Creature*> getAllCreatures();
 
 private:

@@ -5,7 +5,7 @@ using namespace std;
 using namespace fun;
 using namespace soci;
 
-NPC::NPC(dbRef ref, bool temporary): Creature(ref, temporary)
+NPC::NPC(dbRef ref): Creature(ref)
 {
 }
 

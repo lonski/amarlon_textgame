@@ -22,7 +22,7 @@ public:
 
 private:
   friend class Creature;
-  NPC(dbRef ref, bool temporary = false);
+  NPC(dbRef ref);
 
   Clan _clan;
   Tribe _tribe;

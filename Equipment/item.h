@@ -32,13 +32,13 @@ public:
   const static dbTable tableName;
   virtual dbTable table() const { return tableName; }
 
-  Item(dbRef ref, bool temporary = false);
+  Item(dbRef ref);
   virtual ~Item();
-  static Item* create(dbRef ref, bool prototype = false, bool temporary = false);
+  static Item* create(dbRef ref);
   static Item* forge(ItemPrototype proto);
   virtual Item* clone();
 
-  virtual void load(MapRow *data_source = nullptr);
+  virtual void load(MapRow* = nullptr);
   virtual void saveToDB();
 
   std::string getBodyPartsString();

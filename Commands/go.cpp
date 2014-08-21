@@ -169,10 +169,10 @@ void Go::displayLocDescription(Location* loc)
 
 void Go::dispalyLocationObjects(Location* loc)
 {
-  vector<LocationObjectPtr> objs = loc->getAllObjects();
+  vector<ItemPtr> objs = loc->getAllObjects();
   for (auto o = objs.begin(); o != objs.end(); ++o)
   {
-    LocationObjectPtr obj = *o;
+    ItemPtr obj = *o;
     cAppend(obj->name(), Font::LocObject);
     }
 }

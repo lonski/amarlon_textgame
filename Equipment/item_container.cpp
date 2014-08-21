@@ -6,20 +6,20 @@ using namespace soci;
 
 const dbTable Item::Container::tableName = "item_containers";
 
-Item::Container::Container(dbRef ref, bool temporary)
-  : DBObject(ref, temporary)
+Item::Container::Container(dbRef ref)
+  : DBObject(ref)
 {
   load();
 }
 
-Item::Container::Container(int pojemnosc)
+Item::Container::Container()
   : DBObject(0)
 {
   dbRef new_ref;
   _Database << "select new_ref from create_new_item_container", into(new_ref);
 
   setRef(new_ref);
-  set_max_weight(pojemnosc);
+  set_max_weight(defaultCapacity);
 
   set_loaded();
   set_modified();

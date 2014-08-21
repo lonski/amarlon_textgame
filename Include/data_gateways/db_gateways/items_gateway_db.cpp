@@ -26,7 +26,7 @@ bool ItemsGatewayDB::itemExistsInDataSource(unsigned int item_id)
   return r;
 }
 
-unsigned int ItemsGatewayDB::writeItemToDataSource(Item *item)
+unsigned int ItemsGatewayDB::writeItemDataToDataSource(Item *item)
 {
   try
   {

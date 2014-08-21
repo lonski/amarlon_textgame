@@ -30,7 +30,7 @@ public:
 
   static CreatureManager Manager;
 
-  static Creature* create(dbRef ref, bool prototype = false, bool temp = false);
+  static Creature* create(dbRef ref, bool prototype = false);
   virtual Creature *clone();
   virtual ~Creature() = 0;
 
@@ -74,7 +74,7 @@ public:
   void setLocation(Location* loc);
 
 protected:
-  Creature(dbRef ref, bool temp = false);
+  Creature(dbRef ref);
 
   virtual void calcWeapons();
   virtual void calcTotalDamage();

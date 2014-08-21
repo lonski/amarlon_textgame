@@ -22,7 +22,7 @@ protected:
   virtual MapRow getItemDataFromDataSource(unsigned int item_id) = 0;
   virtual std::vector<unsigned int> getItemModificatorIdsFromDataSource(unsigned int item_id) = 0;
   virtual bool itemExistsInDataSource(unsigned int item_id) = 0;
-  virtual unsigned int  writeItemToDataSource(Item* item) = 0;
+  virtual unsigned int  writeItemDataToDataSource(Item* item) = 0;
 
 private:
   void readDataIntoItem(Item* item);
@@ -35,6 +35,8 @@ private:
   void setArmorItemData(Item *item, MapRow item_data);
   void setFoodItemData(MapRow item_data, Item *item);
 
+  void writeItemInventory(Item* item);
+  void writeItemCrtModificators(Item* item);
 };
 
 

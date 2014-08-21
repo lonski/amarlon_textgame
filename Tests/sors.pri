@@ -2,7 +2,6 @@ SOURCES += \
    ../World/location.cpp \
    ../Equipment/item.cpp \
    ../Include/db.cpp \
-   ../World/locationobject.cpp \
    ../Creatures/creature.cpp \
    ../Creatures/creaturemodificator.cpp \
    ../Creatures/creaturestats.cpp \
@@ -44,7 +43,6 @@ HEADERS  += \
    ../Equipment/item.h \
    ../Include/prototypemanager.h \
    ../Include/db.h \
-   ../World/locationobject.h \
    ../Creatures/creature.h \
    ../Creatures/creaturemodificator.h \
    ../Creatures/creaturestats.h \

@@ -31,8 +31,8 @@ CreatureModificator::CreatureModificator(dbTable otable, dbRef oref)
 
 }
 
-CreatureModificator::CreatureModificator(dbRef ref, bool temporary)
-: DBObject(ref, temporary)
+CreatureModificator::CreatureModificator(dbRef ref)
+: DBObject(ref)
 {
   load();
 }

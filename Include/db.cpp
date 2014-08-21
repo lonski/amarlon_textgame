@@ -15,33 +15,30 @@ string DB::_db_server = "192.168.1.5";
 //===DB Object
 void DBObject::saveToDB()
 {
-  if (!isTemporary())
+  try
   {
-    try
-    {
-      _Database.begin();
+    _Database.begin();
 
-      for (auto i = _save_queries.begin(); i != _save_queries.end(); ++i)
+    for (auto i = _save_queries.begin(); i != _save_queries.end(); ++i)
+    {
+      if (*i != "")
       {
-        if (*i != "")
-        {
-          _Database << *i;
-        }
+        _Database << *i;
       }
-
-      _Database.commit();
-    }
-    catch(soci_error &e)
-    {
-      qDebug() << "###Error saving ref=" << ref() << ": ";
-      qDebug() << "#MSG = " << e.what();
-      qDebug() << "#QUERY = " << _Database.get_last_query().c_str();
-      QMessageBox::critical(NULL, "Error",_Database.get_last_query().c_str());
     }
 
-    _save_queries.clear();
-    set_not_modified();
+    _Database.commit();
   }
+  catch(soci_error &e)
+  {
+    qDebug() << "###Error saving ref=" << ref() << ": ";
+    qDebug() << "#MSG = " << e.what();
+    qDebug() << "#QUERY = " << _Database.get_last_query().c_str();
+    QMessageBox::critical(NULL, "Error",_Database.get_last_query().c_str());
+  }
+
+  _save_queries.clear();
+  set_not_modified();
 }
 
 void DBObject::reload()
@@ -53,18 +50,17 @@ void DBObject::reload()
 
 void DBObject::purge()
 {
-  if ( !isTemporary() && ref() > 0)
+  if (ref() > 0)
   {
     _save_queries.clear();
     _Database << "delete from " << table().c_str() << " where ref = " << ref();
     _Database.commit();
-    _temporary = true;
   }
 }
 
 void DBObject::save(string query)
 {
-  if ( loaded() && !isTemporary() )
+  if ( loaded())
   {
     _save_queries.push_back(query);
   }
@@ -72,7 +68,7 @@ void DBObject::save(string query)
 
 DBObject::~DBObject()
 {
-  if ( !isTemporary() && modified() )
+  if ( modified() )
   {
     try
     {

@@ -10,7 +10,7 @@ public:
 
 private:
   friend class Creature;
-  MOB(dbRef ref, bool temporary = false);
+  MOB(dbRef ref);
 
 };
 

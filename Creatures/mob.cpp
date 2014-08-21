@@ -1,5 +1,5 @@
 #include "mob.h"
 
-MOB::MOB(dbRef ref, bool temporary): Creature(ref, temporary)
+MOB::MOB(dbRef ref): Creature(ref)
 {
 }

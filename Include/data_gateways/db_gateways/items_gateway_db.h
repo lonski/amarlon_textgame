@@ -15,7 +15,7 @@ protected:
   virtual MapRow getItemDataFromDataSource(unsigned int item_id);
   virtual std::vector<unsigned int> getItemModificatorIdsFromDataSource(unsigned int item_id);
   virtual bool itemExistsInDataSource(unsigned int item_id);
-  virtual unsigned int writeItemToDataSource(Item* item);
+  virtual unsigned int writeItemDataToDataSource(Item* item);
 
 private:
   void updateItemInDataSource(Item *item);

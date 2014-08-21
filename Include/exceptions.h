@@ -31,6 +31,12 @@ public:
   explicit execution_error (const std::string& what_arg): std::logic_error(what_arg) {}
 };
 
+class cloning_error : public std::logic_error {
+public:
+  explicit cloning_error (const std::string& what_arg = ""): std::logic_error(what_arg) {}
+};
+
+
 }
 
 #endif // EXCEPTIONS_H

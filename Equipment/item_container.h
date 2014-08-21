@@ -20,9 +20,10 @@ private:
 
 public:
   const static dbTable tableName;
+  const static int defaultCapacity = 10;
 
-  Container(dbRef ref, bool temporary = false);
-  Container(int pojemnosc = 10);
+  Container(dbRef ref);
+  Container();
   ~Container();
   static dbRef byOwner(dbTable otable, dbRef oref);
 

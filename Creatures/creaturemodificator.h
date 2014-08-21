@@ -30,7 +30,7 @@ public:
 
   //creation
   CreatureModificator(dbTable otable = "", dbRef oref = 0);
-  CreatureModificator(dbRef ref, bool temporary = false);
+  CreatureModificator(dbRef ref);
   ~CreatureModificator();
 
   //data access  

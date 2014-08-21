@@ -63,7 +63,7 @@ void Location::setDestript(string dsc)
   set_modified();
 }
 
-void Location::insertObject(LocationObjectPtr &obj)
+void Location::insertObject(ItemPtr &obj)
 {
   if (_objects == nullptr)
   {
@@ -74,29 +74,29 @@ void Location::insertObject(LocationObjectPtr &obj)
   _objects->insert(item, 1);
 }
 
-LocationObjectPtr Location::eraseObject(dbRef obj_ref)
+ItemPtr Location::eraseObject(dbRef obj_ref)
 {
   if (_objects == nullptr)
   {
     createObjectsContainer();
   }
 
-  return dynamic_pointer_cast<LocationObject>(_objects->erase(obj_ref, 1).item);
+  return _objects->erase(obj_ref, 1).item;
 }
 
-LocationObjectPtr Location::findObject(dbRef obj_ref)
+ItemPtr Location::findObject(dbRef obj_ref)
 {
   if (_objects == nullptr)
   {
     createObjectsContainer();
   }
 
-  return dynamic_pointer_cast<LocationObject>(_objects->find(obj_ref).item);
+  return _objects->find(obj_ref).item;
 }
 
-std::vector<LocationObjectPtr > Location::getAllObjects()
+std::vector<ItemPtr > Location::getAllObjects()
 {
-  vector<LocationObjectPtr > r;
+  vector<ItemPtr > r;
 
   if (_objects == nullptr)
   {
@@ -107,7 +107,7 @@ std::vector<LocationObjectPtr > Location::getAllObjects()
 
   for (auto o = a_items.begin(); o != a_items.end(); ++o)
   {
-    r.push_back(dynamic_pointer_cast<LocationObject>(o->item));
+    r.push_back(o->item);
   }
 
   return r;

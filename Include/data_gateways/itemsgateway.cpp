@@ -39,7 +39,11 @@ unsigned int ItemsGateway::write(DBObject *obj)
   unsigned int r = 0;
 
   if (item != nullptr)
-    r = writeItemToDataSource(item);
+  {
+    r = writeItemDataToDataSource(item);
+    writeItemInventory(item);
+    writeItemCrtModificators(item);
+  }
 
   return r;
 }
@@ -122,6 +126,28 @@ void ItemsGateway::setArmorItemData(Item *item, MapRow item_data)
 void ItemsGateway::setFoodItemData(MapRow item_data, Item *item)
 {
   item->setHunger(CheckValue<int>(item_data["FOD_HUNGER"]));
+}
+
+void ItemsGateway::writeItemInventory(Item *item)
+{
+  if (item->inventory()->oref() != item->ref())
+  {
+    item->inventory()->setORef(item->ref());
+    item->inventory()->set_modified();
+  }
+
+  item->inventory()->saveToDB();
+}
+
+void ItemsGateway::writeItemCrtModificators(Item *item)
+{
+  if (item->mods().get_complex_mod()->oref() != item->ref())
+  {
+    item->mods().get_complex_mod()->setORef(item->ref());
+    item->mods().get_complex_mod()->setOTable(item->table());
+  }
+
+  item->mods().save();
 }
 
 void ItemsGateway::setItemModificators(Item *item)

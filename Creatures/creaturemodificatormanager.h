@@ -26,5 +26,6 @@ public:
   std::shared_ptr<CreatureModificator> get_complex_mod() const { return _complex_mod; }
   std::vector<std::weak_ptr<CreatureModificator> > getAll();
   virtual void tick_time(Minute tick);
+  void save();
 };
 #endif // CREATUREMODIFICATORMANAGER_H

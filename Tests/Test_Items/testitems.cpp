@@ -9,18 +9,6 @@ void TestItems::ItemCreation()
   //create instance item
   unique_ptr<Item> itm( Item::create(2));
   QCOMPARE(itm->ref(), static_cast<unsigned int>(2));
-
-  //create prototype item
-  bool ok = false;
-  try
-  {
-    unique_ptr<Item> itm (Item::create(4));
-  }
-  catch(logic_error)
-  {
-    ok = true;
-  }
-  QVERIFY(ok);
 }
 
 void TestItems::LoadData()
@@ -238,54 +226,6 @@ void TestItems::SaveData()
 
 }
 
-void TestItems::TemporaryItem()
-{
-  //rollback error in save item
-  unique_ptr<Item> itmx ( Item::create(2));
-
-  itmx->setWeight(1.93);
-  itmx->setDescript("lolo");
-  itmx->setName("TestIns2");
-  itmx->setType(ItemType::Armor);
-  itmx->setCondition(ItemCondition::Good);
-
-  vector<BodyPartType> bps = itmx->bodyParts();
-  for_each(bps.begin(), bps.end(), [&](BodyPartType b)
-  {
-    itmx->removeBodyPart(b);
-  });
-
-  itmx->addBodyPart(BodyPartType::Tors);
-  itmx->addBodyPart(BodyPartType::Glowa);
-  itmx->setDurability(7);
-  delete itmx.release();
-  //~~~
-
-  //create instance item
-  unique_ptr<Item> itm (Item::create(2, false, true));
-
-  //validate data
-  QVERIFY(itm->isTemporary());
-  QCOMPARE(itm->ref(), static_cast<unsigned int>(2));
-  QCOMPARE(itm->value(), 32);
-  QCOMPARE(itm->weight(), 1.93);
-  QCOMPARE(itm->descript().c_str(), "lolo");
-  QCOMPARE(itm->name().c_str(),"TestIns2");
-  QVERIFY(itm->type() == ItemType::Armor);
-
-  //change some data
-  itm->setWeight(6.66);
-
-  //save
-  itm->saveToDB();
-
-  //load again
-  itm->reload();
-
-  //validate if not changed
-  QCOMPARE(itm->weight(), 1.93);
-
-}
 
 void TestItems::PrototypeTest()
 {
@@ -297,7 +237,7 @@ void TestItems::PrototypeTest()
 
 void TestItems::ContainerCreation()
 {
-  Item::Container* cont = new Item::Container(1,true);
+  Item::Container* cont = new Item::Container(1);
   QCOMPARE(cont->name().c_str(), "Ekwipunek");
   delete cont;
 }

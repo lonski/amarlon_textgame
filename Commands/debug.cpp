@@ -107,7 +107,7 @@ void Debug::clearGuiConsole()
 void Debug::createLocObj()
 {
   //create object to be inserted into loc
-  LocationObjectPtr lobj (LocationObject::forge(ItemPrototype::BlankLocationObject));
+  ItemPtr lobj (Item::forge(ItemPrototype::BlankLocationObject));
   lobj->setName("Szafka");
   lobj->setDescript("Niewielka drewniana, prostokątna szafka. Drzwiczki nadgryzł już ząb czasu, a klamka została urwana.");
 

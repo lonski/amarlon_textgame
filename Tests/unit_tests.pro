@@ -19,7 +19,7 @@ unix:INCLUDEPATH += /usr/local/include/soci \
                     /usr/local/lib64/ \
                     /usr/local/include/soci/firebird/ \
 
-win32:LIBS += -L$$quote(../db-wrapper/soci/lib) \
+win32:LIBS += -L$$quote($$PWD/../db-wrapper/soci/lib) \
               -l$$quote(soci_core_3_2) \
               -l$$quote(soci_firebird_3_2) \
               -l$$quote(soci_empty_3_2)

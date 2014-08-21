@@ -90,3 +90,15 @@ void CreatureModificatorManager::tick_time(Minute tick)
     if (!erased) ++i;
   }
 }
+
+void CreatureModificatorManager::save()
+{
+  for (auto m = _applied_mods.begin(); m != _applied_mods.end(); ++m)
+  {
+    TimedCreatureModificator mod = *m;
+    mod.modificator->set_effect_time(mod.time);
+    mod.modificator->setORef(_complex_mod->oref());
+    mod.modificator->setOTable(_complex_mod->otable());
+    mod.modificator->saveToDB();
+  }
+}

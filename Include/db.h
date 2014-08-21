@@ -10,7 +10,7 @@
 
 #define _Database DB::Session()
 #define _saveToDB_ \
-  if ( !isTemporary() && ref() != 0 && modified() )\
+  if (ref() != 0 && modified() )\
   {\
     try\
     {\
@@ -39,7 +39,6 @@ private:
   //flags
   bool _loaded;
   bool _modified;
-  bool _temporary;
 
   //save queue
   std::list<std::string> _save_queries;
@@ -47,15 +46,11 @@ private:
 protected:
   template<typename T> void save(std::string f_name, T f_val, dbTable tbl = "");
   virtual void save(std::string query);
-  virtual void setTemporary() { _temporary = true; }
 
 public:
   //birth and death
-  DBObject(dbRef ref, bool temporary = false): _ref(ref), _loaded(false), _modified(false), _temporary(temporary) {}
+  DBObject(dbRef ref): _ref(ref), _loaded(false), _modified(false) {}
   virtual ~DBObject() = 0;
-
-  //flags access
-  bool isTemporary() const { return _temporary; }
 
   //data access
   virtual dbRef ref() const { return _ref; }
@@ -85,7 +80,7 @@ public:
 template<typename T>
 void DBObject::save(std::string f_name, T f_val, dbTable tbl)
 {
-  if ( ref() && loaded() && !isTemporary() )
+  if ( ref() && loaded() )
   {
     std::stringstream s;
     s << "UPDATE "+ ( tbl == "" ? table() : tbl) + " SET " << f_name << "=\'"<<f_val<<"\' WHERE ref="<<ref();

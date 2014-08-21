@@ -16,8 +16,8 @@ const dbTable Creature::tableName = "creatures";
 const dbTable Creature::Container::tableName = "crt_containers";
 CreatureManager Creature::Manager;
 
-Creature::Creature(dbRef ref, bool temp)
-  : DBObject(ref, temp)
+Creature::Creature(dbRef ref)
+  : DBObject(ref)
   , _sex(Sex::Null)
   , _mods(this)
   , _total_damage(DamageLevel::Brak)
@@ -78,7 +78,7 @@ Item::Inventory &Creature::inventoryContainer()
   return _inventory;
 }
 
-Creature *Creature::create(dbRef ref, bool prototype, bool temp)
+Creature *Creature::create(dbRef ref, bool prototype)
 {
   Creature* new_crt = nullptr;
 
@@ -92,8 +92,8 @@ Creature *Creature::create(dbRef ref, bool prototype, bool temp)
         {
           switch(crt_type)
             {
-            case CreatureType::MOB: new_crt = new MOB(ref, temp); break;
-            case CreatureType::NPC: new_crt = new NPC(ref, temp); break;
+            case CreatureType::MOB: new_crt = new MOB(ref); break;
+            case CreatureType::NPC: new_crt = new NPC(ref); break;
             case CreatureType::Player: /*TODO*/ break;
             default : throw error::creation_error("Nieprawidłowy typ itemu."); break;
             }
@@ -114,21 +114,16 @@ Creature *Creature::create(dbRef ref, bool prototype, bool temp)
 
 Creature* Creature::clone()
 {
-  if (!isTemporary())
-    {
-      //save
-      saveToDB();
+  //save
+  saveToDB();
 
-      //clone db record
-      dbRef new_ref(0);
-      _Database << "EXECUTE PROCEDURE CLONE_CRT("<< ref() << ")", into(new_ref);
-      _Database.commit();
+  //clone db record
+  dbRef new_ref(0);
+  _Database << "EXECUTE PROCEDURE CLONE_CRT("<< ref() << ")", into(new_ref);
+  _Database.commit();
 
-      //return new item
-      return Creature::create(new_ref);
-    }
-
-  return nullptr;
+  //return new item
+  return Creature::create(new_ref);
 }
 
 void Creature::load(MapRow *data_source)

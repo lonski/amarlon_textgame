@@ -1,5 +1,4 @@
 #include "item.h"
-#include "../World/locationobject.h"
 #include "item_container.h"
 #include "Include/functions/messages.h"
 #include "Include/data_gateways/db_gateways/items_gateway_db.h"
@@ -12,8 +11,8 @@ using namespace fun;
 const dbTable Item::tableName = "items";
 DataGateway* Item::itemsGateway = new ItemsGatewayDB;
 
-Item::Item(dbRef ref, bool temporary)
-  : DBObject(ref, temporary)
+Item::Item(dbRef ref)
+  : DBObject(ref)
   , _mods(this)
   , _item_type(ItemType::Null)
   , _name("")
@@ -33,172 +32,20 @@ Item::Item(dbRef ref, bool temporary)
 {  
 }
 
-Item *Item::create(dbRef ref, bool prototype, bool temporary)
+Item *Item::create(dbRef ref)
 {
-  Item* new_item = nullptr;
-
-  if (ref > 0)
-  {
-    MapRow item_data = MapQuery("SELECT obj_type, item_type FROM "+tableName+" WHERE ref="+toStr(ref));
-    ItemType item_type = CheckValueCast<ItemType>( item_data["ITEM_TYPE"] );
-    ObjType obj_type = CheckValueCast<ObjType>( item_data["OBJ_TYPE"] );
-
-    if (item_type != ItemType::Null && (obj_type == ObjType::Instance || prototype) )
-    {
-      switch(item_type)
-      {
-        case ItemType::Ordinary: new_item = new Item(ref, temporary); break;
-        case ItemType::Weapon: new_item = new Item(ref, temporary); break;
-        case ItemType::Armor: new_item = new Item(ref, temporary); break;
-        case ItemType::Jewelry: new_item = new Item(ref, temporary); break;
-        case ItemType::Food: new_item = new Item(ref, temporary); break;
-        case ItemType::Tool: new_item = new Item(ref, temporary); break;
-        case ItemType::Shield: new_item = new Item(ref, temporary); break;
-        case ItemType::LocationObject: new_item = new LocationObject(ref, temporary); break;
-        default : throw error::creation_error("Nieprawidłowy typ itemu."); break;
-      }
-    }else throw error::creation_error("Brak prawidłowego rekordu w bazie.");
-
-    new_item->load();
-  }
-
-  return new_item;
+  return dynamic_cast<Item*>(itemsGateway->fetch(ref));
 }
 
-void Item::load(MapRow *data_source)
+void Item::load(MapRow*)
 {
   if ( !loaded() && ref() > 0 )
     itemsGateway->fetchInto(this);
-//  if ( !loaded() && ref() > 0 ){
-//    try
-//    {
-//      MapRow item_data;
-//      if (data_source != nullptr)
-//      {
-//        item_data = *data_source;
-//      }
-//      else
-//      {
-//        item_data = MapQuery( "SELECT * FROM "+table()+" WHERE ref="+toStr(ref()) );
-//      }
-
-//      if (!item_data.empty())
-//      {
-//        //item
-//        setType( CheckValueCast<ItemType>(item_data["ITEM_TYPE"]));
-//        setName( CheckValue<string>(item_data["NAME"]) );
-//        setDescript( CheckValue<string>(item_data["DESCRIPTION"]) );
-//        setWeight( CheckValue<double>(item_data["WEIGHT"]) );
-//        setValue( CheckValue<int>(item_data["SHOP_VALUE"]) );
-//        setCondition( CheckValueCast<ItemCondition>(item_data["CONDITION"]));
-//        setBodyParts( CheckValue<string>(item_data["BODY_PARTS"]) );
-//        setDurability( CheckValue<int>(item_data["DURABILITY"]) );
-//        setStackable( CheckValue<bool>(item_data["STACKABLE"]) );
-
-//        //weapon
-//        setWeaponSkill(CheckValueCast<WeaponSkill>(item_data["WPN_SKILL"]));
-//        setDefence(CheckValue<int>(item_data["WPN_DEFENCE"]));
-//        setAttack(CheckValue<int>(item_data["WPN_ATTACK"]));
-//        setReflex(CheckValue<int>(item_data["WPN_REFLEX"]));
-//        setStrReq(CheckValue<int>(item_data["WPN_STR_REQ"]));
-//        setRange(CheckValue<int>(item_data["WPN_RANGE"]));
-
-//        Damage dmg
-//        (
-//          CheckValue<int>(item_data["WPN_D_PIERCING"]),
-//          CheckValue<int>(item_data["WPN_D_SLASHING"]),
-//          CheckValue<int>(item_data["WPN_D_BASHING"])
-//        );
-
-//        setDamage(dmg);
-
-//        //armor
-//        Damage dmgred
-//        (
-//          CheckValue<int>(item_data["ARM_DR_PIERCING"]),
-//          CheckValue<int>(item_data["ARM_DR_SLASHING"]),
-//          CheckValue<int>(item_data["ARM_DR_BASHING"])
-//        );
-
-//        setDamageReduction(dmgred);
-
-//        //food
-//        setHunger(CheckValue<int>(item_data["FOD_HUNGER"]));
-
-//        //
-
-//        _mods.get_complex_mod()->setName( name() );
-
-//        set_loaded();
-//        set_not_modified();
-//      }
-
-//      //MODS
-//      //zaladuj z crt_mods
-//      vector<int> mod_refs(100);
-//      vector<indicator> inds;
-
-//      string query = "SELECT ref FROM crt_mods WHERE otable='" + table() + "' and oref=" + fun::toStr(ref());
-//      _Database << query, into(mod_refs, inds);
-
-//      for (auto m = mod_refs.begin(); m != mod_refs.end(); ++m)
-//        _mods.add( shared_ptr<CreatureModificator>(new CreatureModificator(*m)) );
-
-//      //INVENTORY
-//      dbRef inv_ref = Item::Container::byOwner(table(), ref());
-//      if (inv_ref != 0)
-//      {
-//        _inventory.reset(new Item::Container(inv_ref));
-//      }
-//      else
-//      {
-//        _inventory.reset();
-//      }
-
-//    }
-//    catch(soci_error &e)
-//    {
-//      MsgError(e.what());
-//      qDebug() << _Database.get_last_query().c_str();
-//    }
-//  }
 }
 
 void Item::saveToDB()
 {
-  if (!isTemporary())
-    itemsGateway->write(this);
-//  stringstream save_query;
-
-//  save_query <<
-//    "UPDATE " << table() << " SET " <<
-//    "  ITEM_TYPE = " << static_cast<int>(_item_type) <<
-//    ", NAME = '" << _name << "'"
-//    ", DESCRIPTION = '" << _descript << "'"
-//    ", WEIGHT = " << _weight <<
-//    ", SHOP_VALUE = " << _value <<
-//    ", CONDITION = " << static_cast<int>(_condition) <<
-//    ", DURABILITY = " << _durability <<
-//    ", BODY_PARTS = '" << getBodyPartsString() << "'"
-//    ", STACKABLE = " << static_cast<int>(_stackable)
-//             << " ,WPN_SKILL=" << static_cast<int>(_wpn_skill)
-//             << " ,WPN_D_PIERCING=" << _damage.piercing
-//             << " ,WPN_D_SLASHING=" << _damage.slashing
-//             << " ,WPN_D_BASHING=" << _damage.bashing
-//             << " ,WPN_DEFENCE=" << _defence
-//             << " ,WPN_ATTACK=" << _attack
-//             << " ,WPN_REFLEX=" << _reflex
-//             << " ,WPN_STR_REQ=" << _str_req
-//             << " ,WPN_RANGE=" << _range
-//             << " ,ARM_DR_PIERCING=" << _damage_red.piercing
-//             << " ,ARM_DR_SLASHING=" << _damage_red.slashing
-//             << " ,ARM_DR_BASHING=" << _damage_red.bashing
-//             << " ,FOD_HUNGER=" << _hunger
-//             <<
-//    " WHERE ref = " << ref();
-
-//  save(save_query.str());
-//  DBObject::saveToDB();
+  itemsGateway->write(this);
 }
 
 Item::Inventory &Item::inventory()
@@ -331,21 +178,24 @@ void Item::setHunger(int hunger)
 
 Item *Item::clone()
 {
-  if (!isTemporary())
-  {
-    //save
-    saveToDB();
+  //remember current id
+  dbRef thisRef = this->ref();
 
-    //clone db record
-    dbRef new_ref(0);
-    _Database << "EXECUTE PROCEDURE CLONE_ITEM("<< ref() << ")", into(new_ref);
-    _Database.commit();
+  //change id to non-exist, save, and get newly created record id
+  this->setRef(0);
+  dbRef newItemRef = itemsGateway->write(this);
 
-    //return new item
-    return Item::create(new_ref);
-  }else throw error::creation_error("Nie można sklonować obiektu tymczasowego!");
+  //rollback current item id
+  this->setRef(thisRef);
 
-  return nullptr;
+  //validate
+  if (newItemRef == thisRef || newItemRef == 0)
+    throw error::cloning_error();
+
+  //TODO: clone modificators, inventory
+
+  //return new item
+  return Item::create(newItemRef);
 }
 
 Item *Item::forge(ItemPrototype proto)
@@ -452,7 +302,8 @@ string Item::getBodyPartsString()
 
 Item::~Item()
 {
-  _saveToDB_
+  if (ref() && modified())
+    saveToDB();
 }
 //===~~~
 

@@ -30,6 +30,70 @@ Item::Container::~Container()
   _saveToDB_
 }
 
+void Item::Container::load(MapRow *data_source)
+{
+  if ( !loaded() && ref() > 0 ){
+    try
+    {
+      MapRow cont_data;
+      if (data_source != nullptr)
+      {
+        cont_data = *data_source;
+      }
+      else
+      {
+        cont_data = fun::MapQuery("SELECT name, otable, oref, max_weight, items FROM "+tableName+" WHERE ref="+fun::toStr(ref()));
+      }
+
+      if (!cont_data.empty())
+      {
+        setName( fun::CheckValue<std::string>(cont_data["NAME"]) );
+        set_max_weight( fun::CheckValue<Weight>(cont_data["MAX_WEIGHT"]) );
+        setORef( fun::CheckValue<dbRef>(cont_data["OREF"]) );
+        setOTable( fun::CheckValue<std::string>(cont_data["OTABLE"]) );
+        str2items( fun::CheckValue<string>(cont_data["ITEMS"]));
+      }
+
+      set_loaded();
+      set_not_modified();
+    }
+    catch(soci::soci_error &e)
+    {
+      fun::MsgError(e.what());
+      qDebug() << _Database.get_last_query().c_str();
+    }
+    catch(std::exception &e)
+    {
+      fun::MsgError(e.what());
+    }
+  }
+}
+
+void Item::Container::saveToDB()
+{
+  std::stringstream save_query;
+
+  save_query << "UPDATE item_containers SET"
+             << "  MAX_WEIGHT=" << _weight_cap.max
+             << " ,NAME='" << _name << "'"
+             << " ,OREF=" << _oref
+             << " ,OTABLE='" << _otable << "'"
+             << " ,ITEMS='" << items2str() << "'"
+             << " WHERE ref=" << ref();
+
+  save(save_query.str());
+  DBObject::saveToDB();
+}
+
+dbRef Item::Container::byOwner(dbTable otable, dbRef oref)
+{
+  dbRef ref = 0;
+  soci::indicator ind;
+  _Database << "SELECT ref FROM item_containers WHERE otable='"<<otable<<"' and oref="<<fun::toStr(oref), into(ref, ind);
+  if (ind != soci::i_ok) ref = 0;
+  return ref;
+}
+
 string Item::Container::items2str()
 {
   string str;
@@ -72,78 +136,6 @@ void Item::Container::str2items(string items)
     }
   }
 
-}
-
-dbRef Item::Container::byOwner(dbTable otable, dbRef oref)
-{
-  dbRef ref = 0;
-  soci::indicator ind;
-  _Database << "SELECT ref FROM item_containers WHERE otable='"<<otable<<"' and oref="<<fun::toStr(oref), into(ref, ind);
-  if (ind != soci::i_ok) ref = 0;
-  return ref;
-}
-
-void Item::Container::load(MapRow *data_source)
-{
-  if ( !loaded() && ref() > 0 ){
-    try
-    {
-      MapRow cont_data;
-      if (data_source != nullptr)
-      {
-        cont_data = *data_source;
-      }
-      else
-      {
-        cont_data = fun::MapQuery("SELECT name, otable, oref, max_weight, items FROM "+tableName+" WHERE ref="+fun::toStr(ref()));
-      }
-
-      if (!cont_data.empty())
-      {
-        setName( fun::CheckValue<std::string>(cont_data["NAME"]) );
-        set_max_weight( fun::CheckValue<Weight>(cont_data["MAX_WEIGHT"]) );
-        setORef( fun::CheckValue<dbRef>(cont_data["OREF"]) );
-        setOTable( fun::CheckValue<std::string>(cont_data["OTABLE"]) );
-        str2items( fun::CheckValue<string>(cont_data["ITEMS"]));
-      }
-
-      set_loaded();
-      set_not_modified();
-    }
-    catch(soci::soci_error &e)
-    {
-      fun::MsgError(e.what());
-      qDebug() << _Database.get_last_query().c_str();
-    }
-    catch(std::exception &e)
-    {
-      fun::MsgError(e.what());
-    }
-  }
-}
-
-void Item::Container::setName(std::string name)
-{
-  _name = name;
-  set_modified();
-}
-
-void Item::Container::setOTable(dbTable otable)
-{
-  _otable = otable;
-  set_modified();
-}
-
-void Item::Container::setORef(dbRef oref)
-{
-  _oref = oref;
-  set_modified();
-}
-
-void Item::Container::set_max_weight(Weight max_weight)
-{
-  _weight_cap.max = max_weight;
-  set_modified();
 }
 
 /*
@@ -224,21 +216,28 @@ std::vector<AmountedItem > Item::Container::getAll()
   return ret;
 }
 
-void Item::Container::saveToDB()
+void Item::Container::setName(std::string name)
 {
-  std::stringstream save_query;
-
-  save_query << "UPDATE item_containers SET"
-             << "  MAX_WEIGHT=" << _weight_cap.max
-             << " ,NAME='" << _name << "'"
-             << " ,OREF=" << _oref
-             << " ,OTABLE='" << _otable << "'"
-             << " ,ITEMS='" << items2str() << "'"
-             << " WHERE ref=" << ref();
-
-  save(save_query.str());
-  DBObject::saveToDB();
+  _name = name;
+  set_modified();
 }
 
-//===~~~
+void Item::Container::setOTable(dbTable otable)
+{
+  _otable = otable;
+  set_modified();
+}
+
+void Item::Container::setORef(dbRef oref)
+{
+  _oref = oref;
+  set_modified();
+}
+
+void Item::Container::set_max_weight(Weight max_weight)
+{
+  _weight_cap.max = max_weight;
+  set_modified();
+}
+
 

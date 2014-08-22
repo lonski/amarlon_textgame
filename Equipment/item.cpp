@@ -7,7 +7,6 @@ using namespace std;
 using namespace soci;
 using namespace fun;
 
-//==========ITEM============
 const dbTable Item::tableName = "items";
 DataGateway* Item::itemsGateway = new ItemsGatewayDB;
 
@@ -32,9 +31,42 @@ Item::Item(dbRef ref)
 {  
 }
 
+Item::~Item()
+{
+  if (ref() && modified())
+    saveToDB();
+}
+
 Item *Item::create(dbRef ref)
 {
   return dynamic_cast<Item*>(itemsGateway->fetch(ref));
+}
+
+Item *Item::forge(ItemPrototype proto)
+{
+  return Item::prototypes().clone(proto);
+}
+
+Item *Item::clone()
+{
+  //remember current id
+  dbRef thisRef = this->ref();
+
+  //change id to non-exist, save, and get newly created record id
+  this->setRef(0);
+  dbRef newItemRef = itemsGateway->write(this);
+
+  //rollback current item id
+  this->setRef(thisRef);
+
+  //validate
+  if (newItemRef == thisRef || newItemRef == 0)
+    throw error::cloning_error();
+
+  //TODO: clone modificators, inventory
+
+  //return new item
+  return Item::create(newItemRef);
 }
 
 void Item::load(MapRow*)
@@ -46,6 +78,35 @@ void Item::load(MapRow*)
 void Item::saveToDB()
 {
   itemsGateway->write(this);
+}
+
+bool Item::checkBodyPart(BodyPartType bp) const
+{
+  return std::find(_bodyParts.begin(), _bodyParts.end(), bp) != _bodyParts.end();
+}
+
+void Item::addBodyPart(BodyPartType body_part)
+{
+  if (checkBodyPart(body_part) == false )
+  {
+    _bodyParts.push_back(body_part);
+    set_modified();
+  }
+}
+
+void Item::removeBodyPart(BodyPartType body_part)
+{
+  auto iter = std::find(_bodyParts.begin(), _bodyParts.end(), body_part);
+  if (iter != _bodyParts.end())
+  {
+    _bodyParts.erase(iter);
+    set_modified();
+  }
+}
+
+std::vector<BodyPartType> Item::bodyParts() const
+{
+  return _bodyParts;
 }
 
 Item::Inventory &Item::inventory()
@@ -71,6 +132,85 @@ CreatureModificatorManager &Item::mods()
 {
   return _mods;
 }
+
+void Item::setType(ItemType type)
+{
+  _item_type = type;
+  set_modified();
+}
+
+void Item::setName(string name)
+{
+  _name = name;
+  set_modified();
+}
+
+void Item::setDescript(string dsc)
+{
+  _descript = dsc;
+  set_modified();
+}
+
+void Item::setWeight(Weight weight)
+{
+  _weight = weight;
+  set_modified();
+}
+
+void Item::setValue(int value)
+{
+  _value = value;
+  set_modified();
+}
+
+void Item::setCondition(ItemCondition condition)
+{
+  _condition = condition;
+  set_modified();
+}
+
+void Item::setDurability(int dura)
+{
+  _durability = dura;
+  set_modified();
+}
+
+void Item::setStackable(bool stackable)
+{
+  _stackable = stackable;
+  set_modified();
+}
+
+std::vector<BodyPartType> Item::setBodyParts(const string &str)
+{
+  vector<BodyPartType> p;
+
+  vector<string> sv = fun::explode(str, ',');
+  for (auto s = sv.begin(); s != sv.end(); ++s)
+    p.push_back(static_cast<BodyPartType>( fun::fromStr<int>(*s) ));
+
+  _bodyParts.clear();
+  _bodyParts = p;
+
+  return p;
+}
+
+/*
+ * Function converts BodyPartTypes to a 0-1 string, which is saved to db
+ */
+string Item::getBodyPartsString()
+{
+  string str("");
+
+  for (auto i = _bodyParts.begin(); i != _bodyParts.end(); ++i)
+  {
+    BodyPartType bp = *i;
+    str += fun::toStr(static_cast<int>(bp)) + ",";
+  }
+
+  return str;
+}
+
 
 ItemType Item::type() const
 {
@@ -105,16 +245,6 @@ ItemCondition Item::condition() const
 int Item::durability() const
 {
   return _durability;
-}
-
-std::vector<BodyPartType> Item::bodyParts() const
-{
-  return _bodyParts;
-}
-
-bool Item::checkBodyPart(BodyPartType bp) const
-{
-  return std::find(_bodyParts.begin(), _bodyParts.end(), bp) != _bodyParts.end();
 }
 
 bool Item::isStackable() const
@@ -175,135 +305,3 @@ void Item::setHunger(int hunger)
   _hunger = hunger;
   set_modified();
 }
-
-Item *Item::clone()
-{
-  //remember current id
-  dbRef thisRef = this->ref();
-
-  //change id to non-exist, save, and get newly created record id
-  this->setRef(0);
-  dbRef newItemRef = itemsGateway->write(this);
-
-  //rollback current item id
-  this->setRef(thisRef);
-
-  //validate
-  if (newItemRef == thisRef || newItemRef == 0)
-    throw error::cloning_error();
-
-  //TODO: clone modificators, inventory
-
-  //return new item
-  return Item::create(newItemRef);
-}
-
-Item *Item::forge(ItemPrototype proto)
-{
-  return Item::prototypes().clone(proto);
-}
-
-void Item::setType(ItemType type)
-{
-  _item_type = type;
-  set_modified();
-}
-
-void Item::setName(string name)
-{
-  _name = name;
-  set_modified();
-}
-
-void Item::setDescript(string dsc)
-{
-  _descript = dsc;
-  set_modified();
-}
-
-void Item::setWeight(Weight weight)
-{
-  _weight = weight;
-  set_modified();
-}
-
-void Item::setValue(int value)
-{
-  _value = value;
-  set_modified();
-}
-
-void Item::setCondition(ItemCondition condition)
-{
-  _condition = condition;
-  set_modified();
-}
-
-void Item::setDurability(int dura)
-{
-  _durability = dura;
-  set_modified();
-}
-
-void Item::addBodyPart(BodyPartType body_part)
-{
-  if (checkBodyPart(body_part) == false )
-  {
-    _bodyParts.push_back(body_part);
-    set_modified();
-  }
-}
-
-void Item::removeBodyPart(BodyPartType body_part)
-{
-  auto iter = std::find(_bodyParts.begin(), _bodyParts.end(), body_part);
-  if (iter != _bodyParts.end())
-  {
-    _bodyParts.erase(iter);
-    set_modified();
-  }
-}
-
-void Item::setStackable(bool stackable)
-{
-  _stackable = stackable;
-  set_modified();
-}
-
-std::vector<BodyPartType> Item::setBodyParts(const string &str)
-{
-  vector<BodyPartType> p;
-
-  vector<string> sv = fun::explode(str, ',');
-  for (auto s = sv.begin(); s != sv.end(); ++s)
-    p.push_back(static_cast<BodyPartType>( fun::fromStr<int>(*s) ));
-
-  _bodyParts.clear();
-  _bodyParts = p;
-
-  return p;
-}
-
-/*
- * Function converts BodyPartTypes to a 0-1 string, which is saved to db
- */
-string Item::getBodyPartsString()
-{
-  string str("");
-
-  for (auto i = _bodyParts.begin(); i != _bodyParts.end(); ++i)
-  {
-    BodyPartType bp = *i;
-    str += fun::toStr(static_cast<int>(bp)) + ",";
-  }
-
-  return str;
-}
-
-Item::~Item()
-{
-  if (ref() && modified())
-    saveToDB();
-}
-//===~~~
-

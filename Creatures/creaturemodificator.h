@@ -26,12 +26,11 @@ public:
   dbTable otable() const {return _otable; }
   dbRef oref() const { return _oref; }
   void setOTable(dbTable otable) { _otable = otable; set_modified();}
-  void setORef(dbRef oref) { _oref = oref; set_modified();}
+  void setORef(dbRef oref) { _oref = oref; set_modified(); }
 
   //creation
   CreatureModificator(dbTable otable = "", dbRef oref = 0);
   CreatureModificator(dbRef ref);
-  virtual CreatureModificator* clone();
   ~CreatureModificator();
 
   //data access  

@@ -39,10 +39,10 @@ private slots:
   void modificator_load();
   void modificator_save();
   void modificator_augument();
-  void modificator_clone();
-  void modificator_clone_oref();
-  void modmanager_clone();
-  void modmanager_clone_multiple_mods();
+//  void modificator_clone();
+//  void modificator_clone_oref();
+//  void modmanager_clone();
+//  void modmanager_clone_multiple_mods();
 
   void modmanager();
   void modmanager_ticktime();

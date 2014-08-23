@@ -16,11 +16,11 @@ protected:
   virtual std::vector<unsigned int> getItemModificatorIdsFromDataSource(unsigned int item_id);
   virtual bool itemExistsInDataSource(unsigned int item_id);
   virtual unsigned int writeItemDataToDataSource(Item* item);
+  virtual unsigned int getNewItemId();
 
 private:
   void updateItemInDataSource(Item *item);
   void insertItemIntoDataSource(Item *item);
-  unsigned int getNewItemId();
 
 };
 

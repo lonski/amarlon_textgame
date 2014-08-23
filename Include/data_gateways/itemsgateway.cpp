@@ -48,6 +48,61 @@ unsigned int ItemsGateway::write(DBObject *obj)
   return r;
 }
 
+DBObject *ItemsGateway::clone(DBObject *to_clone)
+{
+  Item* item_to_clone = dynamic_cast<Item*>(to_clone);
+  Item* cloned = new Item(0);
+  write(cloned);
+
+  copyItemBaseData(item_to_clone, cloned);
+  copyBodyParts(cloned, item_to_clone);
+  copyCreatureModificators(item_to_clone, cloned);
+
+  write(cloned);
+  return cloned;
+}
+
+void ItemsGateway::copyItemBaseData(Item* item_to_clone, Item* cloned)
+{
+  cloned->setName(item_to_clone->name());
+  cloned->setType(item_to_clone->type());
+  cloned->setDescript(item_to_clone->descript().c_str());
+  cloned->setWeight(item_to_clone->weight());
+  cloned->setValue(item_to_clone->value());
+  cloned->setCondition(item_to_clone->condition());
+  cloned->setDurability(item_to_clone->durability());
+  cloned->setStackable(item_to_clone->isStackable());
+  cloned->setWeaponSkill(item_to_clone->weaponSkill());
+  cloned->setDamage(item_to_clone->damage());
+  cloned->setDefence(item_to_clone->defence());
+  cloned->setAttack(item_to_clone->attack());
+  cloned->setReflex(item_to_clone->reflex());
+  cloned->setStrReq(item_to_clone->str_req());
+  cloned->setRange(item_to_clone->range());
+  cloned->setDamageReduction(item_to_clone->damageReduction());
+  cloned->setHunger(item_to_clone->hunger());
+}
+
+void ItemsGateway::copyBodyParts(Item* cloned, Item* item_to_clone)
+{
+  std::vector<BodyPartType> parts = item_to_clone->bodyParts();
+  for (auto p = parts.begin(); p != parts.end(); ++p)
+  {
+    cloned->addBodyPart(*p);
+  }
+}
+
+void ItemsGateway::copyCreatureModificators(Item* item_to_clone, Item* cloned)
+{
+  std::vector<CreatureModificator*> source_mods = item_to_clone->mods()->getAll();
+  for (auto m = source_mods.begin(); m != source_mods.end(); ++m)
+  {
+    CreatureModificator* new_mod = new CreatureModificator;
+    new_mod->augument(*(*m));
+    cloned->mods()->add(new_mod);
+  }
+}
+
 void ItemsGateway::readDataIntoItem(Item *item)
 {
   if ( !item->loaded() && item->ref() > 0 )
@@ -141,7 +196,6 @@ void ItemsGateway::writeItemInventory(Item *item)
 
 void ItemsGateway::writeItemCrtModificators(Item *item)
 {
-  item->mods()->setOwner(item);
   item->mods()->save();
 }
 

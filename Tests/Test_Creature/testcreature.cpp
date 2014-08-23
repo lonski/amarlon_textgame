@@ -232,80 +232,80 @@ void TestCreature::modificator_augument()
   QCOMPARE(m1.effect_time(), -1);
 }
 
-void TestCreature::modificator_clone()
-{
-  CreatureModificator* mod = new CreatureModificator;
-  QVERIFY(mod->loaded());
-  mod->creature_stats().setAttribute(Attribute::DEX, 2);
+//void TestCreature::modificator_clone()
+//{
+//  CreatureModificator* mod = new CreatureModificator;
+//  QVERIFY(mod->loaded());
+//  mod->creature_stats().setAttribute(Attribute::DEX, 2);
 
-  CreatureModificator* cloned = mod->clone();
-  QVERIFY(cloned->loaded());
-  QCOMPARE(cloned->attribute(Attribute::DEX), 2);
+//  CreatureModificator* cloned = mod->clone();
+//  QVERIFY(cloned->loaded());
+//  QCOMPARE(cloned->attribute(Attribute::DEX), 2);
 
-  cloned->saveToDB();
-  dbRef c_ref = cloned->ref();
-  delete cloned;
-  cloned = new CreatureModificator(c_ref);
-  QVERIFY(cloned->loaded());
+//  cloned->saveToDB();
+//  dbRef c_ref = cloned->ref();
+//  delete cloned;
+//  cloned = new CreatureModificator(c_ref);
+//  QVERIFY(cloned->loaded());
 
-  QCOMPARE(cloned->attribute(Attribute::DEX), 2);
-}
+//  QCOMPARE(cloned->attribute(Attribute::DEX), 2);
+//}
 
-void TestCreature::modificator_clone_oref()
-{
-  dbRef exmp_ref = 14;
-  CreatureModificator *mod = new CreatureModificator(exmp_ref);
-  QCOMPARE(mod->oref(), (dbRef)122);
-  CreatureModificator *cloned_mod = mod->clone();
-  dbRef cloned_ref = cloned_mod->ref();
-  cloned_mod->saveToDB();
+//void TestCreature::modificator_clone_oref()
+//{
+//  dbRef exmp_ref = 14;
+//  CreatureModificator *mod = new CreatureModificator(exmp_ref);
+//  QCOMPARE(mod->oref(), (dbRef)122);
+//  CreatureModificator *cloned_mod = mod->clone();
+//  dbRef cloned_ref = cloned_mod->ref();
+//  cloned_mod->saveToDB();
 
-  delete mod;
-  delete cloned_mod;
+//  delete mod;
+//  delete cloned_mod;
 
-  CreatureModificator *emod = new CreatureModificator(exmp_ref);
-  CreatureModificator *cmod = new CreatureModificator(cloned_ref);
-  QCOMPARE(emod->oref(), (dbRef)122);
-  QCOMPARE(cmod->oref(), (dbRef)122);
-}
+//  CreatureModificator *emod = new CreatureModificator(exmp_ref);
+//  CreatureModificator *cmod = new CreatureModificator(cloned_ref);
+//  QCOMPARE(emod->oref(), (dbRef)122);
+//  QCOMPARE(cmod->oref(), (dbRef)122);
+//}
 
-void TestCreature::modmanager_clone()
-{
-  CreatureModificatorManager *manager = new CreatureModificatorManager;
+//void TestCreature::modmanager_clone()
+//{
+//  CreatureModificatorManager *manager = new CreatureModificatorManager;
 
-  CreatureModificator* mod = new CreatureModificator;
-  mod->creature_stats().setAttribute(Attribute::IMP, 5);
-  mod->saveToDB();
-  QVERIFY(mod->ref() != 0);
+//  CreatureModificator* mod = new CreatureModificator;
+//  mod->creature_stats().setAttribute(Attribute::IMP, 5);
+//  mod->saveToDB();
+//  QVERIFY(mod->ref() != 0);
 
-  manager->add(mod);
-  QCOMPARE(manager->get_complex_mod()->attribute(Attribute::IMP), 5);
+//  manager->add(mod);
+//  QCOMPARE(manager->get_complex_mod()->attribute(Attribute::IMP), 5);
 
-  CreatureModificatorManager *cloned_mng = manager->clone();
-  QCOMPARE(cloned_mng->get_complex_mod()->attribute(Attribute::IMP), 5);
-}
+//  CreatureModificatorManager *cloned_mng = manager->clone();
+//  QCOMPARE(cloned_mng->get_complex_mod()->attribute(Attribute::IMP), 5);
+//}
 
-void TestCreature::modmanager_clone_multiple_mods()
-{
-  CreatureModificatorManager *manager = new CreatureModificatorManager;
+//void TestCreature::modmanager_clone_multiple_mods()
+//{
+//  CreatureModificatorManager *manager = new CreatureModificatorManager;
 
-  CreatureModificator* mod = new CreatureModificator;
-  mod->creature_stats().setAttribute(Attribute::IMP, 5);
-  mod->saveToDB();
-  QVERIFY(mod->ref() != 0);
+//  CreatureModificator* mod = new CreatureModificator;
+//  mod->creature_stats().setAttribute(Attribute::IMP, 5);
+//  mod->saveToDB();
+//  QVERIFY(mod->ref() != 0);
 
-  CreatureModificator* mod2 = new CreatureModificator;
-  mod2->creature_stats().setAttribute(Attribute::IMP, 3);
-  mod2->saveToDB();
-  QVERIFY(mod->ref() != 0);
+//  CreatureModificator* mod2 = new CreatureModificator;
+//  mod2->creature_stats().setAttribute(Attribute::IMP, 3);
+//  mod2->saveToDB();
+//  QVERIFY(mod->ref() != 0);
 
-  manager->add(mod);
-  manager->add(mod2);
-  QCOMPARE(manager->get_complex_mod()->attribute(Attribute::IMP), 8);
+//  manager->add(mod);
+//  manager->add(mod2);
+//  QCOMPARE(manager->get_complex_mod()->attribute(Attribute::IMP), 8);
 
-  CreatureModificatorManager *cloned_mng = manager->clone();
-  QCOMPARE(cloned_mng->get_complex_mod()->attribute(Attribute::IMP), 8);
-}
+//  CreatureModificatorManager *cloned_mng = manager->clone();
+//  QCOMPARE(cloned_mng->get_complex_mod()->attribute(Attribute::IMP), 8);
+//}
 
 void TestCreature::modmanager()
 {
@@ -524,6 +524,9 @@ void TestCreature::creature_load_inventory()
   //insert item
   crtp->take(item1);
 
+  QVERIFY(crtp->inventoryContainer() != nullptr);
+  QCOMPARE(crtp->inventoryContainer()->getAll().size(), (size_t)1);
+
   delete crt.release();
   crt.reset( Creature::create(ref) );
   crtp = crt.get();
@@ -625,8 +628,8 @@ void TestCreature::creature_eq()
 
   }
 
-  CreatureMonitor monit(crt.get());
-  qDebug() << monit.print_mods().c_str();
+  //CreatureMonitor monit(crt.get());
+  //qDebug() << monit.print_mods().c_str();
 
   QCOMPARE(crt->mods()->get_complex_mod()->creature_stats().attribute(Attribute::DEX), -2 );
   QCOMPARE(crt->body().equipped_items().size(), (size_t)4 );

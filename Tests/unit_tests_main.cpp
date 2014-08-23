@@ -14,12 +14,12 @@
 int main(int, char**)
 {
   //active tests:
-  TestDB tdb;
-  TestCommands tcmd;
-  TestItems titm;
+  //TestDB tdb;
+  //TestCommands tcmd;
+  //TestItems titm;
   TestCreature tcrt;
-  TestFun tfun;
-  TestLocation tloc;
+  //TestFun tfun;
+  //TestLocation tloc;
   TestItemGatewayDB tgidb;
   //
 

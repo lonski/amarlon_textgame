@@ -126,7 +126,14 @@ void Item::Container::str2items(string items)
         if (item_ref > 0 && amount > 0)
         {
           ItemPtr item( Item::create(item_ref) );
-          insert(item, amount);
+          if (item != nullptr)
+          {
+            insert(item, amount);
+          }
+          else
+          {
+            qDebug() << "Non valid item ref in invetory: " << item_ref;
+          }
         }
       }
       else

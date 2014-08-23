@@ -17,12 +17,14 @@ public:
   virtual DBObject* fetch(dbRef id);
   virtual void fetchInto(DBObject* obj);
   virtual unsigned int write(DBObject *obj);
+  virtual DBObject* clone(DBObject *to_clone);
 
 protected:
   virtual MapRow getItemDataFromDataSource(unsigned int item_id) = 0;
   virtual std::vector<unsigned int> getItemModificatorIdsFromDataSource(unsigned int item_id) = 0;
   virtual bool itemExistsInDataSource(unsigned int item_id) = 0;
   virtual unsigned int  writeItemDataToDataSource(Item* item) = 0;
+  virtual unsigned int getNewItemId() = 0;
 
 private:
   void readDataIntoItem(Item* item);
@@ -37,6 +39,10 @@ private:
 
   void writeItemInventory(Item* item);
   void writeItemCrtModificators(Item* item);
+
+  void copyItemBaseData(Item* item_to_clone, Item* cloned);
+  void copyBodyParts(Item* cloned, Item* item_to_clone);
+  void copyCreatureModificators(Item* item_to_clone, Item* cloned);
 };
 
 

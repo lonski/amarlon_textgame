@@ -37,36 +37,6 @@ CreatureModificator::CreatureModificator(dbRef ref)
   load();
 }
 
-CreatureModificator *CreatureModificator::clone()
-{
-  //temporary workaroud
-  //goal is to rewrite using CreatureModificatorGateway
-
-  //crate new record in db
-  dbRef new_ref(0);
-  dbRef old_ref = this->ref();
-  soci::indicator ind;
-
-  _Database << "SELECT ref FROM CREATE_EMPTY_CRT_MOD", soci::into(new_ref, ind);
-  _Database.commit();
-
-  //save current instance int that record
-  this->setRef(new_ref);
-  this->set_modified();
-  this->set_loaded();
-  this->saveToDB();
-  _Database.commit();
-  //qDebug() << new_ref;
-  //qDebug() << _Database.get_last_query().c_str();
-
-  //set old id
-  this->setRef(old_ref);
-  this->set_modified();
-
-  //create object from clonned record
-  return new CreatureModificator(new_ref);
-}
-
 CreatureModificator::~CreatureModificator()
 {
   _saveToDB_

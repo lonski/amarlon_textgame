@@ -53,32 +53,7 @@ Item *Item::forge(ItemPrototype proto)
 
 Item *Item::clone()
 {
-  //remember current id
-  dbRef thisRef = this->ref();
-
-  //change id to non-exist, save, and get newly created record id
-  this->setRef(0);
-  dbRef newItemRef = itemsGateway->write(this);
-
-  //rollback current item id
-  this->setRef(thisRef);
-
-  //validate
-  if (newItemRef == thisRef || newItemRef == 0)
-    throw error::cloning_error();
-
-  //TODO: clone modificators, inventory
-  Item* cloned = Item::create(newItemRef);
-  CreatureModificatorManager* mods_cloned = this->mods()->clone();
-  cloned->setCreatureModificatorManager(mods_cloned);
-
-  mods_cloned->get_complex_mod()->setORef(cloned->ref());
-  mods_cloned->get_complex_mod()->setOTable("items");
-  mods_cloned->setOwner(cloned);
-  mods_cloned->save();
-
-  //return new item
-  return cloned;
+  return dynamic_cast<Item*>(itemsGateway->clone(this));
 }
 
 void Item::load(MapRow*)
@@ -99,11 +74,8 @@ bool Item::checkBodyPart(BodyPartType bp) const
 
 void Item::addBodyPart(BodyPartType body_part)
 {
-  if (checkBodyPart(body_part) == false )
-  {
-    _bodyParts.push_back(body_part);
-    set_modified();
-  }
+  _bodyParts.push_back(body_part);
+  set_modified();
 }
 
 void Item::removeBodyPart(BodyPartType body_part)

@@ -12,8 +12,10 @@ public:
   virtual ~DataGateway() {}
 
   virtual DBObject* fetch(dbRef id) = 0;
-  virtual unsigned int write(DBObject* obj) = 0;
   virtual void fetchInto(DBObject* obj) = 0;
+  virtual unsigned int write(DBObject* obj) = 0;
+  virtual DBObject* clone(DBObject* to_clone) = 0;
+
 };
 
 #endif // DATA_GATEWAY_H

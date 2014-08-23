@@ -13,22 +13,6 @@ CreatureModificatorManager::CreatureModificatorManager(DBObject *owner)
     }
 }
 
-CreatureModificatorManager *CreatureModificatorManager::clone()
-{
-  CreatureModificatorManager *cloned = new CreatureModificatorManager(this->_owner);
-
-  for (auto m = _applied_mods.begin(); m != _applied_mods.end(); ++m)
-  {
-    TimedCreatureModificator mod = *m;
-    CreatureModificator *cloned_mod = mod.modificator->clone();
-    cloned_mod->set_effect_time(mod.time);
-    cloned->add(shared_ptr<CreatureModificator>(cloned_mod));
-  }
-
-  cloned->save();
-  return cloned;
-}
-
 CreatureModificatorManager::~CreatureModificatorManager()
 {
   _complex_mod->purge();
@@ -43,7 +27,7 @@ void CreatureModificatorManager::add(std::shared_ptr<CreatureModificator> new_mo
 
   if (0 != new_mod->ref())
   {
-    if (_owner != nullptr && new_mod->oref() == 0 )
+    if (_owner != nullptr)
     {
       new_mod->setORef(_owner->ref());
       new_mod->setOTable(_owner->table());
@@ -79,15 +63,20 @@ bool CreatureModificatorManager::remove(dbRef mod_to_remove)
   return false;
 }
 
-std::vector<std::weak_ptr<CreatureModificator> > CreatureModificatorManager::getAll()
+std::vector<CreatureModificator*> CreatureModificatorManager::getAll()
 {
-  vector<weak_ptr<CreatureModificator> > mods;
+  vector<CreatureModificator* > mods;
   for (auto i = _applied_mods.begin(); i != _applied_mods.end(); ++i)
   {
-    mods.push_back(i->modificator);
+    mods.push_back(i->modificator.get());
   }
 
   return mods;
+}
+
+size_t CreatureModificatorManager::count()
+{
+  return _applied_mods.size();
 }
 
 void CreatureModificatorManager::tick_time(Minute tick)
@@ -112,22 +101,24 @@ void CreatureModificatorManager::tick_time(Minute tick)
   }
 }
 
+void CreatureModificatorManager::updateModificatorsOwner()
+{
+  if (_owner != nullptr)
+  {
+    for (auto m = _applied_mods.begin(); m != _applied_mods.end(); ++m)
+    {
+      (*m).modificator->setORef(_owner->ref());
+      (*m).modificator->setOTable(_owner->table());
+    }
+  }
+}
+
 void CreatureModificatorManager::save()
 {
   for (auto m = _applied_mods.begin(); m != _applied_mods.end(); ++m)
   {
     TimedCreatureModificator mod = *m;
     mod.modificator->set_effect_time(mod.time);
-    if (_owner != nullptr)
-    {
-      mod.modificator->setORef(_owner->ref());
-      mod.modificator->setOTable(_owner->table());
-    }
-    else
-    {
-      mod.modificator->setORef(0);
-      mod.modificator->setOTable("");
-    }
     mod.modificator->saveToDB();
   }
 }
@@ -135,4 +126,10 @@ void CreatureModificatorManager::save()
 void CreatureModificatorManager::setOwner(DBObject *owner)
 {
   _owner = owner;
+  updateModificatorsOwner();
+}
+
+DBObject* CreatureModificatorManager::owner()
+{
+  return _owner;
 }

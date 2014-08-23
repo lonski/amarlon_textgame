@@ -20,12 +20,17 @@ private:
   DBObject *_owner;
 public:
   CreatureModificatorManager(DBObject *owner = nullptr);
+  CreatureModificatorManager* clone();
   ~CreatureModificatorManager();
+
+  void save();
+  void setOwner(DBObject *owner);
+
   void add(std::shared_ptr<CreatureModificator> new_mod);
+  void add(CreatureModificator* new_mod);
   bool remove(dbRef mod_to_remove);
   std::shared_ptr<CreatureModificator> get_complex_mod() const { return _complex_mod; }
   std::vector<std::weak_ptr<CreatureModificator> > getAll();
   virtual void tick_time(Minute tick);
-  void save();
 };
 #endif // CREATUREMODIFICATORMANAGER_H

@@ -19,7 +19,7 @@ CreatureManager Creature::Manager;
 Creature::Creature(dbRef ref)
   : DBObject(ref)
   , _sex(Sex::Null)
-  , _mods(this)
+  , _mods(new CreatureModificatorManager(this))
   , _total_damage(DamageLevel::Brak)
   , _weapon(nullptr)
   , _offhand(nullptr)
@@ -27,6 +27,14 @@ Creature::Creature(dbRef ref)
   , _currentLoc(nullptr)
   , _prevLoc(nullptr)
 {  
+}
+
+Creature::~Creature()
+{
+  _saveToDB_
+  Manager.remove(ref());
+  delete _mods;
+  _mods = nullptr;
 }
 
 void Creature::calcWeapons()
@@ -59,11 +67,6 @@ void Creature::calcWeapons()
     }
 }
 
-Creature::~Creature()
-{
-  _saveToDB_
-      Manager.remove(ref());
-}
 
 Item::Inventory &Creature::inventoryContainer()
 {
@@ -168,13 +171,13 @@ void Creature::load(MapRow *data_source)
         _Database << query, into(mod_refs, inds);
 
         for (auto m = mod_refs.begin(); m != mod_refs.end(); ++m)
-          _mods.add( shared_ptr<CreatureModificator>(new CreatureModificator(*m)) );
+          _mods->add( shared_ptr<CreatureModificator>(new CreatureModificator(*m)) );
 
         //dodaj z itemów założonych na bodyParts
         for (auto im = _body.equipped_items().begin(); im != _body.equipped_items().end(); ++im)
           {
-            if (nullptr != *im && !(*im)->mods().getAll().empty())
-              _mods.add( (*im)->mods().get_complex_mod() );
+            if (nullptr != *im && !(*im)->mods()->getAll().empty())
+              _mods->add( (*im)->mods()->get_complex_mod() );
           }
 
         //INVENTORY
@@ -253,12 +256,12 @@ DamageLevel Creature::totalDamage() const
 
 int Creature::attribute(Attribute atr) const
 {
-  return _stats.attribute(atr) + _mods.get_complex_mod()->creature_stats().attribute(atr);
+  return _stats.attribute(atr) + _mods->get_complex_mod()->creature_stats().attribute(atr);
 }
 
 int Creature::skill(Skill skill) const
 {
-  return _stats.skill(skill) + _mods.get_complex_mod()->creature_stats().skill(skill);
+  return _stats.skill(skill) + _mods->get_complex_mod()->creature_stats().skill(skill);
 }
 
 CreatureStats &Creature::stats()
@@ -276,7 +279,7 @@ Location *Creature::getPrevLoc() const
   return _prevLoc;
 }
 
-CreatureModificatorManager &Creature::mods()
+CreatureModificatorManager *Creature::mods()
 {
   return _mods;
 }
@@ -356,9 +359,9 @@ void Creature::equip(ItemPtr item)
 {
   _body.equip(item);
 
-  if (!item->mods().getAll().empty())
+  if (!item->mods()->getAll().empty())
   {
-    _mods.add( item->mods().get_complex_mod() );
+    _mods->add( item->mods()->get_complex_mod() );
   }
 
   calcWeapons();
@@ -372,7 +375,7 @@ ItemPtr Creature::unequip(dbRef item_ref)
   //usun modyfikatory
   if (r != nullptr)
     {
-      _mods.remove(r->mods().get_complex_mod()->ref());
+      _mods->remove(r->mods()->get_complex_mod()->ref());
     }
 
   calcWeapons();

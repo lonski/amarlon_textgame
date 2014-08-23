@@ -2,6 +2,7 @@
 #include "Gui/gui_console.h"
 #include "Include/functions/string_utils.h"
 #include "Include/functions/common_utils.h"
+#include "Equipment/item.h"
 
 using namespace std;
 
@@ -146,4 +147,9 @@ void TestFun::inifile()
   QCOMPARE(ini2.getValue("nowa","pik").c_str(), "pok");
   ini2.eraseSection("nowa");
   ini2.save();
+}
+
+void TestFun::temp()
+{
+
 }

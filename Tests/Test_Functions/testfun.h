@@ -19,6 +19,7 @@ private slots:
    void explode();
    void gameclock();
    void inifile();
+   void temp();
 };
 
 #endif // TESTFUN_H

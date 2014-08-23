@@ -12,7 +12,7 @@ DataGateway* Item::itemsGateway = new ItemsGatewayDB;
 
 Item::Item(dbRef ref)
   : DBObject(ref)
-  , _mods(this)
+  , _mods(new CreatureModificatorManager(this))
   , _item_type(ItemType::Null)
   , _name("")
   , _descript("")
@@ -35,10 +35,14 @@ Item::~Item()
 {
   if (ref() && modified())
     saveToDB();
+
+  delete _mods;
+  _mods = nullptr;
 }
 
-Item *Item::create(dbRef ref)
+Item *Item::create(dbRef ref, bool prototype)
 {
+  //todo obsluga prototye?
   return dynamic_cast<Item*>(itemsGateway->fetch(ref));
 }
 
@@ -64,9 +68,17 @@ Item *Item::clone()
     throw error::cloning_error();
 
   //TODO: clone modificators, inventory
+  Item* cloned = Item::create(newItemRef);
+  CreatureModificatorManager* mods_cloned = this->mods()->clone();
+  cloned->setCreatureModificatorManager(mods_cloned);
+
+  mods_cloned->get_complex_mod()->setORef(cloned->ref());
+  mods_cloned->get_complex_mod()->setOTable("items");
+  mods_cloned->setOwner(cloned);
+  mods_cloned->save();
 
   //return new item
-  return Item::create(newItemRef);
+  return cloned;
 }
 
 void Item::load(MapRow*)
@@ -128,9 +140,14 @@ void Item::setInventory(Item::Container *inv)
   _inventory.reset(inv);
 }
 
-CreatureModificatorManager &Item::mods()
+CreatureModificatorManager *Item::mods()
 {
   return _mods;
+}
+
+void Item::setCreatureModificatorManager(CreatureModificatorManager *mods)
+{
+  _mods = mods;
 }
 
 void Item::setType(ItemType type)

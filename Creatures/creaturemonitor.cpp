@@ -99,7 +99,7 @@ string CreatureMonitor::print_inventory()
 
 string CreatureMonitor::print_mods()
 {
-  vector<weak_ptr<CreatureModificator> > mods =  _crt->_mods.getAll();
+  vector<weak_ptr<CreatureModificator> > mods =  _crt->_mods->getAll();
   stringstream ss;
   ss << "\n===== MODIFICATORS =====";
   for (auto m = mods.begin(); m != mods.end(); ++m)

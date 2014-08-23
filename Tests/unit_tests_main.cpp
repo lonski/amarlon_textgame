@@ -11,16 +11,18 @@
 #include "Test_Location/testlocation.h"
 #include "Test_Gateways/testitemgatewaydb.h"
 
-static TestDB tdb;
-static TestCommands tcmd;
-static TestItems titm;
-static TestCreature tcrt;
-static TestFun tfun;
-static TestLocation tloc;
-static TestItemGatewayDB tgidb;
-
 int main(int, char**)
 {
+  //active tests:
+  TestDB tdb;
+  TestCommands tcmd;
+  TestItems titm;
+  TestCreature tcrt;
+  TestFun tfun;
+  TestLocation tloc;
+  TestItemGatewayDB tgidb;
+  //
+
   int failedSuitesCount = 0;
   std::vector<QObject*>::iterator iSuite;
 
@@ -33,5 +35,6 @@ int main(int, char**)
     }
   }
 
+  qDebug() << "Passed: " << QTestSuite::m_suites.size() - failedSuitesCount << "/" << QTestSuite::m_suites.size();
   return failedSuitesCount;
 }

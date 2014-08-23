@@ -57,7 +57,7 @@ void PrototypeManager<T,EnumT>::load_all()
     dbRef ref = fun::CheckValue<dbRef>( (*p)["REF"] );
     EnumT type = fun::CheckValueCast<EnumT>( (*p)["PROTOTYPE"] );
 
-    _prototypes[type] = T::create(ref);
+    _prototypes[type] = T::create(ref, true);
   }
 
   _Database.commit();

@@ -50,7 +50,7 @@ public:
   Location* getLocation() const;
   Location* getPrevLoc() const;
 
-  CreatureModificatorManager& mods();
+  CreatureModificatorManager* mods();
   Body& body();
   std::vector< AmountedItem > inventory();
 
@@ -92,7 +92,7 @@ private:
   Body _body;
   Item::Inventory _inventory;
 
-  CreatureModificatorManager _mods;
+  CreatureModificatorManager* _mods;
 
   DamageLevel _total_damage;
 

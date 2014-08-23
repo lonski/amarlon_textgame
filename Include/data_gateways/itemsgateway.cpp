@@ -141,23 +141,18 @@ void ItemsGateway::writeItemInventory(Item *item)
 
 void ItemsGateway::writeItemCrtModificators(Item *item)
 {
-  if (item->mods().get_complex_mod()->oref() != item->ref())
-  {
-    item->mods().get_complex_mod()->setORef(item->ref());
-    item->mods().get_complex_mod()->setOTable(item->table());
-  }
-
-  item->mods().save();
+  item->mods()->setOwner(item);
+  item->mods()->save();
 }
 
 void ItemsGateway::setItemModificators(Item *item)
 {
-  item->mods().get_complex_mod()->setName( item->name() );
+  item->mods()->get_complex_mod()->setName( item->name() );
 
   vector<unsigned int> mod_refs = getItemModificatorIdsFromDataSource(item->ref());
 
   for (auto m = mod_refs.begin(); m != mod_refs.end(); ++m)
-    item->mods().add( shared_ptr<CreatureModificator>(new CreatureModificator(*m)) );
+    item->mods()->add( shared_ptr<CreatureModificator>(new CreatureModificator(*m)) );
 }
 
 void ItemsGateway::setItemInventory(Item *item)

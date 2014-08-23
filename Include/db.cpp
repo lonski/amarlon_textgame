@@ -14,11 +14,10 @@ string DB::_db_server = "192.168.1.5";
 
 //===DB Object
 void DBObject::saveToDB()
-{
+{  
   try
   {
     _Database.begin();
-
     for (auto i = _save_queries.begin(); i != _save_queries.end(); ++i)
     {
       if (*i != "")

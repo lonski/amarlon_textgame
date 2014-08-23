@@ -31,6 +31,7 @@ public:
   //creation
   CreatureModificator(dbTable otable = "", dbRef oref = 0);
   CreatureModificator(dbRef ref);
+  virtual CreatureModificator* clone();
   ~CreatureModificator();
 
   //data access  

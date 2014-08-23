@@ -34,7 +34,7 @@ public:
 
   Item(dbRef ref);
   virtual ~Item();
-  static Item* create(dbRef ref);
+  static Item* create(dbRef ref, bool prototype = true);
   static Item* forge(ItemPrototype proto);
   virtual Item* clone();
 
@@ -46,7 +46,8 @@ public:
 
   Inventory& inventory();
   void setInventory(Item::Container* inv);
-  CreatureModificatorManager& mods();
+  CreatureModificatorManager* mods();
+  void setCreatureModificatorManager(CreatureModificatorManager* mods);
 
 //item specyfic
   ItemType type() const;
@@ -101,7 +102,7 @@ private:
   Item(const Item&) = delete;
 
   Inventory _inventory;
-  CreatureModificatorManager _mods;
+  CreatureModificatorManager *_mods;
 
 //item specific
   ItemType _item_type;

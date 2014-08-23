@@ -10,7 +10,23 @@ CreatureModificatorManager::CreatureModificatorManager(DBObject *owner)
   {
     _complex_mod->setORef(owner->ref());
     _complex_mod->setOTable(owner->table());
+    }
+}
+
+CreatureModificatorManager *CreatureModificatorManager::clone()
+{
+  CreatureModificatorManager *cloned = new CreatureModificatorManager(this->_owner);
+
+  for (auto m = _applied_mods.begin(); m != _applied_mods.end(); ++m)
+  {
+    TimedCreatureModificator mod = *m;
+    CreatureModificator *cloned_mod = mod.modificator->clone();
+    cloned_mod->set_effect_time(mod.time);
+    cloned->add(shared_ptr<CreatureModificator>(cloned_mod));
   }
+
+  cloned->save();
+  return cloned;
 }
 
 CreatureModificatorManager::~CreatureModificatorManager()
@@ -38,7 +54,12 @@ void CreatureModificatorManager::add(std::shared_ptr<CreatureModificator> new_mo
   else
   {
     throw error::no_ref("Do managera nie można dodać modyfikatora nei zapisanego w bazie!");
-  }
+    }
+}
+
+void CreatureModificatorManager::add(CreatureModificator* new_mod)
+{
+  add(shared_ptr<CreatureModificator>(new_mod));
 }
 
 bool CreatureModificatorManager::remove(dbRef mod_to_remove)
@@ -97,8 +118,21 @@ void CreatureModificatorManager::save()
   {
     TimedCreatureModificator mod = *m;
     mod.modificator->set_effect_time(mod.time);
-    mod.modificator->setORef(_complex_mod->oref());
-    mod.modificator->setOTable(_complex_mod->otable());
+    if (_owner != nullptr)
+    {
+      mod.modificator->setORef(_owner->ref());
+      mod.modificator->setOTable(_owner->table());
+    }
+    else
+    {
+      mod.modificator->setORef(0);
+      mod.modificator->setOTable("");
+    }
     mod.modificator->saveToDB();
   }
+}
+
+void CreatureModificatorManager::setOwner(DBObject *owner)
+{
+  _owner = owner;
 }

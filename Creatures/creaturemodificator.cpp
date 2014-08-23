@@ -28,13 +28,43 @@ CreatureModificator::CreatureModificator(dbTable otable, dbRef oref)
   , _otable(otable)
   , _oref(oref)
 {
-
+  set_loaded();
 }
 
 CreatureModificator::CreatureModificator(dbRef ref)
 : DBObject(ref)
 {
   load();
+}
+
+CreatureModificator *CreatureModificator::clone()
+{
+  //temporary workaroud
+  //goal is to rewrite using CreatureModificatorGateway
+
+  //crate new record in db
+  dbRef new_ref(0);
+  dbRef old_ref = this->ref();
+  soci::indicator ind;
+
+  _Database << "SELECT ref FROM CREATE_EMPTY_CRT_MOD", soci::into(new_ref, ind);
+  _Database.commit();
+
+  //save current instance int that record
+  this->setRef(new_ref);
+  this->set_modified();
+  this->set_loaded();
+  this->saveToDB();
+  _Database.commit();
+  //qDebug() << new_ref;
+  //qDebug() << _Database.get_last_query().c_str();
+
+  //set old id
+  this->setRef(old_ref);
+  this->set_modified();
+
+  //create object from clonned record
+  return new CreatureModificator(new_ref);
 }
 
 CreatureModificator::~CreatureModificator()
@@ -61,6 +91,8 @@ void CreatureModificator::load(MapRow *data_source)
       setName( CheckValue<string>(mod_data["NAME"]) );
       set_effect_time( CheckValue<int>(mod_data["EFFECT_TIME"]) );
       set_global_test_level_mod( CheckValue<int>(mod_data["GLB_TEST_MOD"]) );
+      setORef(CheckValue<int>(mod_data["OREF"]));
+      setOTable(CheckValue<string>(mod_data["OTABLE"]));
 
       string atrs = CheckValue<string>(mod_data["ATTRIBUTES"]);
       if (!atrs.empty()) _mods.str2attributes(atrs);
@@ -112,6 +144,7 @@ void CreatureModificator::saveToDB()
          " attributes='" + _mods.attributes2str() + "',"
          " skills='" + _mods.skills2str() + "'"
          " WHERE ref=" + toStr(ref()) );
+
   }
 
   DBObject::saveToDB();

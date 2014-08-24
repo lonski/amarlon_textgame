@@ -40,9 +40,11 @@ private:
   void writeItemInventory(Item* item);
   void writeItemCrtModificators(Item* item);
 
-  void copyItemBaseData(Item* item_to_clone, Item* cloned);
+  void copyItemBaseData(Item* cloned, Item* item_to_clone);
   void copyBodyParts(Item* cloned, Item* item_to_clone);
-  void copyCreatureModificators(Item* item_to_clone, Item* cloned);
+  void copyCreatureModificators(Item* cloned, Item* item_to_clone);
+  void copyInventory(Item* cloned, Item* item_to_clone);
+  Item* createNewItemInstanceAndDBRecord();
 };
 
 

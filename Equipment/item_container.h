@@ -33,6 +33,8 @@ public:
   AmountedItem erase(dbRef item_ref, int amount = 1);
   AmountedItem find(dbRef item_ref);
   std::vector<AmountedItem> getAll();
+  AmountedItem get(size_t index);
+  size_t count();
 
   virtual dbTable table() const { return tableName; }
   std::string name() const { return _name; }

@@ -8,9 +8,9 @@
 using namespace std;
 using namespace soci;
 
-string DB::_db_file( "/home/pi/db/data.fdb");
+string DB::_db_file( "d:/Sources/Test/amarlon/data.fdb");
 string DB::_db_log_file( "db.log" );
-string DB::_db_server = "lonski.pl";
+string DB::_db_server = "";
 
 //===DB Object
 void DBObject::saveToDB()
@@ -134,7 +134,7 @@ void DB::InitDatabase()
     _session = new soci::session;
   }
 
-  _session->open(*soci::factory_firebird(), "service="+_db_server+":"+_db_file+" user=SYSDBA password=sl1wkowe");
+  _session->open(*soci::factory_firebird(), "service="+ (_db_server.empty()? "" : _db_server+":") +_db_file+" user=SYSDBA password=sl1wkowe");
 
   _log_stream = new ofstream(_db_log_file, ios::app);
   _session->set_log_stream(_log_stream);

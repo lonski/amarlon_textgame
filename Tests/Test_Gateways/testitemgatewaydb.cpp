@@ -1,11 +1,15 @@
 #include "testitemgatewaydb.h"
 #include "Equipment/item.h"
+#include "Equipment/item_container.h"
 
 TestItemGatewayDB::TestItemGatewayDB()
 {
   item = dynamic_cast<Item*>(itemGateway.fetch(1));
   item_to_clone = dynamic_cast<Item*>(itemGateway.fetch(122));
   cloned = dynamic_cast<Item*>(itemGateway.clone(item_to_clone));
+
+  item_with_inventory = Item::forge(ItemPrototype::LekkaZbrojaSkorzana);
+
 
   mod_cloned = cloned->mods()->getAll().at(0);
   mod_source = item_to_clone->mods()->getAll().at(0);
@@ -17,6 +21,32 @@ TestItemGatewayDB::~TestItemGatewayDB()
   cloned->purge();
   delete cloned;
   delete item;
+  item_with_inventory->purge();
+  delete item_with_inventory;
+}
+
+void TestItemGatewayDB::purgeItemWithInventory(Item* cloned_item_with_inv)
+{
+  purgeInventory(cloned_item_with_inv);
+  cloned_item_with_inv->purge();
+  delete cloned_item_with_inv;
+}
+
+void TestItemGatewayDB::purgeInventory(Item* item_with_inventory)
+{
+  std::vector<AmountedItem> inv = item_with_inventory->inventory()->getAll();
+  for(auto i = inv.begin(); i != inv.end(); ++i)
+  {
+    AmountedItem ai = *i;
+    ai.item->purge();
+    item_with_inventory->inventory()->erase(ai.item->ref(), ai.amount);
+  }
+}
+
+void TestItemGatewayDB::insertItemIntoItemWithInventory(Item* item_to_insert)
+{
+  ItemPtr inventored_item_1( item_to_insert );
+  item_with_inventory->inventory()->insert(inventored_item_1);
 }
 
 void TestItemGatewayDB::fetchNonExistingOjects_returnsNull()
@@ -30,7 +60,7 @@ void TestItemGatewayDB::fetchExistingObject_returnsItem()
   QVERIFY(item != nullptr);
 }
 
-void TestItemGatewayDB::fetchedItemHasValidData()
+void TestItemGatewayDB::fetchedItem_HasValidData()
 {
   QCOMPARE(item->ref(), (dbRef)1);
   QCOMPARE(item->value(), 43);
@@ -76,18 +106,18 @@ void TestItemGatewayDB::insertNewItemIntoDataSource()
   item = dynamic_cast<Item*>(itemGateway.fetch(1));
 }
 
-void TestItemGatewayDB::clonedItemIsValidPointer()
+void TestItemGatewayDB::clonedItem_IsValidPointer()
 {
   QVERIFY(cloned != nullptr);
 }
 
-void TestItemGatewayDB::clonedItemHasValidId()
+void TestItemGatewayDB::clonedItem_HasValidId()
 {
   QVERIFY(cloned->ref() > 0);
   QVERIFY(cloned->ref() != item->ref());
 }
 
-void TestItemGatewayDB::clonedItemHasSameData()
+void TestItemGatewayDB::clonedItem_HasSameData()
 {
   QCOMPARE(cloned->table().c_str(), item_to_clone->table().c_str());
   QCOMPARE(cloned->name().c_str(), item_to_clone->name().c_str());
@@ -109,7 +139,7 @@ void TestItemGatewayDB::clonedItemHasSameData()
   QCOMPARE(cloned->hunger(), item_to_clone->hunger());
 }
 
-void TestItemGatewayDB::clonedItemHasSameBodyParts()
+void TestItemGatewayDB::clonedItem_HasSameBodyParts()
 {
   std::vector<BodyPartType> cloned_parts = cloned->bodyParts();
   std::vector<BodyPartType> item_parts = item_to_clone->bodyParts();
@@ -121,26 +151,68 @@ void TestItemGatewayDB::clonedItemHasSameBodyParts()
 
 }
 
-void TestItemGatewayDB::clonedItemHasSameModificatorsCount()
+void TestItemGatewayDB::clonedItem_HasSameModificatorsCount()
 {
   QCOMPARE(cloned->mods()->count(), item_to_clone->mods()->count());
 }
 
-void TestItemGatewayDB::clonedItemModificatorHasValidRef()
+void TestItemGatewayDB::clonedItemModificator_HasValidRef()
 {
   QVERIFY(mod_cloned->ref() > 0);
   QVERIFY(mod_cloned->ref() != mod_source->ref());
 }
 
-void TestItemGatewayDB::clonedItemModificatorHasValidOwner()
+void TestItemGatewayDB::clonedItemModificator_HasValidOwner()
 {
   QCOMPARE(cloned->mods()->owner(), cloned);
   QCOMPARE(mod_cloned->oref(), cloned->ref());
   QCOMPARE(mod_cloned->otable(), cloned->table());
 }
 
-void TestItemGatewayDB::clonedItemModificatorHasSameData()
+void TestItemGatewayDB::clonedItemModificator_HasSameData()
 {
   QVERIFY(mod_source->attribute(Attribute::DEX) != 0);
   QCOMPARE(mod_cloned->attribute(Attribute::DEX), mod_source->attribute(Attribute::DEX));
+}
+
+void TestItemGatewayDB::clonedItemWithInventory_HasInventory()
+{
+  insertItemIntoItemWithInventory(Item::forge(ItemPrototype::Nozyk));
+  Item* cloned_item_with_inv = item_with_inventory->clone();
+
+  QCOMPARE(cloned_item_with_inv->inventory()->count(), item_with_inventory->inventory()->count());
+  QVERIFY(cloned_item_with_inv->inventory()->count() > 0);
+
+  purgeInventory(item_with_inventory);
+  purgeItemWithInventory(cloned_item_with_inv);
+}
+
+void TestItemGatewayDB::clonedItemWithInventory_HasValidItemCountInInventory()
+{
+  insertItemIntoItemWithInventory(Item::forge(ItemPrototype::BlankJewelry));
+  insertItemIntoItemWithInventory(Item::forge(ItemPrototype::BlankOrdinary));
+
+  Item* cloned_item_with_inv = item_with_inventory->clone();
+
+  QCOMPARE(cloned_item_with_inv->inventory()->count(), item_with_inventory->inventory()->count());
+  QCOMPARE(cloned_item_with_inv->inventory()->count(), (size_t)2);
+
+  purgeInventory(item_with_inventory);
+  purgeItemWithInventory(cloned_item_with_inv);
+}
+
+void TestItemGatewayDB::clonedInventoryItems_HaveDifferentId_ThanSourceItems()
+{
+  Item* inv_item = Item::forge(ItemPrototype::BlankTool);
+  dbRef inv_item_ref = inv_item->ref();
+
+  QVERIFY(inv_item_ref > 0);
+  insertItemIntoItemWithInventory(inv_item);
+
+  Item* cloned_item_with_inv = item_with_inventory->clone();
+  Item* cloned_inv_item = cloned_item_with_inv->inventory()->get(0).item.get();
+
+  QVERIFY(cloned_inv_item->ref() > 0);
+  QVERIFY(cloned_inv_item->ref() != inv_item_ref);
+
 }

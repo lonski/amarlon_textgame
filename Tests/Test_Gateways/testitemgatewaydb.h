@@ -15,28 +15,36 @@ public:
   TestItemGatewayDB();
   ~TestItemGatewayDB();
 
+  void purgeItemWithInventory(Item* cloned_item_with_inv);
 private:
   ItemsGatewayDB itemGateway;
   Item* item;
   Item *item_to_clone;
   Item *cloned;
+  Item *item_with_inventory;
   CreatureModificator *mod_cloned;
   CreatureModificator *mod_source;
+
+  void insertItemIntoItemWithInventory(Item* item_to_insert);
+  void purgeInventory(Item *item_with_inventory);
 
 private slots:
   void fetchNonExistingOjects_returnsNull();
   void fetchExistingObject_returnsItem();
-  void fetchedItemHasValidData();
+  void fetchedItem_HasValidData();
   void updateingExistingItemInDataSource();
   void insertNewItemIntoDataSource();
-  void clonedItemIsValidPointer();
-  void clonedItemHasValidId();
-  void clonedItemHasSameData();
-  void clonedItemHasSameBodyParts();
-  void clonedItemHasSameModificatorsCount();
-  void clonedItemModificatorHasValidRef();
-  void clonedItemModificatorHasValidOwner();
-  void clonedItemModificatorHasSameData();
+  void clonedItem_IsValidPointer();
+  void clonedItem_HasValidId();
+  void clonedItem_HasSameData();
+  void clonedItem_HasSameBodyParts();
+  void clonedItem_HasSameModificatorsCount();
+  void clonedItemModificator_HasValidRef();
+  void clonedItemModificator_HasValidOwner();
+  void clonedItemModificator_HasSameData();
+  void clonedItemWithInventory_HasInventory();
+  void clonedItemWithInventory_HasValidItemCountInInventory();
+  void clonedInventoryItems_HaveDifferentId_ThanSourceItems();
 };
 
 #endif // TESTITEMGATEWAYDB_H

@@ -223,6 +223,23 @@ std::vector<AmountedItem > Item::Container::getAll()
   return ret;
 }
 
+AmountedItem Item::Container::get(size_t index)
+{
+  AmountedItem r;
+  if (index < _items.size())
+  {
+    vector<AmountedItem> ai = getAll();
+    r = ai[index];
+  }
+
+  return r;
+}
+
+size_t Item::Container::count()
+{
+  return _items.size();
+}
+
 void Item::Container::setName(std::string name)
 {
   _name = name;

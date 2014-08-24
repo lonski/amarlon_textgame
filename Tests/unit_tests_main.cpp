@@ -11,18 +11,24 @@
 #include "Test_Location/testlocation.h"
 #include "Test_Gateways/testitemgatewaydb.h"
 
-int main(int, char**)
+void displayFinalTestStats(int failedSuitesCount)
 {
-  //active tests:
-  //TestDB tdb;
-  //TestCommands tcmd;
-  //TestItems titm;
-  TestCreature tcrt;
-  //TestFun tfun;
-  //TestLocation tloc;
-  TestItemGatewayDB tgidb;
-  //
+  std::cout << "### Passed test suites: "
+            << QTestSuite::m_suites.size() - failedSuitesCount
+            << "/"
+            << QTestSuite::m_suites.size()
+            << std::endl;
+}
 
+void cleanUp()
+{
+  std::cout << "### Cleaning database..." << std::endl;
+  _Database << "execute procedure clean";
+  _Database.commit();
+}
+
+int runTestSuites()
+{
   int failedSuitesCount = 0;
   std::vector<QObject*>::iterator iSuite;
 
@@ -35,6 +41,24 @@ int main(int, char**)
     }
   }
 
-  qDebug() << "Passed: " << QTestSuite::m_suites.size() - failedSuitesCount << "/" << QTestSuite::m_suites.size();
+  return failedSuitesCount;
+}
+
+int main(int, char**)
+{
+  //active test suites:
+  //TestDB tdb;
+  TestCommands tcmd;
+  TestItems titm;
+  TestCreature tcrt;
+  TestFun tfun;
+  TestLocation tloc;
+  TestItemGatewayDB tgidb;
+  //
+
+  int failedSuitesCount = runTestSuites();
+  displayFinalTestStats(failedSuitesCount);
+  cleanUp();
+
   return failedSuitesCount;
 }

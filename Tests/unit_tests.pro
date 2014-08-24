@@ -29,12 +29,22 @@ unix:LIBS += -lsoci_core \
 
 SOURCES += unit_tests_main.cpp \
     testsuite.cpp \
-    Test_Gateways/testitemgatewaydb.cpp
+    Test_Gateways/testitemgatewaydb.cpp \
+    Test_Creature/testcreaturemodificator.cpp \
+    Test_Creature/testcreaturestats.cpp \
+    Test_Creature/testbodypart.cpp \
+    Test_Creature/testcreaturemodificatormanager.cpp \
+    Test_Creature/testcreaturecontainer.cpp
 
 include(tests.pri)
 include(sors.pri)
 
 HEADERS += \
     testsuite.h \
-    Test_Gateways/testitemgatewaydb.h
+    Test_Gateways/testitemgatewaydb.h \
+    Test_Creature/testcreaturemodificator.h \
+    Test_Creature/testcreaturestats.h \
+    Test_Creature/testbodypart.h \
+    Test_Creature/testcreaturemodificatormanager.h \
+    Test_Creature/testcreaturecontainer.h
 

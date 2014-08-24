@@ -51,7 +51,7 @@ void Item::Container::load(MapRow *data_source)
         set_max_weight( fun::CheckValue<Weight>(cont_data["MAX_WEIGHT"]) );
         setORef( fun::CheckValue<dbRef>(cont_data["OREF"]) );
         setOTable( fun::CheckValue<std::string>(cont_data["OTABLE"]) );
-        str2items( fun::CheckValue<string>(cont_data["ITEMS"]));
+        setItems( fun::CheckValue<string>(cont_data["ITEMS"]));
       }
 
       set_loaded();
@@ -78,7 +78,7 @@ void Item::Container::saveToDB()
              << " ,NAME='" << _name << "'"
              << " ,OREF=" << _oref
              << " ,OTABLE='" << _otable << "'"
-             << " ,ITEMS='" << items2str() << "'"
+             << " ,ITEMS='" << getItemsString() << "'"
              << " WHERE ref=" << ref();
 
   save(save_query.str());
@@ -94,7 +94,7 @@ dbRef Item::Container::byOwner(dbTable otable, dbRef oref)
   return ref;
 }
 
-string Item::Container::items2str()
+string Item::Container::getItemsString()
 {
   string str;
 
@@ -108,7 +108,7 @@ string Item::Container::items2str()
   return str;
 }
 
-void Item::Container::str2items(string items)
+void Item::Container::setItems(string items)
 {
   _items.clear();
   if (!items.empty())

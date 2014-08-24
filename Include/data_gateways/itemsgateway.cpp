@@ -126,22 +126,14 @@ void ItemsGateway::readDataIntoItem(Item *item)
 {
   if ( !item->loaded() && item->ref() > 0 )
   {
-    try
-    {
-      MapRow item_data = getItemDataFromDataSource(item->ref());
+    MapRow item_data = getItemDataFromDataSource(item->ref());
 
-      setItemData(item_data, item);
-      setItemModificators(item);
-      setItemInventory(item);
+    setItemData(item_data, item);
+    setItemModificators(item);
+    setItemInventory(item);
 
-      item->set_loaded();
-      item->set_not_modified();
-    }
-    catch(soci_error &e)
-    {
-      qDebug() << e.what();
-      qDebug() << _Database.get_last_query().c_str();
-    }
+    item->set_loaded();
+    item->set_not_modified();
   }
 }
 

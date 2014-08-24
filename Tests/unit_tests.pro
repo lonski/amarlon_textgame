@@ -34,7 +34,8 @@ SOURCES += unit_tests_main.cpp \
     Test_Creature/testcreaturestats.cpp \
     Test_Creature/testbodypart.cpp \
     Test_Creature/testcreaturemodificatormanager.cpp \
-    Test_Creature/testcreaturecontainer.cpp
+    Test_Creature/testcreaturecontainer.cpp \
+    Test_Gateways/testitemcontainersgateway.cpp
 
 include(tests.pri)
 include(sors.pri)
@@ -46,5 +47,6 @@ HEADERS += \
     Test_Creature/testcreaturestats.h \
     Test_Creature/testbodypart.h \
     Test_Creature/testcreaturemodificatormanager.h \
-    Test_Creature/testcreaturecontainer.h
+    Test_Creature/testcreaturecontainer.h \
+    Test_Gateways/testitemcontainersgateway.h
 

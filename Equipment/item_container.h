@@ -15,8 +15,6 @@ private:
 
   //items
   std::map<dbRef, AmountedItem> _items;
-  std::string items2str();
-  void str2items(std::string items);
 
 public:
   const static dbTable tableName;
@@ -46,6 +44,10 @@ public:
   void setOTable(dbTable otable);
   void setORef(dbRef oref);
   void set_max_weight(Weight max_weight);
+
+  std::string getItemsString();
+  void setItems(std::string items);
+
 };
 
 #endif // ITEM_CONTAINER_H

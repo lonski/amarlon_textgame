@@ -14,7 +14,19 @@ ItemsGatewayDB::ItemsGatewayDB()
 
 MapRow ItemsGatewayDB::getItemDataFromDataSource(unsigned int item_id)
 {
- return MapQuery( "SELECT * FROM items WHERE ref="+to_string(item_id) );
+  MapRow row;
+
+  try
+  {
+    row = MapQuery( "SELECT * FROM items WHERE ref="+to_string(item_id) );
+  }
+  catch(soci_error &e)
+  {
+    qDebug() << e.what();
+    qDebug() << _Database.get_last_query().c_str();
+  }
+
+  return row;
 }
 
 bool ItemsGatewayDB::itemExistsInDataSource(unsigned int item_id)

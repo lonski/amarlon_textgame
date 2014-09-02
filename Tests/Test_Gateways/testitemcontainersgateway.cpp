@@ -11,9 +11,9 @@ TestItemContainersGatewayDB::~TestItemContainersGatewayDB()
 {
 }
 
-void TestItemContainersGatewayDB::fetchId0_givesNullptr()
+void TestItemContainersGatewayDB::fetchId0_createsNewContainer()
 {
-  QVERIFY(gateway->fetch(0) == nullptr);
+  QVERIFY(gateway->fetch(0) != nullptr);
 }
 
 void TestItemContainersGatewayDB::fetchValidId_givesNonNullContainer()
@@ -28,4 +28,11 @@ void TestItemContainersGatewayDB::fetchedContainer_hasValidData()
   QCOMPARE(container->ref(), (dbRef)1);
   QCOMPARE(container->weight_capacity().max, 10.0);
   QCOMPARE(container->weight_capacity().cur, 0.0);
+}
+
+void TestItemContainersGatewayDB::fetchedContainerIntoNullContainer_givesContainerWithValidData()
+{
+  Item::Container* emptyContainer = Item::Container::create();
+  gateway->fetchInto(emptyContainer, 1);
+  //todo
 }

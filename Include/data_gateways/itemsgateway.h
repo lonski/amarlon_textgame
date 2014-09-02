@@ -15,7 +15,7 @@ public:
   virtual ~ItemsGateway() {}
 
   virtual DBObject* fetch(dbRef id);
-  virtual void fetchInto(DBObject* obj);
+  virtual void fetchInto(DBObject* obj, dbRef id);
   virtual unsigned int write(DBObject *obj);
   virtual DBObject* clone(DBObject *to_clone);
 

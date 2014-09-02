@@ -1,28 +1,21 @@
 #include "item_container.h"
 #include "Include/functions/messages.h"
+#include "Include/data_gateways/db_gateways/itemcontainersgatewaydb.h"
 
 using namespace std;
 using namespace soci;
 
 const dbTable Item::Container::tableName = "item_containers";
+DataGateway* Item::Container::containersGateway = new ItemContainersGatewayDB;
 
-Item::Container::Container(dbRef ref)
+Item::Container::Container(dbRef ref = 0)
   : DBObject(ref)
 {
-  load();
 }
 
-Item::Container::Container()
-  : DBObject(0)
+Item::Container *Item::Container::create(dbRef ref)
 {
-  dbRef new_ref;
-  _Database << "select new_ref from create_new_item_container", into(new_ref);
-
-  setRef(new_ref);
-  set_max_weight(defaultCapacity);
-
-  set_loaded();
-  set_modified();
+  return dynamic_cast<Item::Container*>(containersGateway->fetch(ref));
 }
 
 Item::Container::~Container()

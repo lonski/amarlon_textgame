@@ -18,9 +18,10 @@ private:
   ItemContainersGateway* gateway;
 
 private slots:
-  void fetchId0_givesNullptr();
+  void fetchId0_createsNewContainer();
   void fetchValidId_givesNonNullContainer();
   void fetchedContainer_hasValidData();
+  void fetchedContainerIntoNullContainer_givesContainerWithValidData();
 };
 
 #endif // TESTITEMCONTAINERSGATEWAY_H

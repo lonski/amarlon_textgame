@@ -72,7 +72,7 @@ Item::Inventory &Creature::inventoryContainer()
 {
   if (_inventory == nullptr)
     {
-      _inventory.reset(new Item::Container);
+      _inventory.reset(Item::Container::create());
       _inventory->setOTable(table());
       _inventory->setORef(ref());
       _inventory->saveToDB();
@@ -184,7 +184,7 @@ void Creature::load(MapRow *data_source)
         dbRef inv_ref = Item::Container::byOwner( table(),ref() );
         if (inv_ref != 0)
           {
-            _inventory.reset( new Item::Container(inv_ref));
+            _inventory.reset( Item::Container::create(inv_ref));
           }
         else
           {

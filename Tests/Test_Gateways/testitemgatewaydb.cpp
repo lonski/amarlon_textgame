@@ -10,7 +10,6 @@ TestItemGatewayDB::TestItemGatewayDB()
 
   item_with_inventory = Item::forge(ItemPrototype::LekkaZbrojaSkorzana);
 
-
   mod_cloned = cloned->mods()->getAll().at(0);
   mod_source = item_to_clone->mods()->getAll().at(0);
 
@@ -215,4 +214,20 @@ void TestItemGatewayDB::clonedInventoryItems_HaveDifferentId_ThanSourceItems()
   QVERIFY(cloned_inv_item->ref() > 0);
   QVERIFY(cloned_inv_item->ref() != inv_item_ref);
 
+}
+
+void TestItemGatewayDB::fetchedDataInto_givestemWithValidData()
+{
+  Item* newItem = Item::create(2);
+  itemGateway.fetchInto(newItem, 1);
+
+  QVERIFY(newItem != nullptr);
+
+  QCOMPARE(newItem->ref(), (dbRef)1);
+  QCOMPARE(newItem->value(), 43);
+  QCOMPARE(newItem->attack(), 2);
+  QCOMPARE(newItem->damageReduction().bashing, 0);
+
+  newItem->purge();
+  delete newItem;
 }

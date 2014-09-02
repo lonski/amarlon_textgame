@@ -12,16 +12,18 @@ public:
   virtual ~ItemContainersGateway();
 
   virtual DBObject* fetch(dbRef id);
-  virtual void fetchInto(DBObject* obj);
+  virtual void fetchInto(DBObject* obj, dbRef id);
   virtual unsigned int write(DBObject *obj);
   virtual DBObject* clone(DBObject *to_clone);
 
 protected:
   virtual bool containerExistsInDataSource(dbRef id) = 0;
   virtual MapRow getContainerDataFromDataSource(dbRef id) = 0;
+  virtual unsigned int getNewContainerId() = 0;
 
 private:
   void readDataIntoContainer(Item::Container* container);
+  void setContainerParams(Item::Container *container, MapRow container_data);
 
 };
 

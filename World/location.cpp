@@ -32,7 +32,7 @@ void Location::initalizeLocationObjects(dbRef ref)
 
   if (objects_ref != 0)
   {
-    _objects.reset(new Item::Container(objects_ref));
+    _objects.reset(Item::Container::create(objects_ref));
   }
   else
   {
@@ -45,7 +45,7 @@ void Location::createObjectsContainer()
   if (_objects == nullptr)
   {
     //TODO REFACTOR
-    _objects.reset( new Item::Container );
+    _objects.reset(Item::Container::create());
     _objects->setORef(ref());
     _objects->setOTable(table());
   }

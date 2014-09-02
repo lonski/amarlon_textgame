@@ -14,15 +14,16 @@ private:
   CMValue<Weight> _weight_cap;
 
   //items
-  std::map<dbRef, AmountedItem> _items;
+  std::map<dbRef, AmountedItem> _items;  
 
 public:
   const static dbTable tableName;
   const static int defaultCapacity = 10;
+  static DataGateway* containersGateway;
 
-  Container(dbRef ref);
-  Container();
+  Container(dbRef);
   ~Container();
+  static Container* create(dbRef = 0);
   static dbRef byOwner(dbTable otable, dbRef oref);
 
   virtual void load(MapRow *data_source = nullptr);

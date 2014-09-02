@@ -33,3 +33,12 @@ MapRow ItemContainersGatewayDB::getContainerDataFromDataSource(dbRef id)
 
   return cont_data;
 }
+
+unsigned int ItemContainersGatewayDB::getNewContainerId()
+{
+  unsigned int new_ref = 0;
+  soci::indicator ind;
+  _Database << "select new_ref from create_new_item_container", into(new_ref, ind);
+
+  return new_ref;
+}

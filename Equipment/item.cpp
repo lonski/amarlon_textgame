@@ -59,7 +59,7 @@ Item *Item::clone()
 void Item::load(MapRow*)
 {
   if ( !loaded() && ref() > 0 )
-    itemsGateway->fetchInto(this);
+    itemsGateway->fetchInto(this, ref());
 }
 
 void Item::saveToDB()
@@ -99,7 +99,7 @@ Item::Inventory &Item::inventory()
   {
     //TODO REFACTOR
 
-    _inventory.reset( new Item::Container );
+    _inventory.reset(  Item::Container::create() );
     _inventory->setORef(ref());
     _inventory->setOTable(table());
   }

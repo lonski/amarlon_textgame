@@ -11,6 +11,7 @@ public:
 protected:
   virtual bool containerExistsInDataSource(dbRef id);
   virtual MapRow getContainerDataFromDataSource(dbRef id);
+  virtual unsigned int getNewContainerId();
 
 };
 

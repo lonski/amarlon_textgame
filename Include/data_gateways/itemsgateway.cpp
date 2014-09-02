@@ -18,19 +18,23 @@ DBObject *ItemsGateway::fetch(dbRef id)
 
   if (itemExistsInDataSource(id))
   {
-    item = new Item(id);
+    item = new Item(id);    
     readDataIntoItem(item);
   }
 
   return item;
 }
 
-void ItemsGateway::fetchInto(DBObject *obj)
+void ItemsGateway::fetchInto(DBObject *obj, dbRef id)
 {
   Item* item = dynamic_cast<Item*>(obj);
 
-  if (item != nullptr && itemExistsInDataSource(item->ref()))
+  if (item != nullptr && itemExistsInDataSource(id))
+  {
+    item->setRef(id);
     readDataIntoItem(item);
+  }
+
 }
 
 unsigned int ItemsGateway::write(DBObject *obj)
@@ -225,7 +229,7 @@ void ItemsGateway::setItemInventory(Item *item)
   dbRef inv_ref = Item::Container::byOwner(item->table(), item->ref());
   if (inv_ref != 0)
   {
-   item-> setInventory(new Item::Container(inv_ref));
+    item->setInventory(Item::Container::create(inv_ref));
   }
   else
   {

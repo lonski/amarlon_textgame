@@ -45,6 +45,7 @@ private slots:
   void clonedItemWithInventory_HasInventory();
   void clonedItemWithInventory_HasValidItemCountInInventory();
   void clonedInventoryItems_HaveDifferentId_ThanSourceItems();
+  void fetchedDataInto_givestemWithValidData();
 };
 
 #endif // TESTITEMGATEWAYDB_H

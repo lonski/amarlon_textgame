@@ -237,7 +237,7 @@ void TestItems::PrototypeTest()
 
 void TestItems::ContainerCreation()
 {
-  Item::Container* cont = new Item::Container(1);
+  Item::Container* cont = Item::Container::create(1);
   QCOMPARE(cont->name().c_str(), "Ekwipunek");
   delete cont;
 }
@@ -246,7 +246,7 @@ void TestItems::ContainerInsertionEraseNonStackable()
 {
   //===================INSERT===================
   //create some new container
-  Item::Container* cont = new Item::Container;
+  Item::Container* cont = Item::Container::create();
   cont->setName("TestCont");
   QCOMPARE(cont->name().c_str(), "TestCont");
 
@@ -268,7 +268,7 @@ void TestItems::ContainerInsertionEraseNonStackable()
   dbRef cont_ref = cont->ref();
 
   delete cont;
-  cont = new Item::Container(cont_ref);
+  cont = Item::Container::create(cont_ref);
   QCOMPARE(cont->getAll().size(), static_cast<size_t>(2));
 
   //====================ERASE======================
@@ -279,7 +279,7 @@ void TestItems::ContainerInsertionEraseNonStackable()
 
   //recreate and check content
   delete cont;
-  cont = new Item::Container(cont_ref);
+  cont = Item::Container::create(cont_ref);
   QCOMPARE(cont->getAll().size(), static_cast<size_t>(0));
 
   //clean up
@@ -293,7 +293,7 @@ void TestItems::ContainerInsertionEraseNonStackable()
 void TestItems::ContainerInsertionEraseStackable()
 {
   //create some new container
-  Item::Container* cont = new Item::Container;
+  Item::Container* cont = Item::Container::create();
   cont->setName("TestCont");
   QCOMPARE(cont->name().c_str(), "TestCont");
 
@@ -366,7 +366,7 @@ void TestItems::ItemAsAContainer()
   szkatulka->setName("Szkatułka");
 
   //create a container for that item
-  Item::Container* cont = new Item::Container;
+  Item::Container* cont = Item::Container::create();
   cont->set_max_weight(5);
   cont->setOTable(szkatulka->table());
   cont->setORef(szkatulka->ref());

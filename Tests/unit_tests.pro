@@ -29,13 +29,13 @@ unix:LIBS += -lsoci_core \
 
 SOURCES += unit_tests_main.cpp \
     testsuite.cpp \
-    Test_Gateways/testitemgatewaydb.cpp \
     Test_Creature/testcreaturemodificator.cpp \
     Test_Creature/testcreaturestats.cpp \
     Test_Creature/testbodypart.cpp \
     Test_Creature/testcreaturemodificatormanager.cpp \
     Test_Creature/testcreaturecontainer.cpp \
-    Test_Gateways/testitemcontainersgateway.cpp
+    Test_Gateways/test_item_containers_gateway.cpp \
+    Test_Gateways/test_item_gateway_db.cpp
 
 include(tests.pri)
 include(sors.pri)

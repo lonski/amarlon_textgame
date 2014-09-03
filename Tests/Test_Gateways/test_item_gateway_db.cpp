@@ -228,6 +228,5 @@ void TestItemGatewayDB::fetchedDataInto_givestemWithValidData()
   QCOMPARE(newItem->attack(), 2);
   QCOMPARE(newItem->damageReduction().bashing, 0);
 
-  newItem->purge();
   delete newItem;
 }

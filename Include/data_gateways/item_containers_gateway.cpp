@@ -53,7 +53,7 @@ unsigned int ItemContainersGateway::write(DBObject *obj)
   return r;
 }
 
-DBObject *ItemContainersGateway::clone(DBObject *to_clone)
+DBObject *ItemContainersGateway::clone(DBObject*)
 {
   throw std::logic_error("Feature not implemented!");
 }

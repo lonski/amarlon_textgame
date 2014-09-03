@@ -7,7 +7,6 @@
 #include "Equipment/item_container.h"
 
 class ItemContainersGateway;
-class Item::Container;
 
 class TestItemContainersGatewayDB : public QTestSuite
 {

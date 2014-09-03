@@ -34,7 +34,7 @@ Item::Container::~Container()
     saveToDB();
 }
 
-void Item::Container::load(MapRow *data_source)
+void Item::Container::load(MapRow*)
 {
   if ( !loaded() && ref() > 0 )
     containersGateway->fetchInto(this, ref());

@@ -4,6 +4,10 @@ TARGET = test_location
 QT       += core gui testlib
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+QMAKE_CXXFLAGS += -fprofile-arcs -ftest-coverage
+QMAKE_LDFLAGS += -fprofile-arcs -ftest-coverage
+LIBS += -lgcov
+
 CONFIG += c++11
 CONFIG += console
 

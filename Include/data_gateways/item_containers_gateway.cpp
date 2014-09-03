@@ -1,4 +1,4 @@
-#include "itemcontainersgateway.h"
+#include "item_containers_gateway.h"
 
 using namespace std;
 
@@ -20,31 +20,42 @@ DBObject *ItemContainersGateway::fetch(dbRef id)
     readDataIntoContainer(container);
   }
   else
-  {
-    dbRef newId = getNewContainerId();
-    container = new Item::Container(newId);
+  {    
+    container = new Item::Container(0);
     container->set_max_weight(Item::Container::defaultCapacity);
 
     container->set_loaded();
-    container->set_not_modified();
+    container->set_not_modified();    
   }
 
   return container;
 }
 
 void ItemContainersGateway::fetchInto(DBObject *obj, dbRef id)
-{
-
+{  
+  Item::Container *container = dynamic_cast<Item::Container*>(obj);
+  if (container != nullptr && id >0)
+  {
+    obj->setRef(id);
+    readDataIntoContainer(container);
+  }
 }
 
 unsigned int ItemContainersGateway::write(DBObject *obj)
 {
+  Item::Container* container = dynamic_cast<Item::Container*>(obj);
+  unsigned int r = 0;
 
+  if (container != nullptr)
+  {
+    r = writeItemDataToDataSource(container);
+  }
+  return r;
 }
 
 DBObject *ItemContainersGateway::clone(DBObject *to_clone)
 {
-
+  throw std::logic_error("Feature not implemented!");
 }
 
 void ItemContainersGateway::readDataIntoContainer(Item::Container *container)

@@ -1,4 +1,4 @@
-#include "testitemgatewaydb.h"
+#include "test_item_gateway_db.h"
 #include "Equipment/item.h"
 #include "Equipment/item_container.h"
 

@@ -40,7 +40,8 @@ Item::~Item()
   _mods = nullptr;
 }
 
-Item *Item::create(dbRef ref, bool prototype)
+/* if ref does not exists in DataSource this function will return null */
+Item *Item::create(dbRef ref, bool)
 {
   //todo obsluga prototye?
   return dynamic_cast<Item*>(itemsGateway->fetch(ref));

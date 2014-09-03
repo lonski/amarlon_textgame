@@ -1,7 +1,7 @@
 #ifndef ITEMS_GATEWAY_DB_H
 #define ITEMS_GATEWAY_DB_H
 
-#include "Include/data_gateways/itemsgateway.h"
+#include "Include/data_gateways/items_gateway.h"
 
 class Item;
 

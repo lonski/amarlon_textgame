@@ -20,6 +20,7 @@ protected:
   virtual bool containerExistsInDataSource(dbRef id) = 0;
   virtual MapRow getContainerDataFromDataSource(dbRef id) = 0;
   virtual unsigned int getNewContainerId() = 0;
+  virtual dbRef writeItemDataToDataSource(Item::Container* container) = 0;
 
 private:
   void readDataIntoContainer(Item::Container* container);

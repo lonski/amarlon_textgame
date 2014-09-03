@@ -42,11 +42,11 @@ include(sors.pri)
 
 HEADERS += \
     testsuite.h \
-    Test_Gateways/testitemgatewaydb.h \
     Test_Creature/testcreaturemodificator.h \
     Test_Creature/testcreaturestats.h \
     Test_Creature/testbodypart.h \
     Test_Creature/testcreaturemodificatormanager.h \
     Test_Creature/testcreaturecontainer.h \
-    Test_Gateways/testitemcontainersgateway.h
+    Test_Gateways/test_item_containers_gateway.h \
+    Test_Gateways/test_item_gateway_db.h
 

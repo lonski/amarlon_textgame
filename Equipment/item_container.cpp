@@ -1,6 +1,6 @@
 #include "item_container.h"
 #include "Include/functions/messages.h"
-#include "Include/data_gateways/db_gateways/itemcontainersgatewaydb.h"
+#include "Include/data_gateways/db_gateways/item_containers_gateway_db.h"
 
 using namespace std;
 using namespace soci;
@@ -8,74 +8,41 @@ using namespace soci;
 const dbTable Item::Container::tableName = "item_containers";
 DataGateway* Item::Container::containersGateway = new ItemContainersGatewayDB;
 
-Item::Container::Container(dbRef ref = 0)
+Item::Container::Container(dbRef ref)
   : DBObject(ref)
 {
 }
 
+/* if ref does not exists in DataSource this function will return
+ * a new Item::Container with bland record inserted to DB.
+ */
 Item::Container *Item::Container::create(dbRef ref)
 {
-  return dynamic_cast<Item::Container*>(containersGateway->fetch(ref));
+  Item::Container* newContainer = dynamic_cast<Item::Container*>(containersGateway->fetch(ref));
+
+  if (newContainer->ref() == 0)
+  {
+    containersGateway->write(newContainer);
+  }
+
+  return newContainer;
 }
 
 Item::Container::~Container()
 {
-  _saveToDB_
+  if (ref() && modified())
+    saveToDB();
 }
 
 void Item::Container::load(MapRow *data_source)
 {
-  if ( !loaded() && ref() > 0 ){
-    try
-    {
-      MapRow cont_data;
-      if (data_source != nullptr)
-      {
-        cont_data = *data_source;
-      }
-      else
-      {
-        cont_data = fun::MapQuery("SELECT name, otable, oref, max_weight, items FROM "+tableName+" WHERE ref="+fun::toStr(ref()));
-      }
-
-      if (!cont_data.empty())
-      {
-        setName( fun::CheckValue<std::string>(cont_data["NAME"]) );
-        set_max_weight( fun::CheckValue<Weight>(cont_data["MAX_WEIGHT"]) );
-        setORef( fun::CheckValue<dbRef>(cont_data["OREF"]) );
-        setOTable( fun::CheckValue<std::string>(cont_data["OTABLE"]) );
-        setItems( fun::CheckValue<string>(cont_data["ITEMS"]));
-      }
-
-      set_loaded();
-      set_not_modified();
-    }
-    catch(soci::soci_error &e)
-    {
-      fun::MsgError(e.what());
-      qDebug() << _Database.get_last_query().c_str();
-    }
-    catch(std::exception &e)
-    {
-      fun::MsgError(e.what());
-    }
-  }
+  if ( !loaded() && ref() > 0 )
+    containersGateway->fetchInto(this, ref());
 }
 
 void Item::Container::saveToDB()
 {
-  std::stringstream save_query;
-
-  save_query << "UPDATE item_containers SET"
-             << "  MAX_WEIGHT=" << _weight_cap.max
-             << " ,NAME='" << _name << "'"
-             << " ,OREF=" << _oref
-             << " ,OTABLE='" << _otable << "'"
-             << " ,ITEMS='" << getItemsString() << "'"
-             << " WHERE ref=" << ref();
-
-  save(save_query.str());
-  DBObject::saveToDB();
+  containersGateway->write(this);
 }
 
 dbRef Item::Container::byOwner(dbTable otable, dbRef oref)

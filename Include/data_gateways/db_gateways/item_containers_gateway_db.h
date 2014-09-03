@@ -1,7 +1,7 @@
 #ifndef ITEMCONTAINERSGATEWAYDB_H
 #define ITEMCONTAINERSGATEWAYDB_H
 
-#include "../itemcontainersgateway.h"
+#include "../item_containers_gateway.h"
 
 class ItemContainersGatewayDB : public ItemContainersGateway
 {
@@ -12,6 +12,11 @@ protected:
   virtual bool containerExistsInDataSource(dbRef id);
   virtual MapRow getContainerDataFromDataSource(dbRef id);
   virtual unsigned int getNewContainerId();
+  virtual dbRef writeItemDataToDataSource(Item::Container *container);
+
+private:
+  void updateContainerInDataSource(Item::Container* container);
+  void insertContainerIntoDataSource(Item::Container* container);
 
 };
 

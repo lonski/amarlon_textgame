@@ -21,7 +21,7 @@ public:
   const static int defaultCapacity = 10;
   static DataGateway* containersGateway;
 
-  Container(dbRef);
+  Container(dbRef = 0);
   ~Container();
   static Container* create(dbRef = 0);
   static dbRef byOwner(dbTable otable, dbRef oref);

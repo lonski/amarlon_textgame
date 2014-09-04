@@ -16,6 +16,7 @@
 #include "Test_Location/testlocation.h"
 #include "Test_Gateways/test_item_gateway_db.h"
 #include "Test_Gateways/test_item_containers_gateway.h"
+#include "Test_Gateways/test_creature_gateway_db.h"
 
 void displayFinalTestStats(int failedSuitesCount)
 {
@@ -53,19 +54,20 @@ int runTestSuites()
 int main(int, char**)
 {
   //active test suites:
-  TestDB tdb;
-  TestCommands tcmd;
-  TestItems titm;
-  TestCreature tcrt;
-  TestCreatureStats tcstats;
-  TestCreatureModificator tcmod;
-  TestCreatureModificatorManager tcmodmng;
-  TestCreatureContainer tccont;
-  TestBodyPart tbpart;
-  TestFun tfun;
-  TestLocation tloc;
-  TestItemGatewayDB tgidb;
-  TestItemContainersGatewayDB tgicdb;
+  //TestDB tdb;
+  //TestCommands tcmd;
+  //TestItems titm;
+  //TestCreature tcrt;
+  //TestCreatureStats tcstats;
+  //TestCreatureModificator tcmod;
+  //TestCreatureModificatorManager tcmodmng;
+  //TestCreatureContainer tccont;
+  //TestBodyPart tbpart;
+  //TestFun tfun;
+  //TestLocation tloc;
+  //TestItemGatewayDB tgidb;
+  //TestItemContainersGatewayDB tgicdb;
+  TestCreatureGatewayDB tcrtgdb;
   //
 
   int failedSuitesCount = runTestSuites();

@@ -47,7 +47,6 @@ public:
   Inventory& inventory();
   void setInventory(Item::Container* inv);
   CreatureModificatorManager* mods();
-  void setCreatureModificatorManager(CreatureModificatorManager* mods);
 
 //item specyfic
   ItemType type() const;

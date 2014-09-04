@@ -34,9 +34,11 @@ SOURCES += \
    ../Include/functions/db_utils.cpp \
    ../Include/functions/common_utils.cpp \
    ../Include/data_gateways/db_gateways/items_gateway_db.cpp \
-    ../Include/data_gateways/item_containers_gateway.cpp \
-    ../Include/data_gateways/items_gateway.cpp \
-    ../Include/data_gateways/db_gateways/item_containers_gateway_db.cpp
+   ../Include/data_gateways/item_containers_gateway.cpp \
+   ../Include/data_gateways/items_gateway.cpp \
+   ../Include/data_gateways/db_gateways/item_containers_gateway_db.cpp \
+   ../Include/data_gateways/creature_gateway.cpp \
+   ../Include/data_gateways/db_gateways/creature_gateway_db.cpp
 
 HEADERS  += \
    ../World/location.h \
@@ -110,7 +112,9 @@ HEADERS  += \
    ../Include/enums/e_font.h \
    ../Include/data_gateways/data_gateway.h \
    ../Include/data_gateways/db_gateways/items_gateway_db.h \
-    ../Include/data_gateways/item_containers_gateway.h \
-    ../Include/data_gateways/items_gateway.h \
-    ../Include/data_gateways/db_gateways/item_containers_gateway_db.h
+   ../Include/data_gateways/item_containers_gateway.h \
+   ../Include/data_gateways/items_gateway.h \
+   ../Include/data_gateways/db_gateways/item_containers_gateway_db.h \
+   ../Include/data_gateways/creature_gateway.h \
+   ../Include/data_gateways/db_gateways/creature_gateway_db.h
 

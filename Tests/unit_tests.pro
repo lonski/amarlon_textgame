@@ -32,25 +32,12 @@ unix:LIBS += -lsoci_core \
              -lsoci_firebird
 
 SOURCES += unit_tests_main.cpp \
-    testsuite.cpp \
-    Test_Creature/testcreaturemodificator.cpp \
-    Test_Creature/testcreaturestats.cpp \
-    Test_Creature/testbodypart.cpp \
-    Test_Creature/testcreaturemodificatormanager.cpp \
-    Test_Creature/testcreaturecontainer.cpp \
-    Test_Gateways/test_item_containers_gateway.cpp \
-    Test_Gateways/test_item_gateway_db.cpp
+    testsuite.cpp
+
+
+HEADERS += \
+    testsuite.h
 
 include(tests.pri)
 include(sors.pri)
-
-HEADERS += \
-    testsuite.h \
-    Test_Creature/testcreaturemodificator.h \
-    Test_Creature/testcreaturestats.h \
-    Test_Creature/testbodypart.h \
-    Test_Creature/testcreaturemodificatormanager.h \
-    Test_Creature/testcreaturecontainer.h \
-    Test_Gateways/test_item_containers_gateway.h \
-    Test_Gateways/test_item_gateway_db.h
 

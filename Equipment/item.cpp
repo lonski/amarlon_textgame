@@ -118,11 +118,6 @@ CreatureModificatorManager *Item::mods()
   return _mods;
 }
 
-void Item::setCreatureModificatorManager(CreatureModificatorManager *mods)
-{
-  _mods = mods;
-}
-
 void Item::setType(ItemType type)
 {
   _item_type = type;

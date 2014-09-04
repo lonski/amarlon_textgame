@@ -34,7 +34,6 @@ void ItemsGateway::fetchInto(DBObject *obj, dbRef id)
     item->setRef(id);
     readDataIntoItem(item);
   }
-
 }
 
 unsigned int ItemsGateway::write(DBObject *obj)

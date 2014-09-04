@@ -10,6 +10,7 @@ DataGateway* Item::Container::containersGateway = new ItemContainersGatewayDB;
 
 Item::Container::Container(dbRef ref)
   : DBObject(ref)
+  , _oref(0)
 {
 }
 

@@ -7,6 +7,11 @@ class CreatureGatewayDB : public CreatureGateway
 {
 public:
   CreatureGatewayDB();
+
+protected:
+  virtual bool creatureExistsInDataSource(dbRef id);
+  virtual MapRow getCreatureDataFromDataSource(dbRef id);
+
 };
 
 #endif // CREATURE_GATEWAY_DB_H

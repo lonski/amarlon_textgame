@@ -4,6 +4,7 @@
 #include "Equipment/item_container.h"
 #include "creaturecontainer.h"
 #include "World/location.h"
+#include "Include/data_gateways/db_gateways/creature_gateway_db.h"
 
 #include "Include/enums/e_creaturetype.h"
 #include "Include/functions/messages.h"
@@ -15,6 +16,7 @@ using namespace fun;
 const dbTable Creature::tableName = "creatures";
 const dbTable Creature::Container::tableName = "crt_containers";
 CreatureManager Creature::Manager;
+DataGateway* Creature::gateway = new CreatureGatewayDB;
 
 Creature::Creature(dbRef ref)
   : DBObject(ref)
@@ -129,79 +131,9 @@ Creature* Creature::clone()
   return Creature::create(new_ref);
 }
 
-void Creature::load(MapRow *data_source)
+void Creature::load(MapRow*)
 {
-  if ( !loaded() && ref() > 0 )
-    {
-      try
-      {
-        //DATA
-        MapRow crt_data;
-        if (data_source != nullptr)
-          {
-            crt_data = *data_source;
-          }
-        else
-          {
-            crt_data = MapQuery( "SELECT * FROM "+table()+" WHERE ref="+toStr(ref()) );
-          }
-
-        if (!crt_data.empty())
-          {
-            //base data
-            setName( CheckValue<string>(crt_data["NAME"]) );
-            setDescript( CheckValue<string>(crt_data["DESCRIPT"]) );
-            setLocDescript( CheckValue<string>(crt_data["LOC_DESCRIPT"]) );
-            setSex( CheckValueCast<Sex>(crt_data["SEX"]));
-
-            //stats
-            _stats.str2attributes( CheckValue<string>(crt_data["ATTRIBUTES"]) );
-            _stats.str2skills( CheckValue<string>(crt_data["SKILLS"]) );
-
-            //body
-            _body.load(CheckValue<string>(crt_data["BODY"]));
-          }
-
-        //MODS
-        //zaladuj z crt_mods
-        vector<int> mod_refs(100);
-        vector<indicator> inds;
-
-        string query = "SELECT ref FROM crt_mods WHERE otable='" + table() + "' and oref=" + fun::toStr(ref());
-        _Database << query, into(mod_refs, inds);
-
-        for (auto m = mod_refs.begin(); m != mod_refs.end(); ++m)
-          _mods->add( shared_ptr<CreatureModificator>(new CreatureModificator(*m)) );
-
-        //dodaj z itemów założonych na bodyParts
-        for (auto im = _body.equipped_items().begin(); im != _body.equipped_items().end(); ++im)
-          {
-            if (nullptr != *im && !(*im)->mods()->getAll().empty())
-              _mods->add( (*im)->mods()->get_complex_mod() );
-          }
-
-        //INVENTORY
-        dbRef inv_ref = Item::Container::byOwner( table(),ref() );
-        if (inv_ref != 0)
-          {
-            _inventory.reset( Item::Container::create(inv_ref));
-          }
-        else
-          {
-            _inventory.reset();
-          }
-
-        calcTotalDamage();
-        calcWeapons();
-        set_loaded();
-        set_not_modified();
-      }
-      catch(soci_error &e)
-      {
-        MsgError(e.what());
-        qDebug() << _Database.get_last_query().c_str();
-      }
-    }
+  Creature::gateway->fetchInto(this, ref());
 }
 
 void Creature::saveToDB()
@@ -403,6 +335,11 @@ void Creature::setLocation(Location *loc)
 {
   _prevLoc = _currentLoc;
   _currentLoc = loc;
+}
+
+void Creature::setInventory(Item::Container* newInventory)
+{
+  _inventory.reset(newInventory);
 }
 
 void Creature::calcTotalDamage()

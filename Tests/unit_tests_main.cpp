@@ -57,7 +57,7 @@ int main(int, char**)
   //TestDB tdb;
   //TestCommands tcmd;
   //TestItems titm;
-  //TestCreature tcrt;
+  TestCreature tcrt;
   //TestCreatureStats tcstats;
   //TestCreatureModificator tcmod;
   //TestCreatureModificatorManager tcmodmng;

@@ -16,6 +16,10 @@ namespace refDict
   {
     StartLocation = 1
   };
+  enum class Creature
+  {
+    Ogr_Mateusz = 6
+  };
 }
 
 #endif // E_REFDICT_H

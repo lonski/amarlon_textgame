@@ -16,6 +16,7 @@
 class CreatureMonitor;
 class Location;
 class Creature;
+class DataGateway;
 
 typedef std::shared_ptr<Creature> CreaturePtr;
 
@@ -24,6 +25,7 @@ class Creature : public DBObject,
 {
 public:
   class Container;
+  static DataGateway* gateway;
 
   const static dbTable tableName;
   virtual dbTable table() const { return tableName; }
@@ -32,7 +34,8 @@ public:
 
   static Creature* create(dbRef ref, bool prototype = false);
   virtual Creature *clone();
-  virtual ~Creature() = 0;
+  Creature(dbRef ref = 0);
+  virtual ~Creature();
 
   virtual void load(MapRow *data_source = nullptr);
   virtual void saveToDB();
@@ -72,16 +75,16 @@ public:
   void setSkill(Skill skill, int val);
   void modifySkill(Skill skill, int mod);
   void setLocation(Location* loc);
+  void setInventory(Item::Container *newInventory);
 
 protected:
-  Creature(dbRef ref);
-
   virtual void calcWeapons();
   virtual void calcTotalDamage();
 
 private:
   friend class TestCreature;
   friend class CreatureMonitor;
+  friend class CreatureGateway;
 
   std::string _name;
   std::string _locDescript;

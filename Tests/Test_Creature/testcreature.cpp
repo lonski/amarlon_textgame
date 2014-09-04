@@ -152,7 +152,7 @@ void TestCreature::creature_load_modificators()
   int walka_miecze = crt->skill(Skill::Walka_Miecze);
   int walka_topory = crt->skill(Skill::Walka_Topory);
   //qDebug() << str << " " << walka_miecze << " " << walka_topory;
-
+  qDebug() << "X";
   //dobra to teraz wciepac trzeba kilka modsów
   //1. mod z założonego itema!
   shared_ptr<CreatureModificator> i_mod1(new CreatureModificator);

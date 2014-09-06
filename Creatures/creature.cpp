@@ -33,7 +33,7 @@ Creature::Creature(dbRef ref)
 
 Creature::~Creature()
 {
-  _saveToDB_
+  saveToDB();
   Manager.remove(ref());
   delete _mods;
   _mods = nullptr;
@@ -99,15 +99,9 @@ Creature *Creature::create(dbRef ref, bool prototype)
             {
             case CreatureType::MOB: new_crt = new MOB(ref); break;
             case CreatureType::NPC: new_crt = new NPC(ref); break;
-            case CreatureType::Player: /*TODO*/ break;
             default : throw error::creation_error("Nieprawidłowy typ itemu."); break;
             }
-        }else throw error::creation_error("Brak prawidłowego rekordu w bazie. Creature ref = "
-                                          + fun::toStr(ref) + " crt_type="
-                                          + fun::toStr(static_cast<int>(crt_type))
-                                          + " obj_type="
-                                          + fun::toStr(static_cast<int>(obj_type))
-                                          );
+        }
 
       new_crt->load();
     }
@@ -138,21 +132,7 @@ void Creature::load(MapRow*)
 
 void Creature::saveToDB()
 {
-  stringstream save_query;
-
-  save_query << "UPDATE " << table() << " SET "
-             << "  NAME='" << _name << "'"
-             << ", DESCRIPT='" << _descript << "'"
-             << ", LOC_DESCRIPT='" << _locDescript << "'"
-             << ", SEX=" << static_cast<int>(_sex)
-             << ", ATTRIBUTES='" << _stats.attributes2str() << "'"
-             << ", SKILLS='" << _stats.skills2str() << "'"
-             << ", BODY='" << _body.toStr() << "'"
-             << ", LOCATION=" << (getLocation() == nullptr ? 0 : getLocation()->ref())
-             << " WHERE ref = " << ref();
-
-  save(save_query.str());
-  DBObject::saveToDB();
+  gateway->write(this);
 }
 
 void Creature::purge()

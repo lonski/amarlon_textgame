@@ -11,6 +11,12 @@ public:
 protected:
   virtual bool creatureExistsInDataSource(dbRef id);
   virtual MapRow getCreatureDataFromDataSource(dbRef id);
+  virtual unsigned int  writeCreatureDataToDataSource(Creature* creature);
+
+private:
+  void updateCreatureInDataSource(Creature* creature);
+  void insertCreatureIntoDataSource(Creature* creature);
+  unsigned int getNewCreatureId();
 
 };
 

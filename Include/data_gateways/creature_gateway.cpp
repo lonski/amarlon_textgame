@@ -35,7 +35,15 @@ void CreatureGateway::fetchInto(DBObject *obj, dbRef id)
 
 unsigned int CreatureGateway::write(DBObject *obj)
 {
-  //todo
+  Creature* crt = dynamic_cast<Creature*>(obj);
+  unsigned int r = 0;
+
+  if (crt != nullptr)
+  {
+    r = writeCreatureDataToDataSource(crt);
+  }
+
+  return r;
 }
 
 DBObject *CreatureGateway::clone(DBObject *to_clone)

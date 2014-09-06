@@ -19,9 +19,11 @@ public:
 
   void setCreatureInventory(Creature *creature);
   void setCreatureMods(Creature *creature);
+
 protected:
   virtual bool creatureExistsInDataSource(dbRef id) = 0;
   virtual MapRow getCreatureDataFromDataSource(dbRef id) = 0;
+  virtual unsigned int  writeCreatureDataToDataSource(Creature* creature) = 0;
 
 private:
   void readDataIntoCreature(Creature* creature);

@@ -49,9 +49,18 @@ unsigned int CreatureGateway::write(DBObject *obj)
 DBObject *CreatureGateway::clone(DBObject *to_clone)
 {
   Creature* creatureToClone = dynamic_cast<Creature*>(to_clone);
-  Creature* creatureCloned = dynamic_cast<Creature*>(fetch(0));
-  write(creatureCloned);
+  Creature* creatureCloned = getCleanNewCreatureWrittenToDB();
 
+  copyCreatureBaseData(creatureToClone, creatureCloned);
+  copyCreatureMods(creatureToClone, creatureCloned);
+  copyCreatureInventory(creatureCloned, creatureToClone);
+
+  write(creatureCloned);
+  return creatureCloned;
+}
+
+void CreatureGateway::copyCreatureBaseData(Creature* creatureToClone, Creature* creatureCloned)
+{
   creatureCloned->setName(creatureToClone->name());
   creatureCloned->setDescript(creatureToClone->descript());
   creatureCloned->setLocDescript(creatureToClone->locDescript());
@@ -59,8 +68,34 @@ DBObject *CreatureGateway::clone(DBObject *to_clone)
   creatureCloned->stats().str2attributes(creatureToClone->stats().attributes2str());
   creatureCloned->stats().str2skills(creatureToClone->stats().skills2str());
   creatureCloned->body().load(creatureToClone->body().toStr());
-  //TODO mods: from item gateway
-  //TODO inventory: from item gateway
+}
+
+void CreatureGateway::copyCreatureMods(Creature* creatureToClone, Creature* creatureCloned)
+{
+  std::vector<CreatureModificator*> source_mods = creatureToClone->mods()->getAll();
+  for (auto m = source_mods.begin(); m != source_mods.end(); ++m)
+  {
+    CreatureModificator* new_mod = new CreatureModificator;
+    new_mod->augument(*(*m));
+    creatureCloned->mods()->add(new_mod);
+  }
+}
+
+void CreatureGateway::copyCreatureInventory(Creature* creatureCloned, Creature* creatureToClone)
+{
+  vector<AmountedItem> inv_to_clone = creatureToClone->inventory();
+  for (auto ai2c = inv_to_clone.begin(); ai2c != inv_to_clone.end(); ++ai2c)
+  {
+    AmountedItem ai_to_clone = *ai2c;
+    ItemPtr to_insert( dynamic_cast<Item*>(Item::itemsGateway->clone(ai_to_clone.item.get())) );
+    creatureCloned->take(to_insert, ai_to_clone.amount);
+  }
+}
+
+Creature * CreatureGateway::getCleanNewCreatureWrittenToDB()
+{
+  Creature* creatureCloned = new Creature(0);
+  write(creatureCloned);
 
   return creatureCloned;
 }
@@ -71,7 +106,7 @@ void CreatureGateway::readDataIntoCreature(Creature *creature)
   {
     MapRow crt_data = getCreatureDataFromDataSource(creature->ref());
 
-    setCreatureBaseData(creature, crt_data);
+    copyCreatureBaseData(creature, crt_data);
     setCreatureStats(creature, crt_data);
     setCreatureBody(crt_data, creature);
     setCreatureMods(creature);
@@ -84,7 +119,7 @@ void CreatureGateway::readDataIntoCreature(Creature *creature)
   }
 }
 
-void CreatureGateway::setCreatureBaseData(Creature *creature, MapRow crt_data)
+void CreatureGateway::copyCreatureBaseData(Creature *creature, MapRow crt_data)
 {
   creature->setName( CheckValue<string>(crt_data["NAME"]) );
   creature->setDescript( CheckValue<string>(crt_data["DESCRIPT"]) );

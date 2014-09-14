@@ -27,9 +27,13 @@ protected:
 
 private:
   void readDataIntoCreature(Creature* creature);
-  void setCreatureBaseData(Creature *creature, MapRow crt_data);
+  void copyCreatureBaseData(Creature *creature, MapRow crt_data);
   void setCreatureStats(Creature *creature, MapRow crt_data);
   void setCreatureBody(MapRow crt_data, Creature *creature);
+  void copyCreatureBaseData(Creature* creatureToClone, Creature* creatureCloned);
+  void copyCreatureMods(Creature* creatureToClone, Creature* creatureCloned);
+  void copyCreatureInventory(Creature* creatureCloned, Creature* creatureToClone);
+  Creature * getCleanNewCreatureWrittenToDB();
 
 };
 

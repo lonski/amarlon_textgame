@@ -1,2 +1,10 @@
 14-09-2014
 - remove crt_type field from creatures
+- think about copying inventory and mods: shoudn't it be realized in CreatureModificator, or ItemContainer? Reason: duplicated code in gateways
+- think about factory metods of prototypable objects: what about bool prototype?
+- resolve problem with violating law of demeter in Item and Creatures: mods() and inventory()
+- think about creature modificators connected strict to creature object, a native modificators. For now, feature disabled in creature gateway
+- ItemContainer::byOwner move away SQL query
+- Player: move away SQL queries to gateway
+- Location, CreatureModificators gateway
+- CreatureContainer: think if it is still needed

@@ -91,16 +91,7 @@ Creature *Creature::create(dbRef ref, bool)
 
 Creature* Creature::clone()
 {
-  //save
-  saveToDB();
-
-  //clone db record
-  dbRef new_ref(0);
-  _Database << "EXECUTE PROCEDURE CLONE_CRT("<< ref() << ")", into(new_ref);
-  _Database.commit();
-
-  //return new item
-  return Creature::create(new_ref);
+  return dynamic_cast<Creature*>(gateway->clone(this));
 }
 
 void Creature::load(MapRow*)

@@ -8,8 +8,6 @@
 
 #include "../Creatures/creature.h"
 #include "../Creatures/creaturemonitor.h"
-#include "../Creatures/mob.h"
-#include "../Creatures/npc.h"
 #include "../Creatures/player.h"
 
 class TestCreature : public QTestSuite
@@ -27,7 +25,7 @@ private slots:
   void creature_load_modificators();
   void creature_eq();
 
-  void npc_load();
+//  void npc_load();
 
   void player_base();
   void player_load();

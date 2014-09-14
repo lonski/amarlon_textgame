@@ -241,6 +241,7 @@ void TestCreature::creature_eq()
   dbRef ref = crt->ref();
   dbRef zbroja_ref = zbroja->ref();
   dbRef helm_ref = helm->ref();
+
   //wyjeb w pizdu
   zbroja.reset();
   helm.reset();
@@ -400,25 +401,25 @@ void TestCreature::creature_eq()
   */
 }
 
-void TestCreature::npc_load()
-{
-  shared_ptr<NPC> npc( dynamic_cast<NPC*>(Creature::prototypes().clone(CreaturePrototype::BlankNPC)) );
-  dbRef ref = npc->ref();
-  npc->setName("Igor");
-  npc->set_clan(Clan::Aep_Tien);
-  npc->set_tribe(Tribe::Tuatha_De_Cael);
+//void TestCreature::npc_load()
+//{
+//  shared_ptr<NPC> npc( dynamic_cast<NPC*>(Creature::prototypes().clone(CreaturePrototype::BlankNPC)) );
+//  dbRef ref = npc->ref();
+//  npc->setName("Igor");
+//  npc->set_clan(Clan::Aep_Tien);
+//  npc->set_tribe(Tribe::Tuatha_De_Cael);
 
-  npc.reset();
-  npc.reset( dynamic_cast<NPC*>(Creature::create(ref)) );
+//  npc.reset();
+//  npc.reset( dynamic_cast<NPC*>(Creature::create(ref)) );
 
-  QCOMPARE(npc->name().c_str(), "Igor");
-  qDebug() << (int)npc->clan();
-  QCOMPARE(npc->clan(), Clan::Aep_Tien);
+//  QCOMPARE(npc->name().c_str(), "Igor");
+//  qDebug() << (int)npc->clan();
+//  QCOMPARE(npc->clan(), Clan::Aep_Tien);
 
-  QCOMPARE(npc->tribe(), Tribe::Tuatha_De_Cael);
+//  QCOMPARE(npc->tribe(), Tribe::Tuatha_De_Cael);
 
-  npc->purge();
-}
+//  npc->purge();
+//}
 
 void TestCreature::player_base()
 {

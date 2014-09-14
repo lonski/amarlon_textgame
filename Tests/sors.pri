@@ -7,8 +7,6 @@ SOURCES += \
    ../Creatures/creaturestats.cpp \
    ../Creatures/bodypart.cpp \
    ../Include/gameclock.cpp \
-   ../Creatures/mob.cpp \
-   ../Creatures/npc.cpp \
    ../Creatures/creaturemonitor.cpp \
    ../Creatures/player.cpp \
    ../Commands/command.cpp \
@@ -51,8 +49,6 @@ HEADERS  += \
    ../Creatures/creaturestats.h \
    ../Creatures/bodypart.h \
    ../Include/gameclock.h \
-   ../Creatures/mob.h \
-   ../Creatures/npc.h \
    ../Creatures/creaturemonitor.h \
    ../Creatures/player.h \
    ../Commands/command.h \

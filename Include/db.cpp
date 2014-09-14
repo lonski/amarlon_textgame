@@ -8,9 +8,9 @@
 using namespace std;
 using namespace soci;
 
-string DB::_db_file( "/home/pi/db/data.fdb");
+string DB::_db_file( "d:\\Sources\\Test\\amarlon\\amarlon\\data.fdb");
 string DB::_db_log_file( "db.log" );
-string DB::_db_server = "192.168.1.5";
+string DB::_db_server = "";
 
 //===DB Object
 void DBObject::saveToDB()

@@ -1,6 +1,4 @@
 #include "creature.h"
-#include "mob.h"
-#include "npc.h"
 #include "Equipment/item_container.h"
 #include "creaturecontainer.h"
 #include "World/location.h"
@@ -83,29 +81,9 @@ Item::Inventory &Creature::inventoryContainer()
   return _inventory;
 }
 
-Creature *Creature::create(dbRef ref, bool prototype)
+Creature *Creature::create(dbRef ref, bool)
 {
-  Creature* new_crt = nullptr;
-
-  if (ref > 0)
-    {
-      MapRow crt_data = MapQuery("SELECT crt_type, obj_type FROM "+tableName+" WHERE ref="+toStr(ref));
-      CreatureType crt_type = CheckValueCast<CreatureType>( crt_data["CRT_TYPE"] );
-      ObjType obj_type = CheckValueCast<ObjType>( crt_data["OBJ_TYPE"] );
-
-      if (crt_type != CreatureType::Null && (obj_type == ObjType::Instance || prototype) )
-        {
-          switch(crt_type)
-            {
-            case CreatureType::MOB: new_crt = new MOB(ref); break;
-            case CreatureType::NPC: new_crt = new NPC(ref); break;
-            default : throw error::creation_error("Nieprawidłowy typ itemu."); break;
-            }
-        }
-
-      new_crt->load();
-    }
-
+  Creature* new_crt = dynamic_cast<Creature*>(gateway->fetch(ref));
   Manager.add(new_crt);
 
   return new_crt;

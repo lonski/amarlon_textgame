@@ -1,0 +1,2 @@
+14-09-2014
+- remove crt_type field from creatures

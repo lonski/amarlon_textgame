@@ -48,7 +48,21 @@ unsigned int CreatureGateway::write(DBObject *obj)
 
 DBObject *CreatureGateway::clone(DBObject *to_clone)
 {
-  //todo
+  Creature* creatureToClone = dynamic_cast<Creature*>(to_clone);
+  Creature* creatureCloned = dynamic_cast<Creature*>(fetch(0));
+  write(creatureCloned);
+
+  creatureCloned->setName(creatureToClone->name());
+  creatureCloned->setDescript(creatureToClone->descript());
+  creatureCloned->setLocDescript(creatureToClone->locDescript());
+  creatureCloned->setSex(creatureToClone->sex());
+  creatureCloned->stats().str2attributes(creatureToClone->stats().attributes2str());
+  creatureCloned->stats().str2skills(creatureToClone->stats().skills2str());
+  creatureCloned->body().load(creatureToClone->body().toStr());
+  //TODO mods: from item gateway
+  //TODO inventory: from item gateway
+
+  return creatureCloned;
 }
 
 void CreatureGateway::readDataIntoCreature(Creature *creature)
